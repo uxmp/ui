@@ -2,6 +2,7 @@ class Album {
     private id?: number;
     private name?: string;
     private artistId?: number;
+    private cover?: string;
     private songList: Array<string> = [];
 
     getId(): number | undefined {
@@ -18,6 +19,10 @@ class Album {
 
     getSongList(): Array<string> {
         return this.songList;
+    }
+
+    getCover(): string | undefined {
+        return this.cover;
     }
 }
 

@@ -32,7 +32,11 @@
   <h1>Alben</h1>
   <ul id="array-rendering">
     <li v-for="album in albumList" :key="album.getId()">
-      <span v-on:click="play(album)">X</span> {{ album.getName() }}
+      <div>
+        <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" width="150" height="150" /><br />
+        {{ album.getName() }}
+      </div>
+      <br />
     </li>
   </ul>
 </template>
@@ -99,5 +103,9 @@ code {
   padding: 2px 4px;
   border-radius: 4px;
   color: #304455;
+}
+
+img.cover_play {
+  cursor: pointer;
 }
 </style>
