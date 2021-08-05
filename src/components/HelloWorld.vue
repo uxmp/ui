@@ -54,14 +54,7 @@ export default defineComponent({
     }
   },
   beforeMount() {
-    amplitudejs.init({
-      songs: [{
-        url: ''
-      }],
-      debug: true,
-      delay: 250,
-      continue_next: true
-    });
+    this.initPlayer();
 
     this.getAlbums();
   },
@@ -74,7 +67,23 @@ export default defineComponent({
         return plainToClass(Album, album_data);
       });
     },
+
+    initPlayer() {
+      amplitudejs.init({
+        songs: [{
+          url: ''
+        }],
+        debug: true,
+        delay: 250,
+        continue_next: true
+      });
+    },
+
     play(album: Album) {
+      amplitudejs.stop();
+
+      this.initPlayer();
+
       album.getSongList().map((url: string) => {
         amplitudejs.addSong({
           name: "Bla"+url,
