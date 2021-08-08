@@ -8,9 +8,6 @@
     </div>
     <div class="grid-player">
       <div style="width: 100%">
-        <div class="song-title"></div>
-        <div class="song-artist"></div>
-
         <div class="time-container">
           <div class="current-time">
             <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
@@ -21,17 +18,25 @@
         <input type="range" class="amplitude-song-slider" step=".1"/>
         <input type="range" class="amplitude-volume-slider"/>
         <div class="control-container">
-          <div class="amplitude-prev">
+          <span class="amplitude-prev">
             &lt;&lt;
-          </div>
-          <div class="amplitude-play-pause">
+          </span>
+          <span class="amplitude-play-pause">
             |&gt;
-          </div>
-          <div class="amplitude-next">
+          </span>
+          <span class="amplitude-next">
             &gt;&gt;
-          </div>
+          </span>
         </div>
-        </div>
+      </div>
+    </div>
+    <div>
+      Now playing
+      <div class="song-title"></div>
+      <div class="song-artist"></div>
+    </div>
+    <div>
+      Playlist
     </div>
   </div>
 </template>
@@ -70,7 +75,7 @@ body {
 
 div.maingrid {
   display: grid;
-  grid-template-columns: 15% auto;
+  grid-template-columns: 15% 15% auto 20%;
   grid-template-rows: auto 15%;
   height: 100%;
 }
@@ -78,6 +83,7 @@ div.maingrid {
 div.grid-content {
   overflow-y: scroll;
   overflow-x: hidden;
+  grid-column: 2 / span 3;
 }
 
 div.grid-sidebar {
@@ -86,7 +92,6 @@ div.grid-sidebar {
 
 div.grid-player {
   max-height: 150px;
-  grid-column: 1 / span 2;
 }
 
 div.grid-player {
@@ -94,5 +99,6 @@ div.grid-player {
   height: 100%;
   display: flex;
   align-items: center;
+  grid-column: 1 / span 2;
 }
 </style>
