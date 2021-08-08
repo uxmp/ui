@@ -3,37 +3,35 @@
     <div class="grid-sidebar">
       <Sidebar />
     </div>
-    <div class="grid-main">
+    <div class="grid-content">
       <router-view />
     </div>
     <div class="grid-player">
-      <div class="player">
-        <div class="meta-container">
-          <div class="song-title"></div>
-          <div class="song-artist"></div>
+      <div style="width: 100%">
+        <div class="song-title"></div>
+        <div class="song-artist"></div>
 
-          <div class="time-container">
-            <div class="current-time">
-              <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
-              <span class="amplitude-duration-minutes">03</span>:<span class="amplitude-duration-seconds">16</span>
-            </div>
-          </div>
-          <progress class="amplitude-buffered-progress" value="0"></progress>
-          <input type="range" class="amplitude-song-slider" step=".1"/>
-          <input type="range" class="amplitude-volume-slider"/>
-          <div class="control-container">
-            <div class="amplitude-prev">
-              &lt;&lt;
-            </div>
-            <div class="amplitude-play-pause">
-              |&gt;
-            </div>
-            <div class="amplitude-next">
-              &gt;&gt;
-            </div>
+        <div class="time-container">
+          <div class="current-time">
+            <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
+            <span class="amplitude-duration-minutes">03</span>:<span class="amplitude-duration-seconds">16</span>
           </div>
         </div>
-      </div>
+        <progress class="amplitude-buffered-progress" value="0"></progress>
+        <input type="range" class="amplitude-song-slider" step=".1"/>
+        <input type="range" class="amplitude-volume-slider"/>
+        <div class="control-container">
+          <div class="amplitude-prev">
+            &lt;&lt;
+          </div>
+          <div class="amplitude-play-pause">
+            |&gt;
+          </div>
+          <div class="amplitude-next">
+            &gt;&gt;
+          </div>
+        </div>
+        </div>
     </div>
   </div>
 </template>
@@ -58,10 +56,16 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: #121d27;
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
 
 div.maingrid {
@@ -71,6 +75,11 @@ div.maingrid {
   height: 100%;
 }
 
+div.grid-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 div.grid-sidebar {
   max-width: 300px;
 }
@@ -78,5 +87,12 @@ div.grid-sidebar {
 div.grid-player {
   max-height: 150px;
   grid-column: 1 / span 2;
+}
+
+div.grid-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 </style>

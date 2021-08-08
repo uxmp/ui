@@ -2,7 +2,12 @@
   <h1>Albums</h1>
   <div class="album" v-for="album in albumList" :key="album.getId()">
     <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" width="150" height="150" /><br />
-    {{ album.getName() }}
+    <div class="album_name">
+      {{ album.getName() }}
+    </div>
+    <div class="album_artist">
+      by {{ album.getArtistName() }}
+    </div>
   </div>
 </template>
 
@@ -63,5 +68,17 @@ div.album {
   display: inline-block;
   width: 300px;
   height: 200px;
+  background-color: #0a0f14;
+  margin: 20px;
+  border: 1px #0a0f14 solid;
+  padding: 15px;
+}
+
+div.album_name {
+  padding-top: 5px;
+}
+
+div.album_artist {
+  font-size: 80%;
 }
 </style>
