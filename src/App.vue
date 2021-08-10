@@ -1,5 +1,5 @@
 <template>
-  <div class="maingrid">
+  <div class="maingrid-noplayer" id="maingrid">
     <div class="grid-sidebar">
       <Sidebar />
     </div>
@@ -83,6 +83,7 @@ export default defineComponent({
   },
   methods: {
     updatePlaylist(songList: Array<SongListItem>): void {
+      document.getElementById('maingrid').className = 'maingrid';
       this.playlist = songList;
     },
     updateNowPlaying(data: object): void {
@@ -128,6 +129,13 @@ div.maingrid {
   display: grid;
   grid-template-columns: 10% 15% auto 40%;
   grid-template-rows: auto 10px 15%;
+  height: 100%;
+}
+
+div.maingrid-noplayer {
+  display: grid;
+  grid-template-columns: 10% 15% auto 40%;
+  grid-template-rows: auto;
   height: 100%;
 }
 
@@ -214,6 +222,18 @@ div.grid-nowplaying {
   height: 100%;
   background-color: #0b1116;
   border-top: 1px #446683 solid;
+}
+
+div.maingrid-noplayer div.grid-nowplaying {
+  display: none;
+}
+
+div.maingrid-noplayer div.grid-player {
+  display: none;
+}
+
+div.maingrid-noplayer div.grid-playlist {
+  display: none;
 }
 
 .amplitude-active-song-container {

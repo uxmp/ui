@@ -10,6 +10,9 @@ class Player {
     amplitudejs.init({
       songs: songList,
       callbacks: {
+        play: function () {
+          app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
+        },
         song_change: function () {
           app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
         }
