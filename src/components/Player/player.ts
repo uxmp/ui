@@ -1,32 +1,50 @@
 import * as amplitudejs from 'amplitudejs'
+import { DefineComponent } from 'vue';
 import { Album } from '../../model/album'
+import { Disc } from '../../model/Disc';
+import { SongListItem } from '../../model/SongListItem';
 
 class Player {
 
-  static init() {
+  static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
     amplitudejs.init({
-      songs: [{
-        url: ''
-      }],
+      songs: songList,
+      callbacks: {
+        song_change: function () {
+          app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
+        }
+      },
       debug: true,
       delay: 250,
       continue_next: true
     });
   }
 
-  static playAlbum(album: Album) {
+  static playIndex(index: number) {
+    amplitudejs.playSongAtIndex(index);
+  }
+
+  static playAlbum(album: Album, app: DefineComponent) {
     amplitudejs.stop();
 
-    Player.init();
+    const songList: Object[] | undefined = [];
 
-    album.getSongList().map((url: string) => {
-      amplitudejs.addSong({
-        name: "Bla"+url,
-        url: url
+    album.getDiscs().map((disc: Disc) => {
+      disc.getSongList().map((song: SongListItem) => {
+        songList.push({
+          name: song.getName(),
+          albumName: song.getAlbumName(),
+          artistName: song.getArtistName(),
+          url: song.getPlayUrl(),
+          cover_art_url: song.getCover(),
+          artistId: song.getArtistId(),
+          albumId: song.getAlbumId(),
+        });
       });
     });
-    amplitudejs.bindNewElements();
-    amplitudejs.playSongAtIndex(1);
+
+    Player.init(app, songList);
+    amplitudejs.play();
   }
 }
 

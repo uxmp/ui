@@ -3,40 +3,61 @@
     <div class="grid-sidebar">
       <Sidebar />
     </div>
-    <div class="grid-content">
-      <router-view />
+    <div class="grid-content scrollbar">
+      <router-view @updatePlaylist="updatePlaylist" @updateNowPlaying="updateNowPlaying" />
+    </div>
+    <div>
     </div>
     <div class="grid-player">
       <div style="width: 100%">
-        <div class="time-container">
-          <div class="current-time">
-            <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
-            <span class="amplitude-duration-minutes">03</span>:<span class="amplitude-duration-seconds">16</span>
-          </div>
-        </div>
-        <progress class="amplitude-buffered-progress" value="0"></progress>
-        <input type="range" class="amplitude-song-slider" step=".1"/>
         <input type="range" class="amplitude-volume-slider"/>
         <div class="control-container">
-          <span class="amplitude-prev">
-            &lt;&lt;
+          <span class="amplitude-prev" style="background-color: rgb(85, 57, 5); height: 50px; display: inline-block; color: #ffffff">
+            <img src="./assets/icons/previous.svg" />
           </span>
-          <span class="amplitude-play-pause">
-            |&gt;
+          <span class="amplitude-play-pause" style="background-color: rgb(85, 57, 5); height: 50px; display: inline-block;">
+            <img src="./assets/icons/play.svg" />
           </span>
-          <span class="amplitude-next">
-            &gt;&gt;
+          <span class="amplitude-next" style="background-color: rgb(85, 57, 5); height: 50px; display: inline-block;">
+            <img src="./assets/icons/next.svg" />
           </span>
         </div>
       </div>
     </div>
-    <div>
-      Now playing
-      <div class="song-title"></div>
-      <div class="song-artist"></div>
+    <div class="grid-nowplaying">
+      <div class="nowplaying-grid">
+        <div class="nowplaying-cover">
+          <img data-amplitude-song-info="cover_art_url" style="width: 110px; height: 110px;" />
+        </div>
+        <div>
+          <div class="nowplaying-title">
+            <span data-amplitude-song-info="name" class="song-name"></span>
+          </div>
+          <div class="nowplaying-album">
+            from <router-link :to="'/album/' + this.nowPlaying.albumId">{{ this.nowPlaying.albumName }}</router-link>
+          </div>
+          <div class="nowplaying-artist">
+            by <router-link :to="'/artist/' + this.nowPlaying.artistId">{{ this.nowPlaying.artistName }}</router-link>
+          </div>
+        </div>
+        <div class="nowplaying-state">
+          <input type="range" class="amplitude-song-slider" step=".1"/>
+          <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
+          <span class="amplitude-duration-minutes">03</span>:<span class="amplitude-duration-seconds">16</span>
+        </div>
+      </div>
     </div>
-    <div>
-      Playlist
+    <div class="grid-playlist">
+      <div class="playlist scrollbar">
+        <table style="width: 100%; margin-top: 10px">
+          <tr v-for="(songListItem, index) in this.playlist" :key="songListItem.getId()" class="song amplitude-song-container" :data-amplitude-song-index="index">
+            <td>{{ songListItem.getTracknumber() }} </td>
+            <td style="text-align: left" v-on:click="playFromPlaylist(index)">
+              {{ songListItem.getName() }}</td>
+            <td>{{ songListItem.getArtistName() }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -45,13 +66,32 @@
 import { defineComponent } from 'vue'
 import ArtistList from './components/Artist/ArtistList.vue'
 import Sidebar from './components/Navigation/Sidebar.vue'
+import { Player } from './components/Player/player';
+import { SongListItem } from './model/SongListItem';
 
 export default defineComponent({
-  name: 'App',
+  data() {
+    return {
+      playlist: [] as SongListItem[],
+      nowPlaying: {},
+    };
+  },
+  name: 'uXMP',
   components: {
     ArtistList,
     Sidebar
-  }
+  },
+  methods: {
+    updatePlaylist(songList: Array<SongListItem>): void {
+      this.playlist = songList;
+    },
+    updateNowPlaying(data: object): void {
+      this.nowPlaying = data;
+    },
+    playFromPlaylist(index: number) {
+      Player.playIndex(index);
+    }
+  },
 })
 </script>
 
@@ -66,6 +106,17 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   background-color: #121d27;
+  overflow: hidden;
+}
+
+a {
+  color: rgb(141, 102, 31);
+  text-decoration: none;;
+}
+
+a:hover {
+  color: rgb(192, 140, 44);
+  text-decoration: none;
 }
 
 body {
@@ -75,8 +126,8 @@ body {
 
 div.maingrid {
   display: grid;
-  grid-template-columns: 15% 15% auto 20%;
-  grid-template-rows: auto 15%;
+  grid-template-columns: 10% 15% auto 40%;
+  grid-template-rows: auto 10px 15%;
   height: 100%;
 }
 
@@ -92,13 +143,80 @@ div.grid-sidebar {
 
 div.grid-player {
   max-height: 150px;
-}
-
-div.grid-player {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   grid-column: 1 / span 2;
+  background-color: #0b1116;
+  border-top: 1px #446683 solid;
+}
+
+div.grid-playlist {
+  background-color: #0b1116;
+  border-top: 1px #446683 solid;
+}
+
+div.grid-playlist div.playlist {
+  max-height: 150px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+div.scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+div.scrollbar::-webkit-scrollbar-track {
+  background: rgb(85, 57, 5);
+}
+
+div.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #121d27;
+  border-radius: 20px;
+  border: 3px solid rgb(85, 57, 5);
+}
+
+div.nowplaying-grid {
+  display: grid;
+  grid-template-rows: 50% auto;
+  grid-template-columns: 150px auto;
+  max-width: 500px;
+}
+
+div.nowplaying-cover {
+  grid-row: 1 / span 2;
+}
+
+div.nowplaying-title {
+  font-size: 110%;
+  text-align: left;
+}
+
+div.nowplaying-album {
+  font-size: 80%;
+  text-align: left;
+}
+
+div.nowplaying-artist {
+  font-size: 80%;
+  text-align: left;
+}
+
+div.nowplaying-state {
+  margin-top: 1%;
+  text-align: left;
+}
+
+div.grid-nowplaying {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: #0b1116;
+  border-top: 1px #446683 solid;
+}
+
+.amplitude-active-song-container {
+  background-color: #1c2c3a; 
 }
 </style>

@@ -1,19 +1,12 @@
-import { Type } from "class-transformer";
-import { Disc } from "./Disc";
-import 'reflect-metadata';
-
-class Album {
-    private id: number = 0;
+class AlbumListItem {
+    private albumId: number = 0;
     private name: string = '';
     private artistId: number = 0;
     private cover: string = '';
     private artistName: string = '';
 
-    @Type(() => Disc)
-    private discs: Array<Disc> = [];
-
-    getId(): number {
-        return this.id;
+    getAlbumId(): number {
+        return this.albumId;
     }
 
     getName(): string {
@@ -24,10 +17,6 @@ class Album {
         return this.artistId;
     }
 
-    getDiscs(): Array<Disc> {
-        return this.discs;
-    }
-
     getCover(): string {
         return this.cover;
     }
@@ -35,6 +24,8 @@ class Album {
     getArtistName(): string {
         return this.artistName;
     }
+
+
 }
 
-export { Album };
+export { AlbumListItem };

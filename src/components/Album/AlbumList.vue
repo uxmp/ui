@@ -1,12 +1,14 @@
 <template>
   <h1>Albums</h1>
-  <div class="album" v-for="album in albumList" :key="album.getId()">
-    <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" width="120" height="120" /><br />
-    <div class="album_name">
-      {{ album.getName() }}
-    </div>
-    <div class="album_artist">
-      by {{ album.getArtistName() }}
+  <div class="album" v-for="album in albumList" :key="album.getAlbumId()">
+    <div class="album_inner">
+      <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" width="120" height="120" /><br />
+      <div class="album_name">
+        {{ album.getName() }}
+      </div>
+      <div class="album_artist">
+        by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -14,8 +16,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
-import { Album } from '../../model/album';
-import { Player } from '../Player/player'
+import { AlbumListItem } from '../../model/AlbumListItem';
+import { loadAlbum } from './loadAlbum'
+import { Player } from '../Player/player';;
+import 'reflect-metadata';
+
 export default defineComponent({
   name: 'AlbumList',
   data() {
@@ -32,22 +37,21 @@ export default defineComponent({
       const data = await res.json();
 
       this.albumList = data.items.map((album_data: any) => {
-        return plainToClass(Album, album_data);
+        return plainToClass(AlbumListItem, album_data);
       });
     },
 
-    play(album: Album) {
-      Player.playAlbum(album);
+    play(item: AlbumListItem) {
+      loadAlbum(item.getAlbumId()).then(album => {
+        Player.playAlbum(album, this)
+        this.$emit('updatePlaylist', album.getDiscs()[0].getSongList());
+      });
     }
   }
 })
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
-
 label {
   margin: 0 0.5em;
   font-weight: bold;
@@ -65,13 +69,19 @@ img.cover_play {
 }
 
 div.album {
-  display: inline-block;
+  display: inline-flex;
   width: 300px;
-  height: 160px;
+  height: 180px;
   background-color: #0a0f14;
-  margin: 20px;
-  border: 1px #0a0f14 solid;
+  margin: 10px;
   padding: 15px;
+  border: 1px #446683 solid;
+}
+
+div.album_inner {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 div.album_name {
