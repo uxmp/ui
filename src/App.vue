@@ -48,16 +48,7 @@
       </div>
     </div>
     <div class="grid-playlist">
-      <div class="playlist scrollbar">
-        <table style="width: 100%; margin-top: 10px">
-          <tr v-for="(songListItem, index) in this.playlist" :key="songListItem.getId()" class="song amplitude-song-container" :data-amplitude-song-index="index">
-            <td>{{ songListItem.getTracknumber() }} </td>
-            <td style="text-align: left" v-on:click="playFromPlaylist(index)">
-              {{ songListItem.getName() }}</td>
-            <td>{{ songListItem.getArtistName() }}</td>
-          </tr>
-        </table>
-      </div>
+      <Playlist :elements="this.playlist" />
     </div>
   </div>
 </template>
@@ -65,8 +56,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ArtistList from './components/Artist/ArtistList.vue'
+import Playlist from './components/Navigation/Playlist.vue';
 import Sidebar from './components/Navigation/Sidebar.vue'
-import { Player } from './components/Player/player';
 import { SongListItem } from './model/SongListItem';
 
 export default defineComponent({
@@ -79,7 +70,8 @@ export default defineComponent({
   name: 'uXMP',
   components: {
     ArtistList,
-    Sidebar
+    Sidebar,
+    Playlist
   },
   methods: {
     updatePlaylist(songList: Array<SongListItem>): void {
@@ -88,9 +80,6 @@ export default defineComponent({
     },
     updateNowPlaying(data: object): void {
       this.nowPlaying = data;
-    },
-    playFromPlaylist(index: number) {
-      Player.playIndex(index);
     }
   },
 })
@@ -163,6 +152,7 @@ div.grid-player {
 div.grid-playlist {
   background-color: #0b1116;
   border-top: 1px #446683 solid;
+  font-size: 80%;
 }
 
 div.grid-playlist div.playlist {

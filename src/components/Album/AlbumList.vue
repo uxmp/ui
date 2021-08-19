@@ -33,7 +33,13 @@ export default defineComponent({
   },
   methods: {
     async getAlbums() {
-      const res = await fetch('http://localhost:8888/albums');
+      const res = await fetch(
+        'http://localhost:8888/albums',
+        {
+          method: 'GET',
+          credentials: "include"
+        }
+      );
       const data = await res.json();
 
       this.albumList = data.items.map((album_data: any) => {

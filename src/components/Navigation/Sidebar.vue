@@ -8,6 +8,13 @@
       <router-link to="/artists">Artists</router-link>
     </li>
   </ul>
+
+  <h3>Random</h3>
+  <ul>
+    <li>
+      <router-link to="/random/songs">Songs</router-link>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">

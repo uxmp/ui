@@ -26,7 +26,13 @@ export default defineComponent({
   },
   methods: {
     async getArtists() {
-      const res = await fetch('http://localhost:8888/artists');
+      const res = await fetch(
+        'http://localhost:8888/artists',
+        {
+              method: "GET",
+              credentials: "include"
+        }
+      );
       const data = await res.json();
 
       this.artistList = data.items.map((artist_data: any) => {

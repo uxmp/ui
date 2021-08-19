@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ArtistList from "../Artist/ArtistList.vue";
 import AlbumList from "../Album/AlbumList.vue";
+import RandomSongs from "../Navigation/Random/RandomSongs.vue"
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     name: "Albums",
     component: AlbumList,
   },
+  {
+    path: "/random/songs",
+    name: "Random songs",
+    component: RandomSongs
+  }
 ];
 
 const router = createRouter({

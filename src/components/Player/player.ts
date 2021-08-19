@@ -49,6 +49,22 @@ class Player {
     Player.init(app, songList);
     amplitudejs.play();
   }
+
+  static createSongListItem(song: SongListItem): Object {
+    return {
+      name: song.getName(),
+      albumName: song.getAlbumName(),
+      artistName: song.getArtistName(),
+      url: song.getPlayUrl(),
+      cover_art_url: song.getCover(),
+      artistId: song.getArtistId(),
+      albumId: song.getAlbumId(),
+    };
+  }
+
+  static play() {
+    amplitudejs.play();
+  }
 }
 
 export { Player };
