@@ -15,7 +15,7 @@ const routes = [
     component: AlbumList,
   },
   {
-    path: "/random/songs",
+    path: "/random/songs/:limit?",
     name: "Random songs",
     component: RandomSongs
   }

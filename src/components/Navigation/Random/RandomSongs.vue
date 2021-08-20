@@ -27,11 +27,21 @@ export default defineComponent({
   },
   name: 'RandomSongs',
   beforeMount() {
-    this.getSongs();
+    this.getSongs(100);
+    console.log(this.$route.params);
+  },
+  async beforeRouteUpdate(to, from) {
+    this.getSongs(to.params.limit)
   },
   methods: {
-    async getSongs() {
-      const res = await fetch('http://localhost:8888/random/songs');
+    async getSongs(limit: number) {
+      const res = await fetch(
+        'http://localhost:8888/random/songs/' + limit,
+        {
+          method: "GET",
+          credentials: "include"
+        }
+      );
       const data = await res.json();
 
       this.songList = data.items.map((song_data: any) => {

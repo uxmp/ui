@@ -29,8 +29,8 @@ export default defineComponent({
       const res = await fetch(
         'http://localhost:8888/artists',
         {
-              method: "GET",
-              credentials: "include"
+          method: "GET",
+          credentials: "include"
         }
       );
       const data = await res.json();

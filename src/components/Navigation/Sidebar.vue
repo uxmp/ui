@@ -12,7 +12,12 @@
   <h3>Random</h3>
   <ul>
     <li>
-      <router-link to="/random/songs">Songs</router-link>
+      <router-link to="/random/songs/100">Songs</router-link>
+      <span class="random_select">
+        (<router-link to="/random/songs/50">50</router-link> /
+        <router-link to="/random/songs/250">250</router-link> /
+        <router-link to="/random/songs/500">500</router-link>)
+      </span>
     </li>
   </ul>
 </template>
@@ -29,5 +34,8 @@ export default defineComponent({
 <style scoped>
 ul {
   list-style-type: none;
+}
+li span.random_select {
+  font-size: 70%;
 }
 </style>
