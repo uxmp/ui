@@ -14,6 +14,8 @@
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import { Artist } from '../../model/artist';
+import DefaultOptions from '../Lib/DefaultOptions'
+
 export default defineComponent({
   name: 'ArtistList',
   data() {
@@ -24,15 +26,14 @@ export default defineComponent({
   beforeMount() {
     this.getArtists();
   },
+  async created() {
+    if (!this.$store.getters.isLogged) {
+      this.$router.push('/login');
+    }
+  },
   methods: {
     async getArtists() {
-      const res = await fetch(
-        'http://localhost:8888/artists',
-        {
-          method: "GET",
-          credentials: "include"
-        }
-      );
+      const res = await fetch('http://localhost:8888/artists', DefaultOptions);
       const data = await res.json();
 
       this.artistList = data.items.map((artist_data: any) => {

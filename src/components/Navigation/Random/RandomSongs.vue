@@ -19,6 +19,8 @@ import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import { SongListItem } from '../../../model/SongListItem';
 import { Player } from '../../Player/player';
+import DefaultOptions from '../../Lib/DefaultOptions'
+
 export default defineComponent({
   data() {
     return {
@@ -33,14 +35,16 @@ export default defineComponent({
   async beforeRouteUpdate(to, from) {
     this.getSongs(to.params.limit)
   },
+  async created() {
+    if (!this.$store.getters.isLogged) {
+      this.$router.push('/login');
+    }
+  },
   methods: {
     async getSongs(limit: number) {
       const res = await fetch(
         'http://localhost:8888/random/songs/' + limit,
-        {
-          method: "GET",
-          credentials: "include"
-        }
+        DefaultOptions
       );
       const data = await res.json();
 

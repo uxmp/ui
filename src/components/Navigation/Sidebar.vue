@@ -20,13 +20,26 @@
       </span>
     </li>
   </ul>
+
+  <h3>User</h3>
+  <ul>
+    <li v-on:click="logout()">Logout</li>
+  </ul>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import AuthService from './../Auth/AuthService'
+
 export default defineComponent({
   name: 'Sidebar',
   methods: {
+    logout() {
+      AuthService.logout(() => {
+        this.$store.dispatch('logout');
+        this.$router.push('/login')
+      });
+    }
   }
 })
 </script>

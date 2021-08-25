@@ -20,6 +20,7 @@ import { AlbumListItem } from '../../model/AlbumListItem';
 import { loadAlbum } from './loadAlbum'
 import { Player } from '../Player/player';;
 import 'reflect-metadata';
+import DefaultOptions from '../Lib/DefaultOptions'
 
 export default defineComponent({
   name: 'AlbumList',
@@ -31,14 +32,16 @@ export default defineComponent({
   beforeMount() {
     this.getAlbums();
   },
+  async created() {
+    if (!this.$store.getters.isLogged) {
+      this.$router.push('/login');
+    }
+  },
   methods: {
     async getAlbums() {
       const res = await fetch(
         'http://localhost:8888/albums',
-        {
-          method: 'GET',
-          credentials: "include"
-        }
+        DefaultOptions
       );
       const data = await res.json();
 
