@@ -52,8 +52,8 @@ export default defineComponent({
 
     play(item: AlbumListItem) {
       loadAlbum(item.getAlbumId()).then(album => {
-        Player.playAlbum(album, this)
         this.$emit('updatePlaylist', album.getDiscs()[0].getSongList());
+        Player.playAlbum(album, this);
       });
     }
   }

@@ -7,6 +7,8 @@ import { SongListItem } from '../../model/SongListItem';
 class Player {
 
   static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
+    amplitudejs.stop();
+
     amplitudejs.init({
       songs: songList,
       callbacks: {
@@ -41,7 +43,7 @@ class Player {
     });
 
     Player.init(app, songList);
-    Player.play(songList[0]);
+    Player.playIndex(0);
   }
 
   static createSongListItem(song: SongListItem): Object {
@@ -54,10 +56,6 @@ class Player {
       artistId: song.getArtistId(),
       albumId: song.getAlbumId(),
     };
-  }
-
-  static play(item: Object): void {
-    amplitudejs.playNow(item);
   }
 
   static stop(): void {
