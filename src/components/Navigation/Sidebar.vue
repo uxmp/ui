@@ -35,6 +35,8 @@ export default defineComponent({
   name: 'Sidebar',
   methods: {
     logout() {
+      this.$emit('hidePlayer');
+      
       AuthService.logout(() => {
         this.$store.dispatch('logout');
         this.$router.push('/login')

@@ -40,7 +40,7 @@ export default defineComponent({
   methods: {
     async getAlbums() {
       const res = await fetch(
-        'http://localhost:8888/albums',
+        import.meta.env.VITE_API_URL + 'albums',
         DefaultOptions
       );
       const data = await res.json();

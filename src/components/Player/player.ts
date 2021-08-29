@@ -15,7 +15,7 @@ class Player {
         },
         song_change: function () {
           app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
-        }
+        },
       },
       debug: true,
       delay: 250,
@@ -64,6 +64,10 @@ class Player {
 
   static play() {
     amplitudejs.play();
+  }
+
+  static stop() {
+    amplitudejs.stop();
   }
 }
 

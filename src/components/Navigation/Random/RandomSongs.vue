@@ -1,9 +1,9 @@
 <template>
   <h1>Random songs</h1>
   <img src="/src/assets/icons/play.svg" v-on:click="playAll()" /><br />
-  <div class="song" v-for="song in this.songList" :key="song.getId()">
+  <div class="song" v-for="song in songList" :key="song.getId()">
     <div class="album_inner">
-      <img class="cover_play" v-on:click="play(song)" v-bind:src="song.getCover()" width="60" height="60" /><br />
+      <img class="cover_play" v-bind:src="song.getCover()" width="60" height="60" /><br />
       <div class="song_name">
         {{ song.getName() }}
       </div>
@@ -30,7 +30,6 @@ export default defineComponent({
   name: 'RandomSongs',
   beforeMount() {
     this.getSongs(100);
-    console.log(this.$route.params);
   },
   async beforeRouteUpdate(to, from) {
     this.getSongs(to.params.limit)
@@ -43,7 +42,7 @@ export default defineComponent({
   methods: {
     async getSongs(limit: number) {
       const res = await fetch(
-        'http://localhost:8888/random/songs/' + limit,
+        import.meta.env.VITE_API_URL + 'random/songs/' + limit,
         DefaultOptions
       );
       const data = await res.json();

@@ -33,7 +33,10 @@ export default defineComponent({
   },
   methods: {
     async getArtists() {
-      const res = await fetch('http://localhost:8888/artists', DefaultOptions);
+      const res = await fetch(
+        import.meta.env.VITE_API_URL + 'artists',
+        DefaultOptions
+      );
       const data = await res.json();
 
       this.artistList = data.items.map((artist_data: any) => {

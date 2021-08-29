@@ -1,4 +1,6 @@
-class SongListItem {
+import SongListItemInterface from "./SongListItemInterface";
+
+class SongListItem implements SongListItemInterface {
     private id: number = 0;
     private name: string = '';
     private trackNumber: number = 0;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8888/common/';
+const url = import.meta.env.VITE_API_URL + 'common/';
 
 export default {
   login(credentials) {

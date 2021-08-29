@@ -1,10 +1,10 @@
 <template>
   <div class="maingrid-noplayer" id="maingrid">
     <div class="grid-sidebar">
-      <Sidebar />
+      <Sidebar @hidePlayer="hidePlayer" />
     </div>
     <div class="grid-content scrollbar">
-      <router-view @updatePlaylist="updatePlaylist" @updateNowPlaying="updateNowPlaying" />
+      <router-view @updatePlaylist="updatePlaylist" @updateNowPlaying="updateNowPlaying"/>
     </div>
     <div>
     </div>
@@ -34,10 +34,10 @@
             <span data-amplitude-song-info="name" class="song-name"></span>
           </div>
           <div class="nowplaying-album">
-            from <router-link :to="'/album/' + this.nowPlaying.albumId">{{ this.nowPlaying.albumName }}</router-link>
+            from <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
           </div>
           <div class="nowplaying-artist">
-            by <router-link :to="'/artist/' + this.nowPlaying.artistId">{{ this.nowPlaying.artistName }}</router-link>
+            by <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
           </div>
         </div>
         <div class="nowplaying-state">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="grid-playlist">
-      <Playlist :elements="this.playlist" />
+      <Playlist :elements="playlist" />
     </div>
   </div>
 </template>
@@ -58,13 +58,14 @@ import { defineComponent } from 'vue'
 import ArtistList from './components/Artist/ArtistList.vue'
 import Playlist from './components/Navigation/Playlist.vue';
 import Sidebar from './components/Navigation/Sidebar.vue'
-import { SongListItem } from './model/SongListItem';
+import NowPlaying from './model/NowPlaying';
+import SongListItemInterface from './model/SongListItemInterface';
 
 export default defineComponent({
   data() {
     return {
-      playlist: [] as SongListItem[],
-      nowPlaying: {},
+      playlist: [] as SongListItemInterface[],
+      nowPlaying: {} as NowPlaying
     };
   },
   name: 'uXMP',
@@ -74,12 +75,16 @@ export default defineComponent({
     Playlist
   },
   methods: {
-    updatePlaylist(songList: Array<SongListItem>): void {
+    updatePlaylist(songList: Array<SongListItemInterface>): void {
       document.getElementById('maingrid').className = 'maingrid';
       this.playlist = songList;
     },
-    updateNowPlaying(data: object): void {
+    updateNowPlaying(data: NowPlaying): void {
       this.nowPlaying = data;
+    },
+    hidePlayer(): void {
+      document.getElementById('maingrid').className = 'maingrid-noplayer';
+      this.playlist = [];
     }
   },
 })
@@ -117,7 +122,7 @@ body {
 div.maingrid {
   display: grid;
   grid-template-columns: 10% 15% auto 40%;
-  grid-template-rows: auto 10px 15%;
+  grid-template-rows: auto 10px minmax(150px, 15%);
   height: 100%;
 }
 
@@ -139,9 +144,8 @@ div.grid-sidebar {
 }
 
 div.grid-player {
-  max-height: 150px;
-  width: 100%;
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   grid-column: 1 / span 2;
@@ -150,13 +154,14 @@ div.grid-player {
 }
 
 div.grid-playlist {
+  height: 100%;
   background-color: #0b1116;
   border-top: 1px #446683 solid;
   font-size: 80%;
 }
 
 div.grid-playlist div.playlist {
-  max-height: 150px;
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -207,6 +212,7 @@ div.nowplaying-state {
 }
 
 div.grid-nowplaying {
+  max-height: minmax(15%, 150px);
   display: flex;
   align-items: center;
   height: 100%;
