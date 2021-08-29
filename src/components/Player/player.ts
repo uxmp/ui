@@ -34,20 +34,14 @@ class Player {
 
     album.getDiscs().map((disc: Disc) => {
       disc.getSongList().map((song: SongListItem) => {
-        songList.push({
-          name: song.getName(),
-          albumName: song.getAlbumName(),
-          artistName: song.getArtistName(),
-          url: song.getPlayUrl(),
-          cover_art_url: song.getCover(),
-          artistId: song.getArtistId(),
-          albumId: song.getAlbumId(),
-        });
+        songList.push(
+          Player.createSongListItem(song)
+        )
       });
     });
 
     Player.init(app, songList);
-    amplitudejs.play();
+    Player.play(songList[0]);
   }
 
   static createSongListItem(song: SongListItem): Object {
@@ -62,11 +56,11 @@ class Player {
     };
   }
 
-  static play() {
-    amplitudejs.play();
+  static play(item: Object): void {
+    amplitudejs.playNow(item);
   }
 
-  static stop() {
+  static stop(): void {
     amplitudejs.stop();
   }
 }

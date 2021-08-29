@@ -59,7 +59,7 @@ export default defineComponent({
       }
 
       Player.init(this, list);
-      Player.play();
+      Player.play(list[0]);
       this.$emit('updatePlaylist', this.songList);
     }
   }
