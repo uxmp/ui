@@ -9,7 +9,6 @@
 </template>
 <script>
 import AuthService from './AuthService.ts';
-import DefaultOptions from './../Lib/DefaultOptions'
 
 export default {
   data() {
@@ -33,8 +32,6 @@ export default {
         const user = response.data.user;
 
         this.$store.dispatch('login', { token, user });
-
-        DefaultOptions.headers.Authorization = `Bearer ${token}`;
 
         this.$router.push('/');
       } catch (error) {

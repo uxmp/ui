@@ -14,7 +14,7 @@
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import { Artist } from '../../model/artist';
-import DefaultOptions from '../Lib/DefaultOptions'
+import ServerRequest from '../Lib/ServerRequest';
 
 export default defineComponent({
   name: 'ArtistList',
@@ -33,11 +33,9 @@ export default defineComponent({
   },
   methods: {
     async getArtists() {
-      const res = await fetch(
-        import.meta.env.VITE_API_URL + 'artists',
-        DefaultOptions
-      );
-      const data = await res.json();
+      let data = await ServerRequest.request(
+        'artists'
+      ).then(response => response.json());
 
       this.artistList = data.items.map((artist_data: any) => {
         return plainToClass(Artist, artist_data);

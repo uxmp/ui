@@ -19,7 +19,7 @@ import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import { SongListItem } from '../../../model/SongListItem';
 import { Player } from '../../Player/player';
-import DefaultOptions from '../../Lib/DefaultOptions'
+import ServerRequest from '../../Lib/ServerRequest';
 
 export default defineComponent({
   data() {
@@ -41,11 +41,9 @@ export default defineComponent({
   },
   methods: {
     async getSongs(limit: number) {
-      const res = await fetch(
-        import.meta.env.VITE_API_URL + 'random/songs/' + limit,
-        DefaultOptions
-      );
-      const data = await res.json();
+      let data = await ServerRequest.request(
+        'random/songs/' + limit
+      ).then(response => response.json());
 
       this.songList = data.items.map((song_data: any) => {
         return plainToClass(SongListItem, song_data);

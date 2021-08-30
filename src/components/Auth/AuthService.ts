@@ -1,24 +1,17 @@
-const url = import.meta.env.VITE_API_URL + 'common/';
+import ServerRequest from "../Lib/ServerRequest";
 
 export default {
   login(credentials) {
-    return fetch(
-      url + 'login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials)
-      }
+    return ServerRequest.request(
+      'common/login',
+      'POST',
+      credentials
     ).then(response => response.json());
   },
   logout(callback) {
-    return fetch(
-      url + 'logout', {
-        method: 'POST'
-      }
-    ).then(callback);
+    ServerRequest.request(
+      'common/logout',
+      'POST'
+    ).then(callback());
   },
 };

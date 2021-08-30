@@ -1,14 +1,12 @@
 import { Album } from '../../model/album'
 import { plainToClass } from 'class-transformer';
-import DefaultOptions from '../Lib/DefaultOptions'
+import ServerRequest from '../Lib/ServerRequest';
 
 async function loadAlbum(albumId: number): Promise<Album> {
-      let result = await fetch(
-            import.meta.env.VITE_API_URL + 'album/' + albumId,
-            DefaultOptions            
-      );
-
-      return plainToClass(Album, await result.json());
+  return plainToClass(
+    Album,
+    await ServerRequest.request('album/' + albumId).then(response => response.json())
+  );
 }
 
 export { loadAlbum };
