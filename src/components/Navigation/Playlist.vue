@@ -1,17 +1,18 @@
 <template>
   <div class="playlist scrollbar">
-    <div
+    <section
       style="width: 100%; margin-top: 10px"
       v-for="(songListItem, index) in elements"
       :key="songListItem.getId()"
       class="song amplitude-song-container"
       :data-amplitude-song-index="index"
+      :id="'playlist-item-' + index"
       v-on:click="playFromPlaylist(index)"
     >
       {{ songListItem.getTracknumber() }}
         {{ songListItem.getName() }}
       {{ songListItem.getArtistName() }}
-    </div>
+    </section>
   </div>
 </template>
 

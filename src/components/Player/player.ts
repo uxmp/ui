@@ -13,10 +13,22 @@ class Player {
       songs: songList,
       callbacks: {
         play: function () {
-          app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
+          let song = amplitudejs.getActiveSongMetadata();
+
+          app.$emit('updateNowPlaying', song)
+
+          document.getElementById('playlist-item-' + song.index).scrollIntoView({
+            behavior: 'smooth'
+          });
         },
         song_change: function () {
-          app.$emit('updateNowPlaying', amplitudejs.getActiveSongMetadata())
+          let song = amplitudejs.getActiveSongMetadata();
+
+          app.$emit('updateNowPlaying', song);
+
+          document.getElementById('playlist-item-' + song.index).scrollIntoView({
+            behavior: 'smooth'
+          });
         },
       },
       debug: true,

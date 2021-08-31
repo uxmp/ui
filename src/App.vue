@@ -9,14 +9,7 @@
     <div>
     </div>
     <div class="grid-player">
-      <div style="width: 100%">
-        <input type="range" class="amplitude-volume-slider"/>
-        <div class="control-container">
-          <div class="amplitude-prev"></div>
-          <div class="amplitude-play-pause"></div>
-          <div class="amplitude-next"></div>
-        </div>
-      </div>
+      <PlayerControl />
     </div>
     <div class="grid-nowplaying">
       <div class="nowplaying-grid">
@@ -54,6 +47,7 @@ import Playlist from './components/Navigation/Playlist.vue';
 import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlaying from './model/NowPlaying';
 import SongListItemInterface from './model/SongListItemInterface';
+import PlayerControl from './components/Navigation/PlayerControl.vue'
 
 export default defineComponent({
   data() {
@@ -66,7 +60,8 @@ export default defineComponent({
   components: {
     ArtistList,
     Sidebar,
-    Playlist
+    Playlist,
+    PlayerControl,
   },
   methods: {
     updatePlaylist(songList: Array<SongListItemInterface>): void {
