@@ -17,23 +17,25 @@ class Player {
 
           app.$emit('updateNowPlaying', song)
 
-          document.getElementById('playlist-item-' + song.index).scrollIntoView({
-            behavior: 'smooth'
-          });
+          Player.scrollPlaylist(song.index);
         },
         song_change: function () {
           let song = amplitudejs.getActiveSongMetadata();
 
           app.$emit('updateNowPlaying', song);
 
-          document.getElementById('playlist-item-' + song.index).scrollIntoView({
-            behavior: 'smooth'
-          });
+          Player.scrollPlaylist(song.index);
         },
       },
       debug: true,
       delay: 250,
       continue_next: true
+    });
+  }
+
+  static scrollPlaylist(index: number): void {
+    document.getElementById('playlist-item-' + index).scrollIntoView({
+      behavior: 'smooth'
     });
   }
 
