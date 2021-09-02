@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="album_name">
-        {{ album.getName() }}
+        <router-link :to="'/album/' + album.getAlbumId()">{{ album.getName() }}</router-link>
       </div>
       <div class="album_artist">
         by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
