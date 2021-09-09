@@ -10,10 +10,12 @@
             <tr>
               <th></th>
               <th>Name</th>
+              <th>Length</th>
             </tr>
             <tr v-for="song in disc.getSongList()" :key="song.getId()">
               <td>{{ song.getTracknumber() }}</td>
               <td>{{ song.getName() }}</td>
+              <td>{{ formatLength(song.getLength()) }}</td>
             </tr>
           </table>
         </div>
@@ -28,9 +30,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { loadAlbum } from './loadAlbum'
 import 'reflect-metadata';
 import { Album } from '../../model/album';
+import formatDurationLength from '../Lib/FormatDurationLength';
+import EntityLoader from '../Lib/EntityLoader';
 
 export default defineComponent({
   name: 'AlbumView',
@@ -44,11 +47,12 @@ export default defineComponent({
       this.$router.push('/login');
     }
 
-    loadAlbum(this.$route.params.albumId).then((album: Album) => {
-      this.album = album;
-    });
+    EntityLoader.loadAlbum(this.$route.params.albumId).then((album: Album) => this.album = album);
   },
   methods: {
+    formatLength(length: number): string {
+      return formatDurationLength(length);
+    }
   }
 })
 </script>

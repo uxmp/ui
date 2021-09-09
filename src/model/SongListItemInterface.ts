@@ -1,20 +1,22 @@
 export default interface SongListItemInterface {
 
-    getId(): number;
+  getId(): number;
 
-    getName(): string;
+  getName(): string;
 
-    getTracknumber(): number;
+  getTracknumber(): number;
 
-    getPlayUrl(): string;
+  getPlayUrl(): string;
 
-    getArtistName(): string;
+  getArtistName(): string;
 
-    getAlbumName(): string;
+  getAlbumName(): string;
 
-    getCover(): string;
+  getCover(): string;
 
-    getArtistId(): number;
+  getArtistId(): number;
 
-    getAlbumId(): number;
+  getAlbumId(): number;
+
+  getLength(): number {
 }

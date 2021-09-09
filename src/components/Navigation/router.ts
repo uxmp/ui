@@ -4,6 +4,7 @@ import AlbumList from "../Album/AlbumList.vue";
 import RandomSongs from "../Navigation/Random/RandomSongs.vue"
 import Login from "../Auth/Login.vue"
 import AlbumView from "../Album/AlbumView.vue"
+import ArtistView from "../Artist/ArtistView.vue"
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: "/album/:albumId",
     name: "Album",
     component: AlbumView,
+  },
+  {
+    path: "/artist/:artistId",
+    name: "ArtistView",
+    component: ArtistView,
   },
   {
     path: "/random/songs/:limit?",

@@ -22,10 +22,10 @@
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import { AlbumListItem } from '../../model/AlbumListItem';
-import { loadAlbum } from './loadAlbum'
 import { Player } from '../Player/player';;
 import 'reflect-metadata';
 import ServerRequest from '../Lib/ServerRequest';
+import EntityLoader from '../Lib/EntityLoader';
 
 export default defineComponent({
   name: 'AlbumList',
@@ -54,7 +54,7 @@ export default defineComponent({
     },
 
     play(item: AlbumListItem) {
-      loadAlbum(item.getAlbumId()).then(album => {
+      EntityLoader.loadAlbum(item.getAlbumId()).then(album => {
         this.$emit('updatePlaylist', album.getDiscs()[0].getSongList());
         Player.playAlbum(album, this);
       });
