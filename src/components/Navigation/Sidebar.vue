@@ -41,6 +41,7 @@ import AuthService from './../Auth/AuthService'
 
 export default defineComponent({
   name: 'Sidebar',
+  emits: ['hidePlayer'],
   methods: {
     logout() {
       this.$emit('hidePlayer');

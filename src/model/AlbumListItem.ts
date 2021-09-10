@@ -1,31 +1,34 @@
 class AlbumListItem {
-    private albumId: number = 0;
-    private name: string = '';
-    private artistId: number = 0;
-    private cover: string = '';
-    private artistName: string = '';
+  private albumId: number = 0;
+  private name: string = '';
+  private artistId: number = 0;
+  private cover: string = '';
+  private artistName: string = '';
+  private length: number = 0;
 
-    getAlbumId(): number {
-        return this.albumId;
-    }
+  getAlbumId(): number {
+    return this.albumId;
+  }
 
-    getName(): string {
-        return this.name;
-    }
+  getName(): string {
+    return this.name;
+  }
 
-    getArtistId(): number {
-        return this.artistId;
-    }
+  getArtistId(): number {
+    return this.artistId;
+  }
 
-    getCover(): string {
-        return this.cover;
-    }
+  getCover(): string {
+    return this.cover;
+  }
 
-    getArtistName(): string {
-        return this.artistName;
-    }
+  getArtistName(): string {
+    return this.artistName;
+  }
 
-
+  getLength(): number {
+    return this.length
+  }
 }
 
 export { AlbumListItem };

@@ -3,38 +3,43 @@ import { Disc } from "./Disc";
 import 'reflect-metadata';
 
 class Album {
-    private id: number = 0;
-    private name: string = '';
-    private artistId: number = 0;
-    private cover: string = '';
-    private artistName: string = '';
+  private id: number = 0;
+  private name: string = '';
+  private artistId: number = 0;
+  private cover: string = '';
+  private artistName: string = '';
+  private length: number = 0;
 
-    @Type(() => Disc)
-    private discs: Array<Disc> = [];
+  @Type(() => Disc)
+  private discs: Array<Disc> = [];
 
-    getId(): number {
-        return this.id;
-    }
+  getId(): number {
+    return this.id;
+  }
 
-    getName(): string {
-        return this.name;
-    }
+  getName(): string {
+    return this.name;
+  }
 
-    getArtistId(): number {
-        return this.artistId;
-    }
+  getArtistId(): number {
+    return this.artistId;
+  }
 
-    getDiscs(): Array<Disc> {
-        return this.discs;
-    }
+  getDiscs(): Array<Disc> {
+    return this.discs;
+  }
 
-    getCover(): string {
-        return this.cover;
-    }
+  getCover(): string {
+    return this.cover;
+  }
 
-    getArtistName(): string {
-        return this.artistName;
-    }
+  getArtistName(): string {
+    return this.artistName;
+  }
+
+  getLength(): number {
+    return this.length;
+  }
 }
 
 export { Album };

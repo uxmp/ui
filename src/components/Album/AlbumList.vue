@@ -29,6 +29,7 @@ import EntityLoader from '../Lib/EntityLoader';
 
 export default defineComponent({
   name: 'AlbumList',
+  emits: ['updatePlaylist', 'updateNowPlaying'],
   data() {
     return { 
       albumList: []

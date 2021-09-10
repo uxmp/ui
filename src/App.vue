@@ -93,6 +93,12 @@ export default defineComponent({
   overflow: hidden;
 }
 
+h1,
+h2,
+h4 {
+  text-align: left;
+}
+
 a {
   color: rgb(141, 102, 31);
   text-decoration: none;;

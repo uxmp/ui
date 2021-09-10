@@ -3,18 +3,24 @@ import { SongListItem } from "./SongListItem";
 import 'reflect-metadata';
 
 class Disc {
-    private id: number = 0;
+  private id: number = 0;
 
-    @Type(() => SongListItem)
-    private songs: Array<SongListItem> = [];
+  @Type(() => SongListItem)
+  private songs: Array<SongListItem> = [];
 
-    getId(): number | undefined {
-        return this.id;
-    }
+  private length: number = 0;
 
-    getSongList(): Array<SongListItem> {
-        return this.songs;
-    }
+  getId(): number | undefined {
+    return this.id;
+  }
+
+  getSongList(): Array<SongListItem> {
+    return this.songs;
+  }
+
+  getLength(): number {
+    return this.length;
+  }
 }
 
 export { Disc };

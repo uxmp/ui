@@ -4,7 +4,12 @@
     <div class="albumGrid">
       <div>
         <h2>{{ album.getName() }}</h2>
-        <h4>by {{ album.getArtistName() }}</h4>
+        <h4>
+          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+        </h4>
+        <h4>
+          Length: {{ formatLength(album.getLength()) }}
+        </h4>
         <div class="album" v-for="disc in album.getDiscs()" :key="disc.getId()">
           <table>
             <tr>
@@ -58,11 +63,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-h2,
-h4 {
-  text-align: left;
-}
-
 div.albumGrid {
   display: grid;
   grid-template-columns: auto 600px;
