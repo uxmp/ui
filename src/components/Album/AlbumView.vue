@@ -39,6 +39,8 @@ import 'reflect-metadata';
 import { Album } from '../../model/album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
+import { AlbumListItem } from '../../model/AlbumListItem';
+import { Player } from '../Player/player';
 
 export default defineComponent({
   name: 'AlbumView',
@@ -57,6 +59,12 @@ export default defineComponent({
   methods: {
     formatLength(length: number): string {
       return formatDurationLength(length);
+    },
+    play(item: AlbumListItem) {
+      EntityLoader.loadAlbum(item.getAlbumId()).then(album => {
+        this.$emit('updatePlaylist', album.getDiscs()[0].getSongList());
+        Player.playAlbum(album, this);
+      });
     }
   }
 })
