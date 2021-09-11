@@ -1,8 +1,7 @@
 import { Type } from "class-transformer";
-import { SongListItem } from "./SongListItem";
+import SongListItem from "./SongListItem";
 import 'reflect-metadata';
-
-class Disc {
+export default class Disc {
   private id: number = 0;
 
   @Type(() => SongListItem)
@@ -22,5 +21,3 @@ class Disc {
     return this.length;
   }
 }
-
-export { Disc };

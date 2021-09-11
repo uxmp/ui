@@ -33,7 +33,7 @@
 <script lang="ts">
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
-import { AlbumListItem } from '../../model/AlbumListItem';
+import AlbumListItem from '../../model/AlbumListItem';
 import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import ServerRequest from '../Lib/ServerRequest';

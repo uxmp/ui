@@ -39,7 +39,7 @@ import 'reflect-metadata';
 import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
-import { AlbumListItem } from '../../model/AlbumListItem';
+import AlbumListItem from '../../model/AlbumListItem';
 import Player from '../Lib/Player';
 
 export default defineComponent({

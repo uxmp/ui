@@ -1,4 +1,4 @@
-class AlbumListItem {
+export default class AlbumListItem {
   private albumId: number = 0;
   private name: string = '';
   private artistId: number = 0;
@@ -30,5 +30,3 @@ class AlbumListItem {
     return this.length
   }
 }
-
-export { AlbumListItem };

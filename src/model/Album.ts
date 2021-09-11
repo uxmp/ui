@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { Disc } from "./Disc";
+import Disc from "./Disc";
 import 'reflect-metadata';
 
 export default class Album {

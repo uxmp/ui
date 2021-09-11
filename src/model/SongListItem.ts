@@ -1,6 +1,5 @@
 import SongListItemInterface from "./SongListItemInterface";
-
-class SongListItem implements SongListItemInterface {
+export default class SongListItem implements SongListItemInterface {
   private id: number = 0;
   private name: string = '';
   private trackNumber: number = 0;
@@ -52,5 +51,3 @@ class SongListItem implements SongListItemInterface {
     return this.length;
   }
 }
-
-export { SongListItem };

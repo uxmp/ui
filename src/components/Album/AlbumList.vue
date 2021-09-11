@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
-import { AlbumListItem } from '../../model/AlbumListItem';
+import AlbumListItem from '../../model/AlbumListItem';
 import Player from '../Lib/Player';
 import 'reflect-metadata';
 import ServerRequest from '../Lib/ServerRequest';

@@ -17,7 +17,7 @@
 <script lang="ts">
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
-import { SongListItem } from '../../model/SongListItem';
+import SongListItem from '../../model/SongListItem';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
 
