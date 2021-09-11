@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ArtistList from "../Artist/ArtistList.vue";
 import AlbumList from "../Album/AlbumList.vue";
-import RandomSongs from "../Navigation/Random/RandomSongs.vue"
+import RandomSongs from "../Random/RandomSongs.vue"
 import Login from "../Auth/Login.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
