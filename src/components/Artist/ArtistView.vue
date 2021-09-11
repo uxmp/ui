@@ -37,7 +37,7 @@ import { AlbumListItem } from '../../model/AlbumListItem';
 import { Artist } from '../../model/artist';
 import EntityLoader from '../Lib/EntityLoader';
 import ServerRequest from '../Lib/ServerRequest';
-import { Player } from '../Player/player';
+import Player from '../Lib/Player';
 import formatDurationLength from '../Lib/FormatDurationLength';
 
 export default defineComponent({

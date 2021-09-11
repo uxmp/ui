@@ -4,10 +4,10 @@ import { Album } from '../../model/album'
 import { Disc } from '../../model/Disc';
 import { SongListItem } from '../../model/SongListItem';
 import { Artist } from '../../model/artist';
-import ServerRequest from '../Lib/ServerRequest';
+import ServerRequest from './ServerRequest';
 import { plainToClass } from 'class-transformer';
 
-class Player {
+export default class Player {
 
   static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
     amplitudejs.stop();
@@ -94,5 +94,3 @@ class Player {
     amplitudejs.stop();
   }
 }
-
-export { Player };

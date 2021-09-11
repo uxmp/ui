@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
-import { Player } from '../Player/player';
+import Player from '../Lib/Player';
 export default defineComponent({
   name: 'Playlist',
   props: {

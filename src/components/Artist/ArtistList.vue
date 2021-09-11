@@ -20,7 +20,7 @@ import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import { Artist } from '../../model/artist';
 import ServerRequest from '../Lib/ServerRequest';
-import { Player } from '../Player/player';
+import Player from '../Lib/Player';
 
 export default defineComponent({
   name: 'ArtistList',

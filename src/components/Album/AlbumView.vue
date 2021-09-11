@@ -40,7 +40,7 @@ import { Album } from '../../model/album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
 import { AlbumListItem } from '../../model/AlbumListItem';
-import { Player } from '../Player/player';
+import Player from '../Lib/Player';
 
 export default defineComponent({
   name: 'AlbumView',

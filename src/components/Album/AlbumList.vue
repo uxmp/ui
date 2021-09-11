@@ -22,7 +22,7 @@
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import { AlbumListItem } from '../../model/AlbumListItem';
-import { Player } from '../Player/player';;
+import Player from '../Lib/Player';
 import 'reflect-metadata';
 import ServerRequest from '../Lib/ServerRequest';
 import EntityLoader from '../Lib/EntityLoader';
