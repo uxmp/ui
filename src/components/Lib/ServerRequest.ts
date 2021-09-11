@@ -1,4 +1,4 @@
-import store from './../Store/store'
+import store from './Store'
 
 export default {
   async request(

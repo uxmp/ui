@@ -9,7 +9,7 @@ const getDefaultState = () => {
 };
 
 // Create a new store instance.
-const store = createStore({
+const Store = createStore({
   strict: true,
   plugins: [createPersistedState()],
   state: getDefaultState(),
@@ -43,4 +43,4 @@ const store = createStore({
   }
 })
 
-export default store;
+export default Store;
