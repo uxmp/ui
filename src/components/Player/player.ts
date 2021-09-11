@@ -1,8 +1,11 @@
 import * as amplitudejs from 'amplitudejs'
-import { DefineComponent } from 'vue';
+import { DefineComponent, Static } from 'vue';
 import { Album } from '../../model/album'
 import { Disc } from '../../model/Disc';
 import { SongListItem } from '../../model/SongListItem';
+import { Artist } from '../../model/artist';
+import ServerRequest from '../Lib/ServerRequest';
+import { plainToClass } from 'class-transformer';
 
 class Player {
 
@@ -58,6 +61,21 @@ class Player {
 
     Player.init(app, songList);
     Player.playIndex(0);
+  }
+
+  static playArtist(artist: Artist, app: DefineComponent) {
+    ServerRequest.request(
+      'artist/' + artist.getId() + '/songs'
+    ).then(async (response: Response) => {
+      let data = await response.json()
+
+      let playList = data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
+
+      app.$emit('updatePlaylist', playList);
+
+      Player.init(app, playList.map((song: SongListItem) => Player.createSongListItem(song)));
+      Player.playIndex(0);
+    });
   }
 
   static createSongListItem(song: SongListItem): Object {

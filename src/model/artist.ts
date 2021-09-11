@@ -1,14 +1,19 @@
 class Artist {
-    private id?: number;
-    private name?: string;
+  private id: number = 0;
+  private name: string = '';
+  private cover: string = '';
 
-    getId(): number | undefined {
-        return this.id;
-    }
+  getId(): number {
+    return this.id;
+  }
 
-    getName(): string | undefined {
-        return this.name;
-    }
+  getName(): string {
+    return this.name;
+  }
+
+  getCover(): string {
+    return this.cover;
+  }
 }
 
 export { Artist };
