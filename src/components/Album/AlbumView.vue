@@ -36,7 +36,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import 'reflect-metadata';
-import { Album } from '../../model/album';
+import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
 import { AlbumListItem } from '../../model/AlbumListItem';

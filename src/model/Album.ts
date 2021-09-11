@@ -2,7 +2,7 @@ import { Type } from "class-transformer";
 import { Disc } from "./Disc";
 import 'reflect-metadata';
 
-class Album {
+export default class Album {
   private id: number = 0;
   private name: string = '';
   private artistId: number = 0;
@@ -41,5 +41,3 @@ class Album {
     return this.length;
   }
 }
-
-export { Album };

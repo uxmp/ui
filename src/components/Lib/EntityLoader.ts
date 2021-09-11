@@ -1,4 +1,4 @@
-import { Album } from '../../model/album'
+import Album from '../../model/Album'
 import { plainToClass } from 'class-transformer';
 import ServerRequest from '../Lib/ServerRequest';
 import { Artist } from '../../model/artist';

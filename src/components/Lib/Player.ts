@@ -1,6 +1,6 @@
 import * as amplitudejs from 'amplitudejs'
 import { DefineComponent, Static } from 'vue';
-import { Album } from '../../model/album'
+import Album from '../../model/Album'
 import { Disc } from '../../model/Disc';
 import { SongListItem } from '../../model/SongListItem';
 import { Artist } from '../../model/artist';
