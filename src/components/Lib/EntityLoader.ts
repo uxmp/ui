@@ -1,7 +1,7 @@
 import Album from '../../model/Album'
 import { plainToClass } from 'class-transformer';
 import ServerRequest from '../Lib/ServerRequest';
-import { Artist } from '../../model/artist';
+import Artist from '../../model/Artist';
 
 const EntityLoader = new class EntityLoader {
 

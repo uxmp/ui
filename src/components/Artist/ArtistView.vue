@@ -34,7 +34,7 @@
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import { AlbumListItem } from '../../model/AlbumListItem';
-import { Artist } from '../../model/artist';
+import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import ServerRequest from '../Lib/ServerRequest';
 import Player from '../Lib/Player';

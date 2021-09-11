@@ -1,4 +1,4 @@
-class Artist {
+export default class Artist {
   private id: number = 0;
   private name: string = '';
   private cover: string = '';
@@ -15,5 +15,3 @@ class Artist {
     return this.cover;
   }
 }
-
-export { Artist };
