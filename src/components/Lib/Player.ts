@@ -18,14 +18,14 @@ export default class Player {
         play: function () {
           let song = amplitudejs.getActiveSongMetadata();
 
-          app.$emit('updateNowPlaying', song)
+          app.emitter.emit('updateNowPlaying', song)
 
           Player.scrollPlaylist(song.index);
         },
         song_change: function () {
           let song = amplitudejs.getActiveSongMetadata();
 
-          app.$emit('updateNowPlaying', song);
+          app.emitter.emit('updateNowPlaying', song);
 
           Player.scrollPlaylist(song.index);
         },

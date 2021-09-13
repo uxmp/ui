@@ -63,14 +63,20 @@ export default defineComponent({
     Playlist,
     PlayerControl,
   },
+  mounted() { 
+    this.emitter.on(
+      "updatePlaylist",
+      (songList: Array<SongListItemInterface>) => {
+        document.getElementById('maingrid').className = 'maingrid';
+        this.playlist = songList;
+      }
+    );
+    this.emitter.on(
+      "updateNowPlaying",
+      (data: NowPlaying) => this.nowPlaying = data
+    );
+  },
   methods: {
-    updatePlaylist(songList: Array<SongListItemInterface>): void {
-      document.getElementById('maingrid').className = 'maingrid';
-      this.playlist = songList;
-    },
-    updateNowPlaying(data: NowPlaying): void {
-      this.nowPlaying = data;
-    },
     hidePlayer(): void {
       document.getElementById('maingrid').className = 'maingrid-noplayer';
       this.playlist = [];
