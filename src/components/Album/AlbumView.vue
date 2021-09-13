@@ -50,10 +50,6 @@ export default defineComponent({
     }
   },
   async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-
     EntityLoader.loadAlbum(this.$route.params.albumId).then((album: Album) => this.album = album);
   },
   methods: {

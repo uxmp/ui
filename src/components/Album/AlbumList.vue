@@ -36,11 +36,6 @@ export default defineComponent({
   beforeMount() {
     this.getAlbums();
   },
-  async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-  },
   methods: {
     async getAlbums() {
       let data = await ServerRequest.request(

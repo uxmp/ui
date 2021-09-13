@@ -32,11 +32,6 @@ export default defineComponent({
   beforeMount() {
     this.getArtists();
   },
-  async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-  },
   methods: {
     async getArtists() {
       let data = await ServerRequest.request(

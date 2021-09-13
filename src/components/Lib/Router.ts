@@ -5,6 +5,7 @@ import RandomSongs from "../Random/RandomSongs.vue"
 import Login from "../Auth/Login.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
+import Store from "./Store";
 
 const routes = [
   {
@@ -43,5 +44,10 @@ const Router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+Router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !Store.getters.isLogged) next({ name: 'Login' })
+  else next()
+})
 
 export default Router;

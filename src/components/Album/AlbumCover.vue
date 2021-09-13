@@ -20,11 +20,6 @@ export default defineComponent({
   props: {
     album: AlbumListItem
   },
-  async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-  },
   methods: {
     play(item: AlbumListItem) {
       EntityLoader.loadAlbum(item.getAlbumId()).then(album => {

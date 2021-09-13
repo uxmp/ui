@@ -34,11 +34,6 @@ export default defineComponent({
   async beforeRouteUpdate(to, from) {
     this.getSongs(to.params.limit)
   },
-  async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-  },
   methods: {
     async getSongs(limit: number) {
       let data = await ServerRequest.request(

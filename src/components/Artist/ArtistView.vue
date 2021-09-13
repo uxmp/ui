@@ -51,11 +51,6 @@ export default defineComponent({
     this.getArtist();
     this.getAlbums();
   },
-  async created() {
-    if (!this.$store.getters.isLogged) {
-      this.$router.push('/login');
-    }
-  },
   methods: {
     getArtist(): void {
       EntityLoader.loadArtist(this.$route.params.artistId).then((artist: Artist) => this.artist = artist);
