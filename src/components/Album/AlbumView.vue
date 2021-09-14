@@ -59,7 +59,7 @@ export default defineComponent({
     AlbumCover
   },
   async created() {
-    EntityLoader.loadAlbum(this.$route.params.albumId).then((album: Album) => this.album = album);
+    EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
 
     ServerRequest.request(
       'album/' + this.$route.params.albumId + '/songs'

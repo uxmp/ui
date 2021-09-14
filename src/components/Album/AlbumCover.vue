@@ -15,7 +15,10 @@ import Album from '../../model/Album';
 export default defineComponent({
   name: 'AlbumCover',
   props: {
-    album: Album
+    album: {
+      type: Album,
+      required: true
+    }
   },
   methods: {
     play(album: Album) {
