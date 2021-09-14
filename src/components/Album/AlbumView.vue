@@ -10,23 +10,26 @@
         <h4>
           Length: {{ formatLength(album.getLength()) }}
         </h4>
-        <div class="album" v-for="disc in album.getDiscs()" :key="disc.getId()">
-          <table>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Length</th>
-            </tr>
-            <tr v-for="song in disc.getSongList()" :key="song.getId()">
-              <td>{{ song.getTracknumber() }}</td>
-              <td>{{ song.getName() }}</td>
-              <td>{{ formatLength(song.getLength()) }}</td>
-            </tr>
-          </table>
-        </div>
+        <template v-if="albumDiscs !== null">
+          <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
+            <table>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Length</th>
+              </tr>
+              <tr v-for="song in disc.getSongList()" :key="song.getId()">
+                <td>{{ song.getTracknumber() }}</td>
+                <td>{{ song.getName() }}</td>
+                <td>{{ formatLength(song.getLength()) }}</td>
+              </tr>
+            </table>
+          </div>
+        </template>
+        <template v-else>Oh no 😢</template>
       </div>
       <div>
-        <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" />
+        <AlbumCover :album="album" />
       </div>
     </div>
   </template>
@@ -39,28 +42,34 @@ import 'reflect-metadata';
 import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
-import AlbumListItem from '../../model/AlbumListItem';
-import Player from '../Lib/Player';
+import AlbumCover from './AlbumCover.vue';
+import { plainToClass } from 'class-transformer';
+import Disc from '../../model/Disc';
+import ServerRequest from '../Lib/ServerRequest';
 
 export default defineComponent({
   name: 'AlbumView',
   data() {
     return { 
-      album: null
+      album: null,
+      albumDiscs: null
     }
+  },
+  components: {
+    AlbumCover
   },
   async created() {
     EntityLoader.loadAlbum(this.$route.params.albumId).then((album: Album) => this.album = album);
+
+    ServerRequest.request(
+      'album/' + this.$route.params.albumId + '/songs'
+    ).then(async (response: Response) => {
+      this.albumDiscs = (await response.json()).items.map((disc_raw: Object) => plainToClass(Disc, disc_raw));
+    });
   },
   methods: {
     formatLength(length: number): string {
       return formatDurationLength(length);
-    },
-    play(item: AlbumListItem) {
-      EntityLoader.loadAlbum(item.getAlbumId()).then(album => {
-        this.$emit('updatePlaylist', album.getDiscs()[0].getSongList());
-        Player.playAlbum(album, this);
-      });
     }
   }
 })
@@ -72,11 +81,6 @@ div.albumGrid {
   grid-template-columns: auto 600px;
   height: 100%;
   margin: auto;
-}
-
-img.cover_play {
-  width: 300px;
-  height: 300px;
 }
 
 table th,

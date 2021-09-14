@@ -4,7 +4,7 @@
       <Sidebar @hidePlayer="hidePlayer" />
     </div>
     <div class="grid-content scrollbar">
-      <router-view @updatePlaylist="updatePlaylist" @updateNowPlaying="updateNowPlaying"/>
+      <router-view />
     </div>
     <div>
     </div>

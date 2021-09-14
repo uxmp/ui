@@ -8,13 +8,13 @@
   <template v-if="albumList !== []">
     <div class="album-list">
       <h2>Albums</h2>
-      <div v-for="album in albumList" :key="album.getAlbumId()" class="album-grid">
+      <div v-for="album in albumList" :key="album.getId()" class="album-grid">
         <div>
-          <AlbumCover :album="album" @updatePlaylist="updatePlaylist" @updateNowPlaying="updateNowPlaying"/>
+          <AlbumCover :album="album" />
         </div>
         <div>
           <div class="title">
-            <router-link :to="'/album/' + album.getAlbumId()">{{ album.getName() }}</router-link>
+            <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
           </div>
           <div class="meta">
             Length: {{ formatLength(album.getLength()) }}
@@ -28,12 +28,12 @@
 <script lang="ts">
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
-import AlbumListItem from '../../model/AlbumListItem';
 import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import ServerRequest from '../Lib/ServerRequest';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import AlbumCover from './../Album/AlbumCover.vue';
+import Album from '../../model/Album';
 
 export default defineComponent({
   name: 'ArtistView',
@@ -61,7 +61,7 @@ export default defineComponent({
       ).then(response => response.json());
 
       this.albumList = data.items.map((album_data: any) => {
-        return plainToClass(AlbumListItem, album_data);
+        return plainToClass(Album, album_data);
       });
     },
     formatLength(length: number): string {

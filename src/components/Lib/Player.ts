@@ -1,6 +1,5 @@
 import * as amplitudejs from 'amplitudejs'
-import { DefineComponent, Static } from 'vue';
-import Album from '../../model/Album'
+import { DefineComponent } from 'vue';
 import Disc from '../../model/Disc';
 import SongListItem from '../../model/SongListItem';
 import Artist from '../../model/Artist';
@@ -46,21 +45,23 @@ export default class Player {
     amplitudejs.playSongAtIndex(index);
   }
 
-  static playAlbum(album: Album, app: DefineComponent) {
+  static playAlbum(albumId: number, app: DefineComponent) {
     amplitudejs.stop();
 
-    const songList: Object[] | undefined = [];
+    ServerRequest.request(
+      'album/' + albumId + '/songs'
+    ).then(async (response: Response) => {
+      let songList = [];
 
-    album.getDiscs().map((disc: Disc) => {
-      disc.getSongList().map((song: SongListItem) => {
-        songList.push(
-          Player.createSongListItem(song)
-        )
+      (await response.json()).items.map((disc_raw: Object) => plainToClass(Disc, disc_raw)).map((disc: Disc) => {
+        disc.getSongList().map((song: SongListItem) => songList.push(song));
       });
-    });
 
-    Player.init(app, songList);
-    Player.playIndex(0);
+      app.emitter.emit('updatePlaylist', songList);
+
+      Player.init(app, songList.map((song: SongListItem) => Player.createSongListItem(song)));
+      Player.playIndex(0);
+    });
   }
 
   static playArtist(artist: Artist, app: DefineComponent) {
@@ -71,7 +72,7 @@ export default class Player {
 
       let playList = data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
 
-      app.$emit('updatePlaylist', playList);
+      app.emitter.emit('updatePlaylist', playList);
 
       Player.init(app, playList.map((song: SongListItem) => Player.createSongListItem(song)));
       Player.playIndex(0);

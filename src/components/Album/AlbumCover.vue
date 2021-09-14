@@ -9,23 +9,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AlbumListItem from '../../model/AlbumListItem';
 import Player from '../Lib/Player';
-import 'reflect-metadata';
-import EntityLoader from '../Lib/EntityLoader';
+import Album from '../../model/Album';
 
 export default defineComponent({
   name: 'AlbumCover',
-  emits: ['updatePlaylist', 'updateNowPlaying'],
   props: {
-    album: AlbumListItem
+    album: Album
   },
   methods: {
-    play(item: AlbumListItem) {
-      EntityLoader.loadAlbum(item.getAlbumId()).then(album => {
-        this.emitter.emit('updatePlaylist', album.getDiscs()[0].getSongList());
-        Player.playAlbum(album, this);
-      });
+    play(album: Album) {
+      Player.playAlbum(album.getId(), this);
     }
   }
 })

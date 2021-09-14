@@ -1,10 +1,10 @@
 <template>
   <h1>Albums</h1>
-  <div class="album" v-for="album in albumList" :key="album.getAlbumId()">
+  <div class="album" v-for="album in albumList" :key="album.getId()">
     <div class="album_inner">
-      <AlbumCover :album="album" @updateNowPlaying="updateNowPlaying" @updatePlaylist="updatePlaylist" />
+      <AlbumCover :album="album" />
       <div class="album_name">
-        <router-link :to="'/album/' + album.getAlbumId()">{{ album.getName() }}</router-link>
+        <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
       </div>
       <div class="album_artist">
         by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
@@ -16,15 +16,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
-import AlbumListItem from '../../model/AlbumListItem';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
-import EntityLoader from '../Lib/EntityLoader';
 import AlbumCover from './AlbumCover.vue';
+import Album from '../../model/Album';
 
 export default defineComponent({
   name: 'AlbumList',
-  emits: ['updatePlaylist', 'updateNowPlaying'],
   data() {
     return { 
       albumList: []
@@ -43,15 +41,12 @@ export default defineComponent({
       ).then(response => response.json());
 
       this.albumList = data.items.map((album_data: any) => {
-        return plainToClass(AlbumListItem, album_data);
+        return plainToClass(Album, album_data);
       });
     },
 
-    play(item: AlbumListItem) {
-      EntityLoader.loadAlbum(item.getAlbumId()).then(album => {
-        this.emitter.emit('updatePlaylist', album.getDiscs()[0].getSongList());
-        Player.playAlbum(album, this);
-      });
+    play(item: Album) {
+      Player.playAlbum(item.getId(), this);
     }
   }
 })
