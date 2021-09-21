@@ -236,34 +236,4 @@ div.maingrid-noplayer div.grid-playlist {
 .amplitude-active-song-container {
   background-color: #1c2c3a; 
 }
-
-.amplitude-play-pause {
-  background-color: rgb(85, 57, 5);
-  height: 50px;
-  width: 50px;
-  display: inline-block;
-}
-
-.amplitude-next {
-  background-color: rgb(85, 57, 5);
-  height: 50px;
-  width: 50px;
-  display: inline-block;
-  background-image: url("./assets/icons/next.svg");
-}
-
-.amplitude-prev {
-  background-color: rgb(85, 57, 5);
-  height: 50px;
-  width: 50px;
-  display: inline-block;
-  background-image: url("./assets/icons/previous.svg");
-}
-
-.amplitude-paused {
-  background-image: url("./assets/icons/play.svg");
-}
-.amplitude-playing {
-  background-image: url("./assets/icons/pause.svg");
-}
 </style>

@@ -1,6 +1,8 @@
 <template>
   <h1>Random songs</h1>
-  <img src="/src/assets/icons/play.svg" v-on:click="playAll()" /><br />
+  <div v-on:click="playAll()" class="playall">
+    <font-awesome-icon :icon="['fas', 'play']" /> Play all
+  </div><br />
   <div class="song" v-for="song in songList" :key="song.getId()">
     <div class="album_inner">
       <img class="cover_play" v-bind:src="song.getCover()" width="60" height="60" /><br />
@@ -51,10 +53,10 @@ export default defineComponent({
         list.push(Player.createSongListItem(song));
       }
 
+      this.emitter.emit('updatePlaylist', this.songList);
+
       Player.init(this, list);
       Player.playIndex(0);
-
-      this.emitter.emit('updatePlaylist', this.songList);
     }
   }
 })
@@ -62,6 +64,10 @@ export default defineComponent({
 
 <style scoped>
 img.cover_play {
+  cursor: pointer;
+}
+
+div.playall {
   cursor: pointer;
 }
 

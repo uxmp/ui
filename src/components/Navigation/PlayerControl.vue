@@ -2,34 +2,51 @@
   <div class="container">
     <div class="controls">
       <div class="icon">
-        <svg class="volume_icon volume_low" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <polygon fill="none" points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        </svg>
+        <font-awesome-icon :icon="['fas', 'volume-off']" class="volume_icon volume_low" />
       </div>
       <div class="volume_icon">
         <input type="range" class="amplitude-volume-slider"/>
       </div>
       <div class="icon">
-        <svg class="volume_icon volume_high" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <polygon fill="none" points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        </svg>
+        <font-awesome-icon :icon="['fas', 'volume-up']" class="volume_icon volume_high" />
       </div>
     </div>
     <br />
     <div class="control-container">
-      <div class="amplitude-prev"></div>
-      <div class="amplitude-play-pause"></div>
-      <div class="amplitude-next"></div>
+      <div class="amplitude-prev">
+        <font-awesome-icon :icon="['fas', 'step-backward']" />
+      </div>
+      <div class="amplitude-play" v-on:click="aggi()" v-if="this.playing === true">
+        <font-awesome-icon :icon="['fas', 'pause']" />
+      </div>
+      <div class="amplitude-pause" v-on:click="aggi()" v-else>
+        <font-awesome-icon :icon="['fas', 'play']" />
+      </div>
+      <div class="amplitude-next">
+        <font-awesome-icon :icon="['fas', 'step-forward']" />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Player from '../Lib/Player'
 
 export default defineComponent({
   name: 'PlayerControl',
+  data() {
+    return {
+      playing: true
+    }
+  },
+  methods: {
+    aggi() {
+      Player.togglePlayerState(!this.playing);
+
+      this.playing = !this.playing;
+    }
+  }
 })
 </script>
 
@@ -59,9 +76,31 @@ svg.volume_icon {
   height: 20px;
 }
 
-svg.volume_icon polygon,
-svg.volume_icon path {
-  stroke: #ffffff;
+.amplitude-next,
+.amplitude-prev,
+.amplitude-pause,
+.amplitude-play,
+.amplitude-play-pause {
+  display: inline-block;
+  color: rgb(85, 57, 5);
+  height: 50px;
+  width: 50px;
+  font-size: 150%;
+}
+
+.amplitude-next:hover,
+.amplitude-prev:hover,
+.amplitude-pause:hover,
+.amplitude-play:hover,
+.amplitude-play-pause:hover {
+  color: rgb(175, 118, 12);
+}
+
+.amplitude-paused {
+  color: rgb(85, 57, 5);
+}
+.amplitude-playing {
+  color: rgb(85, 57, 5);
 }
 </style>
   

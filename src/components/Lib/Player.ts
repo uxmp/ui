@@ -94,4 +94,13 @@ export default class Player {
   static stop(): void {
     amplitudejs.stop();
   }
+
+  static togglePlayerState(state: boolean): void {
+    console.log(state)
+    if (state === true) {
+      amplitudejs.play();
+    } else {
+      amplitudejs.pause();
+    }
+  }
 }
