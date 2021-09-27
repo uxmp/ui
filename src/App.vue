@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ArtistList from './components/Artist/ArtistList.vue'
+import ArtistList from './components/Artist/ArtistListView.vue'
 import Playlist from './components/Navigation/Playlist.vue';
 import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlaying from './model/NowPlaying';
