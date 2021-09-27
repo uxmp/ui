@@ -16,7 +16,7 @@
       <div class="amplitude-prev">
         <font-awesome-icon :icon="['fas', 'step-backward']" />
       </div>
-      <div class="amplitude-play" v-on:click="aggi()" v-if="this.playing === true">
+      <div class="amplitude-play" v-on:click="aggi()" v-if="playing === true">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
       <div class="amplitude-pause" v-on:click="aggi()" v-else>
