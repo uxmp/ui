@@ -5,16 +5,22 @@ import RandomSongs from "../Random/RandomSongs.vue"
 import Login from "../Auth/Login.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
+import HomeView from "../Home/HomeView.vue"
 import Store from "./Store";
 
 const routes = [
+  {
+    path: "/",
+    name: "Home",
+    component: HomeView,
+  },
   {
     path: "/artists",
     name: "Artists",
     component: ArtistList,
   },
   {
-    path: "/",
+    path: "/albums",
     name: "Albums",
     component: AlbumList,
   },

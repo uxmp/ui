@@ -101,6 +101,7 @@ export default defineComponent({
 
 h1,
 h2,
+h3,
 h4 {
   text-align: left;
 }

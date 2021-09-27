@@ -1,4 +1,11 @@
 <template>
+  <h3>Home</h3>
+  <ul>
+    <li>
+      <router-link to="/">Home</router-link>
+    </li>
+  </ul>
+
   <h3>Songs</h3>
   <ul>
     <li>
@@ -18,7 +25,7 @@
   <h3>Albums</h3>
   <ul>
     <li>
-      <router-link to="/">Albums</router-link>
+      <router-link to="/albums">Albums</router-link>
     </li>
   </ul>
 

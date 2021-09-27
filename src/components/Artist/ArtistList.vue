@@ -109,6 +109,7 @@ div.artist_inner {
 }
 
 div.artist_name {
-  padding-top: 5px;
+  padding-top: 10px;
+  font-size: 110%;;
 }
 </style>
