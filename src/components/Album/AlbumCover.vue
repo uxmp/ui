@@ -1,5 +1,5 @@
 <template>
-  <div class="cover_container">
+  <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
     <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" />
     <div class="cover_overlay" v-on:click="play(album)">
       <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M20 33l12-9-12-9v18zm4-29C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.82 0-16-7.18-16-16S15.18 8 24 8s16 7.18 16 16-7.18 16-16 16z" class="overlay_play_button"  /></svg>
@@ -18,6 +18,10 @@ export default defineComponent({
     album: {
       type: Album,
       required: true
+    },
+    size: {
+      type: Number,
+      default: 120
     }
   },
   methods: {
@@ -32,8 +36,6 @@ export default defineComponent({
 div.cover_container {
   display: flex;
   position: relative;
-  width: 120px;
-  height: 120px;
   margin: auto;
 }
 
@@ -41,10 +43,10 @@ img.cover_play {
   cursor: pointer;
   opacity: 1;
   display: block;
-  width: 120px;
-  height: 120px;
   transition: .2s ease;
   backface-visibility: hidden;
+  width: 100%;
+  height: 100%
 }
 
 div.cover_overlay {

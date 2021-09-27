@@ -136,7 +136,7 @@ div.maingrid-noplayer {
 }
 
 div.grid-content {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   grid-column: 2 / span 3;
 }
@@ -164,7 +164,7 @@ div.grid-playlist {
 
 div.grid-playlist div.playlist {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 

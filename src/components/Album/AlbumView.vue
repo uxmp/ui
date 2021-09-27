@@ -29,7 +29,7 @@
         <template v-else>Oh no 😢</template>
       </div>
       <div>
-        <AlbumCover :album="album" />
+        <AlbumCover :album="album" :size="400" />
       </div>
     </div>
   </template>
@@ -79,7 +79,6 @@ export default defineComponent({
 div.albumGrid {
   display: grid;
   grid-template-columns: auto 600px;
-  height: 100%;
   margin: auto;
 }
 
