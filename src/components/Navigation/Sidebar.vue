@@ -29,7 +29,7 @@
     </li>
   </ul>
 
-  <h3>Artiss</h3>
+  <h3>Artists</h3>
   <ul>
     <li>
       <router-link to="/artists">Artists</router-link>

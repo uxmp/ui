@@ -58,9 +58,6 @@ export default class Player {
       });
 
       app.emitter.emit('updatePlaylist', songList);
-
-      Player.init(app, songList.map((song: SongListItem) => Player.createSongListItem(song)));
-      Player.playIndex(0);
     });
   }
 
@@ -73,9 +70,6 @@ export default class Player {
       let playList = data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
 
       app.emitter.emit('updatePlaylist', playList);
-
-      Player.init(app, playList.map((song: SongListItem) => Player.createSongListItem(song)));
-      Player.playIndex(0);
     });
   }
 
@@ -96,8 +90,7 @@ export default class Player {
   }
 
   static togglePlayerState(state: boolean): void {
-    console.log(state)
-    if (state === true) {
+    if (state == true) {
       amplitudejs.play();
     } else {
       amplitudejs.pause();

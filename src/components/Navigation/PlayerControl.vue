@@ -16,10 +16,10 @@
       <div class="amplitude-prev">
         <font-awesome-icon :icon="['fas', 'step-backward']" />
       </div>
-      <div class="amplitude-play" v-on:click="aggi()" v-if="playing === true">
+      <div class="amplitude-play" v-on:click="toggleState()" v-if="playing == true">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
-      <div class="amplitude-pause" v-on:click="aggi()" v-else>
+      <div class="amplitude-pause" v-on:click="toggleState()" v-else>
         <font-awesome-icon :icon="['fas', 'play']" />
       </div>
       <div class="amplitude-next">
@@ -41,7 +41,7 @@ export default defineComponent({
     }
   },
   methods: {
-    aggi() {
+    toggleState() {
       Player.togglePlayerState(!this.playing);
 
       this.playing = !this.playing;
