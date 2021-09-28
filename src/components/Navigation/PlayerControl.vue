@@ -13,16 +13,16 @@
     </div>
     <br />
     <div class="control-container">
-      <div class="amplitude-prev">
+      <div class="amplitude-prev control-button">
         <font-awesome-icon :icon="['fas', 'step-backward']" />
       </div>
-      <div class="amplitude-play" v-on:click="toggleState()" v-if="playing == true">
+      <div class="control-button" v-on:click="toggleState()" v-if="playing == true">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
-      <div class="amplitude-pause" v-on:click="toggleState()" v-else>
+      <div class="control-button control-button-paused" v-on:click="toggleState()" v-else>
         <font-awesome-icon :icon="['fas', 'play']" />
       </div>
-      <div class="amplitude-next">
+      <div class="amplitude-next control-button">
         <font-awesome-icon :icon="['fas', 'step-forward']" />
       </div>
     </div>
@@ -76,11 +76,7 @@ svg.volume_icon {
   height: 20px;
 }
 
-.amplitude-next,
-.amplitude-prev,
-.amplitude-pause,
-.amplitude-play,
-.amplitude-play-pause {
+div.control-button {
   display: inline-block;
   color: rgb(85, 57, 5);
   height: 50px;
@@ -88,19 +84,18 @@ svg.volume_icon {
   font-size: 150%;
 }
 
-.amplitude-next:hover,
-.amplitude-prev:hover,
-.amplitude-pause:hover,
-.amplitude-play:hover,
-.amplitude-play-pause:hover {
-  color: rgb(175, 118, 12);
+div.control-button-paused {
+  animation: blinker 3s linear infinite;
 }
 
-.amplitude-paused {
-  color: rgb(85, 57, 5);
+@keyframes blinker {
+  50% {
+    opacity: 20%;
+  }
 }
-.amplitude-playing {
-  color: rgb(85, 57, 5);
+
+div.control-button:hover {
+  color: rgb(175, 118, 12);
 }
 </style>
   
