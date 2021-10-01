@@ -1,9 +1,6 @@
 <template>
-  <h1>Artist</h1>
   <template v-if="artist !== null">
-    <h2>
-      {{ artist.getName() }}
-    </h2>
+    <h1>Artist &bdquo;{{ artist.getName() }}&rdquo;</h1>
   </template>
   <template v-if="albumList !== []">
     <div class="album-list">
@@ -81,10 +78,6 @@ div.title {
 div.album-grid {
   display: grid;
   grid-template-columns: 130px auto;
-}
-
-div.album-list {
-  padding-top: 50px;
 }
 
 div.meta {
