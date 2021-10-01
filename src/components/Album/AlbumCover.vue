@@ -2,7 +2,7 @@
   <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
     <img class="cover_play" v-on:click="play(album)" v-bind:src="album.getCover()" />
     <div class="cover_overlay" v-on:click="play(album)">
-      <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M20 33l12-9-12-9v18zm4-29C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.82 0-16-7.18-16-16S15.18 8 24 8s16 7.18 16 16-7.18 16-16 16z" class="overlay_play_button"  /></svg>
+      <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']" v-on:click="playAlbum(album)" />
     </div>
   </div>
 </template>
@@ -62,10 +62,6 @@ div.cover_overlay {
   cursor: pointer;
 }
 
-path.overlay_play_button {
-  fill: rgb(141, 102, 31);
-}
-
 div.cover_container:hover .cover_play {
   opacity: 0.3;
 }
@@ -82,5 +78,10 @@ div.album {
   margin: 10px;
   padding: 15px;
   border: 1px #446683 solid;
+}
+
+.coverPlaybutton {
+  font-size: 200%;
+  color: rgb(141, 102, 31);
 }
 </style>

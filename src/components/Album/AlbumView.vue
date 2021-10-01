@@ -1,10 +1,10 @@
 <template>
-  <h1>Album &bdquo;{{ album.getName() }}&rdquo;</h1>
   <template v-if="album !== null">
+    <h1>Album &bdquo;{{ album.getName() }}&rdquo;</h1>
     <div class="albumGrid">
       <div>
         <div class="playAlbum">
-          <font-awesome-icon :icon="['fas', 'play']" v-on:click="playAlbum(album)" title="Play" /> Play
+          <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="playAlbum(album)" title="Play" /> Play
         </div>
         <h3>
           by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
@@ -147,6 +147,10 @@ table tbody tr:last-of-type {
 
 .playButton {
   cursor: pointer;
+}
+
+.playButton:hover {
+  color: rgb(85, 57, 5);
 }
 
 div.playAlbum {
