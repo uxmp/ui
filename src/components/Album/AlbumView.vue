@@ -1,35 +1,45 @@
 <template>
-  <h1>Album</h1>
+  <h1>Album &bdquo;{{ album.getName() }}&rdquo;</h1>
   <template v-if="album !== null">
     <div class="albumGrid">
       <div>
-        <h2>{{ album.getName() }}</h2>
-        <h4>
+        <div class="playAlbum">
+          <font-awesome-icon :icon="['fas', 'play']" v-on:click="playAlbum(album)" title="Play" /> Play
+        </div>
+        <h3>
           by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
-        </h4>
-        <h4>
-          Length: {{ formatLength(album.getLength()) }}
-        </h4>
+        </h3>
+        <div>
+          Total length: {{ formatLength(album.getLength()) }}
+        </div>
         <template v-if="albumDiscs !== null">
           <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
             <table>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Length</th>
-              </tr>
-              <tr v-for="song in disc.getSongList()" :key="song.getId()">
-                <td>{{ song.getTracknumber() }}</td>
-                <td>{{ song.getName() }}</td>
-                <td>{{ formatLength(song.getLength()) }}</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Length</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="song in disc.getSongList()" :key="song.getId()">
+                  <td>
+                    <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" title="Play" />
+                  </td>
+                  <td>{{ song.getTracknumber() }}</td>
+                  <td>{{ song.getName() }}</td>
+                  <td>{{ formatLength(song.getLength()) }}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </template>
         <template v-else>Oh no 😢</template>
       </div>
       <div>
-        <AlbumCover :album="album" :size="400" />
+        <AlbumCover :album="album" :size="500" />
       </div>
     </div>
   </template>
@@ -46,6 +56,8 @@ import AlbumCover from './AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
 import ServerRequest from '../Lib/ServerRequest';
+import SongListItemInterface from '../../model/SongListItemInterface';
+import Player from '../Lib/Player';
 
 export default defineComponent({
   name: 'AlbumView',
@@ -70,12 +82,22 @@ export default defineComponent({
   methods: {
     formatLength(length: number): string {
       return formatDurationLength(length);
+    },
+    play(song: SongListItemInterface): void {
+      Player.playSong(song, this);
+    },
+    playAlbum(album: Album) {
+      Player.playAlbum(album.getId(), this);
     }
   }
 })
 </script>
 
 <style scoped>
+div {
+  text-align: left;;
+}
+
 div.albumGrid {
   display: grid;
   grid-template-columns: auto 600px;
@@ -85,5 +107,50 @@ div.albumGrid {
 table th,
 table td {
   text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
+}
+
+table thead tr {
+  background-color: rgb(85, 57, 5);
+  color: #ffffff;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #11171d;;
+}
+
+tbody tr:hover {
+  background-color: #1c2c3a ! important;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #11171d;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid rgb(85, 57, 5);
+}
+
+.playButton {
+  cursor: pointer;
+}
+
+div.playAlbum {
+  font-size: 150%;
+  cursor: pointer;
 }
 </style>

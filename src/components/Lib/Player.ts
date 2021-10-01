@@ -5,6 +5,7 @@ import SongListItem from '../../model/SongListItem';
 import Artist from '../../model/Artist';
 import ServerRequest from './ServerRequest';
 import { plainToClass } from 'class-transformer';
+import SongListItemInterface from '../../model/SongListItemInterface';
 
 export default class Player {
 
@@ -45,7 +46,7 @@ export default class Player {
     amplitudejs.playSongAtIndex(index);
   }
 
-  static playAlbum(albumId: number, app: DefineComponent) {
+  static playAlbum(albumId: number, app: DefineComponent): void {
     amplitudejs.stop();
 
     ServerRequest.request(
@@ -61,7 +62,7 @@ export default class Player {
     });
   }
 
-  static playArtist(artist: Artist, app: DefineComponent) {
+  static playArtist(artist: Artist, app: DefineComponent): void {
     ServerRequest.request(
       'artist/' + artist.getId() + '/songs'
     ).then(async (response: Response) => {
@@ -73,6 +74,10 @@ export default class Player {
     });
   }
 
+  static playSong(song: SongListItemInterface, app :DefineComponent): void {
+    app.emitter.emit('updatePlaylist', [song])
+  }
+
   static createSongListItem(song: SongListItem): Object {
     return {
       name: song.getName(),
@@ -81,7 +86,7 @@ export default class Player {
       url: song.getPlayUrl(),
       cover_art_url: song.getCover(),
       artistId: song.getArtistId(),
-      albumId: song.getAlbumId(),
+      albumId: song.getAlbumId()
     };
   }
 

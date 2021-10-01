@@ -37,6 +37,7 @@ div.cover_container {
   display: flex;
   position: relative;
   margin: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
 }
 
 img.cover_play {
