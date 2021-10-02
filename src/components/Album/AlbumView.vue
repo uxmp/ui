@@ -3,12 +3,12 @@
     <h1>Album &bdquo;{{ album.getName() }}&rdquo;</h1>
     <div class="albumGrid">
       <div>
+        <div class="albumArtist">
+          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+        </div>
         <div class="playAlbum">
           <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="playAlbum(album)" title="Play" /> Play
         </div>
-        <h3>
-          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
-        </h3>
         <div>
           Total length: {{ formatLength(album.getLength()) }}
         </div>
@@ -156,5 +156,11 @@ table tbody tr:last-of-type {
 div.playAlbum {
   font-size: 150%;
   cursor: pointer;
+  padding-bottom: 20px;
+}
+
+div.albumArtist {
+  font-size: 130%;
+  padding-bottom: 20px;
 }
 </style>

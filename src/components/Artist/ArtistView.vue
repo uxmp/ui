@@ -3,22 +3,29 @@
     <h1>Artist &bdquo;{{ artist.getName() }}&rdquo;</h1>
   </template>
   <template v-if="albumList !== []">
-    <div class="album-list">
-      <h2>Albums</h2>
-      <div v-for="album in albumList" :key="album.getId()" class="album-grid">
-        <div>
-          <AlbumCover :album="album" />
-        </div>
-        <div>
-          <div class="title">
+    <h2>Albums</h2>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Length</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="album in albumList" :key="album.getId()">
+          <td>
+            <AlbumCover :album="album" />
+          </td>
+          <td>
             <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
-          </div>
-          <div class="meta">
-            Length: {{ formatLength(album.getLength()) }}
-          </div>
-        </div>
-      </div>
-    </div>
+          </td>
+          <td>
+            {{ formatLength(album.getLength()) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </template>
 </template>
 
@@ -69,19 +76,44 @@ export default defineComponent({
 </script>
 
 <style scoped>
-div.title {
+table th,
+table td {
   text-align: left;
-  font-size:  110%;
-  font-weight: bold;
 }
 
-div.album-grid {
-  display: grid;
-  grid-template-columns: 130px auto;
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
 }
 
-div.meta {
-  padding-top: 10px;
+table thead tr {
+  background-color: rgb(85, 57, 5);
+  color: #ffffff;
   text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #11171d;;
+}
+
+tbody tr:hover {
+  background-color: #1c2c3a ! important;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #11171d;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px solid rgb(85, 57, 5);
 }
 </style>
