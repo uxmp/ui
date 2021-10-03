@@ -52,7 +52,7 @@ import 'reflect-metadata';
 import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
-import AlbumCover from './AlbumCover.vue';
+import AlbumCover from '../Lib/AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
 import ServerRequest from '../Lib/ServerRequest';

@@ -36,7 +36,7 @@ import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import ServerRequest from '../Lib/ServerRequest';
 import formatDurationLength from '../Lib/FormatDurationLength';
-import AlbumCover from './../Album/AlbumCover.vue';
+import AlbumCover from '../Lib/AlbumCover.vue';
 import Album from '../../model/Album';
 
 export default defineComponent({

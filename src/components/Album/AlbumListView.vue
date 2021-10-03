@@ -18,7 +18,7 @@ import { defineComponent, PropType } from 'vue'
 import { plainToClass } from 'class-transformer';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
-import AlbumCover from './AlbumCover.vue';
+import AlbumCover from '../Lib/AlbumCover.vue';
 import Album from '../../model/Album';
 
 export default defineComponent({

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Player from '../Lib/Player';
+import Player from './Player';
 import Album from '../../model/Album';
 
 export default defineComponent({

@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { plainToClass } from 'class-transformer';
 import Artist from '../../model/Artist';
 import ServerRequest from '../Lib/ServerRequest';
@@ -26,7 +26,7 @@ export default defineComponent({
   name: 'ArtistList',
   data() {
     return { 
-      artistList: []
+      artistList: [] as PropType<Array<Artist>>
     }
   },
   beforeMount(): void {

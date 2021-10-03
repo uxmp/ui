@@ -20,7 +20,7 @@
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import Album from '../../model/Album';
-import AlbumCover from '../Album/AlbumCover.vue';
+import AlbumCover from '../Lib/AlbumCover.vue';
 import ServerRequest from '../Lib/ServerRequest';
 
 export default defineComponent({
