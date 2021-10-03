@@ -2,7 +2,7 @@
   <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
     <img class="cover_play" v-on:click="play(song)" v-bind:src="song.getCover()" />
     <div class="cover_overlay" v-on:click="play(song)">
-      <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']" v-on:click="play(song)" />
+      <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']" />
     </div>
   </div>
 </template>

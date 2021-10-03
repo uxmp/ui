@@ -30,7 +30,7 @@ export default defineComponent({
     }
   },
   updated(): void {
-    this.$nextTick(function () {
+    this.$nextTick(function (): void {
       Player.init(this, this.elements.map((song: SongListItem) => Player.createSongListItem(song)));
       Player.playIndex(0);
     })
