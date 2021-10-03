@@ -99,7 +99,6 @@ export default defineComponent({
   overflow: hidden;
 }
 
-h1,
 h2,
 h3,
 h4 {
@@ -236,5 +235,42 @@ div.maingrid-noplayer div.grid-playlist {
 
 .amplitude-active-song-container {
   background-color: #1c2c3a; 
+}
+
+input[type=button] {
+  font-size: 100%;
+  border: 0;
+  color: #ffffff;
+  background: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px #446683 solid;
+}
+
+input[type=button]:hover {
+  background: #446683;
+  cursor: pointer;
+}
+
+input[type=text],
+input[type=password] {
+  font-size: 100%;
+  margin: 10px;
+  outline: 0;
+  border: 0;
+  color: #ffffff;
+  border-bottom: 1px solid rgb(85, 57, 5);
+  background: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+input[type=text]:hover,
+input[type=password]:hover {
+  border-bottom: 1px solid rgb(192, 140, 44);
 }
 </style>

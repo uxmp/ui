@@ -9,9 +9,6 @@
   <h3>Songs</h3>
   <ul>
     <li>
-      <router-link to="/songs">Songs</router-link>
-    </li>
-    <li>
       <router-link to="/random/songs">Random</router-link>
       <br />
       <span class="random_select">
@@ -44,16 +41,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AuthService from './../Auth/AuthService'
+import ServerRequest from '../Lib/ServerRequest';
 
 export default defineComponent({
   name: 'Sidebar',
   emits: ['hidePlayer'],
   methods: {
-    logout() {
+    async logout() {
       this.$emit('hidePlayer');
-      
-      AuthService.logout(() => {
+
+      ServerRequest.request(
+        'common/logout',
+        'POST'
+      ).then(() => {
         this.$store.dispatch('logout');
         this.$router.push('/login')
       });
