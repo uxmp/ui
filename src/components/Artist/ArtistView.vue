@@ -88,10 +88,12 @@ table {
   font-family: sans-serif;
   width: 90%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
+  border: 1px #446683 solid;
 }
 
 table thead tr {
-  background-color: rgb(85, 57, 5);
+  background-color: #11171d;;
+  border-bottom: 1px solid #11171d;;
   color: #ffffff;
   text-align: left;
 }
@@ -114,6 +116,6 @@ tbody tr:nth-of-type(even) {
 }
 
 table tbody tr:last-of-type {
-  border-bottom: 2px solid rgb(85, 57, 5);
+  border-bottom: 2px #446683 solid;
 }
 </style>
