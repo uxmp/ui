@@ -22,13 +22,6 @@ export default class Player {
 
           Player.scrollPlaylist(song.index);
         },
-        song_change: function () {
-          let song = amplitudejs.getActiveSongMetadata();
-
-          app.emitter.emit('updateNowPlaying', song);
-
-          Player.scrollPlaylist(song.index);
-        },
       },
       debug: true,
       delay: 250,
