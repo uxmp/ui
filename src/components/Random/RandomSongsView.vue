@@ -5,7 +5,7 @@
   </div><br />
   <div class="song" v-for="song in songList" :key="song.getId()">
     <div class="album_inner">
-      <img class="cover_play" v-bind:src="song.getCover()" width="60" height="60" /><br />
+      <SongCover size="80" :song="song" />
       <div class="song_name">
         {{ song.getName() }}
       </div>
@@ -22,6 +22,7 @@ import { defineComponent } from 'vue'
 import SongListItem from '../../model/SongListItem';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
+import SongCover from '../Lib/SongCover.vue'
 
 export default defineComponent({
   data() {
@@ -30,6 +31,9 @@ export default defineComponent({
     };
   },
   name: 'RandomSongs',
+  components: {
+    SongCover
+  },
   beforeMount() {
     this.getSongs(100);
   },
@@ -63,10 +67,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-img.cover_play {
-  cursor: pointer;
-}
-
 div.playall {
   cursor: pointer;
 }
@@ -74,11 +74,20 @@ div.playall {
 div.song {
   display: inline-flex;
   width: 300px;
-  height: 100px;
+  height: 120px;
   background-color: #0a0f14;
   margin: 10px;
   padding: 15px;
   border: 1px #446683 solid;
+}
+
+div.song_name {
+  font-size: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 div.album_inner {
