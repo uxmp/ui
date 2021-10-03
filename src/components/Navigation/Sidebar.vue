@@ -47,7 +47,7 @@ export default defineComponent({
   name: 'Sidebar',
   emits: ['hidePlayer'],
   methods: {
-    async logout() {
+    async logout(): Promise<void> {
       this.$emit('hidePlayer');
 
       ServerRequest.request(

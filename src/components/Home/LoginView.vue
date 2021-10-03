@@ -21,7 +21,7 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import ServerRequest from '../Lib/ServerRequest';
 
 export default {
@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async login(): Promise<void> {
       let response = await ServerRequest.request(
         'common/login',
         'POST',

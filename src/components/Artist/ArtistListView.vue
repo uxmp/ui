@@ -29,11 +29,11 @@ export default defineComponent({
       artistList: []
     }
   },
-  beforeMount() {
+  beforeMount(): void {
     this.getArtists();
   },
   methods: {
-    async getArtists() {
+    async getArtists(): Promise<void> {
       let data = await ServerRequest.request(
         'artists'
       ).then(response => response.json());
@@ -42,7 +42,7 @@ export default defineComponent({
         return plainToClass(Artist, artist_data);
       });
     },
-    async play(artist: Artist) {
+    async play(artist: Artist): Promise<void> {
       Player.playArtist(artist, this);
     }
   }

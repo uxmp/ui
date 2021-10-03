@@ -51,7 +51,7 @@ export default defineComponent({
   components: {
     AlbumCover
   },
-  beforeMount() {
+  beforeMount(): void {
     this.getArtist();
     this.getAlbums();
   },
@@ -64,7 +64,7 @@ export default defineComponent({
         'albums/' + this.$route.params.artistId
       ).then(response => response.json());
 
-      this.albumList = data.items.map((album_data: any) => {
+      this.albumList = data.items.map((album_data: any): Album => {
         return plainToClass(Album, album_data);
       });
     },

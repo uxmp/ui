@@ -33,11 +33,11 @@ export default defineComponent({
   components: {
     AlbumCover
   },
-  beforeMount() {
+  beforeMount(): void {
     this.getNewestAlbums();
   },
   methods: {
-    async getNewestAlbums() {
+    async getNewestAlbums(): Promise<void> {
       let data = await ServerRequest.request(
         'albums/recent'
       ).then(response => response.json());

@@ -41,7 +41,7 @@ export default defineComponent({
     }
   },
   methods: {
-    toggleState() {
+    toggleState(): void {
       Player.togglePlayerState(!this.playing);
 
       this.playing = !this.playing;

@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { plainToClass } from 'class-transformer';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
@@ -25,27 +25,27 @@ export default defineComponent({
   name: 'AlbumList',
   data() {
     return { 
-      albumList: []
+      albumList: [] as PropType<Array<Album>>
     }
   },
   components: {
     AlbumCover
   },
-  beforeMount() {
+  beforeMount(): void {
     this.getAlbums();
   },
   methods: {
-    async getAlbums() {
+    async getAlbums(): Promise<void> {
       let data = await ServerRequest.request(
         'albums'
       ).then(response => response.json());
 
-      this.albumList = data.items.map((album_data: any) => {
+      this.albumList = data.items.map((album_data: any): Album => {
         return plainToClass(Album, album_data);
       });
     },
 
-    play(item: Album) {
+    play(item: Album): void {
       Player.playAlbum(item.getId(), this);
     }
   }

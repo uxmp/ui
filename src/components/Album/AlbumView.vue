@@ -70,7 +70,7 @@ export default defineComponent({
   components: {
     AlbumCover
   },
-  async created() {
+  async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
 
     ServerRequest.request(
@@ -83,10 +83,10 @@ export default defineComponent({
     formatLength(length: number): string {
       return formatDurationLength(length);
     },
-    play(song: SongListItemInterface): void {
+    async play(song: SongListItemInterface): Promise<void> {
       Player.playSong(song, this);
     },
-    playAlbum(album: Album) {
+    async playAlbum(album: Album): Promise<void> {
       Player.playAlbum(album.getId(), this);
     }
   }

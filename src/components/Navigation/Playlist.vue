@@ -29,14 +29,14 @@ export default defineComponent({
       required: true
     }
   },
-  updated() {
+  updated(): void {
     this.$nextTick(function () {
       Player.init(this, this.elements.map((song: SongListItem) => Player.createSongListItem(song)));
       Player.playIndex(0);
     })
   },
   methods: {
-    playFromPlaylist(index: number) {
+    async playFromPlaylist(index: number): Promise<void> {
       Player.playIndex(index);
     }
   }

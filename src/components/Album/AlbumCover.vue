@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
   methods: {
-    play(album: Album) {
+    async play(album: Album): Promise<void> {
       Player.playAlbum(album.getId(), this);
     }
   }

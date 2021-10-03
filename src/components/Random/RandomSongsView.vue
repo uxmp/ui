@@ -18,8 +18,9 @@
 
 <script lang="ts">
 import { plainToClass } from 'class-transformer';
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import SongListItem from '../../model/SongListItem';
+import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 import ServerRequest from '../Lib/ServerRequest';
 import SongCover from '../Lib/SongCover.vue'
@@ -27,30 +28,30 @@ import SongCover from '../Lib/SongCover.vue'
 export default defineComponent({
   data() {
     return {
-      songList: [] as Array<SongListItem>
+      songList: [] as PropType<Array<SongListItemInterface>>
     };
   },
   name: 'RandomSongs',
   components: {
     SongCover
   },
-  beforeMount() {
+  beforeMount(): void {
     this.getSongs(100);
   },
-  async beforeRouteUpdate(to, from) {
+  async beforeRouteUpdate(to, from): Promise<void> {
     this.getSongs(to.params.limit)
   },
   methods: {
-    async getSongs(limit: number) {
+    async getSongs(limit: number): Promise<void> {
       let data = await ServerRequest.request(
         'random/songs/' + limit
       ).then(response => response.json());
 
-      this.songList = data.items.map((song_data: any) => {
+      this.songList = data.items.map((song_data: any): SongListItemInterface => {
         return plainToClass(SongListItem, song_data);
       });
     },
-    playAll() {
+    async playAll(): Promise<void> {
       const list: Object[] = [];
 
       for (var song of this.songList) {
