@@ -1,5 +1,10 @@
 # uxmp-gui
 
+This is the uxmp ui repository - part of the [uxmp Music Player](https://github.com/uxmp/uxmp).
+
+## Setup
+Please see the main repo's [README](https://github.com/uxmp/uxmp/blob/main/README.md) for setup instructions.
+
 # Build commands
 
 ### Start dev server
