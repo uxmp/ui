@@ -107,7 +107,8 @@ h4 {
 
 a {
   color: rgb(141, 102, 31);
-  text-decoration: none;;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {

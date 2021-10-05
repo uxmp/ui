@@ -35,7 +35,7 @@
 
   <h3>User</h3>
   <ul>
-    <li v-on:click="logout()">Logout</li>
+    <li><a v-on:click="logout()">Logout</a></li>
   </ul>
 </template>
 
