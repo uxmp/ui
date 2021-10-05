@@ -10,6 +10,7 @@ import SongListItemInterface from '../../model/SongListItemInterface';
 export default class Player {
 
   static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
+
     amplitudejs.stop();
 
     amplitudejs.init({
@@ -23,7 +24,7 @@ export default class Player {
           Player.scrollPlaylist(song.index);
         },
       },
-      debug: true,
+      debug: import.meta.env.VITE_DEBUG_MODE == 'true',
       delay: 250,
       continue_next: true
     });
