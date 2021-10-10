@@ -22,14 +22,14 @@
   <h3>Albums</h3>
   <ul>
     <li>
-      <router-link to="/albums">Albums</router-link>
+      <router-link to="/albums">List</router-link>
     </li>
   </ul>
 
   <h3>Artists</h3>
   <ul>
     <li>
-      <router-link to="/artists">Artists</router-link>
+      <router-link to="/artists">List</router-link>
     </li>
   </ul>
 
@@ -70,11 +70,16 @@ h3 {
 
 ul {
   list-style-type: none;
+  border: 1px #446683 solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #0a0f14;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 ul li {
   text-align: left;
-  padding-bottom: 10px;
 }
 
 li span.random_select {
