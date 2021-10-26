@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import Album from '../../model/Album';
 import AlbumCover from '../Lib/AlbumCover.vue';
-import ServerRequest from '../Lib/ServerRequest';
+import HttpRequest from '../Lib/HttpRequest';
 
 export default defineComponent({
   name: 'HomeView',
@@ -38,12 +39,10 @@ export default defineComponent({
   },
   methods: {
     async getNewestAlbums(): Promise<void> {
-      let data = await ServerRequest.request(
-        'albums/recent'
-      ).then(response => response.json());
-
-      this.recentAlbums = data.items.map((album_data: any) => {
-        return plainToClass(Album, album_data);
+      HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
+        this.recentAlbums = response.data.items.map((album_data: any) => {
+          return plainToClass(Album, album_data);
+        });
       });
     },
   }

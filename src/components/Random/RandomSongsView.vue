@@ -17,12 +17,13 @@
 </template>
 
 <script lang="ts">
+import { AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { defineComponent, PropType } from 'vue'
 import SongListItem from '../../model/SongListItem';
 import SongListItemInterface from '../../model/SongListItemInterface';
+import HttpRequest from '../Lib/HttpRequest';
 import Player from '../Lib/Player';
-import ServerRequest from '../Lib/ServerRequest';
 import SongCover from '../Lib/SongCover.vue'
 
 export default defineComponent({
@@ -43,12 +44,12 @@ export default defineComponent({
   },
   methods: {
     async getSongs(limit: number): Promise<void> {
-      let data = await ServerRequest.request(
+      HttpRequest.get(
         'random/songs/' + limit
-      ).then(response => response.json());
-
-      this.songList = data.items.map((song_data: any): SongListItemInterface => {
-        return plainToClass(SongListItem, song_data);
+      ).then((response: AxiosResponse) => {
+        this.songList = response.data.items.map((song_data: any): SongListItemInterface => {
+          return plainToClass(SongListItem, song_data);
+        });
       });
     },
     async playAll(): Promise<void> {

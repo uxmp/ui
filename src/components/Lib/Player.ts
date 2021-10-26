@@ -3,9 +3,10 @@ import { DefineComponent } from 'vue';
 import Disc from '../../model/Disc';
 import SongListItem from '../../model/SongListItem';
 import Artist from '../../model/Artist';
-import ServerRequest from './ServerRequest';
 import { plainToClass } from 'class-transformer';
 import SongListItemInterface from '../../model/SongListItemInterface';
+import HttpRequest from './HttpRequest';
+import { AxiosResponse } from 'axios';
 
 export default class Player {
 
@@ -43,12 +44,12 @@ export default class Player {
   static playAlbum(albumId: number, app: DefineComponent): void {
     amplitudejs.stop();
 
-    ServerRequest.request(
+    HttpRequest.get(
       'album/' + albumId + '/songs'
-    ).then(async (response: Response) => {
+    ).then((response: AxiosResponse) => {
       let songList = [];
 
-      (await response.json()).items.map((disc_raw: Object) => plainToClass(Disc, disc_raw)).map((disc: Disc) => {
+      response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw)).map((disc: Disc) => {
         disc.getSongList().map((song: SongListItem) => songList.push(song));
       });
 
@@ -57,12 +58,10 @@ export default class Player {
   }
 
   static playArtist(artist: Artist, app: DefineComponent): void {
-    ServerRequest.request(
+    HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
-    ).then(async (response: Response) => {
-      let data = await response.json()
-
-      let playList = data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
+    ).then((response: AxiosResponse) => {
+      let playList = response.data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
 
       app.emitter.emit('updatePlaylist', playList);
     });

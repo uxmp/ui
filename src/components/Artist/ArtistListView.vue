@@ -18,9 +18,10 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { plainToClass } from 'class-transformer';
+import HttpRequest from '../Lib/HttpRequest';
 import Artist from '../../model/Artist';
-import ServerRequest from '../Lib/ServerRequest';
 import Player from '../Lib/Player';
+import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'ArtistList',
@@ -29,19 +30,14 @@ export default defineComponent({
       artistList: [] as PropType<Array<Artist>>
     }
   },
-  beforeMount(): void {
-    this.getArtists();
-  },
-  methods: {
-    async getArtists(): Promise<void> {
-      let data = await ServerRequest.request(
-        'artists'
-      ).then(response => response.json());
-
-      this.artistList = data.items.map((artist_data: any) => {
+  async created(): Promise<void> {
+    HttpRequest.get('artists').then((response: AxiosResponse) => {
+      this.artistList = response.data.items.map((artist_data: any) => {
         return plainToClass(Artist, artist_data);
       });
-    },
+    });
+  },
+  methods: {
     async play(artist: Artist): Promise<void> {
       Player.playArtist(artist, this);
     }

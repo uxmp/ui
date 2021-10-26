@@ -55,9 +55,10 @@ import EntityLoader from '../Lib/EntityLoader';
 import AlbumCover from '../Lib/AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
-import ServerRequest from '../Lib/ServerRequest';
+import HttpRequest from '../Lib/HttpRequest';
 import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
+import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'AlbumView',
@@ -73,10 +74,10 @@ export default defineComponent({
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
 
-    ServerRequest.request(
+    HttpRequest.get(
       'album/' + this.$route.params.albumId + '/songs'
-    ).then(async (response: Response) => {
-      this.albumDiscs = (await response.json()).items.map((disc_raw: Object) => plainToClass(Disc, disc_raw));
+    ).then((response: AxiosResponse) => {
+      this.albumDiscs = response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw));
     });
   },
   methods: {

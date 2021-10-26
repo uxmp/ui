@@ -22,7 +22,8 @@
   </div>
 </template>
 <script lang="ts">
-import ServerRequest from '../Lib/ServerRequest';
+import { AxiosResponse } from 'axios';
+import HttpRequest from '../Lib/HttpRequest';
 
 export default {
   data() {
@@ -34,25 +35,25 @@ export default {
   },
   methods: {
     async login(): Promise<void> {
-      let response = await ServerRequest.request(
+      HttpRequest.post(
         'common/login',
-        'POST',
         {
           username: this.username,
           password: this.password
         }
-      ).then(response => response.json());
+      ).then((response: AxiosResponse) => {
+        let data = response.data.data;
+        if (data.msg) {
+          this.msg = data.msg;
+        } else {
+          const token = data.token;
+          const user = data.user;
 
-      if (response.data.msg) {
-        this.msg = response.data.msg;
-      } else {
-        const token = response.data.token;
-        const user = response.data.user;
+          this.$store.dispatch('login', { token, user });
 
-        this.$store.dispatch('login', { token, user });
-
-        this.$router.push('/');
-      }
+          this.$router.push('/');
+        }
+      });
     }
   }
 };

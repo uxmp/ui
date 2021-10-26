@@ -41,8 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import ArtistList from './components/Artist/ArtistListView.vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 import Playlist from './components/Navigation/Playlist.vue';
 import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlaying from './model/NowPlaying';
@@ -58,7 +57,7 @@ export default defineComponent({
   },
   name: 'uXMP',
   components: {
-    ArtistList,
+    "ArtistList": defineAsyncComponent(() => import('./components/Artist/ArtistListView.vue')),
     Sidebar,
     Playlist,
     PlayerControl,

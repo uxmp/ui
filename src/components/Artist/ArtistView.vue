@@ -34,10 +34,11 @@ import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
-import ServerRequest from '../Lib/ServerRequest';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import AlbumCover from '../Lib/AlbumCover.vue';
 import Album from '../../model/Album';
+import HttpRequest from '../Lib/HttpRequest';
+import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'ArtistView',
@@ -60,13 +61,14 @@ export default defineComponent({
       EntityLoader.loadArtist(this.$route.params.artistId).then((artist: Artist) => this.artist = artist);
     },
     async getAlbums(): Promise<void> {
-      let data = await ServerRequest.request(
+      HttpRequest.get(
         'albums/' + this.$route.params.artistId
-      ).then(response => response.json());
-
-      this.albumList = data.items.map((album_data: any): Album => {
-        return plainToClass(Album, album_data);
+      ).then((response: AxiosResponse) => {
+        this.albumList = response.data.items.map((album_data: any): Album => {
+          return plainToClass(Album, album_data);
+        });
       });
+
     },
     formatLength(length: number): string {
       return formatDurationLength(length);

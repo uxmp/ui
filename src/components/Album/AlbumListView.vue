@@ -17,9 +17,9 @@
 import { defineComponent, PropType } from 'vue'
 import { plainToClass } from 'class-transformer';
 import Player from '../Lib/Player';
-import ServerRequest from '../Lib/ServerRequest';
 import AlbumCover from '../Lib/AlbumCover.vue';
 import Album from '../../model/Album';
+import HttpRequest from '../Lib/HttpRequest';
 
 export default defineComponent({
   name: 'AlbumList',
@@ -36,12 +36,10 @@ export default defineComponent({
   },
   methods: {
     async getAlbums(): Promise<void> {
-      let data = await ServerRequest.request(
-        'albums'
-      ).then(response => response.json());
-
-      this.albumList = data.items.map((album_data: any): Album => {
-        return plainToClass(Album, album_data);
+      HttpRequest.get(`albums`).then(res => {
+        this.albumList = res.data.items.map((album_data: any): Album => {
+          return plainToClass(Album, album_data);
+        });
       });
     },
 

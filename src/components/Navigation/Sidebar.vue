@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ServerRequest from '../Lib/ServerRequest';
+import HttpRequest from '../Lib/HttpRequest';
 
 export default defineComponent({
   name: 'Sidebar',
@@ -50,9 +50,8 @@ export default defineComponent({
     async logout(): Promise<void> {
       this.$emit('hidePlayer');
 
-      ServerRequest.request(
+      HttpRequest.post(
         'common/logout',
-        'POST'
       ).then(() => {
         this.$store.dispatch('logout');
         this.$router.push('/login')
