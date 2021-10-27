@@ -38,14 +38,18 @@
             </table>
           </div>
         </template>
-        <template v-else>Oh no 😢</template>
+        <template v-else>
+          <LoadingIcon />
+        </template>
       </div>
       <div>
         <AlbumCover :album="album" :size="500" />
       </div>
     </div>
   </template>
-  <template v-else>Oh no 😢</template>
+  <template v-else>
+    <LoadingIcon />
+  </template>
 </template>
 
 <script lang="ts">
@@ -54,6 +58,7 @@ import 'reflect-metadata';
 import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
+import LoadingIcon from '../Lib/LoadingIcon.vue';
 import AlbumCover from '../Lib/AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
@@ -71,7 +76,8 @@ export default defineComponent({
     }
   },
   components: {
-    AlbumCover
+    AlbumCover,
+    LoadingIcon
   },
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);

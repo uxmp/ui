@@ -27,6 +27,9 @@
       </tbody>
     </table>
   </template>
+  <template v-else>
+    <LoadingIcon />
+  </template>
 </template>
 
 <script lang="ts">
@@ -34,6 +37,7 @@ import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
 import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
+import LoadingIcon from '../Lib/LoadingIcon.vue';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import AlbumCover from '../Lib/AlbumCover.vue';
 import Album from '../../model/Album';
@@ -50,7 +54,8 @@ export default defineComponent({
   },
   emits: ['updatePlaylist', 'updateNowPlaying'],
   components: {
-    AlbumCover
+    AlbumCover,
+    LoadingIcon
   },
   beforeMount(): void {
     this.getArtist();
