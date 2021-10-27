@@ -25,10 +25,10 @@
     "yargs-parser": "^13.1.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue": "^1.9.4",
     "@vue/compiler-sfc": "^3.2.20",
     "typescript": "^4.4.4",
-    "vite": "^2.6.12",
+    "vite": "^2.6.13",
     "vue-tsc": "^0.2.3"
   }
 }
