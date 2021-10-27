@@ -8,17 +8,36 @@
   <div>
     Length: {{ formatLength(length) }}
   </div>
-  <br />
-  <div class="song" v-for="song in songList" :key="song.getId()">
-    <div class="album_inner">
-      <SongCover size="80" :song="song" />
-      <div class="song_name">
-        {{ song.getName() }}
-      </div>
-      <div class="album_artist">
-        by <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
-      </div>
-    </div>
+  <div class="songTable">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Artist</th>
+          <th>Length</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="song in songList" :key="song.getId()">
+          <td>
+            <SongCover size="60" :song="song" />
+          </td>
+          <td>
+            <div class="songName">
+              {{ song.getName() }}
+            </div>
+            <div class="albumeName">
+              from <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
+            </div>
+          </td>
+          <td>
+            <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+          </td>
+          <td>{{ formatLength(song.getLength()) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -102,40 +121,63 @@ div.playall span:hover {
 }
 
 div.playall {
-  padding-bottom: 10px;
+  font-size: 150%;
+  padding-bottom: 20px;
 }
 
-div.song {
-  display: inline-flex;
-  width: 300px;
-  height: 120px;
-  background-color: #0a0f14;
-  margin: 10px;
-  padding: 15px;
+div.songName {
+  font-size: 130%;
+}
+
+div {
+  text-align: left;
+}
+
+div.songTable {
+  margin-right: 15px;
+}
+
+table th,
+table td {
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
   border: 1px #446683 solid;
 }
 
-div.song_name {
-  font-size: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  padding-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
+table thead tr {
+  background-color: #11171d;;
+  border-bottom: 1px solid #11171d;;
+  color: #ffffff;
+  text-align: left;
 }
 
-div.album_inner {
-  display: block;
-  width: 100%;
-  height: 100%;
+th,
+td {
+  padding: 12px 15px;
 }
 
-div.album_name {
-  padding-top: 5px;
+tbody tr {
+  border-bottom: 1px solid #11171d;;
 }
 
-div.album_artist {
-  font-size: 80%;
+tbody tr:hover {
+  background-color: #1c2c3a ! important;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #11171d;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px #446683 solid;
 }
 </style>
   

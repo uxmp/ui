@@ -98,7 +98,7 @@ export default defineComponent({
 
 <style scoped>
 div {
-  text-align: left;;
+  text-align: left;
 }
 
 div.albumGrid {
