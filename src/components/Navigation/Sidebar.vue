@@ -9,7 +9,7 @@
   <h3>Songs</h3>
   <ul>
     <li>
-      <router-link to="/random/songs">Random</router-link>
+      <router-link to="/random/songs/50">Random</router-link>
       <br />
       <span class="random_select">
         <router-link to="/random/songs/50">50</router-link> /

@@ -1,8 +1,14 @@
 <template>
   <h1>Random songs</h1>
   <div v-on:click="playAll()" class="playall">
-    <font-awesome-icon :icon="['fas', 'play']" /> Play all
-  </div><br />
+    <span>
+      <font-awesome-icon :icon="['fas', 'play']" /> Play all
+    </span>
+  </div>
+  <div>
+    Length: {{ formatLength(length) }}
+  </div>
+  <br />
   <div class="song" v-for="song in songList" :key="song.getId()">
     <div class="album_inner">
       <SongCover size="80" :song="song" />
@@ -20,8 +26,10 @@
 import { AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { defineComponent, PropType } from 'vue'
+import { useRoute } from 'vue-router';
 import SongListItem from '../../model/SongListItem';
 import SongListItemInterface from '../../model/SongListItemInterface';
+import formatDurationLength from '../Lib/FormatDurationLength';
 import HttpRequest from '../Lib/HttpRequest';
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
@@ -29,7 +37,9 @@ import SongCover from '../Lib/SongCover.vue'
 export default defineComponent({
   data() {
     return {
-      songList: [] as PropType<Array<SongListItemInterface>>
+      songList: [] as PropType<Array<SongListItemInterface>>,
+      limit: 100,
+      length: 0
     };
   },
   name: 'RandomSongs',
@@ -37,12 +47,21 @@ export default defineComponent({
     SongCover
   },
   beforeMount(): void {
-    this.getSongs(100);
+    this.limit = +useRoute().params.limit;
   },
   async beforeRouteUpdate(to, from): Promise<void> {
-    this.getSongs(to.params.limit)
+    this.limit = +to.params.limit;
+  },
+  watch: {
+    limit: function () {
+      console.log(this.limit);
+      this.getSongs(this.limit);
+    }
   },
   methods: {
+    formatLength(length: number): string {
+      return formatDurationLength(length);
+    },
     async getSongs(limit: number): Promise<void> {
       HttpRequest.get(
         'random/songs/' + limit
@@ -50,6 +69,11 @@ export default defineComponent({
         this.songList = response.data.items.map((song_data: any): SongListItemInterface => {
           return plainToClass(SongListItem, song_data);
         });
+
+        let length = 0;
+        this.songList.map((song: SongListItemInterface) => length += song.getLength());
+
+        this.length = length;
       });
     },
     async playAll(): Promise<void> {
@@ -69,8 +93,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
-div.playall {
+div.playall span {
   cursor: pointer;
+}
+
+div.playall span:hover {
+  color: rgb(85, 57, 5);
+}
+
+div.playall {
+  padding-bottom: 10px;
 }
 
 div.song {
