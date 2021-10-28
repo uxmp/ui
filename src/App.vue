@@ -2,6 +2,9 @@
   <div class="maingrid-noplayer" id="maingrid">
     <div class="grid-sidebar">
       <Sidebar @hidePlayer="hidePlayer" />
+      <div class="versionString">
+        <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ this.versionString }}
+      </div>
     </div>
     <div class="grid-content scrollbar">
       <router-view />
@@ -52,7 +55,8 @@ export default defineComponent({
   data() {
     return {
       playlist: [] as SongListItemInterface[],
-      nowPlaying: {} as NowPlaying
+      nowPlaying: {} as NowPlaying,
+      versionString: import.meta.env.VITE_VERSION
     };
   },
   name: 'uXMP',
@@ -272,5 +276,9 @@ input[type=password] {
 input[type=text]:hover,
 input[type=password]:hover {
   border-bottom: 1px solid rgb(192, 140, 44);
+}
+
+div.versionString {
+  opacity: 25%;
 }
 </style>
