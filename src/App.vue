@@ -33,7 +33,7 @@
         <div class="nowplaying-state">
           <input type="range" class="amplitude-song-slider" step=".1"/>
           <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
-          <span class="amplitude-duration-minutes">03</span>:<span class="amplitude-duration-seconds">16</span>
+          <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
         </div>
       </div>
     </div>
@@ -50,6 +50,7 @@ import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlaying from './model/NowPlaying';
 import SongListItemInterface from './model/SongListItemInterface';
 import PlayerControl from './components/Navigation/PlayerControl.vue'
+import formatDurationLength from './components/Lib/FormatDurationLength';
 
 export default defineComponent({
   data() {
@@ -80,6 +81,9 @@ export default defineComponent({
     );
   },
   methods: {
+    formatLength(length: number): string {
+      return formatDurationLength(length);
+    },
     hidePlayer(): void {
       document.getElementById('maingrid').className = 'maingrid-noplayer';
       this.playlist = [];
