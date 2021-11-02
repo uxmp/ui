@@ -21,8 +21,15 @@ export default class Player {
           let song = amplitudejs.getActiveSongMetadata();
 
           app.emitter.emit('updateNowPlaying', song)
+          app.emitter.emit('updatePlayerState', true)
 
           Player.scrollPlaylist(song.index);
+        },
+        pause: function () {
+          app.emitter.emit('updatePlayerState', false)
+        },
+        stop: function () {
+          app.emitter.emit('updatePlayerState', false)
         },
       },
       debug: import.meta.env.VITE_DEBUG_MODE == 'true',

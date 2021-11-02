@@ -3,7 +3,7 @@
     <div class="grid-sidebar">
       <Sidebar @hidePlayer="hidePlayer" />
       <div class="versionString">
-        <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ this.versionString }}
+        <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ versionString }}
       </div>
     </div>
     <div class="grid-content scrollbar">
@@ -12,7 +12,7 @@
     <div>
     </div>
     <div class="grid-player">
-      <PlayerControl />
+      <PlayerControl :playerState="playerState" />
     </div>
     <div class="grid-nowplaying">
       <div class="nowplaying-grid">
@@ -57,7 +57,8 @@ export default defineComponent({
     return {
       playlist: [] as SongListItemInterface[],
       nowPlaying: {} as NowPlaying,
-      versionString: import.meta.env.VITE_VERSION
+      versionString: import.meta.env.VITE_VERSION,
+      playerState: false as boolean,
     };
   },
   name: 'uXMP',
@@ -78,6 +79,10 @@ export default defineComponent({
     this.emitter.on(
       "updateNowPlaying",
       (data: NowPlaying) => this.nowPlaying = data
+    );
+    this.emitter.on(
+      "updatePlayerState",
+      (data: boolean) => this.playerState = data
     );
   },
   methods: {

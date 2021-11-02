@@ -16,7 +16,7 @@
       <div class="amplitude-prev control-button">
         <font-awesome-icon :icon="['fas', 'step-backward']" />
       </div>
-      <div class="control-button" v-on:click="toggleState()" v-if="playing == true">
+      <div class="control-button" v-on:click="toggleState()" v-if="playerState == true">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
       <div class="control-button control-button-paused" v-on:click="toggleState()" v-else>
@@ -35,16 +35,15 @@ import Player from '../Lib/Player'
 
 export default defineComponent({
   name: 'PlayerControl',
-  data() {
-    return {
-      playing: true
+  props: {
+    playerState: {
+      type: Boolean,
+      required: true
     }
   },
   methods: {
     toggleState(): void {
-      Player.togglePlayerState(!this.playing);
-
-      this.playing = !this.playing;
+      Player.togglePlayerState(!this.playerState);
     }
   }
 })

@@ -3,4 +3,5 @@ export default class NowPlaying {
   public albumName: string = '';
   public artistId: number = 0;
   public albumId: number = 0;
+  public length: number = 0;
 }
