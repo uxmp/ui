@@ -49,7 +49,7 @@ export default {
           const token = data.token;
           const user = data.user;
 
-          this.$store.dispatch('login', { token, user });
+          this.$store.dispatch('authStorage/login', { token, user });
 
           this.$router.push('/');
         }

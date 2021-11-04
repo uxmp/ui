@@ -53,7 +53,7 @@ export default defineComponent({
       HttpRequest.post(
         'common/logout',
       ).then(() => {
-        this.$store.dispatch('logout');
+        this.$store.dispatch('authStorage/logout');
         this.$router.push('/login')
       });
     }

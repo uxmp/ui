@@ -8,9 +8,9 @@ const getDefaultState = () => {
   };
 };
 
-// Create a new store instance.
-const Store = createStore({
+const authStorage = {
   strict: true,
+  namespaced: true,
   plugins: [createPersistedState()],
   state: getDefaultState(),
   getters: {
@@ -19,7 +19,8 @@ const Store = createStore({
     },
     getUser: state => {
       return state.user;
-    }
+    },
+    getToken: state => state.token
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -40,6 +41,13 @@ const Store = createStore({
     logout: ({ commit }) => {
       commit('RESET', '');
     }
+  }
+}
+
+// Create a new store instance.
+const Store = createStore({
+  modules: {
+    authStorage: authStorage,
   }
 })
 
