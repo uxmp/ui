@@ -54,6 +54,8 @@ export default defineComponent({
         'common/logout',
       ).then(() => {
         this.$store.dispatch('authStorage/logout');
+        this.$store.dispatch('favorites/reset');
+
         this.$router.push('/login')
       });
     }

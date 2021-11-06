@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from './Store'
+import store from '../Store/Store'
 import Router from './Router'
 
 const HttpRequest = axios.create({

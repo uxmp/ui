@@ -51,6 +51,14 @@ export default {
 
           this.$store.dispatch('authStorage/login', { token, user });
 
+          HttpRequest.get(
+            'user/favorites'
+          ).then((response: AxiosResponse) => {
+            const favorites = response.data;
+
+            this.$store.dispatch('favorites/init', { favorites });
+          });
+
           this.$router.push('/');
         }
       });

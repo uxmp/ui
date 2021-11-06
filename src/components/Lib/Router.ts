@@ -6,7 +6,7 @@ import Login from "../Home/LoginView.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
 import HomeView from "../Home/HomeView.vue"
-import Store from "./Store";
+import Store from "../Store/Store";
 
 const routes = [
   {

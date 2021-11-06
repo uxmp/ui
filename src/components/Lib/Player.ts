@@ -87,7 +87,8 @@ export default class Player {
       cover_art_url: song.getCover(),
       artistId: song.getArtistId(),
       albumId: song.getAlbumId(),
-      length: song.getLength()
+      length: song.getLength(),
+      songId: song.getId(),
     };
   }
 

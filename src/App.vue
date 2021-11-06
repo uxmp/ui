@@ -34,6 +34,21 @@
           <input type="range" class="amplitude-song-slider" step=".1"/>
           <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
           <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
+          <div class="favIcon">
+            <font-awesome-icon
+              v-on:click="removeFavorite(nowPlaying.songId)"
+              class="isFavorite"
+              :icon="['fas', 'star']"
+              v-if="isFavorite()"
+              title="Remove from favorites"
+            />
+            <font-awesome-icon
+              v-on:click="addFavorite(nowPlaying.songId)"
+              class="isNotFavorite"
+              :icon="['far', 'star']"
+              v-else title="Add as favorite"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -92,6 +107,15 @@ export default defineComponent({
     hidePlayer(): void {
       document.getElementById('maingrid').className = 'maingrid-noplayer';
       this.playlist = [];
+    },
+    isFavorite(): boolean {
+      return this.nowPlaying.songId in this.$store.getters['favorites/getSongs'];
+    },
+    addFavorite(songId: number): void {
+
+    },
+    removeFavorite(songId: number): void {
+      
     }
   },
 })
@@ -289,5 +313,13 @@ input[type=password]:hover {
 
 div.versionString {
   opacity: 25%;
+}
+div.favIcon .isNotFavorite:hover,
+div.favIcon .isFavorite {
+  color: rgb(212, 212, 0);
+}
+div.favIcon .isNotFavorite,
+div.favIcon .isFavorite:hover {
+  color: white;
 }
 </style>

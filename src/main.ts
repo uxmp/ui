@@ -1,11 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import Router from './components/Lib/Router'
-import Store from './components/Lib/Store'
+import Store from './components/Store/Store'
 import mitt from 'mitt';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarSol } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarReg } from '@fortawesome/free-regular-svg-icons'
 import { faPause } from '@fortawesome/free-solid-svg-icons'
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { faVolumeOff } from '@fortawesome/free-solid-svg-icons'
@@ -18,6 +20,8 @@ library.add(faVolumeUp);
 library.add(faVolumeOff);
 library.add(faStepForward);
 library.add(faStepBackward);
+library.add(faStarSol);
+library.add(faStarReg);
 
 const emitter = mitt();
 
