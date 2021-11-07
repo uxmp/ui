@@ -4,9 +4,9 @@ import HttpRequest from "../../Lib/HttpRequest";
 const getDefaultState = () => {
   return {
     favorites: {
-      albums: {},
-      songs: {},
-      artists: {},
+      album: {},
+      song: {},
+      artist: {},
     },
   };
 };
@@ -16,20 +16,20 @@ export default {
   state: getDefaultState(),
   getters: {
     getList: state => state.favorites,
-    getAlbums: state => state.favorites.albums,
-    getSongs: state => state.favorites.songs,
-    getArtists: state => state.favorites.artists,
+    getAlbums: state => state.favorites.album,
+    getSongs: state => state.favorites.song,
+    getArtists: state => state.favorites.artist,
   },
   mutations: {
     INIT: (state, favorites) => {
       state.favorites = favorites;
     },
     ADD_SONG: (state, songId: number) => {
-      state.favorites.songs[songId] = + new Date();
+      state.favorites.songs[songId.toString()] = + new Date();
     },
     REMOVE_SONG: (state, songId: number) => {
-      if (songId in state.favorites.songs) {
-        delete state.favorites.songs[songId];
+      if (songId.toString() in state.favorites.songs) {
+        delete state.favorites.songs[songId.toString()];
       }
     },
     RESET: state => {

@@ -55,7 +55,7 @@ export default defineComponent({
   },
   watch: { 
    	nowPlaying: function(newVal: NowPlaying) {
-      this.isFavorite = newVal.songId in this.$store.getters['favorites/getSongs'];
+      this.isFavorite = newVal.songId.toString() in this.$store.getters['favorites/getSongs'];
     }
   },
   methods: {
