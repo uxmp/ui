@@ -16,40 +16,7 @@
     </div>
     <div class="grid-nowplaying">
       <div class="nowplaying-grid">
-        <div class="nowplaying-cover">
-          <img data-amplitude-song-info="cover_art_url" style="width: 110px; height: 110px;" />
-        </div>
-        <div>
-          <div class="nowplaying-title">
-            <span data-amplitude-song-info="name" class="song-name"></span>
-          </div>
-          <div class="nowplaying-album">
-            from <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
-          </div>
-          <div class="nowplaying-artist">
-            by <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
-          </div>
-        </div>
-        <div class="nowplaying-state">
-          <input type="range" class="amplitude-song-slider" step=".1"/>
-          <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
-          <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
-          <div class="favIcon">
-            <font-awesome-icon
-              v-on:click="removeFavorite(nowPlaying.songId)"
-              class="isFavorite"
-              :icon="['fas', 'star']"
-              v-if="isFavorite()"
-              title="Remove from favorites"
-            />
-            <font-awesome-icon
-              v-on:click="addFavorite(nowPlaying.songId)"
-              class="isNotFavorite"
-              :icon="['far', 'star']"
-              v-else title="Add as favorite"
-            />
-          </div>
-        </div>
+        <NowPlayingView :nowPlaying="nowPlaying" />
       </div>
     </div>
     <div class="grid-playlist">
@@ -60,12 +27,12 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
-import Playlist from './components/Navigation/Playlist.vue';
+import Playlist from './components/Navigation/Playlist.vue'
 import Sidebar from './components/Navigation/Sidebar.vue'
-import NowPlaying from './model/NowPlaying';
-import SongListItemInterface from './model/SongListItemInterface';
+import NowPlayingView from './components/Lib/NowPlayingView.vue'
+import NowPlaying from './model/NowPlaying'
+import SongListItemInterface from './model/SongListItemInterface'
 import PlayerControl from './components/Navigation/PlayerControl.vue'
-import formatDurationLength from './components/Lib/FormatDurationLength';
 
 export default defineComponent({
   data() {
@@ -82,6 +49,7 @@ export default defineComponent({
     Sidebar,
     Playlist,
     PlayerControl,
+    NowPlayingView
   },
   mounted() { 
     this.emitter.on(
@@ -101,22 +69,10 @@ export default defineComponent({
     );
   },
   methods: {
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    },
     hidePlayer(): void {
       document.getElementById('maingrid').className = 'maingrid-noplayer';
       this.playlist = [];
     },
-    isFavorite(): boolean {
-      return this.nowPlaying.songId in this.$store.getters['favorites/getSongs'];
-    },
-    addFavorite(songId: number): void {
-
-    },
-    removeFavorite(songId: number): void {
-      
-    }
   },
 })
 </script>
@@ -225,30 +181,6 @@ div.nowplaying-grid {
   max-width: 500px;
 }
 
-div.nowplaying-cover {
-  grid-row: 1 / span 2;
-}
-
-div.nowplaying-title {
-  font-size: 110%;
-  text-align: left;
-}
-
-div.nowplaying-album {
-  font-size: 80%;
-  text-align: left;
-}
-
-div.nowplaying-artist {
-  font-size: 80%;
-  text-align: left;
-}
-
-div.nowplaying-state {
-  margin-top: 1%;
-  text-align: left;
-}
-
 div.grid-nowplaying {
   max-height: minmax(15%, 150px);
   display: flex;
@@ -313,13 +245,5 @@ input[type=password]:hover {
 
 div.versionString {
   opacity: 25%;
-}
-div.favIcon .isNotFavorite:hover,
-div.favIcon .isFavorite {
-  color: rgb(212, 212, 0);
-}
-div.favIcon .isNotFavorite,
-div.favIcon .isFavorite:hover {
-  color: white;
 }
 </style>

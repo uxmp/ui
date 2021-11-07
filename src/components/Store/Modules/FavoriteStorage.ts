@@ -1,9 +1,9 @@
 const getDefaultState = () => {
   return {
     favorites: {
-      albums: [],
-      songs: [],
-      artists: [],
+      albums: {},
+      songs: {},
+      artists: {},
     },
   };
 };
@@ -21,6 +21,14 @@ export default {
     INIT: (state, favorites) => {
       state.favorites = favorites;
     },
+    ADD_SONG: (state, songId: number) => {
+      state.favorites.songs[songId] = + new Date();
+    },
+    REMOVE_SONG: (state, songId: number) => {
+      if (songId in state.favorites.songs) {
+        delete state.favorites.songs[songId];
+      }
+    },
     RESET: state => {
       Object.assign(state, getDefaultState());
     }
@@ -28,6 +36,12 @@ export default {
   actions: {
     init: ({ commit }, { favorites }) => {
       commit('INIT', favorites)
+    },
+    addSong: ({ commit }, { songId }) => {
+      commit('ADD_SONG', songId)
+    },
+    removeSong: ({ commit }, { songId }) => {
+      commit('REMOVE_SONG', songId)
     },
     reset: ({ commit }) => {
       commit('RESET');
