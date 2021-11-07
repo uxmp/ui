@@ -1,3 +1,6 @@
+import { AxiosResponse } from "axios";
+import HttpRequest from "../../Lib/HttpRequest";
+
 const getDefaultState = () => {
   return {
     favorites: {
@@ -38,10 +41,28 @@ export default {
       commit('INIT', favorites)
     },
     addSong: ({ commit }, { songId }) => {
-      commit('ADD_SONG', songId)
+      HttpRequest.post(
+        'user/favorite/song/add',
+        {
+          'itemId': songId
+        }
+      ).then((response: AxiosResponse) => {
+        if (response.data.result === true) {
+          commit('ADD_SONG', songId)
+        }
+      })
     },
     removeSong: ({ commit }, { songId }) => {
-      commit('REMOVE_SONG', songId)
+      HttpRequest.post(
+        'user/favorite/song/remove',
+        {
+          'itemId': songId
+        }
+      ).then((response: AxiosResponse) => {
+        if (response.data.result === true) {
+          commit('REMOVE_SONG', songId)
+        }
+      })
     },
     reset: ({ commit }) => {
       commit('RESET');

@@ -52,7 +52,7 @@ export default {
           this.$store.dispatch('authStorage/login', { token, user });
 
           HttpRequest.get(
-            'user/favorites'
+            'user/favorite'
           ).then((response: AxiosResponse) => {
             const favorites = response.data;
 
