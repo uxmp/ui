@@ -17,21 +17,7 @@
     <input type="range" class="amplitude-song-slider" step=".1"/>
     <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
     <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
-    <div class="favIcon">
-      <font-awesome-icon
-        v-on:click="removeFavorite(nowPlaying.songId)"
-        class="isFavorite"
-        :icon="['fas', 'star']"
-        v-if="isFavorite"
-        title="Remove from favorites"
-      />
-      <font-awesome-icon
-        v-on:click="addFavorite(nowPlaying.songId)"
-        class="isNotFavorite"
-        :icon="['far', 'star']"
-        v-else title="Add as favorite"
-      />
-    </div>
+    <FavoriteStarView :itemId="nowPlaying.songId" itemType="song" />
   </div>
 </template>
 
@@ -39,6 +25,7 @@
 import { defineComponent } from 'vue'
 import NowPlaying from '../../model/NowPlaying'
 import formatDurationLength from './FormatDurationLength';
+import FavoriteStarView from './FavoriteStarView.vue'
 
 export default defineComponent({
   name: 'NowPlayingView',
@@ -48,27 +35,10 @@ export default defineComponent({
       required: true
     }
   },
-  data() {
-    return { 
-      isFavorite: false
-    }
-  },
-  watch: { 
-   	nowPlaying: function(newVal: NowPlaying) {
-      this.isFavorite = newVal.songId.toString() in this.$store.getters['favorites/getSongs'];
-    }
+  components: {
+    FavoriteStarView
   },
   methods: {
-    addFavorite(songId: number): void {
-      this.isFavorite = true;
-
-      this.$store.dispatch('favorites/addSong', { songId });
-    },
-    removeFavorite(songId: number): void {
-      this.isFavorite = false;
-
-      this.$store.dispatch('favorites/removeSong', { songId });
-    },
     formatLength(length: number): string {
       return formatDurationLength(length);
     },
@@ -99,14 +69,5 @@ div.artist {
 div.state {
   margin-top: 1%;
   text-align: left;
-}
-
-div.favIcon .isNotFavorite:hover,
-div.favIcon .isFavorite {
-  color: rgb(212, 212, 0);
-}
-div.favIcon .isNotFavorite,
-div.favIcon .isFavorite:hover {
-  color: white;
 }
 </style>

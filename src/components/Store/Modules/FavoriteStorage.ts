@@ -25,11 +25,11 @@ export default {
       state.favorites = favorites;
     },
     ADD_SONG: (state, songId: number) => {
-      state.favorites.songs[songId.toString()] = + new Date();
+      state.favorites.song[songId.toString()] = + new Date();
     },
     REMOVE_SONG: (state, songId: number) => {
       if (songId.toString() in state.favorites.songs) {
-        delete state.favorites.songs[songId.toString()];
+        delete state.favorites.song[songId.toString()];
       }
     },
     RESET: state => {
