@@ -36,23 +36,33 @@ export default defineComponent({
       isFavorite: false
     }
   },
-  watch: { 
-   	itemId: function(newVal: number): void {
-      this.isFavorite = newVal.toString() in this.$store.getters['favorites/getSongs'];
+  beforeMount(): void {
+    if (this.itemId !== undefined) {
+      this.isFavorite = this.itemId.toString() in this.$store.getters['favorites/getList'][this.itemType];
     }
   },
   methods: {
     addFavorite(): void {
       this.isFavorite = true;
-      const songId = this.itemId;
 
-      this.$store.dispatch('favorites/addSong', { songId });
+      this.$store.dispatch(
+        'favorites/addItem',
+        {
+          itemId: this.itemId,
+          itemType: this.itemType,
+        }
+      );
     },
     removeFavorite(): void {
       this.isFavorite = false;
-      const songId = this.itemId;
 
-      this.$store.dispatch('favorites/removeSong', { songId });
+      this.$store.dispatch(
+        'favorites/removeItem',
+        {
+          itemId: this.itemId,
+          itemType: this.itemType
+        }
+        );
     },
   }
 })

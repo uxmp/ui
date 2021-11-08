@@ -43,6 +43,7 @@
         </template>
       </div>
       <div>
+        <FavoriteStarView :itemId="album.getId()" itemType="album" />
         <AlbumCover :album="album" :size="500" />
       </div>
     </div>
@@ -66,6 +67,7 @@ import HttpRequest from '../Lib/HttpRequest';
 import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
+import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 
 export default defineComponent({
   name: 'AlbumView',
@@ -77,7 +79,8 @@ export default defineComponent({
   },
   components: {
     AlbumCover,
-    LoadingIcon
+    LoadingIcon,
+    FavoriteStarView,
   },
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);

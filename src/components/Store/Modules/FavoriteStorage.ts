@@ -16,20 +16,17 @@ export default {
   state: getDefaultState(),
   getters: {
     getList: state => state.favorites,
-    getAlbums: state => state.favorites.album,
-    getSongs: state => state.favorites.song,
-    getArtists: state => state.favorites.artist,
   },
   mutations: {
     INIT: (state, favorites) => {
       state.favorites = favorites;
     },
-    ADD_SONG: (state, songId: number) => {
-      state.favorites.song[songId.toString()] = + new Date();
+    ADD_ITEM: (state, { itemId, itemType} ) => {
+      state.favorites[itemType][itemId.toString()] = + new Date();
     },
-    REMOVE_SONG: (state, songId: number) => {
-      if (songId.toString() in state.favorites.songs) {
-        delete state.favorites.song[songId.toString()];
+    REMOVE_SONG: (state, { itemId, itemType } ) => {
+      if (itemId.toString() in state.favorites[itemType]) {
+        delete state.favorites[itemType][itemId.toString()];
       }
     },
     RESET: state => {
@@ -40,27 +37,27 @@ export default {
     init: ({ commit }, { favorites }) => {
       commit('INIT', favorites)
     },
-    addSong: ({ commit }, { songId }) => {
+    addItem: ({ commit }, { itemId, itemType }) => {
       HttpRequest.post(
-        'user/favorite/song/add',
+        'user/favorite/' + itemType + '/add',
         {
-          'itemId': songId
+          'itemId': itemId
         }
       ).then((response: AxiosResponse) => {
         if (response.data.result === true) {
-          commit('ADD_SONG', songId)
+          commit('ADD_ITEM', { itemId, itemType })
         }
       })
     },
-    removeSong: ({ commit }, { songId }) => {
+    removeItem: ({ commit }, { itemId, itemType }) => {
       HttpRequest.post(
-        'user/favorite/song/remove',
+        'user/favorite/' + itemType + '/remove',
         {
-          'itemId': songId
+          'itemId': itemId
         }
       ).then((response: AxiosResponse) => {
         if (response.data.result === true) {
-          commit('REMOVE_SONG', songId)
+          commit('REMOVE_SONG', { itemId, itemType })
         }
       })
     },
