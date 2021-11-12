@@ -24,6 +24,9 @@
     <li>
       <router-link to="/albums">List</router-link>
     </li>
+    <li>
+      <router-link to="/albums/favorite">Stars</router-link>
+    </li>
   </ul>
 
   <h3>Artists</h3>
