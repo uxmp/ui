@@ -37,8 +37,11 @@ export default defineComponent({
     }
   },
   beforeMount(): void {
-    if (this.itemId !== undefined) {
-      this.isFavorite = this.itemId.toString() in this.$store.getters['favorites/getList'][this.itemType];
+    this.updateState()
+  },
+  watch: {
+    itemId: function(): void {
+      this.updateState()
     }
   },
   methods: {
@@ -64,6 +67,11 @@ export default defineComponent({
         }
         );
     },
+    updateState(): void {
+      if (this.itemId !== undefined) {
+        this.isFavorite = this.itemId.toString() in this.$store.getters['favorites/getList'][this.itemType];
+      }
+    }
   }
 })
 </script>
