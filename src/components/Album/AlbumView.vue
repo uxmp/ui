@@ -60,7 +60,7 @@ import Album from '../../model/Album';
 import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
-import AlbumCover from '../Lib/AlbumCover.vue';
+import AlbumCover from './Lib/AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
 import HttpRequest from '../Lib/HttpRequest';

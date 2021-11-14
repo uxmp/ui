@@ -1,28 +1,18 @@
 <template>
   <h1>Home</h1>
   <h3>Recent albums</h3>
-  <div class="albumList scrollbar">
-    <div class="album" v-for="album in recentAlbums" :key="album.getId()">
-      <div class="album_inner">
-        <AlbumCover :album="album" />
-        <div class="album_name">
-          <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
-        </div>
-        <div class="album_artist">
-          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
-        </div>
-      </div>
-    </div>
+  <div class="list scrollbar">
+    <AlbumListItem :album="album" v-for="album in recentAlbums" :key="album.getId()" />
   </div>
 </template>
 
 <script lang="ts">
-import { AxiosResponse } from 'axios';
-import { plainToClass } from 'class-transformer';
+import { AxiosResponse } from 'axios'
+import { plainToClass } from 'class-transformer'
 import { defineComponent } from 'vue'
-import Album from '../../model/Album';
-import AlbumCover from '../Lib/AlbumCover.vue';
-import HttpRequest from '../Lib/HttpRequest';
+import Album from '../../model/Album'
+import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
+import HttpRequest from '../Lib/HttpRequest'
 
 export default defineComponent({
   name: 'HomeView',
@@ -32,7 +22,7 @@ export default defineComponent({
     }
   },
   components: {
-    AlbumCover
+    AlbumListItem,
   },
   beforeMount(): void {
     this.getNewestAlbums();
@@ -40,7 +30,7 @@ export default defineComponent({
   methods: {
     async getNewestAlbums(): Promise<void> {
       HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
-        this.recentAlbums = response.data.items.map((album_data: any) => {
+        this.recentAlbums = response.data.items.map((album_data: Object): Album => {
           return plainToClass(Album, album_data);
         });
       });
@@ -50,7 +40,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-div.albumList {
+div.list {
   text-align: left;
   width: 98%;
   height: 220px;
@@ -60,33 +50,5 @@ div.albumList {
   border: 1px #446683 solid;
   padding: 10px;
   white-space: nowrap;
-}
-
-div.album {
-  display: inline-flex;
-  width: 260px;
-  height: 170px;
-  margin: 10px;
-  padding: 15px;
-  background-color: #11171d;
-  border-radius: 5%;
-}
-
-div.album_inner {
-  background-color: #11171d;
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-
-div.album_name {
-  padding-top: 10px;
-  font-size: 110%
-}
-
-div.album_artist {
-  font-size: 80%;
 }
 </style>

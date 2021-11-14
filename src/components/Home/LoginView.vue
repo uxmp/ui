@@ -41,7 +41,7 @@ export default {
           username: this.username,
           password: this.password
         }
-      ).then((response: AxiosResponse) => {
+      ).then((response: AxiosResponse): void => {
         let data = response.data.data;
         if (data.msg) {
           this.msg = data.msg;

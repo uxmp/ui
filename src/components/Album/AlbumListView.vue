@@ -6,28 +6,17 @@
     </div>
   </template>
   <div class="albumList">
-    <div class="album" v-for="album in albumList" :key="album.getId()">
-      <div class="album_inner">
-        <AlbumCover :album="album" />
-        <div class="album_name">
-          <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
-        </div>
-        <div class="album_artist">
-          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
-        </div>
-      </div>
-    </div>
+    <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { plainToClass } from 'class-transformer';
-import Player from '../Lib/Player';
-import AlbumCover from '../Lib/AlbumCover.vue';
-import Album from '../../model/Album';
-import HttpRequest from '../Lib/HttpRequest';
-import formatDurationLength from '../Lib/FormatDurationLength';
+import { plainToClass } from 'class-transformer'
+import Album from '../../model/Album'
+import AlbumListItem from './Lib/AlbumListItem.vue'
+import HttpRequest from '../Lib/HttpRequest'
+import formatDurationLength from '../Lib/FormatDurationLength'
 
 export default defineComponent({
   name: 'AlbumList',
@@ -38,7 +27,7 @@ export default defineComponent({
     }
   },
   components: {
-    AlbumCover
+    AlbumListItem,
   },
   beforeMount(): void {
     this.getAlbums();
@@ -54,9 +43,6 @@ export default defineComponent({
     },
     formatLength(length: number): string {
       return formatDurationLength(length);
-    },
-    play(item: Album): void {
-      Player.playAlbum(item.getId(), this);
     }
   }
 })
@@ -71,30 +57,5 @@ div.albumList {
   margin-top: 10px;
   background-color: #0a0f14;
   border: 1px #446683 solid;
-}
-
-div.album {
-  display: inline-flex;
-  width: 300px;
-  height: 180px;
-  margin: 8px;
-  padding: 8px;
-  background-color: #11171d;
-  border-radius: 5%;
-}
-
-div.album_inner {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-div.album_name {
-  padding-top: 10px;
-  font-size: 110%;
-}
-
-div.album_artist {
-  font-size: 80%;
 }
 </style>

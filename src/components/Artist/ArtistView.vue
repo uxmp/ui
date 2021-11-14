@@ -39,7 +39,7 @@ import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
 import formatDurationLength from '../Lib/FormatDurationLength';
-import AlbumCover from '../Lib/AlbumCover.vue';
+import AlbumCover from '../Album/Lib/AlbumCover.vue';
 import Album from '../../model/Album';
 import HttpRequest from '../Lib/HttpRequest';
 import { AxiosResponse } from 'axios';
