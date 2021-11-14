@@ -47,7 +47,7 @@ img.cover_play {
   transition: .2s ease;
   backface-visibility: hidden;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
 div.cover_overlay {

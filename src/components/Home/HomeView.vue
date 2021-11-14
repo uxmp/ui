@@ -53,7 +53,7 @@ export default defineComponent({
 div.albumList {
   text-align: left;
   width: 98%;
-  height: 200px;
+  height: 220px;
   overflow-y: hidden;
   overflow-x: auto;
   background-color: #0a0f14;
@@ -63,12 +63,17 @@ div.albumList {
 }
 
 div.album {
-  display: inline-block;
-  width: 250px;
-  height: 180px;
+  display: inline-flex;
+  width: 260px;
+  height: 170px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #11171d;
+  border-radius: 5%;
 }
 
 div.album_inner {
+  background-color: #11171d;
   display: block;
   width: 100%;
   height: 100%;

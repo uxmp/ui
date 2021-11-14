@@ -92,6 +92,7 @@ export default defineComponent({
   overflow: hidden;
 }
 
+h1,
 h2,
 h3,
 h4 {
@@ -132,6 +133,8 @@ div.grid-content {
   overflow-y: auto;
   overflow-x: hidden;
   grid-column: 2 / span 3;
+  margin-left: 20px;
+  padding-right: 20px;
 }
 
 div.grid-sidebar {
