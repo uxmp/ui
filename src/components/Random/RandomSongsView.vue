@@ -73,7 +73,6 @@ export default defineComponent({
   },
   watch: {
     limit: function () {
-      console.log(this.limit);
       this.getSongs(this.limit);
     }
   },
