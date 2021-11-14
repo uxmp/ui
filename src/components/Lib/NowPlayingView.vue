@@ -6,14 +6,14 @@
     <div class="title">
       <span data-amplitude-song-info="name" class="song-name"></span>
     </div>
-    <div class="album">
+    <div class="album" v-if="nowPlaying !== null">
       from <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
     </div>
-    <div class="artist">
+    <div class="artist" v-if="nowPlaying !== null">
       by <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
     </div>
   </div>
-  <div class="state">
+  <div class="state" v-if="nowPlaying !== null">
     <input type="range" class="amplitude-song-slider" step=".1"/>
     <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
     <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import NowPlaying from '../../model/NowPlaying'
 import formatDurationLength from './FormatDurationLength';
 import FavoriteStarView from './FavoriteStarView.vue'
@@ -31,7 +31,7 @@ export default defineComponent({
   name: 'NowPlayingView',
   props: {
     nowPlaying: {
-      type: NowPlaying,
+      type: [Object, null] as PropType<NowPlaying>,
       required: true
     }
   },

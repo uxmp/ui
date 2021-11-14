@@ -38,7 +38,7 @@ export default defineComponent({
   data() {
     return {
       playlist: [] as SongListItemInterface[],
-      nowPlaying: {} as NowPlaying,
+      nowPlaying: null,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
     };
@@ -72,6 +72,7 @@ export default defineComponent({
     hidePlayer(): void {
       document.getElementById('maingrid').className = 'maingrid-noplayer';
       this.playlist = [];
+      this.nowPlaying = null;
     },
   },
 })

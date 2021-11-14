@@ -8,15 +8,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Player from './Player';
-import SongListItem from '../../model/SongListItem';
+import SongListItemInterface from '../../model/SongListItemInterface';
 
 export default defineComponent({
   name: 'SongCover',
   props: {
     song: {
-      type: SongListItem,
+      type: Object as PropType<SongListItemInterface>,
       required: true
     },
     size: {
@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
   methods: {
-    play(song: SongListItem) {
+    play(song: SongListItemInterface) {
       Player.playSong(song, this);
     }
   }

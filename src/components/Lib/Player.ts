@@ -57,7 +57,7 @@ export default class Player {
       let songList = [];
 
       response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw)).map((disc: Disc) => {
-        disc.getSongList().map((song: SongListItem) => songList.push(song));
+        disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
       });
 
       app.emitter.emit('updatePlaylist', songList);
@@ -78,7 +78,7 @@ export default class Player {
     app.emitter.emit('updatePlaylist', [song])
   }
 
-  static createSongListItem(song: SongListItem): Object {
+  static createSongListItem(song: SongListItemInterface): Object {
     return {
       name: song.getName(),
       albumName: song.getAlbumName(),

@@ -18,20 +18,19 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import SongListItem from '../../model/SongListItem';
 import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 export default defineComponent({
   name: 'Playlist',
   props: {
     elements: {
-      type: [] as PropType<Array<SongListItemInterface>>,
+      type: Array as PropType<Array<SongListItemInterface>>,
       required: true
     }
   },
   updated(): void {
     this.$nextTick(function (): void {
-      Player.init(this, this.elements.map((song: SongListItem) => Player.createSongListItem(song)));
+      Player.init(this, this.elements.map((song: SongListItemInterface) => Player.createSongListItem(song)));
       Player.playIndex(0);
     })
   },

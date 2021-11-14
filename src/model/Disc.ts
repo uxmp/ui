@@ -1,11 +1,12 @@
 import { Type } from "class-transformer";
 import SongListItem from "./SongListItem";
 import 'reflect-metadata';
+import SongListItemInterface from "./SongListItemInterface";
 export default class Disc {
   private id: number = 0;
 
   @Type(() => SongListItem)
-  private songs: Array<SongListItem> = [];
+  private songs: Array<SongListItemInterface> = [];
 
   private length: number = 0;
 
@@ -13,7 +14,7 @@ export default class Disc {
     return this.id;
   }
 
-  getSongList(): Array<SongListItem> {
+  getSongList(): Array<SongListItemInterface> {
     return this.songs;
   }
 
