@@ -12,18 +12,19 @@
           <tr>
             <th></th>
             <th>Song</th>
+            <th>Album</th>
             <th>Artist</th>
             <th>User</th>
-            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="song in playbackHistory" :key="song.getId()">
             <td>
-              <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" title="Play" />
+              <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="playSong(song)" title="Play" />
             </td>
-            <td>{{ song.getSongName() }}</td>
+            <td>{{ song.getName() }}</td>
             <td>{{ song.getArtistName() }}</td>
+            <td>{{ song.getAlbumName() }}</td>
             <td>{{ song.getUserName() }}</td>
           </tr>
         </tbody>
@@ -40,14 +41,16 @@ import { defineComponent, PropType } from 'vue'
 import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
+import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
+import Player from '../Lib/Player'
 
 export default defineComponent({
   name: 'HomeView',
   data() {
     return { 
-      recentAlbums: [] as Array<PropType<Album>>,
-      playbackHistoy: [] as Array<PropType<PlaybackHistoryItem>>,
+      recentAlbums: [],
+      playbackHistory: [],
     }
   },
   components: {
@@ -55,14 +58,25 @@ export default defineComponent({
   },
   beforeMount(): void {
     this.getNewestAlbums();
+    this.getPlaybackHistory();
   },
   methods: {
     async getNewestAlbums(): Promise<void> {
       HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
-        this.recentAlbums = response.data.items.map((album_data: Object): Album => {
-          return plainToClass(Album, album_data);
+        this.recentAlbums = response.data.items.map((albumData: Object): Album => {
+          return plainToClass(Album, albumData);
         });
       });
+    },
+    async getPlaybackHistory(): Promise<void> {
+      HttpRequest.get('play/history').then((response: AxiosResponse) => {
+        this.playbackHistory = response.data.items.map((historyData: Object): PlaybackHistoryItemInterface => {
+          return plainToClass(PlaybackHistoryItem, historyData);
+        })
+      })
+    },
+    async playSong(song: PlaybackHistoryItemInterface): Promise<void> {
+      Player.playSong(song, this);
     },
   }
 })
