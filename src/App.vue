@@ -250,4 +250,47 @@ input[type=password]:hover {
 div.versionString {
   opacity: 25%;
 }
+
+table th,
+table td {
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
+  border: 1px #446683 solid;
+}
+
+table thead tr {
+  background-color: #11171d;;
+  border-bottom: 1px solid #11171d;;
+  color: #ffffff;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #11171d;;
+}
+
+tbody tr:hover {
+  background-color: #1c2c3a ! important;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #11171d;
+}
+
+table tbody tr:last-of-type {
+  border-bottom: 2px #446683 solid;
+}
 </style>
