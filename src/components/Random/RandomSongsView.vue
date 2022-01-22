@@ -44,7 +44,7 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router';
 import SongListItem from '../../model/SongListItem';
 import SongListItemInterface from '../../model/SongListItemInterface';
@@ -56,7 +56,7 @@ import SongCover from '../Lib/SongCover.vue'
 export default defineComponent({
   data() {
     return {
-      songList: [] as PropType<Array<SongListItemInterface>>,
+      songList: [] as Array<SongListItemInterface>,
       limit: 100,
       length: 0
     };

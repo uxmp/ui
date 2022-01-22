@@ -1,4 +1,6 @@
-export default class Album {
+import AlbumInterface from "./AlbumInterface";
+
+export default class Album implements AlbumInterface {
   private id: number = 0;
   private name: string = '';
   private artistId: number = 0;

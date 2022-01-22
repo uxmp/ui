@@ -15,13 +15,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AlbumCover from './AlbumCover.vue';
-import Album from '../../../model/Album';
+import AlbumInterface from '../../../model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumListItem',
   props: {
     album: {
-      type: Album,
+      type: Object as () => AlbumInterface,
       required: true
     }
   },

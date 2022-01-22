@@ -22,11 +22,12 @@
   </div>
 </template>
 <script lang="ts">
+import { defineComponent } from '@vue/runtime-core';
 import { AxiosResponse } from 'axios';
 import HttpRequest from '../Lib/HttpRequest';
 
-export default {
-  data() {
+export default defineComponent({
+  setup() {
     return {
       username: '',
       password: '',
@@ -64,7 +65,7 @@ export default {
       });
     }
   }
-};
+});
 </script>
 <style scoped>
 div.errorMessage {

@@ -6,18 +6,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer'
 import AlbumCover from './Lib/AlbumCover.vue'
 import AlbumListItem from './Lib/AlbumListItem.vue'
 import Album from '../../model/Album'
 import HttpRequest from '../Lib/HttpRequest'
+import AlbumInterface from '../../model/AlbumInterface'
 
 export default defineComponent({
-  name: 'AlbumList',
+  name: 'AlbumFavoriteView',
   data() {
     return { 
-      albumList: [] as PropType<Array<Album>>
+      albumList: [] as Array<AlbumInterface>
     }
   },
   components: {

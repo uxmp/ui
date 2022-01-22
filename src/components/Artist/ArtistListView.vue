@@ -27,7 +27,7 @@ export default defineComponent({
   name: 'ArtistList',
   data() {
     return { 
-      artistList: [] as PropType<Array<Artist>>
+      artistList: []
     }
   },
   async created(): Promise<void> {

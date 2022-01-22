@@ -10,13 +10,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Player from '../../Lib/Player';
-import Album from '../../../model/Album';
+import AlbumInterface from '../../../model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumCover',
   props: {
     album: {
-      type: Album,
+      type: Object as () => AlbumInterface,
       required: true
     },
     size: {
@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
   methods: {
-    async play(album: Album): Promise<void> {
+    async play(album: AlbumInterface): Promise<void> {
       Player.playAlbum(album.getId(), this);
     }
   }

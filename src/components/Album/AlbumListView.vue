@@ -11,18 +11,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer'
 import Album from '../../model/Album'
 import AlbumListItem from './Lib/AlbumListItem.vue'
 import HttpRequest from '../Lib/HttpRequest'
 import formatDurationLength from '../Lib/FormatDurationLength'
+import AlbumInterface from '../../model/AlbumInterface'
 
 export default defineComponent({
   name: 'AlbumList',
   data() {
     return { 
-      albumList: [] as PropType<Array<Album>>,
+      albumList: [] as Array<AlbumInterface>,
       quantity: 0,
     }
   },
