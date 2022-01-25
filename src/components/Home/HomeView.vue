@@ -37,7 +37,7 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { plainToClass } from 'class-transformer'
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'

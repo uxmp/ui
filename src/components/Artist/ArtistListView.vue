@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import HttpRequest from '../Lib/HttpRequest';
 import Artist from '../../model/Artist';
