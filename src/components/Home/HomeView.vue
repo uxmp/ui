@@ -23,8 +23,8 @@
               <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="playSong(song)" title="Play" />
             </td>
             <td>{{ song.getName() }}</td>
-            <td>{{ song.getAlbumName() }}</td>
-            <td>{{ song.getArtistName() }}</td>
+            <td><router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link></td>
+            <td><router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link></td>
             <td>{{ song.getUserName() }}</td>
           </tr>
         </tbody>
