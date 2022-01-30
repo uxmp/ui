@@ -8,37 +8,42 @@
   <div>
     Length: {{ formatLength(length) }}
   </div>
-  <div class="songTable">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Artist</th>
-          <th>Length</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="song in songList" :key="song.getId()">
-          <td>
-            <SongCover size="60" :song="song" />
-          </td>
-          <td>
-            <div class="songName">
-              {{ song.getName() }}
-            </div>
-            <div class="albumeName">
-              from <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
-            </div>
-          </td>
-          <td>
-            <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
-          </td>
-          <td>{{ formatLength(song.getLength()) }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <template v-if="songList !== null">
+    <div class="songTable">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Artist</th>
+            <th>Length</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="song in songList" :key="song.getId()">
+            <td>
+              <SongCover size="60" :song="song" />
+            </td>
+            <td>
+              <div class="songName">
+                {{ song.getName() }}
+              </div>
+              <div class="albumeName">
+                from <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
+              </div>
+            </td>
+            <td>
+              <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+            </td>
+            <td>{{ formatLength(song.getLength()) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  <template v-else>
+    <LoadingIcon />
+  </template>
 </template>
 
 <script lang="ts">
@@ -52,18 +57,20 @@ import formatDurationLength from '../Lib/FormatDurationLength';
 import HttpRequest from '../Lib/HttpRequest';
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
+import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   data() {
     return {
-      songList: [] as Array<SongListItemInterface>,
+      songList: null as Array<SongListItemInterface>|null,
       limit: 100,
       length: 0
     };
   },
   name: 'RandomSongs',
   components: {
-    SongCover
+    SongCover,
+    LoadingIcon
   },
   beforeMount(): void {
     this.limit = +useRoute().params.limit;
@@ -88,10 +95,7 @@ export default defineComponent({
           return plainToClass(SongListItem, song_data);
         });
 
-        let length = 0;
-        this.songList.map((song: SongListItemInterface) => length += song.getLength());
-
-        this.length = length;
+        this.length = this.songList.reduce((length: number, song: SongListItemInterface) => length + song.getLength(), 0);
       });
     },
     async playAll(): Promise<void> {
