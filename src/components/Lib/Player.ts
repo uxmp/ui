@@ -11,7 +11,6 @@ import ArtistInterface from '../../model/ArtistInterface';
 export default class Player {
 
   static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
-    console.log(songList)
     amplitudejs.stop();
 
     amplitudejs.init({
