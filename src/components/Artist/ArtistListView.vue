@@ -42,7 +42,7 @@ export default defineComponent({
   },
   async created(): Promise<void> {
     HttpRequest.get('artists').then((response: AxiosResponse) => {
-      this.artistList = response.data.items.map((artist_data: any) => {
+      this.artistList = response.data.items.map((artist_data: any): ArtistInterface => {
         return plainToClass(Artist, artist_data);
       });
     });

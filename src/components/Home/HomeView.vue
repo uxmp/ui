@@ -65,7 +65,7 @@ export default defineComponent({
   methods: {
     async getNewestAlbums(): Promise<void> {
       HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
-        this.recentAlbums = response.data.items.map((albumData: Object): Album => {
+        this.recentAlbums = response.data.items.map((albumData: Object): AlbumInterface => {
           return plainToClass(Album, albumData);
         });
       });

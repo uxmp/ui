@@ -2,7 +2,8 @@ import { Type } from "class-transformer";
 import SongListItem from "./SongListItem";
 import 'reflect-metadata';
 import SongListItemInterface from "./SongListItemInterface";
-export default class Disc {
+import DiscInterface from "./DiscInterface";
+export default class Disc implements DiscInterface {
   private id: number = 0;
 
   @Type(() => SongListItem)

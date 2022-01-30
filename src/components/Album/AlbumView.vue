@@ -69,13 +69,14 @@ import { AxiosResponse } from 'axios';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface';
+import DiscInterface from '../../model/DiscInterface';
 
 export default defineComponent({
   name: 'AlbumView',
   data() {
     return { 
       album: null as null|AlbumInterface,
-      albumDiscs: null as null|Array<Disc>
+      albumDiscs: null as null|Array<DiscInterface>
     }
   },
   components: {
@@ -90,7 +91,7 @@ export default defineComponent({
     HttpRequest.get(
       'album/' + this.$route.params.albumId + '/songs'
     ).then((response: AxiosResponse) => {
-      this.albumDiscs = response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw));
+      this.albumDiscs = response.data.items.map((disc_raw: Object): DiscInterface => plainToClass(Disc, disc_raw));
     });
   },
   methods: {

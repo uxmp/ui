@@ -44,12 +44,13 @@ import Album from '../../model/Album';
 import HttpRequest from '../Lib/HttpRequest';
 import { AxiosResponse } from 'axios';
 import AlbumInterface from '../../model/AlbumInterface';
+import ArtistInterface from '../../model/ArtistInterface';
 
 export default defineComponent({
   name: 'ArtistView',
   data() {
     return { 
-      artist: null as null|Artist,
+      artist: null as null|ArtistInterface,
       albumList: null as null|Array<AlbumInterface>
     }
   },
@@ -64,13 +65,13 @@ export default defineComponent({
   },
   methods: {
     getArtist(): void {
-      EntityLoader.loadArtist(this.$route.params.artistId).then((artist: Artist) => this.artist = artist);
+      EntityLoader.loadArtist(this.$route.params.artistId).then((artist: Artist): ArtistInterface => this.artist = artist);
     },
     async getAlbums(): Promise<void> {
       HttpRequest.get(
         'albums/' + this.$route.params.artistId
       ).then((response: AxiosResponse) => {
-        this.albumList = response.data.items.map((album_data: any): Album => {
+        this.albumList = response.data.items.map((album_data: any): AlbumInterface => {
           return plainToClass(Album, album_data);
         });
       });
