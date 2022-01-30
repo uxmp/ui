@@ -123,14 +123,14 @@ body {
 
 div.maingrid {
   display: grid;
-  grid-template-columns: 10% 15% auto 40%;
+  grid-template-columns: minmax(150px, 12%) 15% auto 40%;
   grid-template-rows: auto 10px minmax(150px, 15%);
   height: 100%;
 }
 
 div.maingrid-noplayer {
   display: grid;
-  grid-template-columns: 10% 15% auto 40%;
+  grid-template-columns: minmax(150px, 12%) 15% auto 40%;
   grid-template-rows: auto;
   height: 100%;
 }

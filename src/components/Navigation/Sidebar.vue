@@ -18,7 +18,7 @@
       </span>
     </li>
     <li>
-      <router-link to="/random/favorite/50">Random starred</router-link>
+      <router-link to="/random/favorite/50">Random favorites</router-link>
       <br />
       <span class="random_select">
         <router-link to="/random/favorite/50">50</router-link> /
@@ -34,7 +34,7 @@
       <router-link to="/albums">List</router-link>
     </li>
     <li>
-      <router-link to="/albums/favorite">Stars</router-link>
+      <router-link to="/albums/favorite">Favorites</router-link>
     </li>
   </ul>
 

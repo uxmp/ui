@@ -10,7 +10,7 @@
       v-on:click="playFromPlaylist(index)"
     >
       {{ songListItem.getTracknumber() }}
-        {{ songListItem.getName() }}
+      {{ songListItem.getName() }}
       {{ songListItem.getArtistName() }}
     </section>
   </div>
