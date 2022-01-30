@@ -1,18 +1,23 @@
 <template>
   <h1>Artists</h1>
-  <div class="artist" v-for="artist in artistList" :key="artist.getId()">
-    <div class="artist_inner">
-      <div class="cover_container">
-        <img class="cover_play" v-on:click="play(artist)" v-bind:src="artist.getCover()" />
-        <div class="cover_overlay" v-on:click="play(artist)">
-          <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M20 33l12-9-12-9v18zm4-29C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.82 0-16-7.18-16-16S15.18 8 24 8s16 7.18 16 16-7.18 16-16 16z" class="overlay_play_button"  /></svg>
+  <template v-if="artistList !== null">
+    <div class="artist" v-for="artist in artistList" :key="artist.getId()">
+      <div class="artist_inner">
+        <div class="cover_container">
+          <img class="cover_play" v-on:click="play(artist)" v-bind:src="artist.getCover()" />
+          <div class="cover_overlay" v-on:click="play(artist)">
+            <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M20 33l12-9-12-9v18zm4-29C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.82 0-16-7.18-16-16S15.18 8 24 8s16 7.18 16 16-7.18 16-16 16z" class="overlay_play_button"  /></svg>
+          </div>
+        </div>
+        <div class="artist_name">
+          <router-link :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link>
         </div>
       </div>
-      <div class="artist_name">
-        <router-link :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link>
-      </div>
     </div>
-  </div>
+  </template>
+  <template v-else>
+    <LoadingIcon />
+  </template>
 </template>
 
 <script lang="ts">
@@ -23,13 +28,17 @@ import Artist from '../../model/Artist';
 import ArtistInterface from '../../model/ArtistInterface';
 import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
+import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   name: 'ArtistList',
   data() {
     return { 
-      artistList: [] as Array<ArtistInterface>
+      artistList: null as null|Array<ArtistInterface>
     }
+  },
+  components: {
+    LoadingIcon
   },
   async created(): Promise<void> {
     HttpRequest.get('artists').then((response: AxiosResponse) => {

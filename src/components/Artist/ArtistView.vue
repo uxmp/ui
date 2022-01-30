@@ -2,8 +2,8 @@
   <template v-if="artist !== null">
     <h1>Artist &bdquo;{{ artist.getName() }}&rdquo;</h1>
   </template>
-  <template v-if="albumList !== []">
-    <h2>Albums</h2>
+  <h2>Albums</h2>
+  <template v-if="albumList !== null">
     <table>
       <thead>
         <tr>
@@ -50,7 +50,7 @@ export default defineComponent({
   data() {
     return { 
       artist: null as null|Artist,
-      albumList: [] as Array<AlbumInterface>
+      albumList: null as null|Array<AlbumInterface>
     }
   },
   emits: ['updatePlaylist', 'updateNowPlaying'],

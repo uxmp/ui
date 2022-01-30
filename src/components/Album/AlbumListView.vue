@@ -1,13 +1,16 @@
 <template>
   <h1>Albums</h1>
-  <template v-if="albumList !== []">
+  <template v-if="albumList !== null">
     <div class="albumInfo">
     Count: {{ quantity }}
     </div>
+    <div class="albumList">
+      <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" />
+    </div>
   </template>
-  <div class="albumList">
-    <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" />
-  </div>
+  <template v-else>
+    <LoadingIcon />
+  </template>
 </template>
 
 <script lang="ts">
@@ -18,17 +21,19 @@ import AlbumListItem from './Lib/AlbumListItem.vue'
 import HttpRequest from '../Lib/HttpRequest'
 import formatDurationLength from '../Lib/FormatDurationLength'
 import AlbumInterface from '../../model/AlbumInterface'
+import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   name: 'AlbumList',
   data() {
     return { 
-      albumList: [] as Array<AlbumInterface>,
+      albumList: null as null|Array<AlbumInterface>,
       quantity: 0,
     }
   },
   components: {
     AlbumListItem,
+    LoadingIcon
   },
   beforeMount(): void {
     this.getAlbums();
@@ -37,7 +42,7 @@ export default defineComponent({
     async getAlbums(): Promise<void> {
       HttpRequest.get(`albums`).then(res => {
         this.quantity = res.data.items.length;
-        this.albumList = res.data.items.map((album_data: any): Album => {
+        this.albumList = res.data.items.map((album_data: any): AlbumInterface => {
           return plainToClass(Album, album_data);
         });
       });
