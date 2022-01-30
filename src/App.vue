@@ -38,7 +38,7 @@ export default defineComponent({
   data() {
     return {
       playlist: [] as SongListItemInterface[],
-      nowPlaying: null,
+      nowPlaying: null as null|NowPlaying,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
     };
@@ -55,7 +55,10 @@ export default defineComponent({
     this.emitter.on(
       "updatePlaylist",
       (songList: Array<SongListItemInterface>) => {
-        document.getElementById('maingrid').className = 'maingrid';
+        let element = document.getElementById('maingrid');
+        if (element !== null) {
+          element.className = 'maingrid';
+        }
         this.playlist = songList;
       }
     );
@@ -70,7 +73,10 @@ export default defineComponent({
   },
   methods: {
     hidePlayer(): void {
-      document.getElementById('maingrid').className = 'maingrid-noplayer';
+      let element = document.getElementById('maingrid');
+      if (element !== null) {
+        element.className = 'maingrid-noplayer';
+      }
       this.playlist = [];
       this.nowPlaying = null;
     },

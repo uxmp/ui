@@ -37,20 +37,21 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios'
 import { plainToClass } from 'class-transformer'
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
 import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
+import AlbumInterface from '../../model/AlbumInterface'
 
 export default defineComponent({
   name: 'HomeView',
   data() {
     return { 
-      recentAlbums: [],
-      playbackHistory: [],
+      recentAlbums: [] as Array<AlbumInterface>,
+      playbackHistory: [] as Array<PlaybackHistoryItemInterface>,
     }
   },
   components: {

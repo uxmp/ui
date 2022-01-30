@@ -68,13 +68,14 @@ import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
+import AlbumInterface from '../../model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumView',
   data() {
     return { 
-      album: null,
-      albumDiscs: null
+      album: null as null|AlbumInterface,
+      albumDiscs: null as null|Array<Disc>
     }
   },
   components: {
@@ -96,7 +97,7 @@ export default defineComponent({
     formatLength(length: number): string {
       return formatDurationLength(length);
     },
-    async playAlbum(album: Album): Promise<void> {
+    async playAlbum(album: AlbumInterface): Promise<void> {
       Player.playAlbum(album.getId(), this);
     }
   }

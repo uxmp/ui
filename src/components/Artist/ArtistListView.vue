@@ -20,6 +20,7 @@ import { defineComponent } from 'vue'
 import { plainToClass } from 'class-transformer';
 import HttpRequest from '../Lib/HttpRequest';
 import Artist from '../../model/Artist';
+import ArtistInterface from '../../model/ArtistInterface';
 import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
 
@@ -27,7 +28,7 @@ export default defineComponent({
   name: 'ArtistList',
   data() {
     return { 
-      artistList: []
+      artistList: [] as Array<ArtistInterface>
     }
   },
   async created(): Promise<void> {
@@ -38,7 +39,7 @@ export default defineComponent({
     });
   },
   methods: {
-    async play(artist: Artist): Promise<void> {
+    async play(artist: ArtistInterface): Promise<void> {
       Player.playArtist(artist, this);
     }
   }

@@ -9,4 +9,6 @@ export default interface AlbumInterface {
   getCover(): string;
 
   getArtistName(): string;
+
+  getLength(): number;
 }

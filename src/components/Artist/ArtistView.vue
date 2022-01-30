@@ -43,13 +43,14 @@ import AlbumCover from '../Album/Lib/AlbumCover.vue';
 import Album from '../../model/Album';
 import HttpRequest from '../Lib/HttpRequest';
 import { AxiosResponse } from 'axios';
+import AlbumInterface from '../../model/AlbumInterface';
 
 export default defineComponent({
   name: 'ArtistView',
   data() {
     return { 
-      artist: null,
-      albumList: []
+      artist: null as null|Artist,
+      albumList: [] as Array<AlbumInterface>
     }
   },
   emits: ['updatePlaylist', 'updateNowPlaying'],

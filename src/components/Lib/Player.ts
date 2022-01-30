@@ -2,11 +2,11 @@ import * as amplitudejs from 'amplitudejs'
 import { DefineComponent } from 'vue';
 import Disc from '../../model/Disc';
 import SongListItem from '../../model/SongListItem';
-import Artist from '../../model/Artist';
 import { plainToClass } from 'class-transformer';
 import SongListItemInterface from '../../model/SongListItemInterface';
 import HttpRequest from './HttpRequest';
 import { AxiosResponse } from 'axios';
+import ArtistInterface from '../../model/ArtistInterface';
 
 export default class Player {
 
@@ -39,7 +39,7 @@ export default class Player {
   }
 
   static scrollPlaylist(index: number): void {
-    document.getElementById('playlist-item-' + index).scrollIntoView({
+    document.getElementById('playlist-item-' + index)?.scrollIntoView({
       behavior: 'smooth'
     });
   }
@@ -64,7 +64,7 @@ export default class Player {
     });
   }
 
-  static playArtist(artist: Artist, app: DefineComponent): void {
+  static playArtist(artist: ArtistInterface, app: DefineComponent): void {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {

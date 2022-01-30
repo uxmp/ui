@@ -81,6 +81,9 @@ export default defineComponent({
   watch: {
     limit: function () {
       this.getSongs(this.limit);
+    },
+    songList: function (songList) {
+      this.length = songList.reduce((length: number, song: SongListItemInterface) => length + song.getLength(), 0);
     }
   },
   methods: {
@@ -94,21 +97,17 @@ export default defineComponent({
         this.songList = response.data.items.map((song_data: any): SongListItemInterface => {
           return plainToClass(SongListItem, song_data);
         });
-
-        this.length = this.songList.reduce((length: number, song: SongListItemInterface) => length + song.getLength(), 0);
       });
     },
     async playAll(): Promise<void> {
-      const list: Object[] = [];
+      if (this.songList) {
+        let songList = this.songList.map((song: SongListItemInterface) => Player.createSongListItem(song));
 
-      for (var song of this.songList) {
-        list.push(Player.createSongListItem(song));
+        this.emitter.emit('updatePlaylist', this.songList);
+
+        Player.init(this, songList);
+        Player.playIndex(0);
       }
-
-      this.emitter.emit('updatePlaylist', this.songList);
-
-      Player.init(this, list);
-      Player.playIndex(0);
     }
   }
 })

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import store from '../Store/Store'
 import Router from './Router'
 
@@ -12,10 +12,10 @@ const HttpRequest = axios.create({
 });
 
 HttpRequest.interceptors.request.use(
-  (config) => {
+  (config: AxiosRequestConfig) => {
     let token = store.getters['authStorage/getToken'];
 
-    if (token) {
+    if (token && config.headers) {
       config.headers['Authorization'] = `Bearer ${ token }`;
     }
 
