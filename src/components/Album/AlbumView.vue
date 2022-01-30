@@ -28,7 +28,7 @@
               <tbody>
                 <tr v-for="song in disc.getSongList()" :key="song.getId()">
                   <td>
-                    <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" title="Play" />
+                    <PlaySongButton :song="song" />
                   </td>
                   <td>{{ song.getTracknumber() }}</td>
                   <td>{{ song.getName() }}</td>
@@ -64,10 +64,10 @@ import AlbumCover from './Lib/AlbumCover.vue';
 import { plainToClass } from 'class-transformer';
 import Disc from '../../model/Disc';
 import HttpRequest from '../Lib/HttpRequest';
-import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
+import PlaySongButton from '../Lib/PlaySongButton.vue'
 
 export default defineComponent({
   name: 'AlbumView',
@@ -81,6 +81,7 @@ export default defineComponent({
     AlbumCover,
     LoadingIcon,
     FavoriteStarView,
+    PlaySongButton
   },
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
@@ -94,9 +95,6 @@ export default defineComponent({
   methods: {
     formatLength(length: number): string {
       return formatDurationLength(length);
-    },
-    async play(song: SongListItemInterface): Promise<void> {
-      Player.playSong(song, this);
     },
     async playAlbum(album: Album): Promise<void> {
       Player.playAlbum(album.getId(), this);
@@ -157,14 +155,6 @@ tbody tr:nth-of-type(even) {
 
 table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
-}
-
-.playButton {
-  cursor: pointer;
-}
-
-.playButton:hover {
-  color: rgb(85, 57, 5);
 }
 
 div.playAlbum {

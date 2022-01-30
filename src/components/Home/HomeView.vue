@@ -20,7 +20,7 @@
         <tbody>
           <tr v-for="song in playbackHistory" :key="song.getId()">
             <td>
-              <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="playSong(song)" title="Play" />
+              <PlaySongButton :song="song" />
             </td>
             <td>{{ song.getName() }}</td>
             <td><router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link></td>
@@ -43,7 +43,7 @@ import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
 import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
-import Player from '../Lib/Player'
+import PlaySongButton from '../Lib/PlaySongButton.vue'
 
 export default defineComponent({
   name: 'HomeView',
@@ -55,6 +55,7 @@ export default defineComponent({
   },
   components: {
     AlbumListItem,
+    PlaySongButton
   },
   beforeMount(): void {
     this.getNewestAlbums();
@@ -74,9 +75,6 @@ export default defineComponent({
           return plainToClass(PlaybackHistoryItem, historyData);
         })
       })
-    },
-    async playSong(song: PlaybackHistoryItemInterface): Promise<void> {
-      Player.playSong(song, this);
     },
   }
 })
