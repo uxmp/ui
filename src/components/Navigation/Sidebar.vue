@@ -17,6 +17,15 @@
         <router-link to="/random/songs/500">500</router-link>
       </span>
     </li>
+    <li>
+      <router-link to="/random/favorite/50">Random starred</router-link>
+      <br />
+      <span class="random_select">
+        <router-link to="/random/favorite/50">50</router-link> /
+        <router-link to="/random/favorite/250">250</router-link> /
+        <router-link to="/random/favorite/500">500</router-link>
+      </span>
+    </li>
   </ul>
 
   <h3>Albums</h3>

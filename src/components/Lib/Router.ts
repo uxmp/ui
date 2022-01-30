@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import ArtistList from "../Artist/ArtistListView.vue";
 import AlbumList from "../Album/AlbumListView.vue";
 import RandomSongs from "../Random/RandomSongsView.vue"
+import RandomFavoriteSongs from "../Random/RandomFavoriteSongsView.vue"
 import Login from "../Home/LoginView.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import AlbumFavoriteView from "../Album/AlbumFavoriteView.vue"
@@ -44,6 +45,11 @@ const routes = [
     path: "/random/songs/:limit?",
     name: "Random songs",
     component: RandomSongs
+  },
+  {
+    path: "/random/favorite/:limit?",
+    name: "Random starred songs",
+    component: RandomFavoriteSongs
   },
   {
     path: "/login",
