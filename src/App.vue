@@ -124,7 +124,7 @@ body {
 div.maingrid {
   display: grid;
   grid-template-columns: minmax(150px, 12%) 15% auto 40%;
-  grid-template-rows: auto 10px minmax(150px, 15%);
+  grid-template-rows: auto 10px minmax(170px, 15%);
   height: 100%;
 }
 

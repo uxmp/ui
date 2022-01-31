@@ -49,6 +49,7 @@ export default defineComponent({
 <style scoped>
 div.cover {
   grid-row: 1 / span 2;
+  height: 150px;
 }
 
 div.title {
