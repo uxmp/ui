@@ -7,6 +7,7 @@ import SongListItemInterface from '../../model/SongListItemInterface';
 import HttpRequest from './HttpRequest';
 import { AxiosResponse } from 'axios';
 import ArtistInterface from '../../model/ArtistInterface';
+import RadioStationInterface from '../../model/RadioStationInterface';
 
 export default class Player {
 
@@ -71,6 +72,14 @@ export default class Player {
 
       app.emitter.emit('updatePlaylist', playList);
     });
+  }
+
+  static playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
+    let song = new SongListItem();
+    song.setName(station.getName());
+    song.setPlayUrl(station.getUrl());
+
+    app.emitter.emit('updatePlaylist', [song]);
   }
 
   static playSong(song: SongListItemInterface, app :DefineComponent): void {

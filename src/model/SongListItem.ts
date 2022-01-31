@@ -19,12 +19,20 @@ export default class SongListItem implements SongListItemInterface {
     return this.name;
   }
 
+  setName(name: string) {
+    this.name = name;
+  }
+
   getTracknumber(): number {
     return this.trackNumber;
   }
 
   getPlayUrl(): string {
     return this.playUrl;
+  }
+
+  setPlayUrl(url: string) {
+    this.playUrl = url;
   }
 
   getArtistName(): string {

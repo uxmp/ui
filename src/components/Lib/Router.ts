@@ -9,6 +9,8 @@ import AlbumFavoriteView from "../Album/AlbumFavoriteView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
 import HomeView from "../Home/HomeView.vue"
 import Store from "../Store/Store";
+import RadioStationList from "../RadioStation/RadioStationList.vue"
+import RadioStationCreation from "../RadioStation/RadioStationCreation.vue"
 
 const routes = [
   {
@@ -50,6 +52,16 @@ const routes = [
     path: "/random/favorite/:limit?",
     name: "Random starred songs",
     component: RandomFavoriteSongs
+  },
+  {
+    path: "/radiostations",
+    name: "Radio stations",
+    component: RadioStationList
+  },
+  {
+    path: "/radiostations/create",
+    name: "Create radio station",
+    component: RadioStationCreation
   },
   {
     path: "/login",

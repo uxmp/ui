@@ -45,6 +45,13 @@
     </li>
   </ul>
 
+  <h3>Radiostations</h3>
+  <ul>
+    <li>
+      <router-link to="/radiostations">List</router-link>
+    </li>
+  </ul>
+
   <h3>User</h3>
   <ul>
     <li><a v-on:click="logout()">Logout</a></li>
