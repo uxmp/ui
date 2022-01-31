@@ -16,6 +16,7 @@
             <th>Name</th>
             <th>Artist</th>
             <th>Length</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,9 @@
               <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
             </td>
             <td>{{ formatLength(song.getLength()) }}</td>
+            <td>
+              <FavoriteStarView :itemId="song.getId()" itemType="song" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -52,6 +56,7 @@ import formatDurationLength from '../Lib/FormatDurationLength';
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
+import FavoriteStarView from './FavoriteStarView.vue'
 
 export default defineComponent({
   props: {
@@ -68,7 +73,8 @@ export default defineComponent({
   name: 'SongListView',
   components: {
     SongCover,
-    LoadingIcon
+    LoadingIcon,
+    FavoriteStarView,
   },
   watch: {
     songList: function (songList) {

@@ -23,6 +23,7 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Length</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -33,6 +34,9 @@
                   <td>{{ song.getTracknumber() }}</td>
                   <td>{{ song.getName() }}</td>
                   <td>{{ formatLength(song.getLength()) }}</td>
+                  <td>
+                    <FavoriteStarView :itemId="song.getId()" itemType="song" />
+                  </td>
                 </tr>
               </tbody>
             </table>
