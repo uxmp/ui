@@ -10,6 +10,7 @@
           <th></th>
           <th>Name</th>
           <th>Length</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +23,9 @@
           </td>
           <td>
             {{ formatLength(album.getLength()) }}
+          </td>
+          <td>
+            <FavoriteStarView :itemId="album.getId()" itemType="album" />
           </td>
         </tr>
       </tbody>
@@ -45,6 +49,7 @@ import HttpRequest from '../Lib/HttpRequest';
 import { AxiosResponse } from 'axios';
 import AlbumInterface from '../../model/AlbumInterface';
 import ArtistInterface from '../../model/ArtistInterface';
+import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 
 export default defineComponent({
   name: 'ArtistView',
@@ -57,7 +62,8 @@ export default defineComponent({
   emits: ['updatePlaylist', 'updateNowPlaying'],
   components: {
     AlbumCover,
-    LoadingIcon
+    LoadingIcon,
+    FavoriteStarView
   },
   beforeMount(): void {
     this.getArtist();
