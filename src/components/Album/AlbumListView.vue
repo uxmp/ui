@@ -19,7 +19,6 @@ import { plainToClass } from 'class-transformer'
 import Album from '../../model/Album'
 import AlbumListItem from './Lib/AlbumListItem.vue'
 import HttpRequest from '../Lib/HttpRequest'
-import formatDurationLength from '../Lib/FormatDurationLength'
 import AlbumInterface from '../../model/AlbumInterface'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 
@@ -47,9 +46,6 @@ export default defineComponent({
         });
       });
     },
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    }
   }
 })
 </script>

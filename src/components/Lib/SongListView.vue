@@ -5,7 +5,7 @@
     </span>
   </div>
   <div>
-    Length: {{ formatLength(length) }}
+    Length: <FormatLength :length="length" />
   </div>
   <template v-if="songList !== null">
     <div class="songTable">
@@ -35,7 +35,9 @@
             <td>
               <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
             </td>
-            <td>{{ formatLength(song.getLength()) }}</td>
+            <td>
+              <FormatLength :length="song.getLength()" />
+              </td>
             <td>
               <FavoriteStarView :itemId="song.getId()" itemType="song" />
             </td>
@@ -52,11 +54,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
-import formatDurationLength from '../Lib/FormatDurationLength';
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 import FavoriteStarView from './FavoriteStarView.vue'
+import FormatLength from '../Lib/FormatLength.vue'
 
 export default defineComponent({
   props: {
@@ -75,6 +77,7 @@ export default defineComponent({
     SongCover,
     LoadingIcon,
     FavoriteStarView,
+    FormatLength,
   },
   watch: {
     songList: function (songList) {
@@ -82,9 +85,6 @@ export default defineComponent({
     }
   },
   methods: {
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    },
     async playAll(): Promise<void> {
       if (this.songList) {
         let songList = this.songList.map((song: SongListItemInterface) => Player.createSongListItem(song));

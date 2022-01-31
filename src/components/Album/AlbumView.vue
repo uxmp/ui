@@ -12,7 +12,7 @@
           </span>
         </div>
         <div>
-          Total length: {{ formatLength(album.getLength()) }}
+          Total length: <FormatLength :length="album.getLength()" />
         </div>
         <template v-if="albumDiscs !== null">
           <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
@@ -33,7 +33,9 @@
                   </td>
                   <td>{{ song.getTracknumber() }}</td>
                   <td>{{ song.getName() }}</td>
-                  <td>{{ formatLength(song.getLength()) }}</td>
+                  <td>
+                    <FormatLength :length="song.getLength()" />
+                  </td>
                   <td>
                     <FavoriteStarView :itemId="song.getId()" itemType="song" />
                   </td>
@@ -61,7 +63,6 @@
 import { defineComponent } from 'vue'
 import 'reflect-metadata';
 import Album from '../../model/Album';
-import formatDurationLength from '../Lib/FormatDurationLength';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
 import AlbumCover from './Lib/AlbumCover.vue';
@@ -74,6 +75,7 @@ import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface';
 import DiscInterface from '../../model/DiscInterface';
+import FormatLength from '../Lib/FormatLength.vue'
 
 export default defineComponent({
   name: 'AlbumView',
@@ -87,7 +89,8 @@ export default defineComponent({
     AlbumCover,
     LoadingIcon,
     FavoriteStarView,
-    PlaySongButton
+    PlaySongButton,
+    FormatLength
   },
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
@@ -99,9 +102,6 @@ export default defineComponent({
     });
   },
   methods: {
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    },
     async playAlbum(album: AlbumInterface): Promise<void> {
       Player.playAlbum(album.getId(), this);
     }

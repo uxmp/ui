@@ -16,7 +16,9 @@
   <div class="state" v-if="nowPlaying !== null">
     <input type="range" class="amplitude-song-slider" step=".1"/>
     <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
-    <span class="amplitude-duration">{{ formatLength(nowPlaying.length) }}</span>
+    <span class="amplitude-duration">
+      <FormatLength :length="nowPlaying.length" />
+    </span>
     <FavoriteStarView :itemId="nowPlaying.songId" itemType="song" />
   </div>
 </template>
@@ -24,8 +26,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import NowPlaying from '../../model/NowPlaying'
-import formatDurationLength from './FormatDurationLength';
 import FavoriteStarView from './FavoriteStarView.vue'
+import FormatLength from '../Lib/FormatLength.vue'
 
 export default defineComponent({
   name: 'NowPlayingView',
@@ -36,13 +38,9 @@ export default defineComponent({
     }
   },
   components: {
-    FavoriteStarView
+    FavoriteStarView,
+    FormatLength,
   },
-  methods: {
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    },
-  }
 })
 </script>
 

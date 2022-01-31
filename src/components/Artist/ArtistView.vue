@@ -22,7 +22,7 @@
             <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
           </td>
           <td>
-            {{ formatLength(album.getLength()) }}
+            <FormatLength :length="album.getLength()" />
           </td>
           <td>
             <FavoriteStarView :itemId="album.getId()" itemType="album" />
@@ -42,7 +42,6 @@ import { defineComponent } from 'vue'
 import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
-import formatDurationLength from '../Lib/FormatDurationLength';
 import AlbumCover from '../Album/Lib/AlbumCover.vue';
 import Album from '../../model/Album';
 import HttpRequest from '../Lib/HttpRequest';
@@ -50,6 +49,7 @@ import { AxiosResponse } from 'axios';
 import AlbumInterface from '../../model/AlbumInterface';
 import ArtistInterface from '../../model/ArtistInterface';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
+import FormatLength from '../Lib/FormatLength.vue'
 
 export default defineComponent({
   name: 'ArtistView',
@@ -63,7 +63,8 @@ export default defineComponent({
   components: {
     AlbumCover,
     LoadingIcon,
-    FavoriteStarView
+    FavoriteStarView,
+    FormatLength
   },
   beforeMount(): void {
     this.getArtist();
@@ -83,9 +84,6 @@ export default defineComponent({
       });
 
     },
-    formatLength(length: number): string {
-      return formatDurationLength(length);
-    }
   }
 })
 </script>
