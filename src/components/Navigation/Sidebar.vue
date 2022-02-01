@@ -45,7 +45,7 @@
     </li>
   </ul>
 
-  <h3>Radiostations</h3>
+  <h3>Radio stations</h3>
   <ul>
     <li>
       <router-link to="/radiostations">List</router-link>
