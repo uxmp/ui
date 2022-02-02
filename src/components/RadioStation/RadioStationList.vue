@@ -26,6 +26,9 @@
               {{ station.getUrl() }}
             </td>
             <td>
+              <router-link :to="'/radiostation/edit/' + station.getId()">
+                <font-awesome-icon class="editButton button" :icon="['fas', 'tools']" title="Edit station" />
+              </router-link>
               <font-awesome-icon class="deleteButton button" :icon="['fas', 'minus-circle']" v-on:click="deleteStation(station)" title="Delete station" />
             </td>
           </tr>
@@ -91,5 +94,14 @@ div.create {
 
 .deleteButton:hover {
   color: rgb(107, 0, 0);
+}
+
+.editButton {
+  margin-right: 20px;
+  color: #ffffff;
+}
+
+.editButton:hover {
+  color: rgb(85, 57, 5);
 }
 </style>

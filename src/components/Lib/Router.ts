@@ -11,6 +11,7 @@ import HomeView from "../Home/HomeView.vue"
 import Store from "../Store/Store";
 import RadioStationList from "../RadioStation/RadioStationList.vue"
 import RadioStationCreation from "../RadioStation/RadioStationCreation.vue"
+import RadioStationEdit from "../RadioStation/RadioStationEdit.vue"
 
 const routes = [
   {
@@ -62,6 +63,11 @@ const routes = [
     path: "/radiostations/create",
     name: "Create radio station",
     component: RadioStationCreation
+  },
+  {
+    path: "/radiostation/edit/:stationId?",
+    name: "RadioStationEdit",
+    component: RadioStationEdit,
   },
   {
     path: "/login",

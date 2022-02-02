@@ -12,7 +12,7 @@ export default class RadioStation implements RadioStationInterface {
   getName(): string {
     return this.name;
   }
-  
+
   setName(name: string): void {
     this.name = name;
   }

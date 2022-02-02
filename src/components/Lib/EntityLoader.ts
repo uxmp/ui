@@ -5,6 +5,8 @@ import HttpRequest from '../Lib/HttpRequest';
 import { AxiosResponse } from 'axios';
 import AlbumInterface from '../../model/AlbumInterface';
 import ArtistInterface from '../../model/ArtistInterface';
+import RadioStationInterface from '../../model/RadioStationInterface';
+import RadioStation from '../../model/RadioStation';
 
 const EntityLoader = new class EntityLoader {
 
@@ -19,6 +21,13 @@ const EntityLoader = new class EntityLoader {
     return plainToClass(
       Artist,
       await HttpRequest.get('artist/' + artistId).then((response: AxiosResponse) => response.data)
+    );
+  }
+
+  async loadRadioStation(stationId: number): Promise<RadioStationInterface> {
+    return plainToClass(
+      RadioStation,
+      await HttpRequest.get('radiostation/' + stationId).then((response: AxiosResponse) => response.data)
     );
   }
 }
