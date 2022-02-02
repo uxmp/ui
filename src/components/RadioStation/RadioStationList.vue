@@ -1,7 +1,7 @@
 <template>
   <h1>Radio stations</h1>
   <div class="create">
-    <router-link :to="'/radiostations/create'">+ Create</router-link>
+    <router-link :to="'/radiostation/edit'">+ Create</router-link>
   </div>
   <template v-if="radioStations !== null">
     <div class="songTable">
