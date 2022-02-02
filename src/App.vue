@@ -299,4 +299,8 @@ tbody tr:nth-of-type(even) {
 table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
 }
+
+.button {
+  cursor: pointer;
+}
 </style>

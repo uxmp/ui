@@ -13,6 +13,7 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { faVolumeOff } from '@fortawesome/free-solid-svg-icons'
 import { faStepForward } from '@fortawesome/free-solid-svg-icons'
 import { faStepBackward } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faPlay);
 library.add(faPause);
@@ -22,6 +23,7 @@ library.add(faStepForward);
 library.add(faStepBackward);
 library.add(faStarSol);
 library.add(faStarReg);
+library.add(faMinusCircle);
 
 const emitter = mitt();
 

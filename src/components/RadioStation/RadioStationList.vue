@@ -11,18 +11,22 @@
             <th></th>
             <th>Name</th>
             <th>Url</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="station in radioStations" :key="station.getId()">
             <td>
-              <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(station)" title="Play radio station" />
+              <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(station)" title="Play radio station" />
             </td>
             <td>
               {{ station.getName() }}
             </td>
             <td>
               {{ station.getUrl() }}
+            </td>
+            <td>
+              <font-awesome-icon class="deleteButton button" :icon="['fas', 'minus-circle']" v-on:click="deleteStation(station)" title="Delete station" />
             </td>
           </tr>
         </tbody>
@@ -67,6 +71,11 @@ export default defineComponent({
         });
       });
     },
+    async deleteStation(deleteStation: RadioStationInterface): Promise<void> {
+      HttpRequest.delete(`radiostation/` + deleteStation.getId()).then(() => {
+        this.radioStations = this.radioStations.filter(station => station.getId() !== deleteStation.getId() )
+      });
+    },
   }
 })
 </script>
@@ -76,11 +85,11 @@ div.create {
   text-align: left;
 }
 
-.playButton {
-  cursor: pointer;
-}
-
 .playButton:hover {
   color: rgb(85, 57, 5);
+}
+
+.deleteButton:hover {
+  color: rgb(107, 0, 0);
 }
 </style>
