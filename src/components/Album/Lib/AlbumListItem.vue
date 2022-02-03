@@ -1,5 +1,5 @@
 <template>
-  <div class="album">
+  <div class="album" v-on:click="showAlbum()">
     <div class="album_inner">
       <AlbumCover :album="album" />
       <div class="album_name">
@@ -27,7 +27,12 @@ export default defineComponent({
   },
   components: {
     AlbumCover
-  }
+  },
+  methods: {
+    async showAlbum(): Promise<void> {
+      this.$router.push('/album/' + this.album.getId());
+    },
+  },
 })
 </script>
 
@@ -40,6 +45,12 @@ div.album {
   padding: 8px;
   background-color: #11171d;
   border-radius: 5%;
+  border: 1px #24303d solid;
+}
+
+div.album:hover {
+  background-color: #29313a;
+  cursor: pointer;
 }
 
 div.album_inner {

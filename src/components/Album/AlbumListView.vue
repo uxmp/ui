@@ -2,7 +2,7 @@
   <h1>Albums</h1>
   <template v-if="albumList !== null">
     <div class="albumInfo">
-    Count: {{ quantity }}
+     Count: {{ quantity }}
     </div>
     <div class="albumList">
       <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" />

@@ -1,7 +1,7 @@
 <template>
   <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
-    <img class="cover_play" v-on:click.stop="play(album)" v-bind:src="album.getCover()" />
-    <div class="cover_overlay" v-on:click.stop="play(album)">
+    <img class="cover_play" v-on:click.stop="play(artist)" v-bind:src="artist.getCover()" />
+    <div class="cover_overlay" v-on:click.stop="play(artist)">
       <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']"/>
     </div>
   </div>
@@ -10,13 +10,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Player from '../../Lib/Player';
-import AlbumInterface from '../../../model/AlbumInterface';
+import ArtistInterface from '../../../model/ArtistInterface';
 
 export default defineComponent({
-  name: 'AlbumCover',
+  name: 'ArtistCover',
   props: {
-    album: {
-      type: Object as () => AlbumInterface,
+    artist: {
+      type: Object as () => ArtistInterface,
       required: true
     },
     size: {
@@ -25,8 +25,8 @@ export default defineComponent({
     }
   },
   methods: {
-    async play(album: AlbumInterface): Promise<void> {
-      Player.playAlbum(album.getId(), this);
+    async play(artist: ArtistInterface): Promise<void> {
+      Player.playArtist(artist, this);
     }
   }
 })
