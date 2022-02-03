@@ -15,6 +15,16 @@ import { faStepForward } from '@fortawesome/free-solid-svg-icons'
 import { faStepBackward } from '@fortawesome/free-solid-svg-icons'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTools } from '@fortawesome/free-solid-svg-icons'
+import enLocaleMessages from './locales/en.json'
+import { createI18n } from 'vue-i18n';
+
+const i18n = createI18n({
+  legacy: false,
+  globalInjection: true,
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages: { en: enLocaleMessages }
+})
 
 library.add(faPlay);
 library.add(faPause);
@@ -32,7 +42,9 @@ const emitter = mitt();
 let app = createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(Router)
-  .use(Store);
+  .use(Store)
+  .use(i18n)
+;
 
 app.config.globalProperties.emitter = emitter;
 
