@@ -1,5 +1,5 @@
 <template>
-  <h1>Artists</h1>
+  <h1>/ Artists</h1>
   <template v-if="artistList !== null">
     <div class="artistInfo">
      Count: {{ quantity }}

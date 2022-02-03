@@ -1,5 +1,5 @@
 <template>
-  <h1>Edit radio station</h1>
+  <h1>/ <router-link :to="'/radiostations'">Radio stations</router-link> / Edit</h1>
   <div class="creationBox">
     <div class="errorMessage">
       {{ msg }}

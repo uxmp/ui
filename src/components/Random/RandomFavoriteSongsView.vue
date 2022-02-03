@@ -1,5 +1,5 @@
 <template>
-  <h1>Random favorite songs</h1>
+  <h1>/ Random favorite songs</h1>
   <SongListView :songList="songList" />
 </template>
 

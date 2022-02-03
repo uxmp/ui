@@ -1,5 +1,5 @@
 <template>
-  <h1>Radio stations</h1>
+  <h1>/ Radio stations</h1>
   <div class="create">
     <router-link :to="'/radiostation/edit'">+ Create</router-link>
   </div>

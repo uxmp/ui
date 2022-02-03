@@ -1,6 +1,6 @@
 <template>
   <template v-if="album !== null">
-    <h1>Album &bdquo;{{ album.getName() }}&rdquo;</h1>
+    <h1>/ <router-link :to="'/albums'">Albums</router-link> / &bdquo;{{ album.getName() }}&rdquo;</h1>
     <div class="albumGrid">
       <div>
         <div class="albumArtist">

@@ -1,5 +1,5 @@
 <template>
-  <h1>Albums</h1>
+  <h1>/ Albums</h1>
   <template v-if="albumList !== null">
     <div class="albumInfo">
      Count: {{ quantity }}

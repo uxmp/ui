@@ -1,5 +1,5 @@
 <template>
-  <h1>Home</h1>
+  <h1>/ Home</h1>
   <h3>Recent albums</h3>
   <div class="list scrollbar">
     <AlbumListItem :album="album" v-for="album in recentAlbums" :key="album.getId()" />
