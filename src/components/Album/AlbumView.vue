@@ -21,8 +21,8 @@
                 <tr>
                   <th></th>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Length</th>
+                  <th>{{ $t("album.table.name_column_title") }}</th>
+                  <th>{{ $t("album.table.length_column_title") }}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -171,6 +171,10 @@ div.playAlbum {
 
 div.playAlbum span {
   cursor: pointer;
+}
+
+div.playAlbum span:hover {
+  color: rgb(85, 57, 5);
 }
 
 div.albumArtist {
