@@ -1,15 +1,15 @@
 <template>
   <template v-if="artist !== null">
-    <h1>/ <router-link :to="'/artists'">Artists</router-link> / &bdquo;{{ artist.getName() }}&rdquo;</h1>
+    <h1>/ <router-link :to="'/artists'">{{ $t("artist.artist_list_title") }}</router-link> / &bdquo;{{ artist.getName() }}&rdquo;</h1>
   </template>
-  <h2>Albums</h2>
+  <h2>{{ $t("artist.albums_title") }}</h2>
   <template v-if="albumList !== null">
     <table>
       <thead>
         <tr>
           <th></th>
-          <th>Name</th>
-          <th>Length</th>
+          <th>{{ $t("artist.table.column.name.title") }}</th>
+          <th>{{ $t("artist.table.column.length.title") }}</th>
           <th></th>
         </tr>
       </thead>

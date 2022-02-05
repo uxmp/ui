@@ -1,8 +1,8 @@
 <template>
-  <h1>/ Artists</h1>
+  <h1>/ {{ $t("artist_list.title") }}</h1>
   <template v-if="artistList !== null">
     <div class="artistInfo">
-     Count: {{ quantity }}
+      {{ $t("shared.quantity", {quantity: quantity}) }}
     </div>
     <div class="artistList">
       <ArtistListItem v-for="artist in artistList" :key="artist.getId()" :artist="artist" />

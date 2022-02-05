@@ -46,6 +46,23 @@
       "length_column_title": "Length"
     }
   },
+  "artist_list": {
+    "title": "Artists"
+  },
+  "artist": {
+    "artist_list_title": "Artists",
+    "albums_title": "Albums",
+    "table": {
+      "column": {
+        "name": {
+          "title": "Name"
+        },
+        "length": {
+          "title": "Length"
+        }
+      }
+    }
+  },
   "shared": {
     "by_artist": "by",
     "quantity": "Count: {quantity}",
