@@ -5,13 +5,14 @@
       class="isFavorite"
       :icon="['fas', 'star']"
       v-if="isFavorite"
-      title="Remove from favorites"
+      :title="$t('favorite_star_view.remove_favorite_title')"
     />
     <font-awesome-icon
       v-on:click="addFavorite()"
       class="isNotFavorite"
       :icon="['far', 'star']"
-      v-else title="Add as favorite"
+      v-else
+      :title="$t('favorite_star_view.add_favorite_title')"
     />
   </div>
 </template>

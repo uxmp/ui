@@ -1,11 +1,11 @@
 <template>
   <div v-on:click="playAll()" class="playall">
     <span>
-      <font-awesome-icon :icon="['fas', 'play']" /> Play all
+      <font-awesome-icon :icon="['fas', 'play']" /> {{ $t("song_list.play_all_title") }}
     </span>
   </div>
   <div>
-    Length: <FormatLength :length="length" />
+    {{ $t("song_list.length_title") }} <FormatLength :length="length" />
   </div>
   <template v-if="songList !== null">
     <div class="songTable">
@@ -13,9 +13,9 @@
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Artist</th>
-            <th>Length</th>
+            <th>{{ $t("song_list.table.column.name.title") }}</th>
+            <th>{{ $t("song_list.table.column.artist.title") }}</th>
+            <th>{{ $t("song_list.table.column.length.title") }}</th>
             <th></th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
                 {{ song.getName() }}
               </div>
               <div class="albumeName">
-                from <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
+                {{ $t("shared.from_album") }} <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
               </div>
             </td>
             <td>

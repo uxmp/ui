@@ -2,28 +2,28 @@
   <div class="container">
     <div class="controls">
       <div class="icon">
-        <font-awesome-icon :icon="['fas', 'volume-off']" class="volume_icon volume_low" />
+        <font-awesome-icon :icon="['fas', 'volume-off']" class="volume_icon volume_low" :title="$t('player_control.lower_volume')" />
       </div>
       <div class="volume_icon">
         <input type="range" class="amplitude-volume-slider"/>
       </div>
       <div class="icon">
-        <font-awesome-icon :icon="['fas', 'volume-up']" class="volume_icon volume_high" />
+        <font-awesome-icon :icon="['fas', 'volume-up']" class="volume_icon volume_high" :title="$t('player_control.raise_volume')" />
       </div>
     </div>
     <br />
     <div class="control-container">
       <div class="amplitude-prev control-button">
-        <font-awesome-icon :icon="['fas', 'step-backward']" />
+        <font-awesome-icon :icon="['fas', 'step-backward']" :title="$t('player_control.previous')" />
       </div>
-      <div class="control-button" v-on:click="toggleState()" v-if="playerState == true">
+      <div class="control-button" v-on:click="toggleState()" v-if="playerState == true" :title="$t('player_control.pause')">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
-      <div class="control-button control-button-paused" v-on:click="toggleState()" v-else>
+      <div class="control-button control-button-paused" v-on:click="toggleState()" v-else :title="$t('player_control.play')">
         <font-awesome-icon :icon="['fas', 'play']" />
       </div>
       <div class="amplitude-next control-button">
-        <font-awesome-icon :icon="['fas', 'step-forward']" />
+        <font-awesome-icon :icon="['fas', 'step-forward']" :title="$t('player_control.next')" />
       </div>
     </div>
   </div>

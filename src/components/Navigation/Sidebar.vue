@@ -1,15 +1,15 @@
 <template>
-  <h3>Home</h3>
+  <h3>{{ $t("home.title") }}</h3>
   <ul>
     <li>
-      <router-link to="/">Home</router-link>
+      <router-link to="/">{{ $t("home.title") }}</router-link>
     </li>
   </ul>
 
-  <h3>Songs</h3>
+  <h3>{{ $t("songs.title") }}</h3>
   <ul>
     <li>
-      <router-link to="/random/songs/50">Random</router-link>
+      <router-link to="/random/songs/50">{{ $t("songs.random") }}</router-link>
       <br />
       <span class="random_select">
         <router-link to="/random/songs/50">50</router-link> /
@@ -18,7 +18,7 @@
       </span>
     </li>
     <li>
-      <router-link to="/random/favorite/50">Random favorites</router-link>
+      <router-link to="/random/favorite/50">{{ $t("songs.random_favorites") }}</router-link>
       <br />
       <span class="random_select">
         <router-link to="/random/favorite/50">50</router-link> /
@@ -28,33 +28,33 @@
     </li>
   </ul>
 
-  <h3>Albums</h3>
+  <h3>{{ $t("album_list.title") }}</h3>
   <ul>
     <li>
-      <router-link to="/albums">List</router-link>
+      <router-link to="/albums">{{ $t("album_list.title") }}</router-link>
     </li>
     <li>
-      <router-link to="/albums/favorite">Favorites</router-link>
-    </li>
-  </ul>
-
-  <h3>Artists</h3>
-  <ul>
-    <li>
-      <router-link to="/artists">List</router-link>
+      <router-link to="/albums/favorite">{{ $t("album_list.favorites") }}</router-link>
     </li>
   </ul>
 
-  <h3>Radio stations</h3>
+  <h3>{{ $t("artist_list.title") }}</h3>
   <ul>
     <li>
-      <router-link to="/radiostations">List</router-link>
+      <router-link to="/artists">{{ $t("artist_list.title") }}</router-link>
     </li>
   </ul>
 
-  <h3>User</h3>
+  <h3>{{ $t("radio_stations.title") }}</h3>
   <ul>
-    <li><a v-on:click="logout()">Logout</a></li>
+    <li>
+      <router-link to="/radiostations">{{ $t("radio_stations.title") }}</router-link>
+    </li>
+  </ul>
+
+  <h3>{{ $t("user.title") }}</h3>
+  <ul>
+    <li><a v-on:click="logout()">{{ $t("user.logout") }}</a></li>
   </ul>
 </template>
 

@@ -7,10 +7,10 @@
       <span data-amplitude-song-info="name" class="song-name"></span>
     </div>
     <div class="album" v-if="nowPlaying !== null">
-      from <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
+      {{ $t("shared.from_album") }} <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
     </div>
     <div class="artist" v-if="nowPlaying !== null">
-      by <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
+      {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
     </div>
   </div>
   <div class="state" v-if="nowPlaying !== null">

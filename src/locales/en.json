@@ -37,7 +37,8 @@
     "title": "Favorite albums"
   },
   "album_list": {
-    "title": "Albums"
+    "title": "Albums",
+    "favorites": "Favorites"
   },
   "album": {
     "total_length_title": "Total length",
@@ -63,8 +64,59 @@
       }
     }
   },
+  "login": {
+    "title": "Login",
+    "username_placeholder": "Username",
+    "password_placeholder": "Password",
+    "login_title": "Login"
+  },
+  "favorite_star_view": {
+    "add_favorite_title": "Add as favorite",
+    "remove_favorite_title": "Remove from favorites"
+  },
+  "song_list": {
+    "play_all_title": "Play all",
+    "length_title": "Length:",
+    "table": {
+      "column": {
+        "name": {
+          "title": "Name"
+        },
+        "artist": {
+          "title": "Artist"
+        },
+        "length": {
+          "title": "Length"
+        }
+      }
+    }
+  },
+  "player_control": {
+    "raise_volume": "Raise volume",
+    "lower_volume": "Lower volume",
+    "previous": "Previous",
+    "next": "Next",
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "songs": {
+    "title": "Songs",
+    "random": "Random",
+    "random_favorites": "Random favorites"
+  },
+  "user": {
+    "title": "user",
+    "logout": "Logout"
+  },
+  "random_songs": {
+    "title": "Random songs"
+  },
+  "random_favorite_songs": {
+    "title": "Random favorite songs"
+  },
   "shared": {
     "by_artist": "by",
+    "from_album": "from",
     "quantity": "Count: {quantity}",
     "play": "Play"
   }

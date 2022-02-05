@@ -1,5 +1,5 @@
 <template>
-  <h1>/ Random favorite songs</h1>
+  <h1>/ {{ $t("random_favorite_songs.title") }}</h1>
   <SongListView :songList="songList" />
 </template>
 
