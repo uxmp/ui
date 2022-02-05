@@ -63,7 +63,7 @@ import FormatLength from '../Lib/FormatLength.vue'
 export default defineComponent({
   props: {
     songList: {
-      type: [] as PropType<Array<SongListItemInterface>>,
+      type: Array as PropType<Array<SongListItemInterface>>,
       required: true
     }
   },
