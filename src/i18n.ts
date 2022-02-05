@@ -15,7 +15,7 @@ export function setI18nLanguage(i18n, locale) {
   } else {
     i18n.global.locale.value = locale;
   }
-  document.querySelector("html").setAttribute("lang", locale);
+  document.querySelector("html")?.setAttribute("lang", locale);
 }
 
 export async function loadLocaleMessages(i18n, locale) {

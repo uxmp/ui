@@ -7,7 +7,7 @@
           by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
         </div>
         <div class="playAlbum">
-          <span v-on:click="playAlbum(album)" class="playButton">
+          <span v-on:click="playAlbum()" class="playButton">
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> Play
           </span>
         </div>
@@ -93,7 +93,7 @@ export default defineComponent({
     FormatLength
   },
   async created(): Promise<void> {
-    EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: Album) => this.album = album);
+    EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: AlbumInterface) => this.album = album);
 
     HttpRequest.get(
       'album/' + this.$route.params.albumId + '/songs'
@@ -102,8 +102,10 @@ export default defineComponent({
     });
   },
   methods: {
-    async playAlbum(album: AlbumInterface): Promise<void> {
-      Player.playAlbum(album.getId(), this);
+    async playAlbum(): Promise<void> {
+      if (this.album !== null) {
+        Player.playAlbum(this.album.getId(), this);
+      }
     }
   }
 })

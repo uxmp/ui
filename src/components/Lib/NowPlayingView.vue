@@ -33,8 +33,9 @@ export default defineComponent({
   name: 'NowPlayingView',
   props: {
     nowPlaying: {
-      type: [Object, null] as PropType<NowPlaying>,
-      required: true
+      type: null as unknown as PropType<NowPlaying | null>,
+      required: true,
+      validator: (v: any) => v instanceof NowPlaying || v === null,
     }
   },
   components: {

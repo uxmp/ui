@@ -54,7 +54,7 @@ export default defineComponent({
   name: 'RadioStationList',
   data() {
     return { 
-      radioStations: null as null|Array<RadioStationInterface>
+      radioStations: [] as Array<RadioStationInterface>
     }
   },
   components: {

@@ -72,7 +72,7 @@ export default defineComponent({
   },
   methods: {
     getArtist(): void {
-      EntityLoader.loadArtist(this.$route.params.artistId).then((artist: Artist): ArtistInterface => this.artist = artist);
+      EntityLoader.loadArtist(this.$route.params.artistId).then((artist: ArtistInterface): ArtistInterface => this.artist = artist);
     },
     async getAlbums(): Promise<void> {
       HttpRequest.get(

@@ -54,9 +54,11 @@ export default class Player {
     HttpRequest.get(
       'album/' + albumId + '/songs'
     ).then((response: AxiosResponse) => {
-      let songList = [];
+      let songList = [] as Array<SongListItemInterface>;
 
-      response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw)).map((disc: Disc) => {
+      let discs = response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw))
+
+      discs.map((disc: Disc) => {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
       });
 

@@ -63,7 +63,7 @@ import FormatLength from '../Lib/FormatLength.vue'
 export default defineComponent({
   props: {
     songList: {
-      type: [Array, null] as PropType<Array<SongListItemInterface>>,
+      type: [] as PropType<Array<SongListItemInterface>>,
       required: true
     }
   },
@@ -87,11 +87,12 @@ export default defineComponent({
   methods: {
     async playAll(): Promise<void> {
       if (this.songList) {
-        let songList = this.songList.map((song: SongListItemInterface) => Player.createSongListItem(song));
-
         this.emitter.emit('updatePlaylist', this.songList);
 
-        Player.init(this, songList);
+        Player.init(
+          this,
+          this.songList.map((song: SongListItemInterface) => Player.createSongListItem(song))
+        );
       }
     }
   }

@@ -70,16 +70,6 @@ div.cover_container:hover .cover_overlay {
   opacity: 1;
 }
 
-div.album {
-  display: inline-flex;
-  width: 300px;
-  height: 180px;
-  background-color: #0a0f14;
-  margin: 10px;
-  padding: 15px;
-  border: 1px #446683 solid;
-}
-
 .coverPlaybutton {
   font-size: 200%;
   color: rgb(141, 102, 31);

@@ -26,7 +26,9 @@ HttpRequest.interceptors.request.use(
   }
 );
 
-HttpRequest.interceptors.response.use(null, error => {
+HttpRequest.interceptors.response.use(
+  response => { return response},
+  error => {
   let path;
   switch (error.response.status) {
     case 401: path = '/login'; break;

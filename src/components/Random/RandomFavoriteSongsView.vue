@@ -16,7 +16,7 @@ import SongListView from '../Lib/SongListView.vue'
 export default defineComponent({
   data() {
     return {
-      songList: null as Array<SongListItemInterface>|null,
+      songList: [] as Array<SongListItemInterface>,
       limit: 100,
     };
   },
