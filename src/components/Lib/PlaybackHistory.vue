@@ -33,7 +33,7 @@ export default defineComponent({
   name: 'PlaybackHistory',
   props: {
     items: {
-      type: [] as PropType<Array<PlaybackHistoryItemInterface>>,
+      type: Array as PropType<Array<PlaybackHistoryItemInterface>>,
       required: true
     }
   },
