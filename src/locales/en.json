@@ -32,5 +32,23 @@
     "play_station_title": "Play station",
     "edit_station_title": "Edit station",
     "delete_station_title": "Delete station"
+  },
+  "album_favorites": {
+    "title": "Favorite albums"
+  },
+  "album_list": {
+    "title": "Albums"
+  },
+  "album": {
+    "total_length_title": "Total length",
+    "table": {
+      "name_column_title": "Name",
+      "length_column_title": "Length"
+    }
+  },
+  "shared": {
+    "by_artist": "by",
+    "quantity": "Count: {quantity}",
+    "play": "Play"
   }
 }

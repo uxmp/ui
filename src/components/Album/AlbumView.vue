@@ -1,18 +1,18 @@
 <template>
   <template v-if="album !== null">
-    <h1>/ <router-link :to="'/albums'">Albums</router-link> / &bdquo;{{ album.getName() }}&rdquo;</h1>
+    <h1>/ <router-link :to="'/albums'">{{ $t("album_list.title") }}</router-link> / &bdquo;{{ album.getName() }}&rdquo;</h1>
     <div class="albumGrid">
       <div>
         <div class="albumArtist">
-          by <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+          {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
         </div>
         <div class="playAlbum">
           <span v-on:click="playAlbum()" class="playButton">
-            <font-awesome-icon :icon="['fas', 'play']" title="Play" /> Play
+            <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
         </div>
         <div>
-          Total length: <FormatLength :length="album.getLength()" />
+          {{ $t("album.total_length_title") }}: <FormatLength :length="album.getLength()" />
         </div>
         <template v-if="albumDiscs !== null">
           <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
@@ -62,7 +62,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import 'reflect-metadata';
-import Album from '../../model/Album';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
 import AlbumCover from './Lib/AlbumCover.vue';

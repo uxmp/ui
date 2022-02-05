@@ -39,7 +39,6 @@
 <script lang="ts">
 import { plainToClass } from 'class-transformer';
 import { defineComponent } from 'vue'
-import Artist from '../../model/Artist';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
 import AlbumCover from '../Album/Lib/AlbumCover.vue';
