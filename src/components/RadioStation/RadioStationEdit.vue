@@ -1,5 +1,5 @@
 <template>
-  <h1>/ <router-link :to="'/radiostations'">Radio stations</router-link> / Edit</h1>
+  <h1>/ <router-link :to="'/radiostations'">{{ $t('radio_stations_edit.title') }}</router-link> / {{ $t('radio_stations_edit.edit_title') }}</h1>
   <div class="creationBox">
     <div class="errorMessage">
       {{ msg }}
@@ -7,13 +7,13 @@
     <div>
       <form @submit="create()" v-on:keyup.enter="create()">
         <div>
-          <input type="text" class="textInput" placeholder="Station name" v-model="name" required />
+          <input type="text" class="textInput" :placeholder="$t('radio_stations_edit.station_name_placeholder')" v-model="name" required />
         </div>
         <div>
-          <input type="text" class="textInput" placeholder="Url" v-model="url" required />
+          <input type="text" class="textInput" :placeholder="$t('radio_stations_edit.station_url_placeholder')" v-model="url" required />
         </div>
         <div>
-          <input type="button" class="button" @click="save()" value="Save station" />
+          <input type="button" class="button" @click="save()" :value="$t('radio_stations_edit.save_title')" />
         </div>
       </form>
     </div>
@@ -42,18 +42,18 @@ export default defineComponent({
   },
   computed: {
     name: {
-      set: function(val) {
-        this.radioStation.setName(val);
+      set: function(val: string): void {
+        this.radioStation.setName(val.trim());
       },
-      get: function() {
+      get: function(): string {
         return this.radioStation.getName();
       }
     },
     url: {
-      set: function(val) {
-        this.radioStation.setUrl(val);
+      set: function(val: string): void {
+        this.radioStation.setUrl(val.trim());
       },
-      get: function() {
+      get: function(): string {
         return this.radioStation.getUrl();
       }
     },

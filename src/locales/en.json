@@ -14,5 +14,23 @@
   },
   "play_song_button": {
     "play_song_title": "Play song"
+  },
+  "radio_stations_edit": {
+    "title": "Radio stations",
+    "edit_title": "Edit",
+    "station_name_placeholder": "Station name",
+    "station_url_placeholder": "Url",
+    "save_title": "Save station"
+  },
+  "radio_stations": {
+    "title": "Radio stations",
+    "create_title": "Create",
+    "table": {
+      "name_column_title": "Name",
+      "url_column_title": "Url"
+    },
+    "play_station_title": "Play station",
+    "edit_station_title": "Edit station",
+    "delete_station_title": "Delete station"
   }
 }

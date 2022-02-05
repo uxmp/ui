@@ -1,7 +1,7 @@
 <template>
-  <h1>/ Radio stations</h1>
+  <h1>/ {{ $t('radio_stations.title') }}</h1>
   <div class="create">
-    <router-link :to="'/radiostation/edit'">+ Create</router-link>
+    <router-link :to="'/radiostation/edit'">+ {{ $t('radio_stations.create_title') }}</router-link>
   </div>
   <template v-if="radioStations !== null">
     <div class="songTable">
@@ -9,15 +9,15 @@
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Url</th>
+            <th>{{ $t('radio_stations.table.name_column_title') }}</th>
+            <th>{{ $t('radio_stations.table.url_column_title') }}</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="station in radioStations" :key="station.getId()">
             <td>
-              <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(station)" title="Play radio station" />
+              <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(station)" :title="$t('radio_stations.play_station_title')" />
             </td>
             <td>
               {{ station.getName() }}
@@ -27,9 +27,9 @@
             </td>
             <td>
               <router-link :to="'/radiostation/edit/' + station.getId()">
-                <font-awesome-icon class="editButton button" :icon="['fas', 'tools']" title="Edit station" />
+                <font-awesome-icon class="editButton button" :icon="['fas', 'tools']" :title="$t('radio_stations.edit_station_title')" />
               </router-link>
-              <font-awesome-icon class="deleteButton button" :icon="['fas', 'minus-circle']" v-on:click="deleteStation(station)" title="Delete station" />
+              <font-awesome-icon class="deleteButton button" :icon="['fas', 'minus-circle']" v-on:click="deleteStation(station)" :title="$t('radio_stations.delete_station_title')" />
             </td>
           </tr>
         </tbody>
