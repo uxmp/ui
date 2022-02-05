@@ -6,29 +6,7 @@
   </div>
   <div class="grid">
     <div>
-      <h3>Playback history</h3>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Song</th>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>User</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="song in playbackHistory" :key="song.getId()">
-            <td>
-              <PlaySongButton :song="song" />
-            </td>
-            <td>{{ song.getName() }}</td>
-            <td><router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link></td>
-            <td><router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link></td>
-            <td>{{ song.getUserName() }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <PlaybackHistory :items="playbackHistory" />
     </div>
     <div></div>
   </div>
@@ -43,8 +21,8 @@ import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
 import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
-import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface'
+import PlaybackHistory from '../Lib/PlaybackHistory.vue'
 
 export default defineComponent({
   name: 'HomeView',
@@ -56,7 +34,7 @@ export default defineComponent({
   },
   components: {
     AlbumListItem,
-    PlaySongButton
+    PlaybackHistory
   },
   beforeMount(): void {
     this.getNewestAlbums();

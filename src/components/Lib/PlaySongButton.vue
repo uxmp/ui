@@ -1,5 +1,5 @@
 <template>
-  <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" title="Play song" />
+  <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" :title="$t('play_song_button.play_song_title')" />
 </template>
 
 <script lang="ts">
