@@ -9,10 +9,11 @@ import { AxiosResponse } from 'axios';
 import ArtistInterface from '../../model/ArtistInterface';
 import RadioStationInterface from '../../model/RadioStationInterface';
 import NowPlaying from '../../model/NowPlaying';
+import DiscInterface from '../../model/DiscInterface';
 
 export default class Player {
 
-  static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]) {
+  static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]): void {
     amplitudejs.stop();
 
     amplitudejs.init({
@@ -45,7 +46,7 @@ export default class Player {
     });
   }
 
-  static playIndex(index: number) {
+  static playIndex(index: number): void {
     amplitudejs.playSongAtIndex(index);
   }
 
@@ -57,9 +58,9 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       let songList = [] as Array<SongListItemInterface>;
 
-      let discs = response.data.items.map((disc_raw: Object) => plainToClass(Disc, disc_raw))
+      let discs = response.data.items.map((disc_raw: Object): DiscInterface => plainToClass(Disc, disc_raw))
 
-      discs.map((disc: Disc) => {
+      discs.map((disc: DiscInterface) => {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
       });
 
@@ -71,7 +72,7 @@ export default class Player {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {
-      let playList = response.data.items.map((song_raw: Object) => plainToClass(SongListItem, song_raw));
+      let playList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
       app.emitter.emit('updatePlaylist', playList);
     });

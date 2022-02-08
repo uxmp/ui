@@ -25,7 +25,7 @@ export default defineComponent({
     }
   },
   methods: {
-    play(song: SongListItemInterface) {
+    play(song: SongListItemInterface): void {
       Player.playSong(song, this);
     }
   }

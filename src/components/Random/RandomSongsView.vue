@@ -32,7 +32,7 @@ export default defineComponent({
     this.limit = +to.params.limit;
   },
   watch: {
-    limit: function () {
+    limit: function (): void {
       this.getSongs(this.limit);
     },
   },
