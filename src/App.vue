@@ -33,6 +33,7 @@ import NowPlayingView from './components/Lib/NowPlayingView.vue'
 import NowPlaying from './model/NowPlaying'
 import SongListItemInterface from './model/SongListItemInterface'
 import PlayerControl from './components/Navigation/PlayerControl.vue'
+import ArtistList from './components/Artist/ArtistListView.vue'
 
 export default defineComponent({
   data() {
@@ -45,7 +46,7 @@ export default defineComponent({
   },
   name: 'uXMP',
   components: {
-    "ArtistList": defineAsyncComponent(() => import('./components/Artist/ArtistListView.vue')),
+    ArtistList,
     Sidebar,
     Playlist,
     PlayerControl,
