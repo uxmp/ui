@@ -8,6 +8,7 @@ import HttpRequest from './HttpRequest';
 import { AxiosResponse } from 'axios';
 import ArtistInterface from '../../model/ArtistInterface';
 import RadioStationInterface from '../../model/RadioStationInterface';
+import NowPlaying from '../../model/NowPlaying';
 
 export default class Player {
 
@@ -20,7 +21,7 @@ export default class Player {
         play: function () {
           let song = amplitudejs.getActiveSongMetadata();
 
-          app.emitter.emit('updateNowPlaying', song)
+          app.emitter.emit('updateNowPlaying', plainToClass(NowPlaying, song))
           app.emitter.emit('updatePlayerState', true)
 
           Player.scrollPlaylist(song.index);
