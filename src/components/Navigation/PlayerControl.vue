@@ -30,11 +30,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import Player from '../Lib/Player'
 
 export default defineComponent({
   name: 'PlayerControl',
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   props: {
     playerState: {
       type: Boolean,
@@ -43,7 +49,7 @@ export default defineComponent({
   },
   methods: {
     toggleState(): void {
-      Player.togglePlayerState(!this.playerState);
+      this.player.togglePlayerState(!this.playerState);
     }
   }
 })

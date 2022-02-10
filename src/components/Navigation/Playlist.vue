@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, inject, PropType } from 'vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 export default defineComponent({
@@ -28,15 +28,22 @@ export default defineComponent({
       required: true
     }
   },
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   updated(): void {
     this.$nextTick(function (): void {
-      Player.init(this, this.elements.map((song: SongListItemInterface) => Player.createSongListItem(song)));
-      Player.playIndex(0);
+      this.player.init(this, this.elements.map((song: SongListItemInterface) => this.player.createSongListItem(song)));
+
+      this.player.playIndex(0)
     })
   },
   methods: {
     async playFromPlaylist(index: number): Promise<void> {
-      Player.playIndex(index);
+      this.player.playIndex(index)
     }
   }
 })

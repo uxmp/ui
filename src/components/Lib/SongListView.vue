@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, inject, PropType } from 'vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
@@ -67,8 +67,10 @@ export default defineComponent({
       required: true
     }
   },
-  data() {
+  setup() {
+    const player = inject('ply') as Player;
     return {
+      player,
       length: 0
     };
   },
@@ -89,10 +91,10 @@ export default defineComponent({
       if (this.songList) {
         this.emitter.emit('updatePlaylist', this.songList);
 
-        Player.init(
-          this,
-          this.songList.map((song: SongListItemInterface) => Player.createSongListItem(song))
-        );
+        this.player.init(
+	        this,
+          this.songList.map((song: SongListItemInterface) => this.player.createSongListItem(song))
+	      );
       }
     }
   }

@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import { plainToInstance } from 'class-transformer';
 import HttpRequest from '../Lib/HttpRequest';
 import RadioStationInterface from '../../model/RadioStationInterface'
@@ -57,6 +57,12 @@ export default defineComponent({
       radioStations: [] as Array<RadioStationInterface>
     }
   },
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   components: {
     LoadingIcon
   },
@@ -65,7 +71,7 @@ export default defineComponent({
   },
   methods: {
     async play(station: RadioStationInterface): Promise<void> {
-      Player.playRadiostation(station, this);
+      this.player.playRadiostation(station, this);
     },
     async getRadioStations(): Promise<void> {
       HttpRequest.get(`radiostations`).then(res => {

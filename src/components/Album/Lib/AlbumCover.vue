@@ -8,12 +8,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import Player from '../../Lib/Player';
 import AlbumInterface from '../../../model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumCover',
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   props: {
     album: {
       type: Object as () => AlbumInterface,
@@ -26,7 +32,7 @@ export default defineComponent({
   },
   methods: {
     async play(album: AlbumInterface): Promise<void> {
-      Player.playAlbum(album.getId(), this);
+      this.player.playAlbum(album.getId(), this)
     }
   }
 })

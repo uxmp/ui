@@ -13,7 +13,7 @@ import DiscInterface from '../../model/DiscInterface';
 
 export default class Player {
 
-  static init(app: DefineComponent, songList: Array<Object> = [{url: ''}]): void {
+  init(app: DefineComponent, songList: Array<Object>): void {
     amplitudejs.stop();
 
     amplitudejs.init({
@@ -25,7 +25,9 @@ export default class Player {
           app.emitter.emit('updateNowPlaying', plainToClass(NowPlaying, song))
           app.emitter.emit('updatePlayerState', true)
 
-          Player.scrollPlaylist(song.index);
+          document.getElementById('playlist-item-' + song.index)?.scrollIntoView({
+            behavior: 'smooth'
+          });
         },
         pause: function () {
           app.emitter.emit('updatePlayerState', false)
@@ -40,17 +42,11 @@ export default class Player {
     });
   }
 
-  static scrollPlaylist(index: number): void {
-    document.getElementById('playlist-item-' + index)?.scrollIntoView({
-      behavior: 'smooth'
-    });
-  }
-
-  static playIndex(index: number): void {
+  playIndex(index: number): void {
     amplitudejs.playSongAtIndex(index);
   }
 
-  static playAlbum(albumId: number, app: DefineComponent): void {
+  playAlbum(albumId: number, app: DefineComponent): void {
     amplitudejs.stop();
 
     HttpRequest.get(
@@ -68,7 +64,7 @@ export default class Player {
     });
   }
 
-  static playArtist(artist: ArtistInterface, app: DefineComponent): void {
+  playArtist(artist: ArtistInterface, app: DefineComponent): void {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {
@@ -78,7 +74,7 @@ export default class Player {
     });
   }
 
-  static playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
+  playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
     let song = new SongListItem();
     song.setName(station.getName());
     song.setPlayUrl(station.getUrl());
@@ -86,11 +82,11 @@ export default class Player {
     app.emitter.emit('updatePlaylist', [song]);
   }
 
-  static playSong(song: SongListItemInterface, app :DefineComponent): void {
+  playSong(song: SongListItemInterface, app :DefineComponent): void {
     app.emitter.emit('updatePlaylist', [song])
   }
 
-  static createSongListItem(song: SongListItemInterface): Object {
+  createSongListItem(song: SongListItemInterface): Object {
     return {
       name: song.getName(),
       albumName: song.getAlbumName(),
@@ -104,11 +100,11 @@ export default class Player {
     };
   }
 
-  static stop(): void {
+  stop(): void {
     amplitudejs.stop();
   }
 
-  static togglePlayerState(state: boolean): void {
+  togglePlayerState(state: boolean): void {
     if (state == true) {
       amplitudejs.play();
     } else {

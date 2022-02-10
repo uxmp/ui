@@ -17,6 +17,7 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTools } from '@fortawesome/free-solid-svg-icons'
 import enLocaleMessages from './locales/en.json'
 import { createI18n } from 'vue-i18n';
+import Player from './components/Lib/Player';
 
 const i18n = createI18n({
   legacy: false,
@@ -47,5 +48,6 @@ let app = createApp(App)
 ;
 
 app.config.globalProperties.emitter = emitter;
+app.provide('ply', new Player());
 
 app.mount('#app')

@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject } from 'vue'
 import 'reflect-metadata';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
@@ -84,6 +84,12 @@ export default defineComponent({
       albumDiscs: null as null|Array<DiscInterface>
     }
   },
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   components: {
     AlbumCover,
     LoadingIcon,
@@ -103,7 +109,7 @@ export default defineComponent({
   methods: {
     async playAlbum(): Promise<void> {
       if (this.album !== null) {
-        Player.playAlbum(this.album.getId(), this);
+        this.player.playAlbum(this.album.getId(), this);
       }
     }
   }

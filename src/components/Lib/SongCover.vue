@@ -8,12 +8,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, inject, PropType } from 'vue'
 import Player from './Player';
 import SongListItemInterface from '../../model/SongListItemInterface';
 
 export default defineComponent({
   name: 'SongCover',
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   props: {
     song: {
       type: Object as PropType<SongListItemInterface>,
@@ -26,7 +32,7 @@ export default defineComponent({
   },
   methods: {
     play(song: SongListItemInterface): void {
-      Player.playSong(song, this);
+      this.player.playSong(song, this);
     }
   }
 })
