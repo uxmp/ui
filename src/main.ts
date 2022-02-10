@@ -16,6 +16,7 @@ import { faStepBackward } from '@fortawesome/free-solid-svg-icons'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTools } from '@fortawesome/free-solid-svg-icons'
 import enLocaleMessages from './locales/en.json'
+import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
 import Player from './components/Lib/Player';
 
@@ -24,7 +25,7 @@ const i18n = createI18n({
   globalInjection: true,
   locale: 'en',
   fallbackLocale: 'en',
-  messages: { en: enLocaleMessages }
+  messages: { en: enLocaleMessages, de: deLocaleMessages }
 })
 
 library.add(faPlay);

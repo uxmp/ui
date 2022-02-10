@@ -1,0 +1,123 @@
+{
+  "home": {
+    "title": "Start",
+    "recent_albums_title": "Neueste Alben"
+  },
+  "playback_history": {
+    "title": "Zuletzt gehört",
+    "table": {
+      "song_column_title": "Titel",
+      "album_column_title": "Album",
+      "artist_column_title": "Künstler",
+      "user_column_title": "Benutzer"
+    }
+  },
+  "play_song_button": {
+    "play_song_title": "Abspielen"
+  },
+  "radio_stations_edit": {
+    "title": "Radiosender",
+    "edit_title": "Editieren",
+    "station_name_placeholder": "Name",
+    "station_url_placeholder": "Url",
+    "save_title": "Sender speichern"
+  },
+  "radio_stations": {
+    "title": "Radiosender",
+    "create_title": "Hinzufügen",
+    "table": {
+      "name_column_title": "Name",
+      "url_column_title": "Adresse"
+    },
+    "play_station_title": "Sender abspielen",
+    "edit_station_title": "Sender bearbeiten",
+    "delete_station_title": "Sender löschen"
+  },
+  "album_favorites": {
+    "title": "Favorisierte Alben"
+  },
+  "album_list": {
+    "title": "Alben",
+    "favorites": "Favoriten"
+  },
+  "album": {
+    "total_length_title": "Gesamtlänge",
+    "table": {
+      "name_column_title": "Name",
+      "length_column_title": "Länge"
+    }
+  },
+  "artist_list": {
+    "title": "Künstler"
+  },
+  "artist": {
+    "artist_list_title": "Künstler",
+    "albums_title": "Alben",
+    "table": {
+      "column": {
+        "name": {
+          "title": "Name"
+        },
+        "length": {
+          "title": "Länge"
+        }
+      }
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username_placeholder": "Benutzername",
+    "password_placeholder": "Passwort",
+    "login_title": "Login"
+  },
+  "favorite_star_view": {
+    "add_favorite_title": "Als Favorit hinzufügen",
+    "remove_favorite_title": "Von Favoriten entfernen"
+  },
+  "song_list": {
+    "play_all_title": "Alle abspielen",
+    "length_title": "Länge:",
+    "table": {
+      "column": {
+        "name": {
+          "title": "Name"
+        },
+        "artist": {
+          "title": "Künstler"
+        },
+        "length": {
+          "title": "Länge"
+        }
+      }
+    }
+  },
+  "player_control": {
+    "raise_volume": "Lautstärke erhöhen",
+    "lower_volume": "Lautstärke senken",
+    "previous": "Letzter",
+    "next": "Nächster",
+    "play": "Abspielen",
+    "pause": "Pausieren"
+  },
+  "songs": {
+    "title": "Titel",
+    "random": "Zufällige",
+    "random_favorites": "Zufällige Favoriten"
+  },
+  "user": {
+    "title": "Benutzer",
+    "logout": "Logout"
+  },
+  "random_songs": {
+    "title": "Zufällige Titel"
+  },
+  "random_favorite_songs": {
+    "title": "Zufällige Favoriten"
+  },
+  "shared": {
+    "by_artist": "von",
+    "from_album": "aus",
+    "quantity": "Anzahl: {quantity}",
+    "play": "Abspielen"
+  }
+}
