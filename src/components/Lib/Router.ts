@@ -11,6 +11,7 @@ import HomeView from "../Home/HomeView.vue"
 import Store from "../Store/Store";
 import RadioStationList from "../RadioStation/RadioStationList.vue"
 import RadioStationEdit from "../RadioStation/RadioStationEdit.vue"
+import UserSettingsView from "../User/UserSettingsView.vue"
 
 const routes = [
   {
@@ -68,6 +69,11 @@ const routes = [
     name: "Login",
     component: Login
   },
+  {
+    path: "/usersettings",
+    name: "UserSettings",
+    component: UserSettingsView
+  }
 ];
 
 const Router = createRouter({

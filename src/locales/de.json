@@ -114,10 +114,19 @@
   "random_favorite_songs": {
     "title": "Zufällige Favoriten"
   },
+  "user_settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "save": "Speichern"
+  },
   "shared": {
     "by_artist": "von",
     "from_album": "aus",
     "quantity": "Anzahl: {quantity}",
     "play": "Abspielen"
+  },
+  "country_iso2": {
+    "en": "Englisch",
+    "de": "Deutsch"
   }
 }

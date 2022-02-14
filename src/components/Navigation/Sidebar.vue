@@ -55,7 +55,7 @@
   <h3>{{ $t("user.title") }}</h3>
   <ul>
     <li>
-      <span v-on:click="lang('de')">de</span> / <span v-on:click="lang('en')">en</span>
+      <router-link to="/usersettings">{{ $t("user_settings.title") }}</router-link>
     </li>
     <li><a v-on:click="logout()">{{ $t("user.logout") }}</a></li>
   </ul>
@@ -69,9 +69,6 @@ export default defineComponent({
   name: 'Sidebar',
   emits: ['hidePlayer'],
   methods: {
-    async lang(locale: string): Promise<void> {
-      this.$i18n.locale = locale;
-    },
     async logout(): Promise<void> {
       this.$emit('hidePlayer');
 
