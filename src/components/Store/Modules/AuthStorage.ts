@@ -1,7 +1,8 @@
 const getDefaultState = () => {
   return {
     token: '',
-    user: {}
+    user: {},
+    language: 'en'
   };
 };
 
@@ -11,7 +12,8 @@ export default {
   getters: {
     isLogged: state => state.token,
     getUser: state => state.user,
-    getToken: state => state.token
+    getToken: state => state.token,
+    getLanguage: state => state.language,
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -22,6 +24,9 @@ export default {
     },
     RESET: state => {
       Object.assign(state, getDefaultState());
+    },
+    SET_LANGUAGE: (state, language: string) => {
+      state.language = language
     }
   },
   actions: {
@@ -31,6 +36,9 @@ export default {
     },
     logout: ({ commit }) => {
       commit('RESET', '');
+    },
+    setLanguage: ({ commit }, { language }) => {
+      commit('SET_LANGUAGE', language)
     }
   }
 }

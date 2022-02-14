@@ -48,8 +48,6 @@ export default defineComponent({
    selectedLanguage: {
       set: function(val: string): void {
         this.userSettings.setLanguage(val)
-
-        this.$i18n.locale = val;
       },
       get: function(): string {
         return this.userSettings.getLanguage()
@@ -66,6 +64,12 @@ export default defineComponent({
       });
     },
     async save(): Promise<void> {
+      let language = this.userSettings.getLanguage();
+
+      this.$i18n.locale = language
+
+      this.$store.dispatch('authStorage/setLanguage', { language });
+
       HttpRequest.put(
         'usersettings',
         {

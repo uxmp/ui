@@ -23,7 +23,7 @@ import Player from './components/Lib/Player';
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: 'en',
+  locale: Store.getters['authStorage/getLanguage'],
   fallbackLocale: 'en',
   messages: { en: enLocaleMessages, de: deLocaleMessages }
 })
