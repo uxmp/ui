@@ -1,8 +1,10 @@
+import UserInterface from "../../../model/UserInterface";
+
 const getDefaultState = () => {
   return {
-    token: '',
-    user: {},
-    language: 'en'
+    token: '' as string,
+    user: null as null|UserInterface,
+    language: 'en' as string
   };
 };
 
@@ -16,10 +18,10 @@ export default {
     getLanguage: state => state.language,
   },
   mutations: {
-    SET_TOKEN: (state, token) => {
+    SET_TOKEN: (state, token: string) => {
       state.token = token;
     },
-    SET_USER: (state, user) => {
+    SET_USER: (state, user: UserInterface) => {
       state.user = user;
     },
     RESET: state => {

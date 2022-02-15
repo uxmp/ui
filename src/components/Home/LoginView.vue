@@ -25,6 +25,8 @@
 import { defineComponent } from '@vue/runtime-core';
 import { AxiosResponse } from 'axios';
 import HttpRequest from '../Lib/HttpRequest';
+import { plainToInstance } from 'class-transformer';
+import User from '../../model/User'
 
 export default defineComponent({
   setup() {
@@ -47,17 +49,21 @@ export default defineComponent({
         if (data.msg) {
           this.msg = data.msg;
         } else {
-          const token = data.token;
-          const user = data.user;
+          let user = plainToInstance(User, data.user)
 
-          this.$store.dispatch('authStorage/login', { token, user });
+          this.$store.dispatch('authStorage/login', {
+            token: data.token,
+            user: user
+          });
+
+          this.$i18n.locale = user.getLanguage()
 
           HttpRequest.get(
             'user/favorite'
           ).then((response: AxiosResponse) => {
-            const favorites = response.data;
-
-            this.$store.dispatch('favorites/init', { favorites });
+            this.$store.dispatch('favorites/init', {
+              favorites: response.data
+            });
           });
 
           this.$router.push('/');

@@ -70,7 +70,7 @@ export default defineComponent({
     },
     updateState(): void {
       if (this.itemId !== undefined) {
-        this.isFavorite = this.itemId.toString() in this.$store.getters['favorites/getList'][this.itemType];
+        this.isFavorite = this.itemId in this.$store.getters['favorites/getList'][this.itemType];
       }
     }
   }

@@ -68,7 +68,9 @@ export default defineComponent({
 
       this.$i18n.locale = language
 
-      this.$store.dispatch('authStorage/setLanguage', { language });
+      this.$store.dispatch('authStorage/setLanguage', {
+        language
+      });
 
       HttpRequest.put(
         'usersettings',

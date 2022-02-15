@@ -22,11 +22,11 @@ export default {
       state.favorites = favorites;
     },
     ADD_ITEM: (state, { itemId, itemType} ) => {
-      state.favorites[itemType][itemId.toString()] = + new Date();
+      state.favorites[itemType][itemId] = + new Date();
     },
     REMOVE_SONG: (state, { itemId, itemType } ) => {
-      if (itemId.toString() in state.favorites[itemType]) {
-        delete state.favorites[itemType][itemId.toString()];
+      if (itemId in state.favorites[itemType]) {
+        delete state.favorites[itemType][itemId];
       }
     },
     RESET: state => {
