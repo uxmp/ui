@@ -19,6 +19,8 @@ import enLocaleMessages from './locales/en.json'
 import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
 import Player from './components/Lib/Player';
+import Notifications from '@kyvg/vue3-notification'
+
 
 const i18n = createI18n({
   legacy: false,
@@ -46,6 +48,7 @@ let app = createApp(App)
   .use(Router)
   .use(Store)
   .use(i18n)
+  .use(Notifications)
 ;
 
 app.config.globalProperties.emitter = emitter;

@@ -1,4 +1,6 @@
 <template>
+  <notifications position="top center" group="error" />
+  <notifications position="bottom right" group="app" />
   <div class="maingrid-noplayer" id="maingrid">
     <div class="grid-sidebar">
       <Sidebar @hidePlayer="hidePlayer" />
@@ -26,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 import Playlist from './components/Navigation/Playlist.vue'
 import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlayingView from './components/Lib/NowPlayingView.vue'

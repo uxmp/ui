@@ -78,10 +78,17 @@ export default defineComponent({
           language: this.userSettings.getLanguage(),
         }
       ).then((response: AxiosResponse): void => {
-        let data = response.data;
-        if (data.msg) {
-          this.msg = data.msg;
-        }
+        this.$notify({
+          text: this.$t("user_settings.saved"),
+          group: "app"
+        });
+      })
+      .catch(() => {
+        this.$notify({
+          text: this.$t("user_settings.error_message"),
+          type: "error",
+          group: "error"
+        });
       });
     }
   }

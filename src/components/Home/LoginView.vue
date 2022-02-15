@@ -2,9 +2,6 @@
   <div>
     <h1>{{ $t("login.title") }}</h1>
     <div class="loginBox">
-      <div class="errorMessage">
-        {{ msg }}
-      </div>
       <div>
         <form @submit="login()" v-on:keyup.enter="login()">
           <div>
@@ -47,7 +44,12 @@ export default defineComponent({
       ).then((response: AxiosResponse): void => {
         let data = response.data.data;
         if (data.msg) {
-          this.msg = data.msg;
+          this.$notify({
+            title: this.$t("user.login.error_title"),
+            text: this.$t("user.login.error_text"),
+            type: "error",
+            group: "error"
+          });
         } else {
           let user = plainToInstance(User, data.user)
 
@@ -74,11 +76,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-div.errorMessage {
-  color: rgb(206, 7, 17);
-
-}
-
 div.loginBox {
   width: 500px;
   margin: auto;
