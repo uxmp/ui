@@ -10,6 +10,7 @@ export default class SongListItem implements SongListItemInterface {
   private artistId: number = 0;
   private albumId: number = 0;
   private length: number = 0;
+  private year: number | null = null;
 
   getId(): number {
     return this.id;
@@ -57,5 +58,9 @@ export default class SongListItem implements SongListItemInterface {
 
   getLength(): number {
     return this.length;
+  }
+
+  getYear(): null | number {
+    return this.year;
   }
 }

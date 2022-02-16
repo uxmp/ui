@@ -19,4 +19,6 @@ export default interface SongListItemInterface {
   getAlbumId(): number;
 
   getLength(): number;
+
+  getYear(): null | number;
 }

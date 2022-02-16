@@ -44,7 +44,8 @@
     "total_length_title": "Gesamtlänge",
     "table": {
       "name_column_title": "Name",
-      "length_column_title": "Länge"
+      "length_column_title": "Länge",
+      "year_column_title": "Jahr"
     }
   },
   "artist_list": {
@@ -87,6 +88,9 @@
         },
         "length": {
           "title": "Länge"
+        },
+        "year": {
+          "title": "Jahr"
         }
       }
     }

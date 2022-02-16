@@ -23,6 +23,7 @@
                   <th>#</th>
                   <th>{{ $t("album.table.name_column_title") }}</th>
                   <th>{{ $t("album.table.length_column_title") }}</th>
+                  <th>{{ $t("album.table.year_column_title") }}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -35,6 +36,9 @@
                   <td>{{ song.getName() }}</td>
                   <td>
                     <FormatLength :length="song.getLength()" />
+                  </td>
+                  <td>
+                    {{ song.getYear() }}
                   </td>
                   <td>
                     <FavoriteStarView :itemId="song.getId()" itemType="song" />
