@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ $t("login.title") }}</h1>
+    <h1>/ {{ $t("login.title") }}</h1>
     <div class="loginBox">
       <div>
         <form @submit="login()" v-on:keyup.enter="login()">

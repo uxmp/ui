@@ -251,6 +251,24 @@ input[type=password] {
   margin-bottom: 20px;
 }
 
+select {
+  appearance: none;
+  border: none;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  border-bottom: 1px solid rgb(85, 57, 5);
+  padding: 0.25em 0.5em;
+  font-size: inherit;
+  cursor: pointer;
+  line-height: inherit;
+  background: transparent;
+  color: inherit;
+}
+select option {
+  color: #000;
+}
+
 input[type=text]:hover,
 input[type=password]:hover {
   border-bottom: 1px solid rgb(192, 140, 44);

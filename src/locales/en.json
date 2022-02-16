@@ -123,7 +123,11 @@
     "language": "Language",
     "save": "Save",
     "saved": "Saved",
-    "error_message": "Error saving settings"
+    "error_message": "Error saving settings",
+    "table": {
+      "settings_title": "Setting",
+      "value_title": "Value"
+    }
   },
   "shared": {
     "by_artist": "by",

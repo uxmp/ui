@@ -123,7 +123,11 @@
     "language": "Sprache",
     "save": "Speichern",
     "saved": "Gespeichert",
-    "error_message": "Fehler beim Speichern der Einstellungen"
+    "error_message": "Fehler beim Speichern der Einstellungen",
+    "table": {
+      "settings_title": "Einstellung",
+      "value_title": "Wert"
+    }
   },
   "shared": {
     "by_artist": "von",

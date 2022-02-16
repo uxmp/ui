@@ -1,20 +1,34 @@
 <template>
   <h1>/ {{ $t('user_settings.title') }}</h1>
   <template v-if="userSettings !== null">
-    <form @submit="save()" v-on:keyup.enter="save()">
-      <div>
-        {{ $t('user_settings.language') }}
-        <select v-model="selectedLanguage">
-          <option v-for="option in languageOptions" :value="option.value" v-bind:key="option.value">
-            {{ $t(option.text) }}
-          </option>
-          {{ userSettings.getLanguage() }}
-        </select>
-      </div>
-      <div>
-        <input type="button" class="button" @click="save()" :value="$t('user_settings.save')" />
-      </div>
-    </form>
+    <div class="box">
+      <form @submit="save()" v-on:keyup.enter="save()">
+        <table>
+          <tr>
+            <th>{{ $t('user_settings.table.settings_title') }}</th>
+            <th>{{ $t('user_settings.table.value_title') }}</th>
+          </tr>
+          <tr>
+            <td>
+              {{ $t('user_settings.language') }}
+            </td>
+            <td>
+              <select v-model="selectedLanguage">
+                <option v-for="option in languageOptions" :value="option.value" v-bind:key="option.value">
+                  {{ $t(option.text) }}
+                </option>
+                {{ userSettings.getLanguage() }}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="savebutton_row">
+              <input type="button" class="button" @click="save()" :value="$t('user_settings.save')" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </template>
   <template v-else>
     <LoadingIcon />
@@ -96,4 +110,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+div.box {
+  width: 500px;
+  margin: auto;
+  padding: 5px;
+}
+
+div.box form div {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+
+.savebutton_row {
+  text-align: center;
+}
 </style>
