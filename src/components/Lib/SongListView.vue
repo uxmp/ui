@@ -22,7 +22,7 @@
         <tbody>
           <tr v-for="song in songList" :key="song.getId()">
             <td>
-              <SongCover size="60" :song="song" />
+              <SongCover size="50" :song="song" />
             </td>
             <td>
               <div class="songName">

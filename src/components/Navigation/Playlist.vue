@@ -8,6 +8,7 @@
       :data-amplitude-song-index="index"
       :id="'playlist-item-' + index"
       v-on:click="playFromPlaylist(index)"
+      :title="$t('shared.play')"
     >
       {{ songListItem.getTracknumber() }}
       {{ songListItem.getName() }}
@@ -50,5 +51,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
+section:hover {
+  cursor: pointer;
+  color: rgb(192, 140, 44);
+}
 </style>
   

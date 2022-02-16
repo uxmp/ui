@@ -23,7 +23,7 @@
           </tr>
           <tr>
             <td colspan="2" class="savebutton_row">
-              <input type="button" class="button" @click="save()" :value="$t('user_settings.save')" />
+              <input type="button" class="button savebutton" @click="save()" :value="$t('user_settings.save')" />
             </td>
           </tr>
         </table>
@@ -124,5 +124,9 @@ div.box form div {
 
 .savebutton_row {
   text-align: center;
+}
+
+.savebutton {
+  width: 100%;
 }
 </style>
