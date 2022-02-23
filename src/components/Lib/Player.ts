@@ -16,11 +16,25 @@ export default class Player {
   init(app: DefineComponent, songList: Array<Object>): void {
     amplitudejs.stop();
 
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.setActionHandler('previoustrack', function () { amplitudejs.prev() });
+      navigator.mediaSession.setActionHandler('nexttrack', function () { amplitudejs.next() });
+    }
+
     amplitudejs.init({
       songs: songList,
       callbacks: {
         play: function () {
           let song = amplitudejs.getActiveSongMetadata();
+
+          if ("mediaSession" in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+              title: song.name,
+              artist: song.artistName,
+              album: song.albumName,
+              artwork: [{ src: song.cover_art_url, }],
+            });
+          }
 
           app.emitter.emit('updateNowPlaying', plainToClass(NowPlaying, song))
           app.emitter.emit('updatePlayerState', true)
