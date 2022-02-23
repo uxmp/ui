@@ -6,7 +6,7 @@
         <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
       </div>
       <div class="album_artist">
-        {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+        {{ $t("shared.by_artist") }} <router-link @click.stop :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
       </div>
     </div>
   </div>
