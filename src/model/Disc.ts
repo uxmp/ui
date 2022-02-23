@@ -11,6 +11,8 @@ export default class Disc implements DiscInterface {
 
   private length: number = 0;
 
+  private number: number = 0;
+
   getId(): number | undefined {
     return this.id;
   }
@@ -21,5 +23,9 @@ export default class Disc implements DiscInterface {
 
   getLength(): number {
     return this.length;
+  }
+
+  getNumber(): number {
+    return this.number
   }
 }

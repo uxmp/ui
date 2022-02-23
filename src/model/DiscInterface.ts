@@ -5,4 +5,6 @@ export default interface DiscInterface {
   getSongList(): Array<SongListItemInterface>;
 
   getLength(): number;
+
+  getNumber(): number;
 }

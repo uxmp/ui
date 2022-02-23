@@ -46,7 +46,8 @@
       "name_column_title": "Name",
       "length_column_title": "Länge",
       "year_column_title": "Jahr"
-    }
+    },
+    "disc_title": "CD {number}"
   },
   "artist_list": {
     "title": "Künstler"

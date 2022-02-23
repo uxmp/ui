@@ -46,7 +46,8 @@
       "name_column_title": "Name",
       "length_column_title": "Length",
       "year_column_title": "Year"
-    }
+    },
+    "disc_title": "Disc {number}"
   },
   "artist_list": {
     "title": "Artists"
