@@ -16,7 +16,7 @@
         </div>
         <template v-if="albumDiscs !== null">
           <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
-            <h3>
+            <h3 v-if="albumDiscs.length > 1">
               {{ $t('album.disc_title', { number: disc.getNumber() }) }}
             </h3>
             <table>
