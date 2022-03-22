@@ -6,12 +6,14 @@
     <div class="title">
       <span data-amplitude-song-info="name" class="song-name"></span>
     </div>
-    <div class="album" v-if="nowPlaying !== null">
-      {{ $t("shared.from_album") }} <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
-    </div>
-    <div class="artist" v-if="nowPlaying !== null">
-      {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
-    </div>
+    <template v-if="nowPlaying !== null">
+      <div class="album" v-if="hasAlbum()">
+        {{ $t("shared.from_album") }} <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
+      </div>
+      <div class="artist" v-if="hasArtist()">
+        {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
+      </div>
+    </template>
   </div>
   <div class="state" v-if="nowPlaying !== null">
     <input type="range" class="amplitude-song-slider" step=".1"/>
@@ -41,6 +43,14 @@ export default defineComponent({
   components: {
     FavoriteStarView,
     FormatLength,
+  },
+  methods: {
+    hasAlbum(): boolean {
+      return this.nowPlaying !== null && this.nowPlaying.albumId;
+    },
+    hasArtist(): boolean {
+      return this.nowPlaying !== null && this.nowPlaying.artistId;
+    }
   },
 })
 </script>
