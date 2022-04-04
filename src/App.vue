@@ -36,6 +36,8 @@ import NowPlaying from './model/NowPlaying'
 import SongListItemInterface from './model/SongListItemInterface'
 import PlayerControl from './components/Navigation/PlayerControl.vue'
 import ArtistList from './components/Artist/ArtistListView.vue'
+import HttpRequest from './components/Lib/HttpRequest'
+import { AxiosResponse } from 'axios'
 
 export default defineComponent({
   data() {
@@ -44,9 +46,10 @@ export default defineComponent({
       nowPlaying: null as null|NowPlaying,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
+      timer: ''
     };
   },
-  name: 'uXMP',
+  name: 'uxMP',
   components: {
     ArtistList,
     Sidebar,
@@ -54,7 +57,7 @@ export default defineComponent({
     PlayerControl,
     NowPlayingView
   },
-  mounted() { 
+  mounted(): void { 
     this.emitter.on(
       "updatePlaylist",
       (songList: Array<SongListItemInterface>) => {
@@ -74,6 +77,12 @@ export default defineComponent({
       (data: boolean) => this.playerState = data
     );
   },
+  created(): void {
+    this.timer = setInterval(this.fetchFavorites, 300000); // every 5 minutes
+  },
+  beforeDestroy () {
+    this.cancelAutoUpdate();
+  },
   methods: {
     hidePlayer(): void {
       let element = document.getElementById('maingrid');
@@ -83,6 +92,20 @@ export default defineComponent({
       this.playlist = [];
       this.nowPlaying = null;
     },
+    cancelAutoUpdate(): void {
+      clearInterval(this.timer);
+    },
+    fetchFavorites(): void {
+      if (this.$store.getters['authStorage/isLogged']) {
+        HttpRequest.get(
+          'user/favorite'
+        ).then((response: AxiosResponse) => {
+          this.$store.dispatch('favorites/init', {
+            favorites: response.data
+          });
+        });
+      }
+    }
   },
 })
 </script>
