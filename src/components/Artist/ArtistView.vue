@@ -1,6 +1,10 @@
 <template>
   <template v-if="artist !== null">
     <h1>/ <router-link :to="'/artists'">{{ $t("artist.artist_list_title") }}</router-link> / &bdquo;{{ artist.getName() }}&rdquo;</h1>
+    <h2>{{ $t("artist.albums_info") }}</h2>
+    <div class="musicBrainz">
+      <a :href="`https://musicbrainz.org/artist/${artist.getMbId()}`" target="_blank">Musicbrainz</a>
+    </div>
   </template>
   <h2>{{ $t("artist.albums_title") }}</h2>
   <template v-if="albumList !== null">
@@ -129,5 +133,9 @@ tbody tr:nth-of-type(even) {
 
 table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
+}
+
+div.musicBrainz {
+  text-align: left
 }
 </style>

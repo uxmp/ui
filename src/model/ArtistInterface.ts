@@ -4,4 +4,6 @@ export default interface ArtistInterface {
   getName(): string;
 
   getCover(): string;
+
+  getMbId(): string;
 }

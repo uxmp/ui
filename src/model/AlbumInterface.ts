@@ -11,4 +11,6 @@ export default interface AlbumInterface {
   getArtistName(): string;
 
   getLength(): number;
+
+  getMbId(): string;
 }

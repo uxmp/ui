@@ -7,6 +7,7 @@ export default class Album implements AlbumInterface {
   private cover: string = '';
   private artistName: string = '';
   private length: number = 0;
+  private mbId: string = '';
 
   getId(): number {
     return this.id;
@@ -30,5 +31,9 @@ export default class Album implements AlbumInterface {
 
   getLength(): number {
     return this.length;
+  }
+
+  getMbId(): string {
+    return this.mbId;
   }
 }

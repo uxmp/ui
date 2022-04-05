@@ -58,6 +58,9 @@
       <div>
         <FavoriteStarView :itemId="album.getId()" itemType="album" />
         <AlbumCover :album="album" :size="500" />
+        <div class="musicBrainz">
+          <a :href="`https://musicbrainz.org/release/${album.getMbId()}`" target="_blank">Musicbrainz</a>
+        </div>
       </div>
     </div>
   </template>
@@ -193,5 +196,11 @@ div.playAlbum span:hover {
 div.albumArtist {
   font-size: 130%;
   padding-bottom: 20px;
+}
+
+div.musicBrainz {
+  width: 100%;
+  padding-top: 20px;
+  text-align: center;;
 }
 </style>

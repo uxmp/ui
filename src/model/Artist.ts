@@ -1,7 +1,10 @@
-export default class Artist {
+import ArtistInterface from "./ArtistInterface";
+
+export default class Artist implements ArtistInterface {
   private id: number = 0;
   private name: string = '';
   private cover: string = '';
+  private mbId: string = '';
 
   getId(): number {
     return this.id;
@@ -13,5 +16,9 @@ export default class Artist {
 
   getCover(): string {
     return this.cover;
+  }
+
+  getMbId(): string {
+    return this.mbId;
   }
 }

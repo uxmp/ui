@@ -55,6 +55,7 @@
   "artist": {
     "artist_list_title": "Künstler",
     "albums_title": "Alben",
+    "albums_info": "Info",
     "table": {
       "column": {
         "name": {
