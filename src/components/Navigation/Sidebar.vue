@@ -45,6 +45,13 @@
     </li>
   </ul>
 
+  <h3>{{ $t("playlists.title") }}</h3>
+  <ul>
+    <li>
+      <router-link to="/playlists">{{ $t("playlists.title") }}</router-link>
+    </li>
+  </ul>
+
   <h3>{{ $t("radio_stations.title") }}</h3>
   <ul>
     <li>

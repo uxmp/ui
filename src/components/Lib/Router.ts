@@ -12,6 +12,7 @@ import Store from "../Store/Store";
 import RadioStationList from "../RadioStation/RadioStationList.vue"
 import RadioStationEdit from "../RadioStation/RadioStationEdit.vue"
 import UserSettingsView from "../User/UserSettingsView.vue"
+import PlaylistList from "../Playlist/PlaylistList.vue"
 
 const routes = [
   {
@@ -73,6 +74,11 @@ const routes = [
     path: "/usersettings",
     name: "UserSettings",
     component: UserSettingsView
+  },
+  {
+    path: "/playlists",
+    name: "Playlists",
+    component: PlaylistList
   }
 ];
 

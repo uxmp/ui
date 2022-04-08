@@ -33,6 +33,10 @@
     "edit_station_title": "Edit station",
     "delete_station_title": "Delete station"
   },
+  "playlists": {
+    "title": "Playlists",
+    "create_title": "Create"
+  },
   "album_favorites": {
     "title": "Favorite albums"
   },

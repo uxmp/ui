@@ -33,6 +33,10 @@
     "edit_station_title": "Sender bearbeiten",
     "delete_station_title": "Sender löschen"
   },
+  "playlists": {
+    "title": "Playlists",
+    "create_title": "Hinzufügen"
+  },
   "album_favorites": {
     "title": "Favorisierte Alben"
   },
