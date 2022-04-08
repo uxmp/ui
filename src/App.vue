@@ -2,7 +2,7 @@
   <notifications position="top center" group="error" />
   <notifications position="bottom right" group="app" />
   <div class="maingrid-noplayer" id="maingrid">
-    <div class="grid-sidebar">
+    <div class="grid-sidebar scrollbar">
       <Sidebar @hidePlayer="hidePlayer" />
       <div class="versionString">
         <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ versionString }}
@@ -171,6 +171,7 @@ div.grid-content {
 
 div.grid-sidebar {
   max-width: 300px;
+  overflow-y: auto;
 }
 
 div.grid-player {

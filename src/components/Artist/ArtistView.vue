@@ -85,7 +85,6 @@ export default defineComponent({
           return plainToClass(Album, album_data);
         });
       });
-
     },
   }
 })
