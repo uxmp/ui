@@ -29,14 +29,17 @@ HttpRequest.interceptors.request.use(
 HttpRequest.interceptors.response.use(
   response => { return response},
   error => {
-  let path;
-  switch (error.response.status) {
-    case 401: path = '/login'; break;
-    case 403: path = '/login'; break;
-    default: path = '/login';
+    let path;
+    switch (error.response.status) {
+      case 401: path = '/login'; break;
+      case 403: path = '/login'; break;
+      default: path = null;
+    }
+    if (path !== null) {
+      Router.push(path);
+    }
+    return Promise.reject(error);
   }
-  Router.push(path);
-  return Promise.reject(error);
-});
+);
 
 export default HttpRequest;

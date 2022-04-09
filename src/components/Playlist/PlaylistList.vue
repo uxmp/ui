@@ -82,6 +82,9 @@ export default defineComponent({
         this.playlists = this.playlists.filter(playlist => playlist.getId() !== deletePlaylist.getId() )
       });
     },
+    async play(playlist: PlaylistInterface): Promise<void> {
+      
+    }
   }
 })
 </script>

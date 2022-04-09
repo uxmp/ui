@@ -1,22 +1,58 @@
 <template>
-  <div class="spinner"></div>
+  <template v-if="state === 1">
+    <div class="spinner" :style="{ width: size + 'px', height: size + 'px', margin: margin + 'px auto' }"></div>
+  </template>
+  <template v-if="state === 2">
+    <div class="failed">
+      <font-awesome-icon :icon="['fas', 'triangle-exclamation']" />
+    </div>
+  </template>
+  <template v-if="state === 3">
+    <div class="success">
+      <font-awesome-icon :icon="['fas', 'circle-check']" />
+    </div>
+  </template>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import LoadingState from './LoadingState'
 
 export default defineComponent({
   name: 'LoadingIcon',
+  props: {
+    size: {
+      type: Number,
+      default: 40
+    },
+    margin: {
+      type: Number,
+      default: 100
+    },
+    state: {
+      type: Number,
+      default: LoadingState.LOADING
+    }
+  }
 })
 </script>
 
 <style scoped>
+div.failed {
+  color: red;
+  margin: 5px auto;
+  text-align: center;;
+}
+
+div.success {
+  color: green;
+  margin: 5px auto;
+  text-align: center;;
+}
+
 .spinner {
-  width: 40px;
-  height: 40px;
   background-color: rgb(255, 255, 255);
 
-  margin: 100px auto;
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
   animation: sk-rotateplane 1.2s infinite ease-in-out;
 }

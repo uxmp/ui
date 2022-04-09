@@ -1,7 +1,7 @@
 <template>
   <div class="addToPlaylist button">
     <span v-on:click="openModal()" class="playButton">
-      <font-awesome-icon :icon="['fas', 'plus']" title="Add to playlist" /> {{ $t("shared.add_to_playlist") }}
+      <font-awesome-icon :icon="['fas', 'plus']" title="Add to playlist" /> {{ $t("add_to_playlists.title") }}
     </span>
   </div>
   <Modal
@@ -9,31 +9,40 @@
     @close="closeModal"
   >
     <template v-slot:header>
-      {{ $t("shared.add_to_playlist") }}
+      {{ $t("add_to_playlists.title") }}
     </template>
 
     <template v-slot:body>
-      Fna
+      {{ $t('add_to_playlists.add_media') }}
       <div class="list">
         <template v-if="playlists !== null">
           <table>
             <thead>
               <tr>
                 <th></th>
-                <th>{{ $t('playlists.table.columns.name') }}</th>
+                <th>{{ $t('add_to_playlists.table.columns.name') }}</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="playlist in playlists" :key="playlist.getId()">
                 <td>
-                  <input type="checkbox" :id="'cb' + playlist.getId()" v-model="checked">
+                  <input type="checkbox" :id="'cb' + playlist.getId()" v-model="selectedPlaylists" :value="playlist.getId()">
                 </td>
                 <td>
                   <label :for="'cb' + playlist.getId()" >{{ playlist.getName() }}</label>
                 </td>
+                <td class="loading">
+                  <LoadingIcon :size="15" :margin="4" :state="states.get(playlist.getId())"/>
+                </td>
               </tr>
             </tbody>
           </table>
+          <button
+            @click="addToPlaylists()"
+          >
+            Add
+          </button>
         </template>
         <template v-else>
           <LoadingIcon />
@@ -51,6 +60,7 @@ import Playlist from '../../../model/Playlist'
 import HttpRequest from '../../Lib/HttpRequest';
 import { plainToInstance } from 'class-transformer';
 import Modal from '../../Lib/Modal.vue'
+import LoadingState from '../../Lib/LoadingState'
 
 export default defineComponent({
   name: 'AddToPlaylist',
@@ -58,6 +68,8 @@ export default defineComponent({
     return { 
       playlists: [] as Array<PlaylistInterface>,
       isVisible: false as boolean,
+      selectedPlaylists: [] as Array<Number>,
+      states: new Map() as Map<number, number>
     }
   },
   props: {
@@ -81,7 +93,9 @@ export default defineComponent({
     async getPlaylists(): Promise<void> {
       HttpRequest.get(`playlists/user`).then(res => {
         this.playlists = res.data.items.map((album_data: any): PlaylistInterface => {
-          return plainToInstance(Playlist, album_data);
+          let playlist = plainToInstance(Playlist, album_data);
+          this.states.set(playlist.getId(), LoadingState.NONE);
+          return playlist;
         });
       });
     },
@@ -91,6 +105,25 @@ export default defineComponent({
     closeModal(): void {
       this.isVisible = false;
     },
+    addToPlaylists(): void {
+      this.selectedPlaylists.map((playlistId: Number): void => {
+        this.states.set(playlistId, LoadingState.LOADING);
+
+        HttpRequest.post(
+          `playlists/songs`,
+          {
+            'itemType': this.itemType,
+            'itemId': this.itemId
+          }
+        )
+        .then(res => {
+          this.states.set(playlistId, LoadingState.SUCCESS);
+        })
+        .catch(res => {
+          this.states.set(playlistId, LoadingState.ERROR);
+        });
+      });
+    }
   }
 })
 </script>
@@ -98,6 +131,10 @@ export default defineComponent({
 <style scoped>
 div.list {
   width: 500px;
+}
+
+td.loading {
+  width: 50px;
 }
 
 div.addToPlaylist {

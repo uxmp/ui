@@ -44,6 +44,15 @@
     "edit_playlist": "Edit playlist",
     "delete_playlist": "Delete playlist"
   },
+  "add_to_playlists": {
+    "title": "Add to playlist...",
+    "add_media": "Add the media(s) to the following playlists.",
+    "table": {
+      "columns": {
+        "name": "Name"
+      }
+    }
+  },
   "playlists_edit": {
     "title": "Edit",
     "input": {
@@ -158,7 +167,6 @@
     "from_album": "from",
     "quantity": "Count: {quantity}",
     "play": "Play",
-    "add_to_playlist": "Add to playlist...",
     "close": "Close"
   },
   "country_iso2": {
