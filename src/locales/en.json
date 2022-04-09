@@ -157,7 +157,9 @@
     "by_artist": "by",
     "from_album": "from",
     "quantity": "Count: {quantity}",
-    "play": "Play"
+    "play": "Play",
+    "add_to_playlist": "Add to playlist...",
+    "close": "Close"
   },
   "country_iso2": {
     "en": "English",

@@ -46,7 +46,7 @@ export default defineComponent({
       nowPlaying: null as null|NowPlaying,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
-      timer: ''
+      timer: '',
     };
   },
   name: 'uxMP',
@@ -55,7 +55,7 @@ export default defineComponent({
     Sidebar,
     Playlist,
     PlayerControl,
-    NowPlayingView
+    NowPlayingView,
   },
   mounted(): void { 
     this.emitter.on(
@@ -105,7 +105,7 @@ export default defineComponent({
           });
         });
       }
-    }
+    },
   },
 })
 </script>
@@ -243,6 +243,7 @@ div.maingrid-noplayer div.grid-playlist {
   background-color: #1c2c3a; 
 }
 
+button,
 input[type=button] {
   font-size: 100%;
   border: 0;
@@ -255,6 +256,7 @@ input[type=button] {
   border: 1px #446683 solid;
 }
 
+button:hover,
 input[type=button]:hover {
   background: #446683;
   cursor: pointer;
@@ -289,6 +291,7 @@ select {
   background: transparent;
   color: inherit;
 }
+
 select option {
   color: #000;
 }

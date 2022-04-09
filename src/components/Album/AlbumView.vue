@@ -6,11 +6,12 @@
         <div class="albumArtist">
           {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
         </div>
-        <div class="playAlbum">
+        <div class="playAlbum button">
           <span v-on:click="playAlbum()" class="playButton">
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
         </div>
+          <AddToPlaylist :itemId="album.getId()" :itemType="'album'" />
         <div>
           {{ $t("album.total_length_title") }}: <FormatLength :length="album.getLength()" />
         </div>
@@ -84,14 +85,15 @@ import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface';
 import DiscInterface from '../../model/DiscInterface';
-import FormatLength from '../Lib/FormatLength.vue'
+import FormatLength from '../Lib/FormatLength.vue';
+import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 
 export default defineComponent({
   name: 'AlbumView',
   data() {
     return { 
       album: null as null|AlbumInterface,
-      albumDiscs: null as null|Array<DiscInterface>
+      albumDiscs: null as null|Array<DiscInterface>,
     }
   },
   setup() {
@@ -105,7 +107,8 @@ export default defineComponent({
     LoadingIcon,
     FavoriteStarView,
     PlaySongButton,
-    FormatLength
+    FormatLength,
+    AddToPlaylist,
   },
   async created(): Promise<void> {
     EntityLoader.loadAlbum(+this.$route.params.albumId).then((album: AlbumInterface) => this.album = album);
@@ -121,7 +124,7 @@ export default defineComponent({
       if (this.album !== null) {
         this.player.playAlbum(this.album.getId(), this);
       }
-    }
+    },
   }
 })
 </script>
@@ -182,14 +185,18 @@ table tbody tr:last-of-type {
 
 div.playAlbum {
   font-size: 150%;
+  padding-bottom: 10px;
+}
+div.addToPlaylist {
+  font-size: 110%;
   padding-bottom: 20px;
 }
 
-div.playAlbum span {
+div.button span {
   cursor: pointer;
 }
 
-div.playAlbum span:hover {
+div.button span:hover {
   color: rgb(85, 57, 5);
 }
 

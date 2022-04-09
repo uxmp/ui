@@ -15,6 +15,7 @@ import { faStepForward } from '@fortawesome/free-solid-svg-icons'
 import { faStepBackward } from '@fortawesome/free-solid-svg-icons'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faTools } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import enLocaleMessages from './locales/en.json'
 import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
@@ -40,6 +41,7 @@ library.add(faStarSol);
 library.add(faStarReg);
 library.add(faMinusCircle);
 library.add(faTools);
+library.add(faPlus);
 
 const emitter = mitt();
 
