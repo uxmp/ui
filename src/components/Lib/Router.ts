@@ -13,6 +13,7 @@ import RadioStationList from "../RadioStation/RadioStationList.vue"
 import RadioStationEdit from "../RadioStation/RadioStationEdit.vue"
 import UserSettingsView from "../User/UserSettingsView.vue"
 import PlaylistList from "../Playlist/PlaylistList.vue"
+import PlaylistEdit from "../Playlist/PlaylistEdit.vue"
 
 const routes = [
   {
@@ -79,7 +80,12 @@ const routes = [
     path: "/playlists",
     name: "Playlists",
     component: PlaylistList
-  }
+  },
+  {
+    path: "/playlist/edit/:playlistId?",
+    name: "PlaylistEdit",
+    component: PlaylistEdit,
+  },
 ];
 
 const Router = createRouter({

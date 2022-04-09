@@ -16,10 +16,9 @@
     "play_song_title": "Abspielen"
   },
   "radio_stations_edit": {
-    "title": "Radiosender",
-    "edit_title": "Editieren",
-    "station_name_placeholder": "Name",
-    "station_url_placeholder": "Url",
+    "edit_title": "Bearbeiten",
+    "station_name_placeholder": "Name des Senders",
+    "station_url_placeholder": "Stream-Adresse (URL)",
     "save_title": "Sender speichern"
   },
   "radio_stations": {
@@ -27,7 +26,7 @@
     "create_title": "Hinzufügen",
     "table": {
       "name_column_title": "Name",
-      "url_column_title": "Adresse"
+      "url_column_title": "Stream-Adresse"
     },
     "play_station_title": "Sender abspielen",
     "edit_station_title": "Sender bearbeiten",
@@ -35,7 +34,22 @@
   },
   "playlists": {
     "title": "Playlists",
-    "create_title": "Hinzufügen"
+    "create_title": "Hinzufügen",
+    "table": {
+      "columns": {
+        "name": "Name",
+        "user_name": "User"
+      }
+    },
+    "edit_playlist": "Playlist bearbeiten",
+    "delete_playlist": "Playlist löschen"
+  },
+  "playlists_edit": {
+    "title": "Bearbeiten",
+    "input": {
+      "name_placeholder": "Name der Playlist"
+    },
+    "save": "Playlist speichern"
   },
   "album_favorites": {
     "title": "Favorisierte Alben"

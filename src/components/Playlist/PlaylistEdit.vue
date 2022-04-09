@@ -1,5 +1,5 @@
 <template>
-  <h1>/ <router-link :to="'/radiostations'">{{ $t('radio_stations.title') }}</router-link> / {{ $t('radio_stations_edit.edit_title') }}</h1>
+  <h1>/ <router-link :to="'/playlists'">{{ $t('playlists.title') }}</router-link> / {{ $t('playlists_edit.title') }}</h1>
   <div class="creationBox">
     <div class="errorMessage">
       {{ msg }}
@@ -7,13 +7,10 @@
     <div>
       <form @submit="create()" v-on:keyup.enter="create()">
         <div>
-          <input type="text" class="textInput" :placeholder="$t('radio_stations_edit.station_name_placeholder')" v-model="name" required />
+          <input type="text" class="textInput" :placeholder="$t('playlists_edit.input.name_placeholder')" v-model="name" required />
         </div>
         <div>
-          <input type="text" class="textInput" :placeholder="$t('radio_stations_edit.station_url_placeholder')" v-model="url" required />
-        </div>
-        <div>
-          <input type="button" class="button" @click="save()" :value="$t('radio_stations_edit.save_title')" />
+          <input type="button" class="button" @click="save()" :value="$t('playlists_edit.save')" />
         </div>
       </form>
     </div>
@@ -23,17 +20,17 @@
 <script lang="ts">
 import { AxiosResponse } from 'axios';
 import { defineComponent } from 'vue'
-import RadioStation from '../../model/RadioStation';
-import RadioStationInterface from '../../model/RadioStationInterface';
+import Playlist from '../../model/Playlist';
+import PlaylistInterface from '../../model/PlaylistInterface';
 import EntityLoader from '../Lib/EntityLoader';
 import HttpRequest from '../Lib/HttpRequest';
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
-  name: 'RadioStationEdit',
+  name: 'PlaylistEdit',
   data() {
     return { 
-      radioStation: new RadioStation(),
+      playlist: new Playlist(),
       msg: ''
     }
   },
@@ -43,30 +40,22 @@ export default defineComponent({
   computed: {
     name: {
       set: function(val: string): void {
-        this.radioStation.setName(val.trim());
+        this.playlist.setName(val.trim());
       },
       get: function(): string {
-        return this.radioStation.getName();
-      }
-    },
-    url: {
-      set: function(val: string): void {
-        this.radioStation.setUrl(val.trim());
-      },
-      get: function(): string {
-        return this.radioStation.getUrl();
+        return this.playlist.getName();
       }
     },
   },
   async created(): Promise<void> {
-    let stationId = +this.$route.params.stationId;
-    if (stationId !== 0) {
-      EntityLoader.loadRadioStation(stationId).then((station: RadioStationInterface) => this.radioStation = station);
+    let playlistId = +this.$route.params.playlistId;
+    if (playlistId !== 0) {
+      EntityLoader.loadPlaylist(playlistId).then((playlist: PlaylistInterface) => this.playlist = playlist);
     }
   },
   methods: {
     async save(): Promise<void> {
-      if (this.radioStation.getId() === 0) {
+      if (this.playlist.getId() === 0) {
         this.create();
       } else {
         this.persist();
@@ -74,33 +63,31 @@ export default defineComponent({
     },
     async create(): Promise<void> {
       HttpRequest.post(
-        'radiostation',
+        'playlist',
         {
-          name: this.radioStation.getName(),
-          url: this.radioStation.getUrl(),
+          name: this.playlist.getName(),
         }
       ).then((response: AxiosResponse): void => {
         let data = response.data;
         if (data.msg) {
           this.msg = data.msg;
         } else {
-          this.$router.push('/radiostations');
+          this.$router.push('/playlists');
         }
       });
     },
     async persist(): Promise<void> {
       HttpRequest.put(
-        '/radiostation/' + this.radioStation.getId(),
+        '/playlist/' + this.playlist.getId(),
         {
-          name: this.radioStation.getName(),
-          url: this.radioStation.getUrl(),
+          name: this.playlist.getName(),
         }
       ).then((response: AxiosResponse): void => {
         let data = response.data;
         if (data.msg) {
           this.msg = data.msg;
         } else {
-          this.$router.push('/radiostations');
+          this.$router.push('/playlists');
         }
       });
     },

@@ -16,7 +16,6 @@
     "play_song_title": "Play song"
   },
   "radio_stations_edit": {
-    "title": "Radio stations",
     "edit_title": "Edit",
     "station_name_placeholder": "Station name",
     "station_url_placeholder": "Url",
@@ -35,7 +34,22 @@
   },
   "playlists": {
     "title": "Playlists",
-    "create_title": "Create"
+    "create_title": "Create",
+    "table": {
+      "columns": {
+        "name": "Name",
+        "user_name": "User"
+      }
+    },
+    "edit_playlist": "Edit playlist",
+    "delete_playlist": "Delete playlist"
+  },
+  "playlists_edit": {
+    "title": "Edit",
+    "input": {
+      "name_placeholder": "Playlist name"
+    },
+    "save": "Save playlist"
   },
   "album_favorites": {
     "title": "Favorite albums"
