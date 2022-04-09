@@ -86,7 +86,7 @@ export default defineComponent({
     LoadingIcon,
     Modal,
   },
-  async created(): Promise<void> {
+  async updated(): Promise<void> {
     this.getPlaylists()
   },
   methods: {
@@ -104,6 +104,10 @@ export default defineComponent({
     },
     closeModal(): void {
       this.isVisible = false;
+
+      this.playlists = null;
+      this.states = new Map();
+      this.selectedPlaylists = [];
     },
     addToPlaylists(): void {
       this.selectedPlaylists.map((playlistId: Number): void => {
