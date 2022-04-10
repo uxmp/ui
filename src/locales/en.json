@@ -1,15 +1,22 @@
 {
   "home": {
     "title": "Home",
-    "recent_albums_title": "Recent albums"
-  },
-  "playback_history": {
-    "title": "Playback history",
-    "table": {
-      "song_column_title": "Song",
-      "album_column_title": "Album",
-      "artist_column_title": "Artist",
-      "user_column_title": "User"
+    "recent_albums_title": "Recent albums",
+    "most_played": {
+      "title": "Most played",
+      "table": {
+        "column": {
+          "song": "Song",
+          "number_played": "# played"
+        }
+      }
+    },
+    "playback_history": {
+      "title": "Playback history",
+      "table": {
+        "song_column_title": "Song",
+        "user_column_title": "User"
+      }
     }
   },
   "play_song_button": {

@@ -1,15 +1,22 @@
 {
   "home": {
     "title": "Start",
-    "recent_albums_title": "Neueste Alben"
-  },
-  "playback_history": {
-    "title": "Zuletzt gehört",
-    "table": {
-      "song_column_title": "Titel",
-      "album_column_title": "Album",
-      "artist_column_title": "Künstler",
-      "user_column_title": "Benutzer"
+    "recent_albums_title": "Neueste Alben",
+    "most_played": {
+      "title": "Meistgehört",
+      "table": {
+        "column": {
+          "song": "Song",
+          "number_played": "# angehört"
+        }
+      }
+    },
+    "playback_history": {
+      "title": "Zuletzt gehört",
+      "table": {
+        "song_column_title": "Titel",
+        "user_column_title": "Benutzer"
+      }
     }
   },
   "play_song_button": {

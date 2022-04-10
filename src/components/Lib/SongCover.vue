@@ -27,7 +27,7 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: 60
+      default: '60'
     }
   },
   methods: {

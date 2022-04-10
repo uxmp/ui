@@ -8,7 +8,9 @@
     <div>
       <PlaybackHistory :items="playbackHistory" />
     </div>
-    <div></div>
+    <div>
+      <MostPlayed :items="mostPlayed" />
+    </div>
   </div>
 </template>
 
@@ -20,9 +22,12 @@ import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
 import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
 import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
+import MostPlayedItem from '../../model/MostPlayedItem'
+import MostPlayedItemInterface from '../../model/MostPlayedItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
 import AlbumInterface from '../../model/AlbumInterface'
 import PlaybackHistory from '../Lib/PlaybackHistory.vue'
+import MostPlayed from '../Lib/MostPlayed.vue'
 
 export default defineComponent({
   name: 'HomeView',
@@ -30,15 +35,18 @@ export default defineComponent({
     return { 
       recentAlbums: [] as Array<AlbumInterface>,
       playbackHistory: [] as Array<PlaybackHistoryItemInterface>,
+      mostPlayed: [] as Array<MostPlayedItemInterface>,
     }
   },
   components: {
     AlbumListItem,
-    PlaybackHistory
+    PlaybackHistory,
+    MostPlayed,
   },
   beforeMount(): void {
-    this.getNewestAlbums();
-    this.getPlaybackHistory();
+    this.getNewestAlbums()
+    this.getPlaybackHistory()
+    this.getMostPlayed()
   },
   methods: {
     async getNewestAlbums(): Promise<void> {
@@ -55,6 +63,13 @@ export default defineComponent({
         })
       })
     },
+    async getMostPlayed(): Promise<void> {
+      HttpRequest.get('play/mostplayed').then((response: AxiosResponse) => {
+        this.mostPlayed = response.data.items.map((data: Object): MostPlayedItemInterface => {
+          return plainToClass(MostPlayedItem, data);
+        })
+      })
+    },
   }
 })
 </script>
@@ -62,17 +77,19 @@ export default defineComponent({
 <style scoped>
 div.list {
   text-align: left;
-  width: 98%;
-  height: 220px;
+  width: 100%;
+  height: 230px;
   overflow-y: hidden;
   overflow-x: auto;
   background-color: #0a0f14;
   border: 1px #446683 solid;
-  padding: 10px;
   white-space: nowrap;
+  margin-right: 20px;
 }
 div.grid {
   display: grid;
   grid-template-columns: 50% 50%;
+  column-gap: 20px;
+  margin-right: 20px;
 }
 </style>

@@ -29,7 +29,7 @@
               <div class="songName">
                 {{ song.getName() }}
               </div>
-              <div class="albumeName">
+              <div class="albumName">
                 {{ $t("shared.from_album") }} <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
               </div>
             </td>
