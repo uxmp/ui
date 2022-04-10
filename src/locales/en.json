@@ -51,7 +51,8 @@
     "add_media": "Add the media(s) to the following playlists.",
     "table": {
       "columns": {
-        "name": "Name"
+        "name": "Name",
+        "song_count": "Songs"
       }
     }
   },

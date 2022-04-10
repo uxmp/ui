@@ -11,7 +11,7 @@
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
         </div>
-          <AddToPlaylist :itemId="album.getId()" :itemType="'album'" />
+        <AddToPlaylist :itemId="album.getId()" :itemType="'album'" />
         <div>
           {{ $t("album.total_length_title") }}: <FormatLength :length="album.getLength()" />
         </div>

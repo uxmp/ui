@@ -21,6 +21,7 @@
               <tr>
                 <th></th>
                 <th>{{ $t('add_to_playlists.table.columns.name') }}</th>
+                <th>{{ $t('add_to_playlists.table.columns.song_count') }}</th>
                 <th></th>
               </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <td>
                   <label :for="'cb' + playlist.getId()" >{{ playlist.getName() }}</label>
                 </td>
+                <td>{{ playlist.getSongCount() }}</td>
                 <td class="loading">
                   <LoadingIcon :size="15" :margin="4" :state="states.get(playlist.getId())"/>
                 </td>

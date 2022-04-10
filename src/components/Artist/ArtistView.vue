@@ -1,8 +1,11 @@
 <template>
   <template v-if="artist !== null">
     <h1>/ <router-link :to="'/artists'">{{ $t("artist.artist_list_title") }}</router-link> / &bdquo;{{ artist.getName() }}&rdquo;</h1>
+    <div class="action">
+      <AddToPlaylist :itemId="artist.getId()" :itemType="'artist'" />
+    </div>
     <h2>{{ $t("artist.albums_info") }}</h2>
-    <div class="musicBrainz">
+    <div class="info">
       <a :href="`https://musicbrainz.org/artist/${artist.getMbId()}`" target="_blank">Musicbrainz</a>
     </div>
   </template>
@@ -53,6 +56,7 @@ import AlbumInterface from '../../model/AlbumInterface';
 import ArtistInterface from '../../model/ArtistInterface';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import FormatLength from '../Lib/FormatLength.vue'
+import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 
 export default defineComponent({
   name: 'ArtistView',
@@ -67,7 +71,8 @@ export default defineComponent({
     AlbumCover,
     LoadingIcon,
     FavoriteStarView,
-    FormatLength
+    FormatLength,
+    AddToPlaylist,
   },
   beforeMount(): void {
     this.getArtist();
@@ -134,7 +139,8 @@ table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
 }
 
-div.musicBrainz {
+div.info,
+div.action {
   text-align: left
 }
 </style>
