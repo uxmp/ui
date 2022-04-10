@@ -114,10 +114,10 @@ export default defineComponent({
         this.states.set(playlistId, LoadingState.LOADING);
 
         HttpRequest.post(
-          `playlists/songs`,
+          `playlist/` + playlistId + `/songs`,
           {
-            'itemType': this.itemType,
-            'itemId': this.itemId
+            'mediaType': this.itemType,
+            'mediaId': this.itemId
           }
         )
         .then(res => {
