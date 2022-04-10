@@ -1,11 +1,13 @@
 export default interface PlaylistInterface {
-  getId(): number;
+  getId(): number
 
-  getName(): string;
+  getName(): string
 
-  setName(name: string): void;
+  setName(name: string): void
 
-  getUserName(): string;
+  getSongCount(): number
 
-  getUserId(): number;
+  getUserName(): string
+
+  getUserId(): number
 }

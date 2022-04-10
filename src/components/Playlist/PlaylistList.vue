@@ -1,7 +1,7 @@
 <template>
   <h1>/ {{ $t('playlists.title') }}</h1>
   <div class="create">
-    <router-link :to="'/playlist/edit'">+ {{ $t('playlists.create_title') }}</router-link>
+    <router-link :to="'/playlist/edit'">+ {{ $t('playlists.create') }}</router-link>
   </div>
   <template v-if="playlists !== null">
     <div>
@@ -11,6 +11,7 @@
             <th></th>
             <th>{{ $t('playlists.table.columns.name') }}</th>
             <th>{{ $t('playlists.table.columns.user_name') }}</th>
+            <th>{{ $t('playlists.table.columns.song_count') }}</th>
             <th></th>
           </tr>
         </thead>
@@ -24,6 +25,9 @@
             </td>
             <td>
               {{ playlist.getUserName() }}
+            </td>
+            <td>
+              {{ playlist.getSongCount() }}
             </td>
             <td>
               <router-link :to="'/playlist/edit/' + playlist.getId()">
@@ -83,7 +87,7 @@ export default defineComponent({
       });
     },
     async play(playlist: PlaylistInterface): Promise<void> {
-      
+      this.player.playPlaylist(playlist.getId(), this);
     }
   }
 })

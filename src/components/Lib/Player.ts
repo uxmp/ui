@@ -78,13 +78,25 @@ export default class Player {
     });
   }
 
+  playPlaylist(playlistId: number, app: DefineComponent): void {
+    amplitudejs.stop();
+
+    HttpRequest.get(
+      'playlist/' + playlistId + '/songs'
+    ).then((response: AxiosResponse) => {
+      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+
+      app.emitter.emit('updatePlaylist', songList);
+    });
+  }
+
   playArtist(artist: ArtistInterface, app: DefineComponent): void {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {
-      let playList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
-      app.emitter.emit('updatePlaylist', playList);
+      app.emitter.emit('updatePlaylist', songList);
     });
   }
 

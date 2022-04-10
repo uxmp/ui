@@ -34,11 +34,13 @@
   },
   "playlists": {
     "title": "Playlists",
-    "create_title": "Create",
+    "create": "Create",
+    "play_playlist": "Play Playlist",
     "table": {
       "columns": {
         "name": "Name",
-        "user_name": "User"
+        "user_name": "User",
+        "song_count": "Songs"
       }
     },
     "edit_playlist": "Edit playlist",
