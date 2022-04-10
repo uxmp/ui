@@ -21,7 +21,7 @@
               <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(playlist)" :title="$t('playlists.play_playlist')" />
             </td>
             <td>
-              {{ playlist.getName() }}
+              <router-link :to="'/playlist/' + playlist.getId()">{{ playlist.getName() }}</router-link>
             </td>
             <td>
               {{ playlist.getUserName() }}

@@ -53,6 +53,9 @@
     "edit_playlist": "Playlist bearbeiten",
     "delete_playlist": "Playlist löschen"
   },
+  "playlist": {
+    "title": "Playlist"
+  },
   "add_to_playlists": {
     "title": "Zu Playlist hinzufügen...",
     "add_media": "Füge die Medien den folgenden Playlists hinzu",
