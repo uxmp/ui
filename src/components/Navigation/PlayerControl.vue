@@ -25,6 +25,9 @@
       <div class="amplitude-next control-button">
         <font-awesome-icon :icon="['fas', 'step-forward']" :title="$t('player_control.next')" />
       </div>
+      <div class="amplitude-shuffle control-button">
+        <font-awesome-icon :icon="['fas', 'shuffle']" :title="$t('player_control.shuffle')" />
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +90,14 @@ div.control-button {
   height: 50px;
   width: 50px;
   font-size: 150%;
+}
+
+div.amplitude-shuffle-on {
+  color: rgb(175, 118, 12);
+}
+
+div.amplitude-shuffle-on:hover {
+  color: rgb(85, 57, 5);
 }
 
 div.control-button-paused {
