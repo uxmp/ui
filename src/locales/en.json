@@ -174,6 +174,15 @@
     "table": {
       "settings_title": "Setting",
       "value_title": "Value"
+    },
+    "subsonic": {
+      "title": "SubSonic API",
+      "token": "Token",
+      "token_text": "Use this as \"password\" in your subsonic-compatible app",
+      "token_show_button": "Show",
+      "token_deletion_button": "Delete",
+      "token_generation": "Press the \"Generate\"-Button if you'd like to enable subsonic api access for your account.",
+      "token_generation_button": "Generate"
     }
   },
   "shared": {

@@ -2,7 +2,7 @@
   <h1>/ {{ $t('user_settings.title') }}</h1>
   <template v-if="userSettings !== null">
     <div class="box">
-      <h3>Settings</h3>
+      <h3>{{ $t('user_settings.title') }}</h3>
       <form @submit="save()" v-on:keyup.enter="save()">
         <table>
           <tr>
@@ -36,23 +36,23 @@
   </template>
   <template v-if="subSonicSettings !== null">
     <div class="box">
-      <h3>SubSonic API</h3>
+      <h3>{{ $t('user_settings.subsonic.title') }}</h3>
       <table>
         <tr>
-          <th>Token</th>
+          <th>{{ $t('user_settings.subsonic.token') }}</th>
         </tr>
         <tr>
           <td v-if="subSonicSettings.getAccessToken() !== null">
-            <span>Use this as "password" in your subsonic-compatible app</span>
+            <span>{{ $t('user_settings.subsonic.token_text') }}</span>
             <div>
               <pre>{{ subSonicKey }}</pre>
-              <input type="button" value="Show" @click="showSubSonicKey()" />
+              <input type="button" :value="$t('user_settings.subsonic.token_show_button')" @click="showSubSonicKey()" />
             </div>
-            <div><input type="button" value="Delete" @click="deleteSubSonicKey()" /></div>
+            <div><input type="button" :value="$t('user_settings.subsonic.token_deletion_button')" @click="deleteSubSonicKey()" /></div>
           </td>
           <td v-else>
-            <span>Press the "Generate"-Button if you'd like to enable subsonic api access for your account.</span>
-            <div><input type="button" value="Generate" @click="generateSubSonicKey()" /></div>
+            <span>{{ $t('user_settings.subsonic.generation') }}</span>
+            <div><input type="button" :value="$t('user_settings.subsonic.token_generation_button')" @click="generateSubSonicKey()" /></div>
           </td>
         </tr>
       </table>
