@@ -25,8 +25,13 @@
       <div class="amplitude-next control-button">
         <font-awesome-icon :icon="['fas', 'step-forward']" :title="$t('player_control.next')" />
       </div>
+    </div>
+    <div class="control-container-secondary">
       <div class="amplitude-shuffle control-button">
         <font-awesome-icon :icon="['fas', 'shuffle']" :title="$t('player_control.shuffle')" />
+      </div>
+      <div class="amplitude-repeat control-button">
+        <font-awesome-icon :icon="['fas', 'repeat']" :title="$t('player_control.repeat')" />
       </div>
     </div>
   </div>
@@ -61,6 +66,7 @@ export default defineComponent({
 <style scoped>
 div.container {
   width: 100%;
+  padding-top: 20px;
 }
 
 div.controls div {
@@ -92,11 +98,15 @@ div.control-button {
   font-size: 150%;
 }
 
-div.amplitude-shuffle-on {
+div.amplitude-shuffle-on,
+div.amplitude-repeat-on
+{
   color: rgb(175, 118, 12);
 }
 
-div.amplitude-shuffle-on:hover {
+div.amplitude-shuffle-on:hover,
+div.amplitude-repeat-on:hover
+{
   color: rgb(85, 57, 5);
 }
 
@@ -112,6 +122,14 @@ div.control-button-paused {
 
 div.control-button:hover {
   color: rgb(175, 118, 12);
+}
+
+div.control-container {
+  font-size: 110%;
+}
+
+div.control-container-secondary {
+  font-size: 90%;
 }
 </style>
   

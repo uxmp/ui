@@ -19,6 +19,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faShuffle } from '@fortawesome/free-solid-svg-icons';
+import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 import enLocaleMessages from './locales/en.json'
 import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
@@ -34,20 +35,23 @@ const i18n = createI18n({
   messages: { en: enLocaleMessages, de: deLocaleMessages }
 })
 
-library.add(faPlay);
-library.add(faPause);
-library.add(faVolumeUp);
-library.add(faVolumeOff);
-library.add(faStepForward);
-library.add(faStepBackward);
-library.add(faStarSol);
-library.add(faStarReg);
-library.add(faMinusCircle);
-library.add(faTools);
-library.add(faPlus);
-library.add(faTriangleExclamation);
-library.add(faCircleCheck);
-library.add(faShuffle);
+library.add(
+  faPlay,
+  faPause,
+  faVolumeUp,
+  faVolumeOff,
+  faStepForward,
+  faStepBackward,
+  faStarSol,
+  faStarReg,
+  faMinusCircle,
+  faTools,
+  faPlus,
+  faTriangleExclamation,
+  faCircleCheck,
+  faShuffle,
+  faRepeat,
+);
 
 const emitter = mitt();
 
