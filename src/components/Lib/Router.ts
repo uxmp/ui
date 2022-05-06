@@ -2,7 +2,6 @@ import { createWebHistory, createRouter } from "vue-router";
 import ArtistList from "../Artist/ArtistListView.vue";
 import AlbumList from "../Album/AlbumListView.vue";
 import RandomSongs from "../Random/RandomSongsView.vue"
-import RandomFavoriteSongs from "../Random/RandomFavoriteSongsView.vue"
 import Login from "../Home/LoginView.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import AlbumFavoriteView from "../Album/AlbumFavoriteView.vue"
@@ -19,77 +18,58 @@ import PlaylistView from "../Playlist/PlaylistView.vue"
 const routes = [
   {
     path: "/",
-    name: "Home",
     component: HomeView,
   },
   {
     path: "/artists",
-    name: "Artists",
     component: ArtistList,
   },
   {
     path: "/albums",
-    name: "Albums",
     component: AlbumList,
   },
   {
     path: "/albums/favorite",
-    name: "Starred Albums",
     component: AlbumFavoriteView
   },
   {
     path: "/album/:albumId",
-    name: "Album",
     component: AlbumView,
   },
   {
     path: "/artist/:artistId",
-    name: "ArtistView",
     component: ArtistView,
   },
   {
     path: "/random/songs/:limit?",
-    name: "Random songs",
     component: RandomSongs
   },
   {
-    path: "/random/favorite/:limit?",
-    name: "Random starred songs",
-    component: RandomFavoriteSongs
-  },
-  {
     path: "/radiostations",
-    name: "Radio stations",
     component: RadioStationList
   },
   {
     path: "/radiostation/edit/:stationId?",
-    name: "RadioStationEdit",
     component: RadioStationEdit,
   },
   {
     path: "/login",
-    name: "Login",
     component: Login
   },
   {
     path: "/usersettings",
-    name: "UserSettings",
     component: UserSettingsView
   },
   {
     path: "/playlists",
-    name: "Playlists",
     component: PlaylistList
   },
   {
     path: "/playlist/edit/:playlistId?",
-    name: "PlaylistEdit",
     component: PlaylistEdit,
   },
   {
     path: "/playlist/:playlistId?",
-    name: "PlaylistView",
     component: PlaylistView,
   },
 ];

@@ -12,7 +12,7 @@
         <div v-if="isNewPlaylist()">
           <select v-model="selectedPlaylistType">
             <option v-for="option in playlistTypes" :value="option.value" v-bind:key="option.value">
-                  {{ $t(option.label) }}
+              {{ $t(option.label) }}
             </option>
           </select>
         </div>
