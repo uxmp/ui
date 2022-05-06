@@ -1,62 +1,45 @@
 <template>
-  <h3>{{ $t("home.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/">{{ $t("home.title") }}</router-link>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("home.title") }}</div>
+    <router-link to="/">{{ $t("home.title") }}</router-link>
+  </div>
 
-  <h3>{{ $t("songs.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/random/songs/50">{{ $t("songs.random") }}</router-link>
-      <br />
-      <span class="random_select">
-        <router-link to="/random/songs/50">50</router-link> /
-        <router-link to="/random/songs/250">250</router-link> /
-        <router-link to="/random/songs/500">500</router-link>
-      </span>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("songs.title") }}</div>
+    <router-link to="/random/songs/50">{{ $t("songs.random") }}</router-link>
+    <span class="random_select">
+      <router-link to="/random/songs/50">50</router-link> /
+      <router-link to="/random/songs/250">250</router-link> /
+      <router-link to="/random/songs/500">500</router-link>
+    </span>
+  </div>
 
-  <h3>{{ $t("album_list.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/albums">{{ $t("album_list.title") }}</router-link>
-    </li>
-    <li>
-      <router-link to="/albums/favorite">{{ $t("album_list.favorites") }}</router-link>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("album_list.title") }}</div>
+    <router-link to="/albums">{{ $t("album_list.title") }}</router-link>
+    <router-link to="/albums/favorite">{{ $t("album_list.favorites") }}</router-link>
+  </div>
 
-  <h3>{{ $t("artist_list.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/artists">{{ $t("artist_list.title") }}</router-link>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("artist_list.title") }}</div>
+    <router-link to="/artists">{{ $t("artist_list.title") }}</router-link>
+  </div>
 
-  <h3>{{ $t("playlists.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/playlists">{{ $t("playlists.title") }}</router-link>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("playlists.title") }}</div>
+    <router-link to="/playlists">{{ $t("playlists.title") }}</router-link>
+  </div>
 
-  <h3>{{ $t("radio_stations.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/radiostations">{{ $t("radio_stations.title") }}</router-link>
-    </li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("radio_stations.title") }}</div>
+    <router-link to="/radiostations">{{ $t("radio_stations.title") }}</router-link>
+  </div>
 
-  <h3>{{ $t("user.title") }}</h3>
-  <ul>
-    <li>
-      <router-link to="/usersettings">{{ $t("user_settings.title") }}</router-link>
-    </li>
-    <li><a v-on:click="logout()">{{ $t("user.logout") }}</a></li>
-  </ul>
+  <div class="box">
+    <div class="head">{{ $t("user.title") }}</div>
+    <router-link to="/usersettings">{{ $t("user_settings.title") }}</router-link>
+    <a v-on:click="logout()">{{ $t("user.logout") }}</a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -84,26 +67,45 @@ export default defineComponent({
 </script>
 
 <style scoped>
-h3 {
-  text-align: left;
-  margin-left: 30px
+div.box:first-of-type {
+  margin-top: 10px;
 }
 
-ul {
-  list-style-type: none;
+div.box {
   border: 1px #446683 solid;
+  border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #0a0f14;
   margin-left: 10px;
   margin-right: 10px;
-}
-
-ul li {
+  margin-bottom: 15px;
   text-align: left;
 }
 
-li span.random_select {
-  font-size: 70%;
+div.box a {
+  display: block;
+  margin-left: 30px;
+}
+
+div.box div.head {
+  font-size: 110%;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+div.box div.content {
+  margin-left: 30px;
+}
+
+div.box span.random_select a {
+  font-size: 80%;
+  display: inline;
+  margin-left: 0;
+}
+
+div.box span.random_select a:first-of-type {
+  margin-left: 30px;
 }
 </style>
