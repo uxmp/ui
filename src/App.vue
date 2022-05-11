@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="grid-playlist">
-      <Playlist :elements="playlist" />
+      <Playlist :playlistConfig="playlist" />
     </div>
   </div>
 </template>
@@ -40,11 +40,13 @@ import HttpRequest from './components/Lib/HttpRequest'
 import { AxiosResponse } from 'axios'
 import { plainToClass } from 'class-transformer'
 import SongListItem from './model/SongListItem'
+import PlaylistConfig from './model/PlaylistConfig'
+import PlaylistConfigInterface from './model/PlaylistConfigInterface'
 
 export default defineComponent({
   data() {
     return {
-      playlist: [] as SongListItemInterface[],
+      playlist: null as null|PlaylistConfigInterface,
       nowPlaying: null as null|NowPlaying,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
@@ -63,14 +65,16 @@ export default defineComponent({
     this.emitter.on(
       "updatePlaylist",
       (songList: Array<SongListItemInterface>) => {
-        let element = document.getElementById('maingrid');
-        if (element !== null) {
-          element.className = 'maingrid';
-        }
+        this.showPlayer()
 
         let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
         if (temporaryPlaylistId === null) {
           temporaryPlaylistId = this.$uuid.v4()
+
+          // save temporary playlist id
+          this.$store.dispatch('authStorage/setTemporaryPlaylistId', {
+            temporaryPlaylistId: temporaryPlaylistId
+          });
         }
 
         HttpRequest.post(
@@ -81,7 +85,9 @@ export default defineComponent({
           }
         );
 
-        this.playlist = songList;
+        this.playlist = new PlaylistConfig(
+          songList
+        )
       }
     );
     this.emitter.on(
@@ -98,13 +104,18 @@ export default defineComponent({
   },
   beforeMount(): void {
     let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+    console.log(temporaryPlaylistId)
     if (temporaryPlaylistId !== null) {
       HttpRequest.get(
         'temporary_playlist/' + temporaryPlaylistId + '/songs'
       ).then((response: AxiosResponse) => {
-        let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+        this.showPlayer()
 
-        this.emitter.emit('updatePlaylist', songList);
+        this.playlist = new PlaylistConfig(
+          response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw)),
+          0,
+          false
+        )
       });
     }
   },
@@ -112,12 +123,18 @@ export default defineComponent({
     this.cancelAutoUpdate();
   },
   methods: {
+    showPlayer(): void {
+        let element = document.getElementById('maingrid');
+        if (element !== null) {
+          element.className = 'maingrid';
+        }
+    },
     hidePlayer(): void {
       let element = document.getElementById('maingrid');
       if (element !== null) {
         element.className = 'maingrid-noplayer';
       }
-      this.playlist = [];
+      this.playlist = null;
       this.nowPlaying = null;
     },
     cancelAutoUpdate(): void {
