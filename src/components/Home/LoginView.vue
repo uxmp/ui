@@ -22,8 +22,10 @@
 import { defineComponent } from '@vue/runtime-core';
 import { AxiosResponse } from 'axios';
 import HttpRequest from '../Lib/HttpRequest';
-import { plainToInstance } from 'class-transformer';
+import { plainToClass, plainToInstance } from 'class-transformer';
 import User from '../../model/User'
+import SongListItemInterface from '../../model/SongListItemInterface';
+import SongListItem from '../../model/SongListItem';
 
 export default defineComponent({
   setup() {
@@ -66,6 +68,28 @@ export default defineComponent({
             this.$store.dispatch('favorites/init', {
               favorites: response.data
             });
+          });
+
+          HttpRequest.get(
+            'temporary_playlist'
+          ).then((response: AxiosResponse) => {
+            let temporaryPlaylistId = response.data.result
+
+            this.$store.dispatch('authStorage/setTemporaryPlaylistId', {
+              temporaryPlaylistId: temporaryPlaylistId
+            });
+
+            if (temporaryPlaylistId !== null) {
+              console.log(temporaryPlaylistId)
+
+              HttpRequest.get(
+                'temporary_playlist/' + temporaryPlaylistId + '/songs'
+              ).then((response: AxiosResponse) => {
+                let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+
+                this.emitter.emit('updatePlaylist', songList);
+              });
+            }
           });
 
           this.$router.push('/');

@@ -25,6 +25,7 @@ import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
 import Player from './components/Lib/Player';
 import Notifications from '@kyvg/vue3-notification'
+import withUUID from "vue-uuid";
 
 
 const i18n = createI18n({
@@ -61,6 +62,7 @@ let app = createApp(App)
   .use(Store)
   .use(i18n)
   .use(Notifications)
+  .use(withUUID)
 ;
 
 app.config.globalProperties.emitter = emitter;

@@ -38,6 +38,8 @@ import PlayerControl from './components/Navigation/PlayerControl.vue'
 import ArtistList from './components/Artist/ArtistListView.vue'
 import HttpRequest from './components/Lib/HttpRequest'
 import { AxiosResponse } from 'axios'
+import { plainToClass } from 'class-transformer'
+import SongListItem from './model/SongListItem'
 
 export default defineComponent({
   data() {
@@ -65,6 +67,20 @@ export default defineComponent({
         if (element !== null) {
           element.className = 'maingrid';
         }
+
+        let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+        if (temporaryPlaylistId === null) {
+          temporaryPlaylistId = this.$uuid.v4()
+        }
+
+        HttpRequest.post(
+          'temporary_playlist',
+          {
+            playlistId: temporaryPlaylistId,
+            songIds: songList.map((item: SongListItemInterface) => item.getId()),
+          }
+        );
+
         this.playlist = songList;
       }
     );
@@ -80,7 +96,19 @@ export default defineComponent({
   created(): void {
     this.timer = setInterval(this.fetchFavorites, 300000); // every 5 minutes
   },
-  beforeDestroy () {
+  beforeMount(): void {
+    let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+    if (temporaryPlaylistId !== null) {
+      HttpRequest.get(
+        'temporary_playlist/' + temporaryPlaylistId + '/songs'
+      ).then((response: AxiosResponse) => {
+        let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+
+        this.emitter.emit('updatePlaylist', songList);
+      });
+    }
+  },
+  beforeDestroy(): void {
     this.cancelAutoUpdate();
   },
   methods: {

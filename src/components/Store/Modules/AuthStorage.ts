@@ -4,7 +4,8 @@ const getDefaultState = () => {
   return {
     token: '' as string,
     user: null as null|UserInterface,
-    language: 'en' as string
+    language: 'en' as string,
+    temporaryPlaylistId: null as null|string,
   };
 };
 
@@ -16,6 +17,7 @@ export default {
     getUser: state => state.user,
     getToken: state => state.token,
     getLanguage: state => state.language,
+    getTemporaryPlaylistId: state => state.temporaryPlaylistId,
   },
   mutations: {
     SET_TOKEN: (state, token: string) => {
@@ -29,6 +31,9 @@ export default {
     },
     SET_LANGUAGE: (state, language: string) => {
       state.language = language
+    },
+    SET_TEMPORARY_PLAYLIST_ID: (state, temporaryPlaylistId: null|string) => {
+      state.temporaryPlaylistId = temporaryPlaylistId
     }
   },
   actions: {
@@ -41,6 +46,9 @@ export default {
     },
     setLanguage: ({ commit }, { language }) => {
       commit('SET_LANGUAGE', language)
+    },
+    setTemporaryPlaylistId: ({ commit }, {temporaryPlaylistId}) => {
+      commit('SET_TEMPORARY_PLAYLIST_ID', temporaryPlaylistId)
     }
   }
 }

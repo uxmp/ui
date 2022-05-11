@@ -74,7 +74,7 @@ export default class Player {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
       });
 
-      app.emitter.emit('updatePlaylist', songList);
+      this.updatePlaylist(songList, app)
     });
   }
 
@@ -86,7 +86,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
-      app.emitter.emit('updatePlaylist', songList);
+      this.updatePlaylist(songList, app)
     });
   }
 
@@ -96,7 +96,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
-      app.emitter.emit('updatePlaylist', songList);
+      this.updatePlaylist(songList, app)
     });
   }
 
@@ -108,8 +108,12 @@ export default class Player {
     app.emitter.emit('updatePlaylist', [song]);
   }
 
-  playSong(song: SongListItemInterface, app :DefineComponent): void {
-    app.emitter.emit('updatePlaylist', [song])
+  playSong(song: SongListItemInterface, app: DefineComponent): void {
+    this.updatePlaylist([song], app)
+  }
+
+  private updatePlaylist(songs: Array<SongListItemInterface>, app: DefineComponent): void {
+    app.emitter.emit('updatePlaylist', songs)
   }
 
   createSongListItem(song: SongListItemInterface): Object {
