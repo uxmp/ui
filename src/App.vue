@@ -107,13 +107,15 @@ export default defineComponent({
     console.log(temporaryPlaylistId)
     if (temporaryPlaylistId !== null) {
       HttpRequest.get(
-        'temporary_playlist/' + temporaryPlaylistId + '/songs'
+        'temporary_playlist/' + temporaryPlaylistId
       ).then((response: AxiosResponse) => {
         this.showPlayer()
 
+        let data = response.data.data;
+
         this.playlist = new PlaylistConfig(
-          response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw)),
-          0,
+          data.songs.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw)),
+          data.offset,
           false
         )
       });

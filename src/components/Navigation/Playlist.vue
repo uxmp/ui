@@ -42,7 +42,8 @@ export default defineComponent({
     this.$nextTick(function (): void {
       this.player.init(
         this,
-        this.playlistConfig.getSongList().map((song: SongListItemInterface) => this.player.createSongListItem(song))
+        this.playlistConfig.getSongList().map((song: SongListItemInterface) => this.player.createSongListItem(song)),
+        this.playlistConfig.getOffset()
       );
 
       if (this.playlistConfig.isAutoPlay()) {

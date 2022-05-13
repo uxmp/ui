@@ -13,7 +13,7 @@ import DiscInterface from '../../model/DiscInterface';
 
 export default class Player {
 
-  init(app: DefineComponent, songList: Array<Object>): void {
+  init(app: DefineComponent, songList: Array<Object>, offset: Number = 0): void {
     amplitudejs.stop();
 
     if ("mediaSession" in navigator) {
@@ -23,6 +23,7 @@ export default class Player {
 
     amplitudejs.init({
       songs: songList,
+      start_song: offset,
       callbacks: {
         play: function () {
           let song = amplitudejs.getActiveSongMetadata();
@@ -35,6 +36,17 @@ export default class Player {
               artwork: [{ src: song.cover_art_url, }],
             });
           }
+
+          HttpRequest.post(
+            'play/nowplaying',
+            {
+              songId: song.songId,
+              temporaryPlaylist: {
+                id: app.$store.getters['authStorage/getTemporaryPlaylistId'],
+                offset: song.index,
+              }
+            }
+          );
 
           app.emitter.emit('updateNowPlaying', plainToClass(NowPlaying, song))
           app.emitter.emit('updatePlayerState', true)
