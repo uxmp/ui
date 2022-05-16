@@ -51,7 +51,7 @@
             <div><input type="button" :value="$t('user_settings.subsonic.token_deletion_button')" @click="deleteSubSonicKey()" /></div>
           </td>
           <td v-else>
-            <span>{{ $t('user_settings.subsonic.generation') }}</span>
+            <span>{{ $t('user_settings.subsonic.token_generation') }}</span>
             <div><input type="button" :value="$t('user_settings.subsonic.token_generation_button')" @click="generateSubSonicKey()" /></div>
           </td>
         </tr>
