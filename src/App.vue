@@ -104,14 +104,13 @@ export default defineComponent({
   },
   beforeMount(): void {
     let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
-    console.log(temporaryPlaylistId)
     if (temporaryPlaylistId !== null) {
       HttpRequest.get(
         'temporary_playlist/' + temporaryPlaylistId
       ).then((response: AxiosResponse) => {
         this.showPlayer()
 
-        let data = response.data.data;
+        let data = response.data;
 
         this.playlist = new PlaylistConfig(
           data.songs.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw)),
