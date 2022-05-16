@@ -144,7 +144,8 @@
     "next": "Next",
     "play": "Play",
     "pause": "Pause",
-    "shuffle": "Shuffle"
+    "shuffle": "Shuffle",
+    "repeat": "Repeat"
   },
   "songs": {
     "title": "Songs",

@@ -144,7 +144,8 @@
     "next": "Nächster",
     "play": "Abspielen",
     "pause": "Pausieren",
-    "shuffle": "Zufallswiedergabe"
+    "shuffle": "Zufallswiedergabe",
+    "repeat": "Wiederholen"
   },
   "songs": {
     "title": "Titel",
