@@ -67,23 +67,29 @@ export default defineComponent({
       (songList: Array<SongListItemInterface>) => {
         this.showPlayer()
 
-        let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
-        if (temporaryPlaylistId === null) {
-          temporaryPlaylistId = this.$uuid.v4()
+        let temporaryPlaylistSongIds = songList
+          .map((item: SongListItemInterface): number => item.getId())
+          .filter((songId: number): boolean => songId > 0)
+        
+        if (temporaryPlaylistSongIds.length > 0) {
+          let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+          if (temporaryPlaylistId === null) {
+            temporaryPlaylistId = this.$uuid.v4()
 
-          // save temporary playlist id
-          this.$store.dispatch('authStorage/setTemporaryPlaylistId', {
-            temporaryPlaylistId: temporaryPlaylistId
-          });
-        }
-
-        HttpRequest.post(
-          'temporary_playlist',
-          {
-            playlistId: temporaryPlaylistId,
-            songIds: songList.map((item: SongListItemInterface) => item.getId()),
+            // save temporary playlist id
+            this.$store.dispatch('authStorage/setTemporaryPlaylistId', {
+              temporaryPlaylistId: temporaryPlaylistId
+            });
           }
-        );
+
+          HttpRequest.post(
+            'temporary_playlist',
+            {
+              playlistId: temporaryPlaylistId,
+              songIds: temporaryPlaylistSongIds,
+            }
+          );
+        }
 
         this.playlist = new PlaylistConfig(
           songList
