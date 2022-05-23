@@ -1,6 +1,6 @@
 <template>
-  <div v-on:click="playAll()" class="playall">
-    <span>
+  <div class="playall">
+    <span v-on:click="playAll()">
       <font-awesome-icon :icon="['fas', 'play']" /> {{ $t("song_list.play_all_title") }}
     </span>
   </div>
