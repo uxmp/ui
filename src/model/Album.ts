@@ -1,4 +1,8 @@
+import { Type } from "class-transformer";
 import AlbumInterface from "./AlbumInterface";
+import Genre from "./Genre";
+import GenreInterface from "./GenreInterface";
+import 'reflect-metadata';
 
 export default class Album implements AlbumInterface {
   private id: number = 0;
@@ -8,6 +12,9 @@ export default class Album implements AlbumInterface {
   private artistName: string = '';
   private length: number = 0;
   private mbId: string = '';
+
+  @Type(() => Genre)
+  private genres: Array<GenreInterface> = []
 
   getId(): number {
     return this.id;
@@ -35,5 +42,9 @@ export default class Album implements AlbumInterface {
 
   getMbId(): string {
     return this.mbId;
+  }
+
+  getGenres(): Array<GenreInterface> {
+    return this.genres
   }
 }

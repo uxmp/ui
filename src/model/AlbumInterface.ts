@@ -1,3 +1,5 @@
+import GenreInterface from "./GenreInterface";
+
 export default interface AlbumInterface {
 
   getId(): number;
@@ -13,4 +15,6 @@ export default interface AlbumInterface {
   getLength(): number;
 
   getMbId(): string;
+
+  getGenres(): Array<GenreInterface>
 }
