@@ -6,7 +6,7 @@
         <div class="albumArtist">
           {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
         </div>
-        <div class="playAlbum button">
+        <div class="playAlbum">
           <span v-on:click="playAlbum()" class="playButton">
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
@@ -195,11 +195,11 @@ div.addToPlaylist {
   padding-bottom: 20px;
 }
 
-div.button span {
+span.playButton {
   cursor: pointer;
 }
 
-div.button span:hover {
+span.playButton:hover {
   color: rgb(85, 57, 5);
 }
 
