@@ -53,6 +53,7 @@ const routes = [
     component: RadioStationEdit,
   },
   {
+    name: "Login",
     path: "/login",
     component: Login
   },
@@ -80,7 +81,7 @@ const Router = createRouter({
 });
 
 Router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !Store.getters['authStorage/isLogged']) next({ name: 'Login' })
+  if (to.name !== 'Login' && !Store.getters['authStorage/isLogged']) next({ path: 'Login' })
   else next()
 })
 
