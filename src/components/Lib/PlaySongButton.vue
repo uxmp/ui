@@ -1,11 +1,15 @@
 <template>
-  <font-awesome-icon class="playButton" :icon="['fas', 'play']" v-on:click="play(song)" :title="$t('play_song_button.play_song_title')" />
+  <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(song)" :title="$t('play_song_button.play_song_title')" />
+  <span class="addToPlaylistButton">
+    <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
+  </span>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, PropType } from 'vue'
 import Player from './Player';
 import SongListItemInterface from '../../model/SongListItemInterface';
+import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 
 export default defineComponent({
   name: 'PlaySongButton',
@@ -21,20 +25,30 @@ export default defineComponent({
       player,
     };
   },
+  components: {
+    AddToPlaylist,
+  },
   methods: {
-    play(song: SongListItemInterface): void {
+    async play(song: SongListItemInterface): Promise<void> {
       this.player.playSong(song, this);
+    },
+    async addToPlaylist(song: SongListItemInterface): Promise<void> {
+
     }
   }
 })
 </script>
 
 <style scoped>
-.playButton {
+.button {
   cursor: pointer;
 }
 
-.playButton:hover {
+.button :hover {
   color: rgb(85, 57, 5);
+}
+
+.addToPlaylistButton {
+  padding-left: 15px;
 }
 </style>

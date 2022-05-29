@@ -11,7 +11,9 @@
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
         </div>
-        <AddToPlaylist :itemId="album.getId()" :itemType="'album'" />
+        <div class="addToPlaylist button">
+          <AddToPlaylist :itemId="album.getId()" :itemType="'album'" :showTitle="true" />
+        </div>
         <div>
           {{ $t("album.total_length_title") }}: <FormatLength :length="album.getLength()" />
         </div>
@@ -23,8 +25,8 @@
             <table>
               <thead>
                 <tr>
-                  <th></th>
-                  <th>#</th>
+                  <th class="trackNumber">#</th>
+                  <th class="buttons"></th>
                   <th>{{ $t("album.table.name_column_title") }}</th>
                   <th>{{ $t("album.table.length_column_title") }}</th>
                   <th>{{ $t("album.table.year_column_title") }}</th>
@@ -33,10 +35,10 @@
               </thead>
               <tbody>
                 <tr v-for="song in disc.getSongList()" :key="song.getId()">
+                  <td>{{ song.getTracknumber() }}</td>
                   <td>
                     <PlaySongButton :song="song" />
                   </td>
-                  <td>{{ song.getTracknumber() }}</td>
                   <td>{{ song.getName() }}</td>
                   <td>
                     <FormatLength :length="song.getLength()" />
@@ -228,5 +230,18 @@ div.musicBrainz {
   width: 100%;
   padding-top: 20px;
   text-align: center;
+}
+
+div.addToPlaylist {
+  font-size: 110%;
+  padding-bottom: 20px;
+}
+
+th.trackNumber {
+  width: 10px;
+}
+
+th.buttons {
+  width: 80px;
 }
 </style>

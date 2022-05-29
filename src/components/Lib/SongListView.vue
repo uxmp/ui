@@ -12,7 +12,7 @@
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th class="cover"></th>
             <th>{{ $t("song_list.table.column.name.title") }}</th>
             <th>{{ $t("song_list.table.column.artist.title") }}</th>
             <th>{{ $t("song_list.table.column.length.title") }}</th>
@@ -43,7 +43,12 @@
               {{ song.getYear() }}
             </td>
             <td>
-              <FavoriteStarView :itemId="song.getId()" itemType="song" />
+              <div class="button">
+                <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
+              </div>
+              <div class="button">
+                <FavoriteStarView :itemId="song.getId()" itemType="song" />
+              </div>
             </td>
           </tr>
         </tbody>
@@ -63,6 +68,7 @@ import SongCover from '../Lib/SongCover.vue'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 import FavoriteStarView from './FavoriteStarView.vue'
 import FormatLength from '../Lib/FormatLength.vue'
+import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 
 export default defineComponent({
   props: {
@@ -84,6 +90,7 @@ export default defineComponent({
     LoadingIcon,
     FavoriteStarView,
     FormatLength,
+    AddToPlaylist,
   },
   watch: {
     songList: function (songList) {
@@ -172,5 +179,14 @@ tbody tr:nth-of-type(even) {
 
 table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
+}
+
+th.cover {
+  width: 60px;
+}
+
+div.button {
+  display: inline-block;
+  padding-left: 6px;
 }
 </style>

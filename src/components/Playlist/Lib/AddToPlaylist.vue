@@ -1,9 +1,10 @@
 <template>
-  <div class="addToPlaylist button">
-    <span v-on:click="openModal()" class="playButton">
-      <font-awesome-icon :icon="['fas', 'plus']" title="Add to playlist" /> {{ $t("add_to_playlists.title") }}
+  <span v-on:click="openModal()" class="button">
+    <font-awesome-icon :icon="['fas', 'file-circle-plus']" :title="$t('add_to_playlists.title')" />
+    <span class="title" v-if="showTitle">
+      {{ $t("add_to_playlists.title") }}
     </span>
-  </div>
+  </span>
   <Modal
     v-show="isVisible"
     @close="closeModal"
@@ -82,6 +83,10 @@ export default defineComponent({
     itemType: {
       type: String,
       default: ''
+    },
+    showTitle: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -111,7 +116,7 @@ export default defineComponent({
       this.states = new Map();
       this.selectedPlaylists = [];
     },
-    addToPlaylists(): void {
+    async addToPlaylists(): Promise<void> {
       this.selectedPlaylists.map((playlistId: Number): void => {
         this.states.set(playlistId, LoadingState.LOADING);
 
@@ -129,7 +134,7 @@ export default defineComponent({
           this.states.set(playlistId, LoadingState.ERROR);
         });
       });
-    }
+    },
   }
 })
 </script>
@@ -143,16 +148,15 @@ td.loading {
   width: 50px;
 }
 
-div.addToPlaylist {
-  font-size: 110%;
-  padding-bottom: 20px;
-}
-
-div.button span {
+span.button {
   cursor: pointer;
 }
 
-div.button span:hover {
+span.button:hover {
   color: rgb(85, 57, 5);
+}
+
+span.title {
+  padding-left: 5px;
 }
 </style>
