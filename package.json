@@ -27,7 +27,7 @@
     "vue-uuid": "^3.0.0",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0",
-    "yargs-parser": "^13.1.2"
+    "yargs-parser": "^21.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.10.2",
