@@ -9,6 +9,7 @@
       <PlaybackHistory :items="playbackHistory" />
     </div>
     <div>
+      <GenreStatistics :items="genreStatistics" />
       <MostPlayed :items="mostPlayed" />
     </div>
   </div>
@@ -28,6 +29,9 @@ import HttpRequest from '../Lib/HttpRequest'
 import AlbumInterface from '../../model/AlbumInterface'
 import PlaybackHistory from '../Lib/PlaybackHistory.vue'
 import MostPlayed from '../Lib/MostPlayed.vue'
+import GenreStatisticItemInterface from '../../model/GenreStatisticItemInterface'
+import GenreStatisticItem from '../../model/GenreStatisticItem'
+import GenreStatistics from './Lib/GenreStatistics.vue'
 
 export default defineComponent({
   name: 'HomeView',
@@ -36,17 +40,20 @@ export default defineComponent({
       recentAlbums: [] as Array<AlbumInterface>,
       playbackHistory: [] as Array<PlaybackHistoryItemInterface>,
       mostPlayed: [] as Array<MostPlayedItemInterface>,
+      genreStatistics: [] as Array<GenreStatisticItemInterface>,
     }
   },
   components: {
     AlbumListItem,
     PlaybackHistory,
     MostPlayed,
-  },
+    GenreStatistics
+},
   beforeMount(): void {
     this.getNewestAlbums()
     this.getPlaybackHistory()
     this.getMostPlayed()
+    this.getGenreStatistics()
   },
   methods: {
     async getNewestAlbums(): Promise<void> {
@@ -67,6 +74,13 @@ export default defineComponent({
       HttpRequest.get('play/mostplayed').then((response: AxiosResponse) => {
         this.mostPlayed = response.data.items.map((data: Object): MostPlayedItemInterface => {
           return plainToClass(MostPlayedItem, data);
+        })
+      })
+    },
+    async getGenreStatistics(): Promise<void> {
+      HttpRequest.get('genres').then((response: AxiosResponse) => {
+        this.genreStatistics = response.data.items.map((data: Object): GenreStatisticItemInterface => {
+          return plainToClass(GenreStatisticItem, data);
         })
       })
     },

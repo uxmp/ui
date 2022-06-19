@@ -17,6 +17,9 @@
         "song_column_title": "Song",
         "user_column_title": "User"
       }
+    },
+    "genre_statistics": {
+      "title": "Genre"
     }
   },
   "play_song_button": {
