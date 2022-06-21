@@ -62,7 +62,9 @@
         <FavoriteStarView :itemId="album.getId()" itemType="album" />
         <AlbumCover :album="album" :size="500" />
         <div class="genres" v-if="album.getGenres().length > 0">
-          <span :key="genre.getId()" v-for="genre in album.getGenres()">{{ genre.getTitle() }}</span>
+          <router-link :key="genre.getId()" v-for="genre in album.getGenres()" :to="'/albums/genre/' + genre.getId()">
+            <span :key="genre.getId()">{{ genre.getTitle() }}</span>
+          </router-link>
         </div>
         <div class="musicBrainz">
           <a :href="`https://musicbrainz.org/release/${album.getMbId()}`" target="_blank">Musicbrainz</a>
@@ -224,6 +226,8 @@ div.genres span {
   padding: 2px 6px 2px 6px;
   font-weight: bold;
   margin: 0 3px 0 3px;
+  cursor: pointer;
+  color: #ffffff;
 }
 
 div.musicBrainz {
