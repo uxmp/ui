@@ -7,7 +7,7 @@ export default class GenreStatisticItem implements GenreStatisticItemInterface {
   public songCount: number = 0
 
   getId(): number {
-    return this.albumCount
+    return this.id
   }
 
   getName(): string {

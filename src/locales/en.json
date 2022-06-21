@@ -84,6 +84,9 @@
     "title": "Albums",
     "favorites": "Favorites"
   },
+  "album_list_by_genre": {
+    "title": "By genre"
+  },
   "album": {
     "total_length_title": "Total length",
     "table": {

@@ -1,7 +1,9 @@
 <template>
   <h3>{{ $t("home.genre_statistics.title") }}</h3>
   <div class="genres">
-    <span :key="genre.getId()" v-for="genre in items" :title="$t('home.genre_statistics.albumCount', {albumCount: genre.getAlbumCount()})">{{ genre.getName() }}</span>
+    <router-link :key="genre.getId()" v-for="genre in items" :to="'/albums/genre/' + genre.getId()">
+      <span :title="$t('home.genre_statistics.albumCount', {albumCount: genre.getAlbumCount()})">{{ genre.getName() }}</span>
+    </router-link>
   </div>
 </template>
 
@@ -39,6 +41,7 @@ div.genres span {
   height: 20px;
   cursor: pointer;
   font-weight: bold;
+  color: #ffffff;
 }
 </style>
 

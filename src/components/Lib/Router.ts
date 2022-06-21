@@ -5,6 +5,7 @@ import RandomSongs from "../Random/RandomSongsView.vue"
 import Login from "../Home/LoginView.vue"
 import AlbumView from "../Album/AlbumView.vue"
 import AlbumFavoriteView from "../Album/AlbumFavoriteView.vue"
+import AlbumListByGenreView from "../Album/AlbumListByGenreView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
 import HomeView from "../Home/HomeView.vue"
 import Store from "../Store/Store";
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "/albums",
     component: AlbumList,
+  },
+  {
+    path: "/albums/genre/:genreId",
+    component: AlbumListByGenreView,
   },
   {
     path: "/albums/favorite",
