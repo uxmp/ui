@@ -19,7 +19,8 @@
       }
     },
     "genre_statistics": {
-      "title": "Genre"
+      "title": "Genre",
+      "albumCount": "Alben: {albumCount}"
     }
   },
   "play_song_button": {

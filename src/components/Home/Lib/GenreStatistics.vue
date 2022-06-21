@@ -1,7 +1,7 @@
 <template>
   <h3>{{ $t("home.genre_statistics.title") }}</h3>
   <div class="genres">
-    <span :key="genre.getId()" v-for="genre in items" :title="'Albums: ' + genre.getAlbumCount()">{{ genre.getName() }}</span>
+    <span :key="genre.getId()" v-for="genre in items" :title="$t('home.genre_statistics.albumCount', {albumCount: genre.getAlbumCount()})">{{ genre.getName() }}</span>
   </div>
 </template>
 

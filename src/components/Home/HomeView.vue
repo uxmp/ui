@@ -88,7 +88,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 div.list {
   text-align: left;
   width: 100%;
