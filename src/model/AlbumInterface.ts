@@ -17,4 +17,6 @@ export default interface AlbumInterface {
   getMbId(): string;
 
   getGenres(): Array<GenreInterface>
+
+  getYear(): null | number;
 }

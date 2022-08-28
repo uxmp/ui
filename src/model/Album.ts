@@ -12,6 +12,7 @@ export default class Album implements AlbumInterface {
   private artistName: string = '';
   private length: number = 0;
   private mbId: string = '';
+  private year: null | number = null;
 
   @Type(() => Genre)
   private genres: Array<GenreInterface> = []
@@ -46,5 +47,9 @@ export default class Album implements AlbumInterface {
 
   getGenres(): Array<GenreInterface> {
     return this.genres
+  }
+
+  getYear(): number | null {
+    return this.year;
   }
 }

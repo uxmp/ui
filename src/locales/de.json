@@ -89,6 +89,7 @@
   },
   "album": {
     "total_length_title": "Gesamtlänge",
+    "year": "Jahr",
     "table": {
       "name_column_title": "Name",
       "length_column_title": "Länge",
@@ -97,10 +98,10 @@
     "disc_title": "CD {number}"
   },
   "artist_list": {
-    "title": "Künstler"
+    "title": "Interpreten"
   },
   "artist": {
-    "artist_list_title": "Künstler",
+    "artist_list_title": "Interpret",
     "albums_title": "Alben",
     "albums_info": "Info",
     "table": {
@@ -110,6 +111,9 @@
         },
         "length": {
           "title": "Länge"
+        },
+        "year": {
+          "title": "Jahr"
         }
       }
     }
@@ -133,7 +137,7 @@
           "title": "Name"
         },
         "artist": {
-          "title": "Künstler"
+          "title": "Interpret"
         },
         "length": {
           "title": "Länge"

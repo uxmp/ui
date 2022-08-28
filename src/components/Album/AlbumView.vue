@@ -17,6 +17,9 @@
         <div>
           {{ $t("album.total_length_title") }}: <FormatLength :length="album.getLength()" />
         </div>
+        <div v-if="album.getYear() !== null">
+          {{ $t("album.year") }}: {{ album.getYear() }}
+        </div>
         <template v-if="albumDiscs !== null">
           <div class="album" v-for="disc in albumDiscs" :key="disc.getId()">
             <h3 v-if="albumDiscs.length > 1">
