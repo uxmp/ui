@@ -197,6 +197,18 @@
       "token_generation_button": "Generieren"
     }
   },
+  "settings": {
+    "title": "Einstellungen",
+    "user": {
+      "title": "Benutzer",
+      "create": "Hinzufügen",
+      "table": {
+        "columns": {
+          "name": "Name"
+        }
+      }
+    }
+  },
   "shared": {
     "by_artist": "von",
     "from_album": "aus",

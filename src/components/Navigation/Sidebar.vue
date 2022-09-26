@@ -36,6 +36,11 @@
   </div>
 
   <div class="box">
+    <div class="head">{{ $t("settings.title") }}</div>
+    <router-link to="/settings/user">{{ $t("settings.user.title") }}</router-link>
+  </div>
+
+  <div class="box">
     <div class="head">{{ $t("user.title") }}</div>
     <router-link to="/usersettings">{{ $t("user_settings.title") }}</router-link>
     <a v-on:click="logout()">{{ $t("user.logout") }}</a>
