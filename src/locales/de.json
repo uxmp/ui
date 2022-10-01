@@ -104,6 +104,7 @@
     "artist_list_title": "Interpret",
     "albums_title": "Alben",
     "albums_info": "Info",
+    "top_songs": "Top Songs",
     "table": {
       "column": {
         "name": {
@@ -114,8 +115,12 @@
         },
         "year": {
           "title": "Jahr"
+        },
+        "song": {
+          "title": "Song"
         }
-      }
+      },
+      "no_top_songs": "Noch keinen Song gespielt"
     }
   },
   "login": {

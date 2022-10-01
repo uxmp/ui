@@ -103,6 +103,7 @@
   "artist": {
     "artist_list_title": "Artists",
     "albums_title": "Albums",
+    "top_songs": "Top Songs",
     "albums_info": "Info",
     "table": {
       "column": {
@@ -114,8 +115,12 @@
         },
         "year": {
           "title": "Year"
+        },
+        "song": {
+          "title": "Song"
         }
-      }
+      },
+      "no_top_songs": "No Songs played yet"
     }
   },
   "login": {

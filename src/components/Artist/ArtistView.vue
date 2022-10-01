@@ -9,38 +9,75 @@
       <a :href="`https://musicbrainz.org/artist/${artist.getMbId()}`" target="_blank">Musicbrainz</a>
     </div>
   </template>
-  <h2>{{ $t("artist.albums_title") }}</h2>
   <template v-if="albumList !== null">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>{{ $t("artist.table.column.name.title") }}</th>
-          <th>{{ $t("artist.table.column.length.title") }}</th>
-          <th>{{ $t("artist.table.column.year.title") }}</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="album in albumList" :key="album.getId()">
-          <td>
-            <AlbumCover :album="album" />
-          </td>
-          <td>
-            <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
-          </td>
-          <td>
-            <FormatLength :length="album.getLength()" />
-          </td>
-          <td>
-            {{ album.getYear() }}
-          </td>
-          <td>
-            <FavoriteStarView :itemId="album.getId()" itemType="album" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="display: flex">
+      <div style="flex: 2">
+        <h2>{{ $t("artist.albums_title") }}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>{{ $t("artist.table.column.name.title") }}</th>
+              <th>{{ $t("artist.table.column.length.title") }}</th>
+              <th>{{ $t("artist.table.column.year.title") }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="album in albumList" :key="album.getId()">
+              <td>
+                <AlbumCover :album="album" />
+              </td>
+              <td>
+                <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
+              </td>
+              <td>
+                <FormatLength :length="album.getLength()" />
+              </td>
+              <td>
+                {{ album.getYear() }}
+              </td>
+              <td>
+                <FavoriteStarView :itemId="album.getId()" itemType="album" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="flex: 1; margin-left: 10px">
+        <h2>{{ $t("artist.top_songs") }}</h2>
+        <template v-if="topSongs !== null">
+          <table>
+            <thead>
+              <tr>
+                <th class="play_button"></th>
+                <th>{{ $t("artist.table.column.song.title") }}</th>
+                <th class="fav_button"></th>
+              </tr>
+            </thead>
+            <tbody v-if="topSongs.length == 0">
+              <tr>
+                <td colspan="3" class="no_top_songs">{{ $t("artist.table.no_top_songs") }}</td>
+              </tr>
+            </tbody>
+            <tbody v-if="topSongs.length > 0">
+              <tr v-for="song in topSongs" :key="song.getId()">
+                <td>
+                    <PlaySongButton :song="song" />
+                </td>
+                <td>{{ song.getName() }}</td>
+                <td>
+                  <FavoriteStarView :itemId="song.getId()" itemType="song" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </template>
+        <template v-else>
+          <LoadingIcon />
+        </template>
+      </div>
+    </div>
   </template>
   <template v-else>
     <LoadingIcon />
@@ -61,13 +98,17 @@ import ArtistInterface from '../../model/ArtistInterface';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import FormatLength from '../Lib/FormatLength.vue'
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
+import SongListItemInterface from '../../model/SongListItemInterface';
+import SongListItem from '../../model/SongListItem';
+import PlaySongButton from '../Lib/PlaySongButton.vue';
 
 export default defineComponent({
   name: 'ArtistView',
   data() {
     return { 
       artist: null as null|ArtistInterface,
-      albumList: null as null|Array<AlbumInterface>
+      albumList: null as null|Array<AlbumInterface>,
+      topSongs: null as null|Array<SongListItemInterface>
     }
   },
   emits: ['updatePlaylist', 'updateNowPlaying'],
@@ -77,10 +118,12 @@ export default defineComponent({
     FavoriteStarView,
     FormatLength,
     AddToPlaylist,
+    PlaySongButton
   },
   beforeMount(): void {
     this.getArtist();
     this.getAlbums();
+    this.getTopSongs();
   },
   methods: {
     getArtist(): void {
@@ -92,6 +135,15 @@ export default defineComponent({
       ).then((response: AxiosResponse) => {
         this.albumList = response.data.items.map((album_data: any): AlbumInterface => {
           return plainToClass(Album, album_data);
+        });
+      });
+    },
+    async getTopSongs(): Promise<void> {
+      HttpRequest.get(
+        'artist/' + this.$route.params.artistId + '/top_songs'
+      ).then((response: AxiosResponse) => {
+        this.topSongs = response.data.items.map((song_data: any): SongListItemInterface => {
+          return plainToClass(SongListItem, song_data);
         });
       });
     },
@@ -141,6 +193,18 @@ tbody tr:nth-of-type(even) {
 
 table tbody tr:last-of-type {
   border-bottom: 2px #446683 solid;
+}
+
+td.no_top_songs {
+  text-align: center;
+}
+
+th.play_button {
+  width: 50px;
+}
+
+th.fav_button {
+  width: 30px;
 }
 
 div.info,
