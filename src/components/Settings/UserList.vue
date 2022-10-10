@@ -9,7 +9,6 @@
         <thead>
           <tr>
             <th>{{ $t('settings.user.table.columns.name') }}</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>

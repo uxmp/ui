@@ -15,6 +15,10 @@ export default class User implements UserInterface {
     return this.name;
   }
 
+  setName(name: string): void {
+    this.name = name;
+  }
+
   getLanguage(): string {
     return this.language
   }

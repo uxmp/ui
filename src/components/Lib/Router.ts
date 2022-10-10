@@ -16,6 +16,7 @@ import PlaylistList from "../Playlist/PlaylistList.vue"
 import PlaylistEdit from "../Playlist/PlaylistEdit.vue"
 import PlaylistView from "../Playlist/PlaylistView.vue"
 import UserList from "../Settings/UserList.vue"
+import UserEdit from "../Settings/UserEdit.vue"
 
 const routes = [
   {
@@ -82,6 +83,10 @@ const routes = [
   {
     path: "/settings/user",
     component: UserList
+  },
+  {
+    path: "/settings/user/edit/:userId?",
+    component: UserEdit,
   },
 ];
 

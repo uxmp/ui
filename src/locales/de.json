@@ -206,7 +206,10 @@
     "title": "Einstellungen",
     "user": {
       "title": "Benutzer",
+      "edit_title": "Bearbeiten",
       "create": "Hinzufügen",
+      "name_placeholder": "Username",
+      "save_title": "Speichern",
       "table": {
         "columns": {
           "name": "Name"

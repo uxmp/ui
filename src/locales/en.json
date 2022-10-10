@@ -206,7 +206,10 @@
     "title": "Settings",
     "user": {
       "title": "User",
-      "create": "Create",
+      "edit_title": "Edit",
+      "create": "Add",
+      "name_placeholder": "Username",
+      "save_title": "Save",
       "table": {
         "columns": {
           "name": "Name"
