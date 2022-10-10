@@ -1,10 +1,20 @@
 import { nextTick } from "vue";
 import { createI18n } from "vue-i18n";
+import enUS from './locales/en.json'
+import deDE from './locales/de.json'
+
+type MessageSchema = typeof enUS
 
 export const SUPPORT_LOCALES = ["en", "de"];
 
-export function setupI18n(options = { locale: "en" }) {
-  const i18n = createI18n(options);
+export function setupI18n(options = {
+    locale: 'en',
+    messages: {
+      'en': enUS,
+      'de': deDE
+    }
+}) {
+  const i18n = createI18n<[MessageSchema], 'en' | 'de'>(options)
   setI18nLanguage(i18n, options.locale);
   return i18n;
 }
