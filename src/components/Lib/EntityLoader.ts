@@ -45,7 +45,7 @@ const EntityLoader = new class EntityLoader {
   async loadUser(userId: number): Promise<UserInterface> {
     return plainToClass(
       User,
-      await HttpRequest.get('user/' + userId).then((response: AxiosResponse) => response.data)
+      await HttpRequest.get('settings/user/' + userId).then((response: AxiosResponse) => response.data)
     );
   }
 }
