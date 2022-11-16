@@ -209,12 +209,19 @@
       "edit_title": "Bearbeiten",
       "create": "Hinzufügen",
       "name_placeholder": "Username",
+      "password_placeholder": "Passwort",
       "save_title": "Speichern",
+      "header": {
+        "user": "Benutzer",
+        "password": "Passwort"
+      },
       "table": {
         "columns": {
           "name": "Name"
         }
-      }
+      },
+      "creation_error_message": "Fehler bei der Benutzer-Erstellung",
+      "created_message": "Benutzer erstellt"
     }
   },
   "shared": {

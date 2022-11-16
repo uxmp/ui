@@ -1,24 +1,35 @@
 <template>
   <h1>/ <router-link :to="'/settings/user'">{{ $t('settings.user.title') }}</router-link> / {{ $t('settings.user.edit_title') }}</h1>
-  <div class="creationBox">
-    <div class="errorMessage">
-      {{ msg }}
+  <div class="box">
+    <h3>{{ $t('settings.user.header.user') }}</h3>
+    <form @submit="save()" v-on:submit.prevent>
+      <table>
+        <tr>
+          <th>{{ $t('settings.user.table.columns.name') }}</th>
+          <td>
+            <input type="text" class="textInput" :placeholder="$t('settings.user.name_placeholder')" v-model="name" required :readonly="!isNewUser()" />
+          </td>
+        </tr>
+        <tr v-if="isNewUser()">
+          <td colspan="2" class="savebutton_row">
+            <input type="button" class="savebutton" @click="save()" :value="$t('settings.user.save_title')" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="box" v-if="!isNewUser()">
+    <form @submit="save()" v-on:submit.prevent>
+    <h3>{{ $t('settings.user.header.password') }}</h3>
+    <div class="creationBox" style="margin-top: 10px;">
+      <input type="password" class="textInput" :placeholder="$t('settings.user.password_placeholder')" v-model="password" required />
+      <input type="button" class="button" @click="setPassword()" :value="$t('settings.user.save_title')" />
     </div>
-    <div>
-      <form @submit="create()" v-on:keyup.enter="create()">
-        <div>
-          <input type="text" class="textInput" :placeholder="$t('settings.user.name_placeholder')" v-model="name" required />
-        </div>
-        <div>
-          <input type="button" class="button" @click="save()" :value="$t('settings.user.save_title')" />
-        </div>
-      </form>
-    </div>
+    </form>
   </div>
 </template>
 
 <script lang="ts">
-import { AxiosResponse } from 'axios';
 import { defineComponent } from 'vue'
 import User from '../../model/User';
 import UserInterface from '../../model/UserInterface';
@@ -31,19 +42,26 @@ export default defineComponent({
   data() {
     return { 
       user: new User(),
-      msg: ''
+      password: ''
     }
   },
   components: {
     LoadingIcon
   },
-  computed: {
-    name: {
+  computed: {    name: {
       set: function(val: string): void {
         this.user.setName(val.trim());
       },
       get: function(): string {
         return this.user.getName();
+      }
+    },
+    password: {
+      set: function(val: string): void {
+        this.password = val;
+      },
+      get: function(): string {
+        return this.password;
       }
     },
   },
@@ -54,11 +72,12 @@ export default defineComponent({
     }
   },
   methods: {
+    isNewUser(): boolean {
+      return this.user.getId() === 0;
+    },
     async save(): Promise<void> {
-      if (this.user.getId() === 0) {
+      if (this.user.getId() === 0 && this.name !== '') {
         this.create();
-      } else {
-        this.persist();
       }
     },
     async create(): Promise<void> {
@@ -67,29 +86,44 @@ export default defineComponent({
         {
           name: this.user.getName()
         }
-      ).then((response: AxiosResponse): void => {
-        let data = response.data;
-        if (data.msg) {
-          this.msg = data.msg;
-        } else {
-          this.$router.push('/user/edit');
-        }
+      ).then((): void => {
+        this.$router.push('/settings/user');
+
+        this.$notify({
+          text: this.$t("settings.user.created_message"),
+          group: "app"
+        });
+      })
+      .catch((): void => {
+        this.$notify({
+          text: this.$t("settings.user.creation_error_message"),
+          type: "error",
+          group: "error"
+        });
       });
+      ;
     },
-    async persist(): Promise<void> {
+    async setPassword(): Promise<void> {
       HttpRequest.put(
-        '/settings/user/' + this.user.getId(),
+        '/settings/user/password',
         {
-          name: this.user.getName()
+          userId: this.user.getId(),
+          password: this.password
         }
-      ).then((response: AxiosResponse): void => {
-        let data = response.data;
-        if (data.msg) {
-          this.msg = data.msg;
-        } else {
-          this.$router.push('/user/edit');
-        }
+      ).then((): void => {
+        this.$notify({
+          text: this.$t("settings.user.password_saved_message"),
+          group: "app"
+        });
+      })
+      .catch((): void => {
+        this.$notify({
+          text: this.$t("settings.user.error_message"),
+          type: "error",
+          group: "error"
+        });
       });
+      ;
     },
   }
 })
@@ -101,6 +135,12 @@ div.creationBox {
   margin: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
   border: 1px #446683 solid;
+  padding: 5px;
+}
+
+div.box {
+  width: 500px;
+  margin: auto;
   padding: 5px;
 }
 
@@ -116,5 +156,12 @@ input[type=text], input[type=password] {
 
 input[type=button] {
   width: 80%;
+}
+.savebutton_row {
+  text-align: center;
+}
+
+.savebutton {
+  width: 100%;
 }
 </style>
