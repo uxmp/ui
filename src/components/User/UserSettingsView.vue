@@ -30,6 +30,23 @@
         </table>
       </form>
     </div>
+    <div class="box">
+      <form @submit="setPassword()" v-on:submit.prevent>
+        <h3>{{ $t('user_settings.password.title')}}</h3>
+        <table>
+          <tr>
+            <td>
+              <input type="password" placeholder="*********" v-model="password" required />
+            </td>
+          </tr>
+          <tr>
+            <td class="savebutton_row">
+              <input type="button" class="button savebutton" @click="setPassword()" :value="$t('settings.user.save_title')" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </template>
   <template v-else>
     <LoadingIcon />
@@ -72,7 +89,6 @@ import SubSonicSettingsInterface from '../../model/SubSonicSettingsInterface'
 import SubSonicSettings from '../../model/SubSonicSettings'
 import UserSettings from '../../model/UserSettings'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
-import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'UserSettings',
@@ -85,6 +101,7 @@ export default defineComponent({
         { text: 'country_iso2.en', value: 'en' },
         { text: 'country_iso2.de', value: 'de' },
       ],
+      user_password: '',
     }
   },
   components: {
@@ -97,6 +114,14 @@ export default defineComponent({
       },
       get: function(): string {
         return this.userSettings.getLanguage()
+      }
+    },
+    password: {
+      set: function(val: string): void {
+        this.user_password = val;
+      },
+      get: function(): string {
+        return this.user_password;
       }
     },
   },
@@ -144,7 +169,7 @@ export default defineComponent({
         {
           language: this.userSettings.getLanguage(),
         }
-      ).then((response: AxiosResponse): void => {
+      ).then((): void => {
         this.$notify({
           text: this.$t("user_settings.saved"),
           group: "app"
@@ -157,7 +182,29 @@ export default defineComponent({
           group: "error"
         });
       });
-    }
+    },
+    async setPassword(): Promise<void> {
+      HttpRequest.put(
+        '/usersettings/password',
+        {
+          userId: null,
+          password: this.user_password
+        }
+      ).then((): void => {
+        this.$notify({
+          text: this.$t("user_settings.password_saved_message"),
+          group: "app"
+        });
+      })
+      .catch((): void => {
+        this.$notify({
+          text: this.$t("user_settings.error_message"),
+          type: "error",
+          group: "error"
+        });
+      });
+      ;
+    },
   }
 })
 </script>
@@ -190,5 +237,9 @@ pre {
   display: inline-block;
   width: 120px;
   text-align: center;
+}
+
+input[type=password] {
+  width: 99%;
 }
 </style>

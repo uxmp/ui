@@ -192,6 +192,9 @@
       "settings_title": "Setting",
       "value_title": "Value"
     },
+    "password": {
+      "title": "Password"
+    },
     "subsonic": {
       "title": "SubSonic API",
       "token": "Token",
