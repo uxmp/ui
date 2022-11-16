@@ -82,11 +82,21 @@ const routes = [
   },
   {
     path: "/settings/user",
-    component: UserList
+    component: UserList,
+    beforeEnter: () => {
+      if (!Store.getters['authStorage/isAdmin']) {
+        return false;
+      }
+    },
   },
   {
     path: "/settings/user/edit/:userId?",
     component: UserEdit,
+    beforeEnter: () => {
+      if (!Store.getters['authStorage/isAdmin']) {
+        return false;
+      }
+    },
   },
 ];
 

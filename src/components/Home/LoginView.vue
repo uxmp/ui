@@ -22,7 +22,7 @@
 import { defineComponent } from '@vue/runtime-core';
 import { AxiosResponse } from 'axios';
 import HttpRequest from '../Lib/HttpRequest';
-import { plainToClass, plainToInstance } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import User from '../../model/User'
 
 export default defineComponent({
@@ -65,6 +65,14 @@ export default defineComponent({
           ).then((response: AxiosResponse) => {
             this.$store.dispatch('favorites/init', {
               favorites: response.data
+            });
+          });
+
+          HttpRequest.get(
+            'usersettings/acl'
+          ).then((response: AxiosResponse) => {
+            this.$store.dispatch('authStorage/setAcl', {
+              acl: response.data
             });
           });
 

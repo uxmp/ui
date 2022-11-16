@@ -1,4 +1,5 @@
 import UserInterface from "../../../model/UserInterface";
+import AclEnum from "../../Lib/Enum/AclEnum";
 
 const getDefaultState = () => {
   return {
@@ -6,6 +7,7 @@ const getDefaultState = () => {
     user: null as null|UserInterface,
     language: 'en' as string,
     temporaryPlaylistId: null as null|string,
+    acl: [] as Array<number>,
   };
 };
 
@@ -18,6 +20,10 @@ export default {
     getToken: state => state.token,
     getLanguage: state => state.language,
     getTemporaryPlaylistId: state => state.temporaryPlaylistId,
+    getAcl: state => state.acl,
+    isAdmin: (state): boolean => {
+      return state.acl.includes(AclEnum.USER_EDIT)
+    }
   },
   mutations: {
     SET_TOKEN: (state, token: string) => {
@@ -34,6 +40,9 @@ export default {
     },
     SET_TEMPORARY_PLAYLIST_ID: (state, temporaryPlaylistId: null|string) => {
       state.temporaryPlaylistId = temporaryPlaylistId
+    },
+    SET_ACL: (state, acl: Array<number>) => {
+      state.acl = acl
     }
   },
   actions: {
@@ -49,6 +58,9 @@ export default {
     },
     setTemporaryPlaylistId: ({ commit }, {temporaryPlaylistId}) => {
       commit('SET_TEMPORARY_PLAYLIST_ID', temporaryPlaylistId)
-    }
+    },
+    setAcl: ({commit}, {acl}) => {
+      commit('SET_ACL', acl)
+    },
   }
 }

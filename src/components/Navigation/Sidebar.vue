@@ -35,7 +35,7 @@
     <router-link to="/radiostations">{{ $t("radio_stations.title") }}</router-link>
   </div>
 
-  <div class="box">
+  <div class="box" v-if="isAdmin()">
     <div class="head">{{ $t("settings.title") }}</div>
     <router-link to="/settings/user">{{ $t("settings.user.title") }}</router-link>
   </div>
@@ -66,8 +66,11 @@ export default defineComponent({
 
         this.$router.push('/login')
       });
+    },
+    isAdmin(): boolean {
+      return this.$store.getters['authStorage/isAdmin'] == true;
     }
-  }
+  },
 })
 </script>
 
