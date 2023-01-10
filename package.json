@@ -22,7 +22,7 @@
     "reflect-metadata": "^0.1.13",
     "sass": "^1.52.3",
     "vue": "^3.2.33",
-    "vue-i18n": "^v9.3.0-beta.6",
+    "vue-i18n": "v9.3.0-beta.11",
     "vue-router": "^4.0.15",
     "vue-uuid": "^3.0.0",
     "vuex": "^4.0.2",
