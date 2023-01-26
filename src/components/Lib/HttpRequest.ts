@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { InternalAxiosRequestConfig } from 'axios';
 import store from '../Store/Store'
 import Router from './Router'
 
@@ -12,7 +12,7 @@ const HttpRequest = axios.create({
 });
 
 HttpRequest.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     let token = store.getters['authStorage/getToken'];
 
     if (token && config.headers) {
