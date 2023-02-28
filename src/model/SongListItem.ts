@@ -44,6 +44,10 @@ export default class SongListItem implements SongListItemInterface {
     return this.albumName;
   }
 
+  setCover(cover: string) {
+    this.cover = cover;
+  }
+
   getCover(): string {
     return this.cover;
   }

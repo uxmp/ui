@@ -116,6 +116,7 @@ export default class Player {
     let song = new SongListItem();
     song.setName(station.getName());
     song.setPlayUrl(station.getUrl());
+    song.setCover('/radio.png');
 
     app.emitter.emit('updatePlaylist', [song]);
   }

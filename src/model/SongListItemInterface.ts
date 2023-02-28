@@ -12,6 +12,8 @@ export default interface SongListItemInterface {
 
   getAlbumName(): string;
 
+  setCover(cover: string);
+
   getCover(): string;
 
   getArtistId(): number;

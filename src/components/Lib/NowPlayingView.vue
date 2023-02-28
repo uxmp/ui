@@ -1,6 +1,6 @@
 <template>
   <div class="cover">
-    <img data-amplitude-song-info="cover_art_url" style="width: 110px; height: 110px;" />
+    <img data-amplitude-song-info="cover_art_url" />
   </div>
   <div>
     <div class="title">
@@ -59,6 +59,11 @@ export default defineComponent({
 div.cover {
   grid-row: 1 / span 2;
   height: 150px;
+}
+
+div.cover img {
+  width: 110px;
+  height: 110px;
 }
 
 div.title {
