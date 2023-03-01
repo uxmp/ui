@@ -1,6 +1,5 @@
 <template>
-  <div class="playlist scrollbar" v-if="playlistConfig !== null">
-    <section
+    <section v-if="playlistConfig !== null"
       style="width: 100%; margin-top: 10px"
       v-for="(songListItem, index) in playlistConfig.getSongList()"
       :key="songListItem.getId()"
@@ -14,7 +13,6 @@
       {{ songListItem.getName() }}
       {{ songListItem.getArtistName() }}
     </section>
-  </div>
 </template>
 
 <script lang="ts">

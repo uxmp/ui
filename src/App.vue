@@ -2,26 +2,26 @@
   <notifications position="top center" group="error" />
   <notifications position="bottom right" group="app" />
   <div class="maingrid-noplayer" id="maingrid">
-    <div class="grid-sidebar scrollbar">
+    <div class="Sidebar scrollbar">
       <Sidebar @hidePlayer="hidePlayer" />
       <div class="versionString">
         <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ versionString }}
       </div>
     </div>
-    <div class="grid-content scrollbar">
+    <div class="Header">
+    </div>
+    <div class="Content scrollbar">
       <router-view />
     </div>
-    <div>
-    </div>
-    <div class="grid-player">
+    <div class="PlayerControl">
       <PlayerControl :playerState="playerState" />
     </div>
-    <div class="grid-nowplaying">
+    <div class="NowPlaying">
       <div class="nowplaying-grid">
         <NowPlayingView :nowPlaying="nowPlaying" />
       </div>
     </div>
-    <div class="grid-playlist">
+    <div class="Playlist scrollbar">
       <Playlist :playlistConfig="playlist" />
     </div>
   </div>
@@ -175,6 +175,10 @@ export default defineComponent({
   overflow: hidden;
 }
 
+h1 {
+  font-size: 150%;
+}
+
 h1,
 h2,
 h3,
@@ -200,54 +204,78 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%231b3e5a' fill-opacity='0.1' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-div.maingrid {
-  display: grid;
-  grid-template-columns: minmax(150px, 12%) 15% auto 40%;
-  grid-template-rows: auto 10px minmax(170px, 15%);
-  height: 100%;
-}
-
 div.maingrid-noplayer {
   display: grid;
-  grid-template-columns: minmax(150px, 12%) 15% auto 40%;
-  grid-template-rows: auto;
+  grid-template-columns: 0.6fr 1.3fr 1.3fr 1fr;
+  grid-template-rows: 0.1fr 1.8fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Sidebar Header Header Header"
+    "Sidebar Content Content Content";
+}
+
+div.maingrid {
   height: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 0.8fr 1.1fr 1.4fr;
+  grid-template-rows: 0.15fr 2.3fr 0.1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Sidebar Header Header Header"
+    "Sidebar Content Content Content"
+    "PlayerControl PlayerControl Nowplaying Playlist";
 }
 
-div.grid-content {
+.Sidebar {
+  grid-area: Sidebar;
   overflow-y: auto;
-  overflow-x: hidden;
-  grid-column: 2 / span 3;
-  margin-left: 20px;
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
-div.grid-sidebar {
-  max-width: 300px;
-  overflow-y: auto;
+.Header {
+  grid-area: Header;
+  background-color: #0b1116;
+  border-bottom: 1px #446683 solid;
+  border-left: 1px #446683 solid;
 }
 
-div.grid-player {
+.PlayerControl {
+  grid-area: PlayerControl;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
-  grid-column: 1 / span 2;
   background-color: #0b1116;
   border-top: 1px #446683 solid;
 }
 
-div.grid-playlist {
+.NowPlaying {
+  grid-area: Nowplaying;
+  display: flex;
+  align-items: center;
   height: 100%;
   background-color: #0b1116;
   border-top: 1px #446683 solid;
-  font-size: 80%;
 }
 
-div.grid-playlist div.playlist {
+.Playlist {
+  grid-area: Playlist;
+  background-color: #0b1116;
+  border-top: 1px #446683 solid;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  font-size: 80%;
+}
+
+.Content {
+  grid-area: Content;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-right: 10px;
 }
 
 div.scrollbar::-webkit-scrollbar {
@@ -271,24 +299,15 @@ div.nowplaying-grid {
   max-width: 500px;
 }
 
-div.grid-nowplaying {
-  max-height: minmax(15%, 150px);
-  display: flex;
-  align-items: center;
-  height: 100%;
-  background-color: #0b1116;
-  border-top: 1px #446683 solid;
-}
-
-div.maingrid-noplayer div.grid-nowplaying {
+div.maingrid-noplayer div.NowPlaying {
   display: none;
 }
 
-div.maingrid-noplayer div.grid-player {
+div.maingrid-noplayer div.PlayerControl {
   display: none;
 }
 
-div.maingrid-noplayer div.grid-playlist {
+div.maingrid-noplayer div.Playlist {
   display: none;
 }
 
