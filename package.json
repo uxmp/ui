@@ -33,7 +33,7 @@
     "@babel/types": "^7.18.13",
     "@vitejs/plugin-vue": "^4",
     "@vue/compiler-sfc": "^3.2.33",
-    "typescript": "^4",
+    "typescript": "^5",
     "vite": "^4",
     "vue-tsc": "^1"
   }
