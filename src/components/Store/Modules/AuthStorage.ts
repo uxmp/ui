@@ -15,7 +15,7 @@ export default {
   namespaced: true,
   state: getDefaultState(),
   getters: {
-    isLogged: state => state.token,
+    isLogged: state => state.token !== '',
     getUser: state => state.user,
     getToken: state => state.token,
     getLanguage: state => state.language,

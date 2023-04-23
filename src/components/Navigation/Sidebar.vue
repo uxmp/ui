@@ -39,34 +39,15 @@
     <div class="head">{{ $t("settings.title") }}</div>
     <router-link to="/settings/user">{{ $t("settings.user.title") }}</router-link>
   </div>
-
-  <div class="box">
-    <div class="head">{{ $t("user.title") }}</div>
-    <router-link to="/usersettings">{{ $t("user_settings.title") }}</router-link>
-    <a v-on:click="logout()">{{ $t("user.logout") }}</a>
-  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HttpRequest from '../Lib/HttpRequest';
 
 export default defineComponent({
   name: 'Sidebar',
   emits: ['hidePlayer'],
   methods: {
-    async logout(): Promise<void> {
-      this.$emit('hidePlayer');
-
-      HttpRequest.post(
-        'common/logout',
-      ).then(() => {
-        this.$store.dispatch('authStorage/logout');
-        this.$store.dispatch('favorites/reset');
-
-        this.$router.push('/login')
-      });
-    },
     isAdmin(): boolean {
       return this.$store.getters['authStorage/isAdmin'] == true;
     }
@@ -101,10 +82,6 @@ div.box div.head {
   font-weight: bold;
   margin-bottom: 10px;
   margin-left: 15px;
-}
-
-div.box div.content {
-  margin-left: 30px;
 }
 
 div.box span.random_select a {

@@ -19,6 +19,8 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faShuffle } from '@fortawesome/free-solid-svg-icons';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import enLocaleMessages from './locales/en.json'
 import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
@@ -51,6 +53,8 @@ library.add(
   faShuffle,
   faRepeat,
   faFileCirclePlus,
+  faArrowRightFromBracket,
+  faUser,
 );
 
 const emitter = mitt();

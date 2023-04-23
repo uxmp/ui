@@ -9,6 +9,7 @@
       </div>
     </div>
     <div class="Header">
+        <Header @hidePlayer="hidePlayer" />
     </div>
     <div class="Content scrollbar">
       <router-view />
@@ -35,13 +36,13 @@ import NowPlayingView from './components/Lib/NowPlayingView.vue'
 import NowPlaying from './model/NowPlaying'
 import SongListItemInterface from './model/SongListItemInterface'
 import PlayerControl from './components/Navigation/PlayerControl.vue'
-import ArtistList from './components/Artist/ArtistListView.vue'
 import HttpRequest from './components/Lib/HttpRequest'
 import { AxiosResponse } from 'axios'
 import { plainToClass } from 'class-transformer'
 import SongListItem from './model/SongListItem'
 import PlaylistConfig from './model/PlaylistConfig'
 import PlaylistConfigInterface from './model/PlaylistConfigInterface'
+import Header from "./components/Navigation/Header.vue";
 
 export default defineComponent({
   data() {
@@ -55,13 +56,13 @@ export default defineComponent({
   },
   name: 'uxMP',
   components: {
-    ArtistList,
     Sidebar,
     Playlist,
     PlayerControl,
     NowPlayingView,
+    Header,
   },
-  mounted(): void { 
+  mounted(): void {
     this.emitter.on(
       "updatePlaylist",
       (songList: Array<SongListItemInterface>) => {
@@ -206,8 +207,8 @@ body {
 
 div.maingrid-noplayer {
   display: grid;
-  grid-template-columns: 0.6fr 1.3fr 1.3fr 1fr;
-  grid-template-rows: 0.1fr 1.8fr;
+  grid-template-columns: 280px 0.6fr 1.3fr 1fr;
+  grid-template-rows: 60px 1fr;
   gap: 0px 0px;
   grid-template-areas:
     "Sidebar Header Header Header"
@@ -217,8 +218,8 @@ div.maingrid-noplayer {
 div.maingrid {
   height: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 0.8fr 1.1fr 1.4fr;
-  grid-template-rows: 0.15fr 2.3fr 0.1fr;
+  grid-template-columns: 280px 0.6fr 1.3fr 1fr;
+  grid-template-rows: 60px 1fr 200px;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
