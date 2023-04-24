@@ -92,7 +92,6 @@ export default defineComponent({
 div.list {
   text-align: left;
   width: 100%;
-  height: 230px;
   overflow-y: hidden;
   overflow-x: auto;
   background-color: #0a0f14;
