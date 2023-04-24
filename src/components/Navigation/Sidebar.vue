@@ -1,10 +1,5 @@
 <template>
   <div class="box">
-    <div class="head">{{ $t("home.title") }}</div>
-    <router-link to="/">{{ $t("home.title") }}</router-link>
-  </div>
-
-  <div class="box">
     <div class="head">{{ $t("songs.title") }}</div>
     <router-link to="/random/songs/50">{{ $t("songs.random") }}</router-link>
     <span class="random_select">
@@ -66,7 +61,6 @@ div.box {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #0a0f14;
-  margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
   text-align: left;

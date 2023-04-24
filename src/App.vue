@@ -2,14 +2,14 @@
   <notifications position="top center" group="error" />
   <notifications position="bottom right" group="app" />
   <div class="maingrid-noplayer" id="maingrid">
+      <div class="Header">
+          <Header @hidePlayer="hidePlayer" />
+      </div>
     <div class="Sidebar scrollbar">
       <Sidebar @hidePlayer="hidePlayer" />
       <div class="versionString">
         <a href="https://github.com/uxmp/uxmp" target="_blank">uxmp</a> {{ versionString }}
       </div>
-    </div>
-    <div class="Header">
-        <Header @hidePlayer="hidePlayer" />
     </div>
     <div class="Content scrollbar">
       <router-view />
@@ -211,7 +211,7 @@ div.maingrid-noplayer {
   grid-template-rows: 60px 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "Sidebar Header Header Header"
+    "Header Header Header Header"
     "Sidebar Content Content Content";
 }
 
@@ -223,7 +223,7 @@ div.maingrid {
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "Sidebar Header Header Header"
+    "Header Header Header Header"
     "Sidebar Content Content Content"
     "PlayerControl PlayerControl Nowplaying Playlist";
 }

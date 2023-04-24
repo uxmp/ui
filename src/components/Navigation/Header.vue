@@ -1,5 +1,8 @@
 <template>
     <div class="grid-user" v-if="isLoggedIn()">
+        <div class="gridItem logo">
+            <router-link to="/">UXMP</router-link>
+        </div>
         <div>
         </div>
         <div class="gridItem">
@@ -14,9 +17,11 @@
         </div>
     </div>
     <div class="grid" v-if="!isLoggedIn()">
+        <div class="gridItem logo">
+            UXMP
+        </div>
         <div>
         </div>
-
     </div>
 </template>
 
@@ -54,13 +59,13 @@ export default defineComponent({
 <style scoped>
 div.grid-user {
     display: grid;
-    grid-template-columns: auto 100px 60px;
+    grid-template-columns: 100px auto 100px 60px;
     width: 100%;
     height: 100%;
 }
 div.grid {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 100px auto;
     width: 100%;
     height: 100%;
 }
@@ -69,5 +74,12 @@ div.gridItem {
     vertical-align: middle;
     height: 100%;
     line-height: 60px;
+}
+div.logo {
+    font-style: italic;
+    font-weight: bold;
+    color: rgb(192, 140, 44);
+    text-decoration: none;
+    font-size: 160%;
 }
 </style>
