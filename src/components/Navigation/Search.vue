@@ -10,7 +10,7 @@
         </template>
 
         <template v-slot:body>
-            <div class="searchResults">
+            <div class="searchResults scrollbar">
                 <template v-if="this.searchState">
                     <LoadingIcon />
                 </template>
@@ -19,7 +19,7 @@
                         <div class="resultListHeader">Albums ({{ searchResult.albums.length }})</div>
                         <div class="resultList" v-for="album in searchResult.albums" :key="album.getId()">
                             <div>
-                                <AlbumCover size="70" :album="album" />
+                                <AlbumCover size="60" :album="album" />
                             </div>
                             <div>
                                 <div><router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link></div>
@@ -31,7 +31,7 @@
                         <div class="resultListHeader">Artists ({{ searchResult.artists.length }})</div>
                         <div class="resultList" v-for="artist in searchResult.artists" :key="artist.getId()">
                             <div>
-                                <ArtistCover size="70" :artist="artist" />
+                                <ArtistCover size="60" :artist="artist" />
                             </div>
                             <div>
                                 <span><router-link :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link></span>
@@ -84,9 +84,9 @@ export default defineComponent({
     },
     async retrieveResult(searchTerm: string): Promise<void> {
       HttpRequest.post(`search`, { searchTerm: searchTerm }).then(res => {
-        this.searchResult.albums = res.data.items.albums.map((data: any): AlbumInterface[] => plainToInstance(Album, data));
-        this.searchResult.songs = res.data.items.songs.map((data: any): SongListItemInterface[] => plainToInstance(SongListItem, data));
-        this.searchResult.artists = res.data.items.artists.map((data: any): ArtistInterface[] => plainToInstance(Artist, data));
+        this.searchResult.albums = res.data.items.albums.map((data: Object): AlbumInterface => plainToInstance(Album, data));
+        this.searchResult.songs = res.data.items.songs.map((data: Object): SongListItemInterface => plainToInstance(SongListItem, data));
+        this.searchResult.artists = res.data.items.artists.map((data: Object): ArtistInterface => plainToInstance(Artist, data));
       });
 
       this.isVisible = true
@@ -96,7 +96,11 @@ export default defineComponent({
       this.searchQuery = ''
       this.searchState = false
       this.isVisible = false
-      this.searchResult = []
+      this.searchResult = {
+        albums: [],
+        artists: [],
+        songs: []
+      }
     },
   },
   data() {
@@ -120,24 +124,24 @@ input[type=text], input[type=text]:hover {
     border: 0;
     width: 300px
 }
-
 div.searchResults {
     width: 700px;
     line-height: normal;
+    overflow-y: scroll;
+    max-height: 700px;
 }
-
 div.resultList {
     display: grid;
     grid-template-columns: 100px auto;
     width: 100%;
     height: 100%;
+    margin-top: 15px;
 }
 div.resultListHeader {
     font-size: 80%;
     font-weight: bold;
     margin: 15px 0 15px 0;
 }
-
 span.glass {
     color: rgb(192, 140, 44);
 }
