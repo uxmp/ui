@@ -21,6 +21,7 @@ import { faShuffle } from '@fortawesome/free-solid-svg-icons';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import enLocaleMessages from './locales/en.json'
 import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
@@ -55,6 +56,7 @@ library.add(
   faFileCirclePlus,
   faArrowRightFromBracket,
   faUser,
+  faMagnifyingGlass,
 );
 
 const emitter = mitt();

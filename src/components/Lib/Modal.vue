@@ -14,13 +14,11 @@
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          Default title
         </slot>
       </header>
 
       <section class="modal-body">
         <slot name="body">
-          Default body
         </slot>
        </section>
 

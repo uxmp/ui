@@ -3,6 +3,9 @@
         <div class="gridItem logo">
             <router-link to="/">UXMP</router-link>
         </div>
+        <div class="gridItem search">
+            <Search />
+        </div>
         <div>
         </div>
         <div class="gridItem">
@@ -28,9 +31,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import HttpRequest from '../Lib/HttpRequest';
+import Search from "./Search.vue";
+import SongListView from "../Lib/SongListView.vue";
 
 export default defineComponent({
   name: 'Header',
+  components: {SongListView, Search},
   emits: ['hidePlayer'],
   methods: {
     async logout(): Promise<void> {
@@ -49,7 +55,6 @@ export default defineComponent({
       return this.$store.getters['authStorage/isAdmin'] == true;
     },
     isLoggedIn(): boolean {
-      console.log(this.$store.getters['authStorage/isLogged'])
       return this.$store.getters['authStorage/isLogged'] == true;
     }
   },
@@ -59,7 +64,7 @@ export default defineComponent({
 <style scoped>
 div.grid-user {
     display: grid;
-    grid-template-columns: 100px auto 100px 60px;
+    grid-template-columns: 250px 400px auto 100px 60px;
     width: 100%;
     height: 100%;
 }
@@ -75,11 +80,25 @@ div.gridItem {
     height: 100%;
     line-height: 60px;
 }
+div.search {
+    font-size: 110%;
+    vertical-align: middle;
+    line-height: 60px;
+    text-align: left;
+    padding-left: 10px;
+}
+div.search input {
+    margin: 0 0 0 10px;
+    border: 0;
+    width: 300px
+}
 div.logo {
     font-style: italic;
     font-weight: bold;
     color: rgb(192, 140, 44);
     text-decoration: none;
     font-size: 160%;
+    text-align: left;
+    margin-left: 30px;
 }
 </style>

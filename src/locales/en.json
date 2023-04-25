@@ -227,6 +227,9 @@
       "created_message": "User created"
     }
   },
+  "header": {
+    "search": "Search"
+  },
   "shared": {
     "by_artist": "by",
     "from_album": "from",

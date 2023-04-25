@@ -227,6 +227,9 @@
       "created_message": "Benutzer erstellt"
     }
   },
+  "header": {
+    "search": "Suche"
+  },
   "shared": {
     "by_artist": "von",
     "from_album": "aus",
