@@ -1,14 +1,3 @@
-<script lang="ts">
-  export default {
-    name: 'Modal',
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
-  };
-</script>
-
 <template>
   <div class="modal-backdrop">
     <div class="modal">
@@ -36,6 +25,17 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'Modal',
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+  },
+};
+</script>
 
 <style>
   .modal-backdrop {

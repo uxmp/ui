@@ -6,7 +6,15 @@
 
     <Modal v-show="isVisible" @close="closeModal">
         <template v-slot:header>
-            {{ $t("header.search") }}: {{ this.searchQuery }}
+            {{ $t("header.search") }}:
+            <input
+                type="text"
+                ref="modalSearchInput"
+                :placeholder="$t('header.search')"
+                v-model="searchQuery"
+                @keyup="search"
+                v-on:keydown.esc="closeModal"
+            />
         </template>
 
         <template v-slot:body>
@@ -78,6 +86,7 @@ export default defineComponent({
         return
       }
 
+      this.$refs.modalSearchInput.focus()
       this.searchState = true;
 
       await this.retrieveResult(this.searchQuery)
