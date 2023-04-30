@@ -99,7 +99,7 @@ export default defineComponent({
   methods: {
     async getPlaylists(): Promise<void> {
       HttpRequest.get(`playlists/user`).then(res => {
-        this.playlists = res.data.items.map((album_data: any): PlaylistInterface => {
+        this.playlists = res.data.items.map((album_data: object): PlaylistInterface => {
           let playlist = plainToInstance(Playlist, album_data);
           this.states.set(playlist.getId(), LoadingState.NONE);
           return playlist;
@@ -127,10 +127,10 @@ export default defineComponent({
             'mediaId': this.itemId
           }
         )
-        .then(res => {
+        .then(() => {
           this.states.set(playlistId, LoadingState.SUCCESS);
         })
-        .catch(res => {
+        .catch(() => {
           this.states.set(playlistId, LoadingState.ERROR);
         });
       });

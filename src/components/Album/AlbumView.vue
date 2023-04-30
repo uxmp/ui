@@ -11,7 +11,7 @@
             <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
           </span>
         </div>
-        <div class="addToPlaylist button">
+        <div class="addToPlaylist">
           <AddToPlaylist :itemId="album.getId()" :itemType="'album'" :showTitle="true" />
         </div>
         <div>

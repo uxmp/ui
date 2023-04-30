@@ -2,26 +2,19 @@
   <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
-        <slot name="header">
-        </slot>
+        <div>
+          <slot name="header">
+          </slot>
+        </div>
+        <div class="modal-close">
+          <font-awesome-icon :icon="['fas', 'rectangle-xmark']" :title="$t('shared.close')" @click="close"  class="modal-close-button"/>
+        </div>
       </header>
 
       <section class="modal-body">
         <slot name="body">
         </slot>
        </section>
-
-      <footer class="modal-footer">
-        <slot name="footer">
-        </slot>
-        <button
-          type="button"
-          class="button"
-          @click="close"
-        >
-          {{ $t("shared.close") }}
-        </button>
-      </footer>
     </div>
   </div>
 </template>
@@ -56,32 +49,38 @@ export default {
     box-shadow: 2px 2px 20px 1px rgb(85, 57, 5);
     border: 1px solid rgb(85, 57, 5);
     overflow-x: auto;
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
-  }
-
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
-    display: flex;
+    height: 90%;
+    font-size: 1.1em;
   }
 
   .modal-header {
+    padding: 10px 10px 5px 10px;
+    line-height: normal;
+    color: rgb(141, 102, 31);
     position: relative;
     border-bottom: 1px #446683 solid;
-    color: #ffffff;
     justify-content: space-between;
     font-size: 120%;
-  }
-
-  .modal-footer {
-    border-top: 1px #446683 solid;
-    flex-direction: column;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: auto 50px;
   }
 
   .modal-body {
     position: relative;
     padding: 20px 10px;
+    height: auto;
+  }
+
+  div.modal-close {
+    text-align: right;
+  }
+  .modal-close-button {
+    cursor: pointer;
+  }
+  .modal-close-button:hover {
+    color: rgb(192, 140, 44);
   }
 </style>

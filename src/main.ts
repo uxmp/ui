@@ -5,7 +5,7 @@ import Store from './components/Store/Store'
 import mitt from 'mitt';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faFileCirclePlus, faPlay } from '@fortawesome/free-solid-svg-icons'
+import {faFileCirclePlus, faPlay, faRectangleXmark} from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarSol } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarReg } from '@fortawesome/free-regular-svg-icons'
 import { faPause } from '@fortawesome/free-solid-svg-icons'
@@ -57,6 +57,7 @@ library.add(
   faArrowRightFromBracket,
   faUser,
   faMagnifyingGlass,
+  faRectangleXmark,
 );
 
 const emitter = mitt();

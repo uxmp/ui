@@ -2,18 +2,20 @@
     <span class="glass">
       <font-awesome-icon :icon="['fas', 'magnifying-glass']" :title="$t('header.search')"/>
     </span>
-    <input type="text" :placeholder="$t('header.search')" v-model="searchQuery" @keyup="search"/>
+    <input type="text" :placeholder="$t('header.search')" v-model="searchQuery" @keyup="search" class="searchInput"/>
 
     <Modal v-show="isVisible" @close="closeModal">
         <template v-slot:header>
-            {{ $t("header.search") }}:
+            <span class="glass">
+              <font-awesome-icon :icon="['fas', 'magnifying-glass']" :title="$t('header.search')"/>
+            </span>
             <input
-                type="text"
-                ref="modalSearchInput"
-                :placeholder="$t('header.search')"
-                v-model="searchQuery"
-                @keyup="search"
-                v-on:keydown.esc="closeModal"
+                    type="text"
+                    ref="modalSearchInput"
+                    :placeholder="$t('header.search')"
+                    v-model="searchQuery"
+                    @keyup="search"
+                    v-on:keydown.esc="closeModal"
             />
         </template>
 
@@ -48,8 +50,18 @@
                     </div>
                     <div v-if="searchResult.songs.length > 0">
                         <div class="resultListHeader">Songs ({{ searchResult.songs.length }})</div>
-                        <div class="resultList" v-for="item in searchResult.songs" :key="item.getId()">
-                            <span>{{ item.getName() }}</span>
+                        <div class="resultList" v-for="song in searchResult.songs" :key="song.getId()">
+                            <div>
+                                <SongCover :song="song" :size="'40'" />
+                            </div>
+                            <div>
+                                <div>
+                                    {{ song.getName() }}
+                                </div>
+                                <div class="artistName">
+                                    <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </template>
@@ -72,10 +84,11 @@ import Artist from "../../model/Artist";
 import SongListItem from "../../model/SongListItem";
 import AlbumCover from "../Album/Lib/AlbumCover.vue";
 import ArtistCover from "../Artist/Lib/ArtistCover.vue";
+import SongCover from "../Lib/SongCover.vue";
 
 export default defineComponent({
   name: 'Search',
-  components: {ArtistCover, AlbumCover, LoadingIcon, Modal},
+  components: {SongCover, ArtistCover, AlbumCover, LoadingIcon, Modal},
   methods: {
     async search(): Promise<void> {
       if (this.searchState) {
@@ -130,7 +143,7 @@ export default defineComponent({
 <style scoped>
 input[type=text], input[type=text]:hover {
     margin: 0 0 0 10px;
-    border: 0;
+    border-bottom: 1px #446683 solid;
     width: 300px
 }
 div.searchResults {
@@ -153,5 +166,9 @@ div.resultListHeader {
 }
 span.glass {
     color: rgb(192, 140, 44);
+}
+
+div.artistName {
+    margin-top: 3px;
 }
 </style>

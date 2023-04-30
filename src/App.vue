@@ -174,6 +174,7 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-size: 1.1em;
 }
 
 h1 {
