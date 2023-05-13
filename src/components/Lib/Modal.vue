@@ -53,7 +53,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 90%;
-    font-size: 1.1em;
+    font-size: 1.2rem;
   }
 
   .modal-header {

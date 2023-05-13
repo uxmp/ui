@@ -174,7 +174,7 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-size: 1.1em;
+  font-size: 1.2rem;
 }
 
 h1 {
@@ -207,6 +207,7 @@ body {
 }
 
 div.maingrid-noplayer {
+  height: 100%;
   display: grid;
   grid-template-columns: 280px 0.6fr 1.3fr 1fr;
   grid-template-rows: 60px 1fr;
@@ -292,6 +293,10 @@ div.scrollbar::-webkit-scrollbar-thumb {
   background-color: #121d27;
   border-radius: 20px;
   border: 3px solid rgb(85, 57, 5);
+}
+
+div.scrollbar {
+  scrollbar-color: rgb(85, 57, 5) #121d27;
 }
 
 div.nowplaying-grid {
@@ -387,7 +392,7 @@ table td {
 table {
   border-collapse: collapse;
   margin: 25px 0;
-  font-size: 0.9em;
+  font-size: 1rem;
   font-family: sans-serif;
   min-width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
