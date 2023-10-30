@@ -32,8 +32,8 @@
                                 <AlbumCover size="60" :album="album" />
                             </div>
                             <div>
-                                <div><router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link></div>
-                                <div>{{ $t("shared.by_artist") }} <router-link @click.stop :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link></div>
+                                <div><router-link :to="'/album/' + album.getId()" @click="closeModal()">{{ album.getName() }}</router-link></div>
+                                <div>{{ $t("shared.by_artist") }} <router-link @click.stop @click="closeModal()" :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link></div>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                 <ArtistCover size="60" :artist="artist" />
                             </div>
                             <div>
-                                <span><router-link :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link></span>
+                                <span><router-link :to="'/artist/' + artist.getId()" @click="closeModal()">{{ artist.getName() }}</router-link></span>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                     {{ song.getName() }}
                                 </div>
                                 <div class="artistName">
-                                    <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+                                    <router-link :to="'/artist/' + song.getArtistId()" @click="closeModal()">{{ song.getArtistName() }}</router-link>
                                 </div>
                             </div>
                         </div>
