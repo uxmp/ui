@@ -83,7 +83,7 @@ export default defineComponent({
     },
     async deletePlaylist(deletePlaylist: PlaylistInterface): Promise<void> {
       HttpRequest.delete(`playlist/` + deletePlaylist.getId()).then(() => {
-        this.playlists = this.playlists.filter(playlist => playlist.getId() !== deletePlaylist.getId() )
+        this.playlists = this.playlists.filter((playlist: PlaylistInterface) => playlist.getId() !== deletePlaylist.getId() )
       });
     },
     async play(playlist: PlaylistInterface): Promise<void> {

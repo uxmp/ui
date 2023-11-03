@@ -82,7 +82,7 @@ export default defineComponent({
     },
     async deleteStation(deleteStation: RadioStationInterface): Promise<void> {
       HttpRequest.delete(`radiostation/` + deleteStation.getId()).then(() => {
-        this.radioStations = this.radioStations.filter(station => station.getId() !== deleteStation.getId() )
+        this.radioStations = this.radioStations.filter((station: RadioStationInterface) => station.getId() !== deleteStation.getId() )
       });
     },
   }

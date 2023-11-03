@@ -5,8 +5,6 @@ import deDE from './locales/de.json'
 
 type MessageSchema = typeof enUS
 
-export const SUPPORT_LOCALES = ["en", "de"];
-
 export function setupI18n(options = {
     locale: 'en',
     messages: {

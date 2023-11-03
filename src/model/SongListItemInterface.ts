@@ -12,7 +12,7 @@ export default interface SongListItemInterface {
 
   getAlbumName(): string;
 
-  setCover(cover: string);
+  setCover(cover: string): void;
 
   getCover(): string;
 
