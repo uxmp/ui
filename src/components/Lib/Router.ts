@@ -17,6 +17,7 @@ import PlaylistEdit from "../Playlist/PlaylistEdit.vue"
 import PlaylistView from "../Playlist/PlaylistView.vue"
 import UserList from "../Settings/UserList.vue"
 import UserEdit from "../Settings/UserEdit.vue"
+import CatalogList from "../Settings/Catalog/CatalogList.vue";
 
 const routes = [
   {
@@ -83,6 +84,15 @@ const routes = [
   {
     path: "/settings/user",
     component: UserList,
+    beforeEnter: () => {
+      if (!Store.getters['authStorage/isAdmin']) {
+        return false;
+      }
+    },
+  },
+  {
+    path: "/settings/catalogs",
+    component: CatalogList,
     beforeEnter: () => {
       if (!Store.getters['authStorage/isAdmin']) {
         return false;

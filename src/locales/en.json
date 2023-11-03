@@ -207,6 +207,9 @@
   },
   "settings": {
     "title": "Settings",
+    "catalogs": {
+      "title": "Catalogs"
+    },
     "user": {
       "title": "User",
       "edit_title": "Edit",

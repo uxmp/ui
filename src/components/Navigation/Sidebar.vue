@@ -33,6 +33,7 @@
   <div class="box" v-if="isAdmin()">
     <div class="head">{{ $t("settings.title") }}</div>
     <router-link to="/settings/user">{{ $t("settings.user.title") }}</router-link>
+    <router-link to="/settings/catalogs">{{ $t("settings.catalogs.title") }}</router-link>
   </div>
 </template>
 
