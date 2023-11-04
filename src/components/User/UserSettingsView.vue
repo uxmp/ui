@@ -126,8 +126,8 @@ export default defineComponent({
     },
   },
   async created(): Promise<void> {
-    this.getUserSettings()
-    this.getSubSonicSettings()
+    await this.getUserSettings()
+    await this.getSubSonicSettings()
   },
   methods: {
     async showSubSonicKey(): Promise<void> {
@@ -160,7 +160,7 @@ export default defineComponent({
 
       this.$i18n.locale = language
 
-      this.$store.dispatch('authStorage/setLanguage', {
+      await this.$store.dispatch('authStorage/setLanguage', {
         language
       });
 

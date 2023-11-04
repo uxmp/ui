@@ -67,8 +67,8 @@ import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 import FavoriteStarView from './FavoriteStarView.vue'
-import FormatLength from '../Lib/FormatLength.vue'
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
+import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 
 export default defineComponent({
   props: {

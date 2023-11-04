@@ -208,7 +208,14 @@
   "settings": {
     "title": "Settings",
     "catalogs": {
-      "title": "Catalogs"
+      "title": "Catalogs",
+      "table": {
+        "columns": {
+          "id": "Id",
+          "path": "Path",
+          "last_updated": "Last updated"
+        }
+      }
     },
     "user": {
       "title": "User",

@@ -29,7 +29,7 @@
 import { defineComponent, PropType } from 'vue'
 import NowPlaying from '../../model/NowPlaying'
 import FavoriteStarView from './FavoriteStarView.vue'
-import FormatLength from '../Lib/FormatLength.vue'
+import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 
 export default defineComponent({
   name: 'NowPlayingView',

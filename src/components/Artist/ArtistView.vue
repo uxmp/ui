@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { defineComponent } from 'vue'
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
@@ -96,11 +96,11 @@ import { AxiosResponse } from 'axios';
 import AlbumInterface from '../../model/AlbumInterface';
 import ArtistInterface from '../../model/ArtistInterface';
 import FavoriteStarView from '../Lib/FavoriteStarView.vue'
-import FormatLength from '../Lib/FormatLength.vue'
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
 import SongListItem from '../../model/SongListItem';
 import PlaySongButton from '../Lib/PlaySongButton.vue';
+import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 
 export default defineComponent({
   name: 'ArtistView',
@@ -134,7 +134,7 @@ export default defineComponent({
         'albums/' + this.$route.params.artistId
       ).then((response: AxiosResponse) => {
         this.albumList = response.data.items.map((album_data: any): AlbumInterface => {
-          return plainToClass(Album, album_data);
+          return plainToInstance(Album, album_data);
         });
       });
     },
@@ -143,7 +143,7 @@ export default defineComponent({
         'artist/' + this.$route.params.artistId + '/top_songs'
       ).then((response: AxiosResponse) => {
         this.topSongs = response.data.items.map((song_data: any): SongListItemInterface => {
-          return plainToClass(SongListItem, song_data);
+          return plainToInstance(SongListItem, song_data);
         });
       });
     },

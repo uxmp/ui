@@ -95,8 +95,8 @@ import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface';
 import DiscInterface from '../../model/DiscInterface';
-import FormatLength from '../Lib/FormatLength.vue';
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
+import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 
 export default defineComponent({
   name: 'AlbumView',

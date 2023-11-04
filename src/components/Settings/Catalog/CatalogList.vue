@@ -5,8 +5,9 @@
       <table>
         <thead>
           <tr>
-            <th>Id</th>
-            <th>{{ $t('settings.user.table.columns.name') }}</th>
+            <th>{{ $t('settings.catalogs.table.columns.id') }}</th>
+            <th>{{ $t('settings.catalogs.table.columns.path') }}</th>
+            <th>{{ $t('settings.catalogs.table.columns.last_updated') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +15,9 @@
             <td>{{ catalog.id }}</td>
             <td>
               {{ catalog.path }}
+            </td>
+            <td>
+              <FormatDateTime :date="catalog.lastUpdate" />
             </td>
           </tr>
         </tbody>
@@ -29,26 +33,38 @@
 import {defineComponent} from 'vue'
 import LoadingIcon from '../../Lib/LoadingIcon.vue'
 import HttpRequest from '../../Lib/HttpRequest';
-import UserListItemInterface from '../../../model/UserListItemInterface';
+import FormatDateTime from "@/components/Lib/Format/FormatDateTime.vue";
 
 export default defineComponent({
   name: 'CatalogList',
   data() {
     return { 
-      catalogs: [] as Array<{id: number, path: string}>
+      catalogs: null as null|Array<{id: number, path: string, lastUpdate: null|Date}>
     }
   },
   components: {
+    FormatDateTime,
     LoadingIcon
   },
   async created(): Promise<void> {
-    this.getCatalogs()
+    await this.getCatalogs()
   },
   methods: {
     async getCatalogs(): Promise<void> {
       HttpRequest.get(`/settings/catalogs`).then(res => {
-        this.catalogs = res.data.items.map((user_data: any): UserListItemInterface => {
-          return user_data;
+        this.catalogs = res.data.items.map((catalog: {id: number, path: string, lastUpdate: null|string}): {id: number, path: string, lastUpdate: null|Date} => {
+          if (catalog.lastUpdate !== null) {
+            return {
+              id: catalog.id,
+              path: catalog.path,
+              lastUpdate: new Date(catalog.lastUpdate)
+            };
+          }
+          return {
+            id: catalog.id,
+            path: catalog.path,
+            lastUpdate: null
+          }
         });
       });
     },

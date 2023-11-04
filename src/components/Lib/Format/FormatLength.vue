@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import formatDurationLength from '../Lib/FormatDurationLength';
+import formatDurationLength from "./FormatDurationLength";
 
 export default defineComponent({
   name: 'FormatLength',
