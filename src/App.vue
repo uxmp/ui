@@ -43,6 +43,7 @@ import SongListItem from './model/SongListItem'
 import PlaylistConfig from './model/PlaylistConfig'
 import PlaylistConfigInterface from './model/PlaylistConfigInterface'
 import Header from "./components/Navigation/Header.vue";
+import {Notifications} from "@kyvg/vue3-notification";
 
 export default defineComponent({
   data() {
@@ -56,6 +57,7 @@ export default defineComponent({
   },
   name: 'uxMP',
   components: {
+    Notifications,
     Sidebar,
     Playlist,
     PlayerControl,
@@ -127,7 +129,7 @@ export default defineComponent({
       });
     }
   },
-  beforeDestroy(): void {
+  beforeUnmount(): void {
     this.cancelAutoUpdate();
   },
   methods: {
