@@ -2,7 +2,7 @@ import * as amplitudejs from 'amplitudejs'
 import { DefineComponent } from 'vue';
 import Disc from '../../model/Disc';
 import SongListItem from '../../model/SongListItem';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import SongListItemInterface from '../../model/SongListItemInterface';
 import HttpRequest from './HttpRequest';
 import { AxiosResponse } from 'axios';
@@ -48,7 +48,7 @@ export default class Player {
             }
           );
 
-          app.emitter.emit('updateNowPlaying', plainToClass(NowPlaying, song))
+          app.emitter.emit('updateNowPlaying', plainToInstance(NowPlaying, song))
           app.emitter.emit('updatePlayerState', true)
 
           document.getElementById('playlist-item-' + song.index)?.scrollIntoView({
@@ -80,7 +80,7 @@ export default class Player {
 
       let songList = [] as Array<SongListItemInterface>;
 
-      let discs = response.data.items.map((disc_raw: Object): DiscInterface => plainToClass(Disc, disc_raw))
+      let discs = response.data.items.map((disc_raw: Object): DiscInterface => plainToInstance(Disc, disc_raw))
 
       discs.map((disc: DiscInterface) => {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
@@ -96,7 +96,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       this.stop();
 
-      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
     });
@@ -108,7 +108,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       this.stop();
 
-      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
+      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
     });

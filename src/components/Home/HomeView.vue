@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { AxiosResponse } from 'axios'
-import { plainToClass } from 'class-transformer'
+import { plainToInstance } from 'class-transformer'
 import { defineComponent } from 'vue'
 import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
@@ -59,28 +59,28 @@ export default defineComponent({
     async getNewestAlbums(): Promise<void> {
       HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
         this.recentAlbums = response.data.items.map((albumData: Object): AlbumInterface => {
-          return plainToClass(Album, albumData);
+          return plainToInstance(Album, albumData);
         });
       });
     },
     async getPlaybackHistory(): Promise<void> {
       HttpRequest.get('play/history').then((response: AxiosResponse) => {
         this.playbackHistory = response.data.items.map((historyData: Object): PlaybackHistoryItemInterface => {
-          return plainToClass(PlaybackHistoryItem, historyData);
+          return plainToInstance(PlaybackHistoryItem, historyData);
         })
       })
     },
     async getMostPlayed(): Promise<void> {
       HttpRequest.get('play/mostplayed').then((response: AxiosResponse) => {
         this.mostPlayed = response.data.items.map((data: Object): MostPlayedItemInterface => {
-          return plainToClass(MostPlayedItem, data);
+          return plainToInstance(MostPlayedItem, data);
         })
       })
     },
     async getGenreStatistics(): Promise<void> {
       HttpRequest.get('genres').then((response: AxiosResponse) => {
         this.genreStatistics = response.data.items.map((data: Object): GenreStatisticItemInterface => {
-          return plainToClass(GenreStatisticItem, data);
+          return plainToInstance(GenreStatisticItem, data);
         })
       })
     },

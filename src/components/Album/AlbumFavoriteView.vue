@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { plainToClass } from 'class-transformer'
+import {plainToInstance} from 'class-transformer'
 import Album from '../../model/Album'
 import HttpRequest from '../Lib/HttpRequest'
 import AlbumInterface from '../../model/AlbumInterface'
@@ -36,7 +36,7 @@ export default defineComponent({
     async getAlbums(): Promise<void> {
       HttpRequest.get(`albums/favorite`).then(res => {
         this.albumList = res.data.items.map((album_data: Object): AlbumInterface => {
-          return plainToClass(Album, album_data);
+          return plainToInstance(Album, album_data);
         });
       });
 

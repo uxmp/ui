@@ -14,7 +14,7 @@ import Player from '../Lib/Player';
 import LoadingIcon from '../Lib/LoadingIcon.vue'
 import PlaylistInterface from '../../model/PlaylistInterface'
 import HttpRequest from '../Lib/HttpRequest';
-import { plainToClass} from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import EntityLoader from '../Lib/EntityLoader';
 import { AxiosResponse } from 'axios';
 import SongListItemInterface from '../../model/SongListItemInterface';
@@ -45,7 +45,7 @@ export default defineComponent({
     HttpRequest.get(
       'playlist/' + this.$route.params.playlistId + '/songs'
     ).then((response: AxiosResponse) => {
-      this.songList = response.data.items.map((data: Object): SongListItemInterface => plainToClass(SongListItem, data));
+      this.songList = response.data.items.map((data: Object): SongListItemInterface => plainToInstance(SongListItem, data));
     });
   },
   methods: {

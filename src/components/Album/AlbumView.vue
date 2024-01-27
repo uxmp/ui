@@ -86,7 +86,7 @@ import 'reflect-metadata';
 import EntityLoader from '../Lib/EntityLoader';
 import LoadingIcon from '../Lib/LoadingIcon.vue';
 import AlbumCover from './Lib/AlbumCover.vue';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import Disc from '../../model/Disc';
 import HttpRequest from '../Lib/HttpRequest';
 import Player from '../Lib/Player';
@@ -126,7 +126,7 @@ export default defineComponent({
     HttpRequest.get(
       'album/' + this.$route.params.albumId + '/songs'
     ).then((response: AxiosResponse) => {
-      this.albumDiscs = response.data.items.map((disc_raw: Object): DiscInterface => plainToClass(Disc, disc_raw));
+      this.albumDiscs = response.data.items.map((disc_raw: Object): DiscInterface => plainToInstance(Disc, disc_raw));
     });
   },
   methods: {

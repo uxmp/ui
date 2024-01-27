@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { AxiosResponse } from 'axios';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router';
 import SongListItem from '../../model/SongListItem';
@@ -42,7 +42,7 @@ export default defineComponent({
         'random/songs/' + limit
       ).then((response: AxiosResponse): void => {
         this.songList = response.data.items.map((song_data: any): SongListItemInterface => {
-          return plainToClass(SongListItem, song_data);
+          return plainToInstance(SongListItem, song_data);
         });
       });
     },
@@ -52,4 +52,3 @@ export default defineComponent({
 
 <style scoped>
 </style>
-  

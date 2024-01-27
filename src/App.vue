@@ -38,7 +38,7 @@ import SongListItemInterface from './model/SongListItemInterface'
 import PlayerControl from './components/Navigation/PlayerControl.vue'
 import HttpRequest from './components/Lib/HttpRequest'
 import { AxiosResponse } from 'axios'
-import { plainToClass } from 'class-transformer'
+import {plainToInstance} from 'class-transformer'
 import SongListItem from './model/SongListItem'
 import PlaylistConfig from './model/PlaylistConfig'
 import PlaylistConfigInterface from './model/PlaylistConfigInterface'
@@ -122,7 +122,7 @@ export default defineComponent({
         let data = response.data;
 
         this.playlist = new PlaylistConfig(
-          data.songs.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw)),
+          data.songs.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw)),
           data.offset,
           false
         )

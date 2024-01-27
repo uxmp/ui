@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import HttpRequest from '../Lib/HttpRequest';
 import Artist from '../../model/Artist';
 import ArtistInterface from '../../model/ArtistInterface';
@@ -39,7 +39,7 @@ export default defineComponent({
     HttpRequest.get('artists').then((response: AxiosResponse) => {
       this.quantity = response.data.items.length;
       this.artistList = response.data.items.map((artist_data: any): ArtistInterface => {
-        return plainToClass(Artist, artist_data);
+        return plainToInstance(Artist, artist_data);
       });
     });
   },
