@@ -8,7 +8,7 @@
         <th>{{ $t('home.most_played.table.column.number_played') }}</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="items !== null">
       <tr v-for="item in items" :key="item.getSong().getId()">
         <td>
           <SongCover :song="item.getSong()" :size="'40'" />
@@ -24,27 +24,51 @@
         <td>{{ item.getCount() }}</td>
       </tr>
     </tbody>
+    <tbody v-else>
+    <tr>
+      <td colspan="3">
+        <LoadingIcon />
+      </td>
+    </tr>
+    </tbody>
   </table>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import MostPlayedItemInterface from '../../model/MostPlayedItemInterface'
 import PlaySongButton from './PlaySongButton.vue'
 import SongCover from '../Lib/SongCover.vue'
+import HttpRequest from '../Lib/HttpRequest'
+import {AxiosResponse} from "axios";
+import {plainToInstance} from "class-transformer";
+import MostPlayedItem from '../../model/MostPlayedItem'
+import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 
 export default defineComponent({
   name: 'MostPlayed',
-  props: {
-    items: {
-      type: Array as PropType<Array<MostPlayedItemInterface>>,
-      required: true
+  data() {
+    return {
+      items: null as null|Array<MostPlayedItemInterface>,
     }
   },
   components: {
+    LoadingIcon,
     PlaySongButton,
     SongCover,
   },
+  beforeMount(): void {
+    this.getMostPlayed()
+  },
+  methods: {
+    async getMostPlayed(): Promise<void> {
+      HttpRequest.get('play/mostplayed').then((response: AxiosResponse) => {
+        this.items = response.data.items.map((data: Object): MostPlayedItemInterface => {
+          return plainToInstance(MostPlayedItem, data);
+        })
+      })
+    },
+  }
 })
 </script>
 

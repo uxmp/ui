@@ -2,15 +2,16 @@
   <h1>/ {{ $t("home.title") }}</h1>
   <h3>{{ $t("home.recent_albums_title") }}</h3>
   <div class="list scrollbar">
-    <AlbumListItem :album="album" v-for="album in recentAlbums" :key="album.getId()" />
+    <AlbumListItem v-if="recentAlbums !== null" :album="album" v-for="album in recentAlbums" :key="album.getId()" />
+    <LoadingIcon v-else />
   </div>
   <div class="grid">
     <div>
-      <PlaybackHistory :items="playbackHistory" />
+      <PlaybackHistory />
     </div>
     <div>
-      <GenreStatistics :items="genreStatistics" />
-      <MostPlayed :items="mostPlayed" />
+      <GenreStatistics />
+      <MostPlayed />
     </div>
   </div>
 </template>
@@ -21,39 +22,29 @@ import { plainToInstance } from 'class-transformer'
 import { defineComponent } from 'vue'
 import Album from '../../model/Album'
 import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
-import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
-import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
-import MostPlayedItem from '../../model/MostPlayedItem'
-import MostPlayedItemInterface from '../../model/MostPlayedItemInterface'
 import HttpRequest from '../Lib/HttpRequest'
 import AlbumInterface from '../../model/AlbumInterface'
 import PlaybackHistory from '../Lib/PlaybackHistory.vue'
 import MostPlayed from '../Lib/MostPlayed.vue'
-import GenreStatisticItemInterface from '../../model/GenreStatisticItemInterface'
-import GenreStatisticItem from '../../model/GenreStatisticItem'
 import GenreStatistics from './Lib/GenreStatistics.vue'
+import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 
 export default defineComponent({
   name: 'HomeView',
   data() {
     return { 
-      recentAlbums: [] as Array<AlbumInterface>,
-      playbackHistory: [] as Array<PlaybackHistoryItemInterface>,
-      mostPlayed: [] as Array<MostPlayedItemInterface>,
-      genreStatistics: [] as Array<GenreStatisticItemInterface>,
+      recentAlbums: null as null|Array<AlbumInterface>,
     }
   },
   components: {
+    LoadingIcon,
     AlbumListItem,
     PlaybackHistory,
     MostPlayed,
     GenreStatistics
-},
+  },
   beforeMount(): void {
     this.getNewestAlbums()
-    this.getPlaybackHistory()
-    this.getMostPlayed()
-    this.getGenreStatistics()
   },
   methods: {
     async getNewestAlbums(): Promise<void> {
@@ -62,27 +53,6 @@ export default defineComponent({
           return plainToInstance(Album, albumData);
         });
       });
-    },
-    async getPlaybackHistory(): Promise<void> {
-      HttpRequest.get('play/history').then((response: AxiosResponse) => {
-        this.playbackHistory = response.data.items.map((historyData: Object): PlaybackHistoryItemInterface => {
-          return plainToInstance(PlaybackHistoryItem, historyData);
-        })
-      })
-    },
-    async getMostPlayed(): Promise<void> {
-      HttpRequest.get('play/mostplayed').then((response: AxiosResponse) => {
-        this.mostPlayed = response.data.items.map((data: Object): MostPlayedItemInterface => {
-          return plainToInstance(MostPlayedItem, data);
-        })
-      })
-    },
-    async getGenreStatistics(): Promise<void> {
-      HttpRequest.get('genres').then((response: AxiosResponse) => {
-        this.genreStatistics = response.data.items.map((data: Object): GenreStatisticItemInterface => {
-          return plainToInstance(GenreStatisticItem, data);
-        })
-      })
     },
   }
 })

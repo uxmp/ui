@@ -8,7 +8,7 @@
         <th>{{ $t("home.playback_history.table.user_column_title") }}</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="items !== null">
       <tr v-for="song in items" :key="song.getId()">
         <td>
           <SongCover :song="song" :size="'40'" />
@@ -24,27 +24,51 @@
         <td>{{ song.getUserName() }}</td>
       </tr>
     </tbody>
+    <tbody v-else>
+      <tr>
+        <td colspan="3">
+          <LoadingIcon />
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
+import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import SongCover from '../Lib/SongCover.vue'
+import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
+import HttpRequest from '../Lib/HttpRequest'
+import {AxiosResponse} from "axios";
+import {plainToInstance} from "class-transformer";
 
 export default defineComponent({
   name: 'PlaybackHistory',
-  props: {
-    items: {
-      type: Array as PropType<Array<PlaybackHistoryItemInterface>>,
-      required: true
+  data() {
+    return {
+      items: null as null|Array<PlaybackHistoryItemInterface>,
     }
   },
   components: {
+    LoadingIcon,
     PlaySongButton,
     SongCover,
   },
+  beforeMount() {
+      this.getPlaybackHistory();
+  },
+  methods: {
+    async getPlaybackHistory(): Promise<void> {
+      HttpRequest.get('play/history').then((response: AxiosResponse) => {
+        this.items = response.data.items.map((historyData: Object): PlaybackHistoryItemInterface => {
+          return plainToInstance(PlaybackHistoryItem, historyData);
+        })
+      })
+    },
+  }
 })
 </script>
 

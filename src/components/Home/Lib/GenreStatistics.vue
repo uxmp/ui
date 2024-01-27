@@ -1,26 +1,46 @@
 <template>
   <h3>{{ $t("home.genre_statistics.title") }}</h3>
-  <div class="genres">
+  <div class="genres" v-if="items !== null">
     <router-link :key="genre.getId()" v-for="genre in items" :to="'/albums/genre/' + genre.getId()">
       <span :title="$t('home.genre_statistics.albumCount', {albumCount: genre.getAlbumCount()})">{{ genre.getName() }}</span>
     </router-link>
   </div>
+  <div class="genres" v-else>
+    <LoadingIcon />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import GenreStatisticItemInterface from '../../../model/GenreStatisticItemInterface'
+import {AxiosResponse} from "axios";
+import {plainToInstance} from "class-transformer";
+import GenreStatisticItem from '../../../model/GenreStatisticItem'
+import HttpRequest from '../../Lib/HttpRequest'
+import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 
 export default defineComponent({
   name: 'GenreStatistics',
-  props: {
-    items: {
-      type: Array as PropType<Array<GenreStatisticItemInterface>>,
-      required: true
+  data() {
+    return {
+      items: null as null|Array<GenreStatisticItemInterface>,
     }
   },
   components: {
+    LoadingIcon
   },
+  beforeMount(): void {
+    this.getGenreStatistics()
+  },
+  methods: {
+    async getGenreStatistics(): Promise<void> {
+      HttpRequest.get('genres').then((response: AxiosResponse) => {
+        this.items = response.data.items.map((data: Object): GenreStatisticItemInterface => {
+          return plainToInstance(GenreStatisticItem, data);
+        })
+      })
+    },
+  }
 })
 </script>
 
