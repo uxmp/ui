@@ -1,6 +1,6 @@
 <template>
   <h1>/ {{ $t("album_list.title") }}</h1>
-  <template v-if="loading === false">
+  <template v-if="!loading">
     <AlbumSelector :albumList="albumList" />
   </template>
   <template v-else>

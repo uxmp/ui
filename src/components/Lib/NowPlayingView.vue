@@ -68,11 +68,15 @@ div.cover img {
 div.title {
   font-size: 110%;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 div.album {
   font-size: 80%;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 div.artist {

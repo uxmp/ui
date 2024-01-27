@@ -2,7 +2,7 @@
   <div class="album" v-on:click="showAlbum()">
     <div class="album_inner">
       <AlbumCover :album="album" />
-      <div class="album_name">
+      <div class="album_name" :title="album.getName() ">
         <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
       </div>
       <div class="album_artist">
@@ -38,6 +38,7 @@ export default defineComponent({
 
 <style scoped>
 div.album {
+  color: rgb(141, 102, 31);
   display: inline-flex;
   width: 300px;
   height: 180px;
@@ -61,12 +62,16 @@ div.album_inner {
 
 div.album_name {
   padding-top: 10px;
-  font-size: 110%;
+  font-size: 100%;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 div.album_artist {
   font-size: 80%;
   text-align: center;
+  color: #ffffff;
 }
 </style>
