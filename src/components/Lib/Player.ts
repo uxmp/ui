@@ -73,11 +73,11 @@ export default class Player {
   }
 
   playAlbum(albumId: number, app: DefineComponent): void {
-    amplitudejs.stop();
-
     HttpRequest.get(
       'album/' + albumId + '/songs'
     ).then((response: AxiosResponse) => {
+      this.stop();
+
       let songList = [] as Array<SongListItemInterface>;
 
       let discs = response.data.items.map((disc_raw: Object): DiscInterface => plainToClass(Disc, disc_raw))
@@ -91,11 +91,11 @@ export default class Player {
   }
 
   playPlaylist(playlistId: number, app: DefineComponent): void {
-    amplitudejs.stop();
-
     HttpRequest.get(
       'playlist/' + playlistId + '/songs'
     ).then((response: AxiosResponse) => {
+      this.stop();
+
       let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
@@ -106,6 +106,8 @@ export default class Player {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {
+      this.stop();
+
       let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToClass(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
@@ -113,6 +115,8 @@ export default class Player {
   }
 
   playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
+    this.stop();
+
     let song = new SongListItem();
     song.setName(station.getName());
     song.setPlayUrl(station.getUrl());
@@ -122,6 +126,8 @@ export default class Player {
   }
 
   playSong(song: SongListItemInterface, app: DefineComponent): void {
+    this.stop();
+
     this.updatePlaylist([song], app)
   }
 
@@ -148,7 +154,7 @@ export default class Player {
   }
 
   togglePlayerState(state: boolean): void {
-    if (state == true) {
+    if (state) {
       amplitudejs.play();
     } else {
       amplitudejs.pause();
