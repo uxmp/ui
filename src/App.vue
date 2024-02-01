@@ -52,7 +52,7 @@ export default defineComponent({
       nowPlaying: null as null|NowPlaying,
       versionString: import.meta.env.VITE_VERSION,
       playerState: false as boolean,
-      timer: '',
+      timer: null as null|number,
     };
   },
   name: 'uxMP',
@@ -148,7 +148,9 @@ export default defineComponent({
       this.nowPlaying = null;
     },
     cancelAutoUpdate(): void {
-      clearInterval(this.timer);
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
     },
     fetchFavorites(): void {
       if (this.$store.getters['authStorage/isLogged']) {

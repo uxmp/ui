@@ -69,9 +69,9 @@ export default defineComponent({
   name: 'AddToPlaylist',
   data() {
     return { 
-      playlists: [] as Array<PlaylistInterface>,
+      playlists: [] as null|Array<PlaylistInterface>,
       isVisible: false as boolean,
-      selectedPlaylists: [] as Array<Number>,
+      selectedPlaylists: [] as Array<number>,
       states: new Map() as Map<number, number>
     }
   },
@@ -117,7 +117,7 @@ export default defineComponent({
       this.selectedPlaylists = [];
     },
     async addToPlaylists(): Promise<void> {
-      this.selectedPlaylists.map((playlistId: Number): void => {
+      this.selectedPlaylists.map((playlistId: number): void => {
         this.states.set(playlistId, LoadingState.LOADING);
 
         HttpRequest.post(

@@ -3,5 +3,7 @@ export default interface UserInterface {
 
   getName(): string;
 
+  setName(name: string): void;
+
   getLanguage(): string;
 }

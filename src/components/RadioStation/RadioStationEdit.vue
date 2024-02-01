@@ -33,7 +33,7 @@ export default defineComponent({
   name: 'RadioStationEdit',
   data() {
     return { 
-      radioStation: new RadioStation(),
+      radioStation: new RadioStation() as RadioStationInterface,
       msg: ''
     }
   },

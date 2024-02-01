@@ -37,7 +37,7 @@ export default defineComponent({
   name: 'PlaylistEdit',
   data() {
     return { 
-      playlist: new Playlist(),
+      playlist: new Playlist() as PlaylistInterface,
       msg: '',
       playlistTypes: null as Array<{value: string, label: string}>|null,
       selectedPlaylistType: 1 as number

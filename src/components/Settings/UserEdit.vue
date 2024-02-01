@@ -48,7 +48,8 @@ export default defineComponent({
   components: {
     LoadingIcon
   },
-  computed: {    name: {
+  computed: {
+    name: {
       set: function(val: string): void {
         this.user.setName(val.trim());
       },

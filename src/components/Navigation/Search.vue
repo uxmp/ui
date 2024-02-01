@@ -21,7 +21,7 @@
 
         <template v-slot:body>
             <div class="searchResults scrollbar">
-                <template v-if="this.searchState">
+                <template v-if="searchState">
                     <LoadingIcon />
                 </template>
                 <template v-else>
@@ -88,6 +88,18 @@ import SongCover from "../Lib/SongCover.vue";
 
 export default defineComponent({
   name: 'Search',
+  data() {
+    return {
+      searchQuery: '',
+      searchState: false,
+      searchResult: {
+        albums: [] as Array<AlbumInterface>,
+        artists: [] as Array<ArtistInterface>,
+        songs: [] as Array<SongListItemInterface>
+      },
+      isVisible: false
+    }
+  },
   components: {SongCover, ArtistCover, AlbumCover, LoadingIcon, Modal},
   methods: {
     async search(): Promise<void> {
@@ -124,18 +136,6 @@ export default defineComponent({
         songs: []
       }
     },
-  },
-  data() {
-    return {
-      searchQuery: '',
-      searchState: false,
-      searchResult: {
-        albums: [] as Array<AlbumInterface>,
-        artists: [] as Array<ArtistInterface>,
-        songs: [] as Array<SongListItemInterface>
-      },
-      isVisible: false
-    }
   },
 })
 </script>
