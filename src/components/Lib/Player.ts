@@ -11,10 +11,16 @@ import RadioStationInterface from '../../model/RadioStationInterface';
 import NowPlaying from '../../model/NowPlaying';
 import DiscInterface from '../../model/DiscInterface';
 
-export default class Player {
 
+export default class Player {
   init(app: DefineComponent, songList: Array<Object>, offset: Number = 0): void {
     amplitudejs.stop();
+
+    // get the volume so can set it again
+    let currentVolume = amplitudejs.getConfig().volume;
+    if (currentVolume < 1) {
+      currentVolume = 50;
+    }
 
     if ("mediaSession" in navigator) {
       navigator.mediaSession.setActionHandler('previoustrack', function () { amplitudejs.prev() });
@@ -24,6 +30,7 @@ export default class Player {
     amplitudejs.init({
       songs: songList,
       start_song: offset,
+      volume: currentVolume,
       callbacks: {
         play: function () {
           let song = amplitudejs.getActiveSongMetadata();
