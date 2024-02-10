@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent, inject} from 'vue'
 import Playlist from './components/Navigation/Playlist.vue'
 import Sidebar from './components/Navigation/Sidebar.vue'
 import NowPlayingView from './components/Lib/NowPlayingView.vue'
@@ -44,8 +44,15 @@ import PlaylistConfig from './model/PlaylistConfig'
 import PlaylistConfigInterface from './model/PlaylistConfigInterface'
 import Header from "./components/Navigation/Header.vue";
 import {Notifications} from "@kyvg/vue3-notification";
+import Player from "./components/Lib/Player";
 
 export default defineComponent({
+  setup() {
+    const player = inject('ply') as Player;
+    return {
+      player,
+    };
+  },
   data() {
     return {
       playlist: null as null|PlaylistConfigInterface,
@@ -135,15 +142,18 @@ export default defineComponent({
   methods: {
     showPlayer(): void {
         let element = document.getElementById('maingrid');
-        if (element !== null) {
+        if (element) {
           element.className = 'maingrid';
         }
     },
     hidePlayer(): void {
       let element = document.getElementById('maingrid');
-      if (element !== null) {
+      if (element) {
         element.className = 'maingrid-noplayer';
       }
+
+      this.player.stop();
+
       this.playlist = null;
       this.nowPlaying = null;
     },

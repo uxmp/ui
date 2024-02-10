@@ -38,14 +38,16 @@ export default defineComponent({
   },
   updated(): void {
     this.$nextTick(function (): void {
-      this.player.init(
-        this,
-        this.playlistConfig.getSongList().map((song: SongListItemInterface) => this.player.createSongListItem(song)),
-        this.playlistConfig.getOffset()
-      );
+      if (this.playlistConfig) {
+        this.player.init(
+            this,
+            this.playlistConfig.getSongList().map((song: SongListItemInterface) => this.player.createSongListItem(song)),
+            this.playlistConfig.getOffset()
+        );
 
-      if (this.playlistConfig.isAutoPlay()) {
-        this.player.playIndex(this.playlistConfig.getOffset())
+        if (this.playlistConfig.isAutoPlay()) {
+          this.player.playIndex(this.playlistConfig.getOffset())
+        }
       }
     })
   },
@@ -63,4 +65,3 @@ section:hover {
   color: rgb(192, 140, 44);
 }
 </style>
-  
