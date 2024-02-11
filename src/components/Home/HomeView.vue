@@ -2,7 +2,7 @@
   <h1>/ {{ $t("home.title") }}</h1>
   <h3>{{ $t("home.recent_albums_title") }}</h3>
   <div class="list scrollbar">
-    <AlbumListItem v-if="recentAlbums !== null" :album="album" v-for="album in recentAlbums" :key="album.getId()" />
+    <AlbumListItem v-if="recentAlbums !== null" :album="album" v-for="album in recentAlbums" :key="album.getId()" :displayMetadata="true" />
     <LoadingIcon v-else />
   </div>
   <div class="grid">

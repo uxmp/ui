@@ -26,7 +26,7 @@
           <tbody>
             <tr v-for="album in albumList" :key="album.getId()">
               <td>
-                <AlbumCover :album="album" />
+                <AlbumCover :album="album" :size="120"/>
               </td>
               <td>
                 <router-link :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>

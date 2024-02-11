@@ -1,8 +1,21 @@
 <template>
-  <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
-    <img class="cover_play" v-on:click.stop="play(album)" v-bind:src="album.getCover()" />
+  <div v-on:click.stop="play(album)"
+      class="cover_container"
+      :style="{'height': size + 'px', 'width': size + 'px', 'background-image': 'url(\'' + album.getCover() + '\')'}"
+  >
     <div class="cover_overlay" v-on:click.stop="play(album)">
       <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']"/>
+    </div>
+    <div class="meta_container" v-if="displayMetadata">
+      <div class="cover_meta_separator"></div>
+      <div class="album_info">
+        <div class="album_name" :title="album.getName()">
+          <router-link @click.stop :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
+        </div>
+        <div class="album_artist">
+          <router-link @click.stop :to="'/artist/' + album.getArtistId()">{{ album.getArtistName() }}</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +40,11 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: "120"
+      default: "260"
+    },
+    displayMetadata: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -44,16 +61,42 @@ div.cover_container {
   position: relative;
   margin: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
+  background-size: cover;
+  background-position: center center;
 }
 
-img.cover_play {
-  cursor: pointer;
-  opacity: 1;
-  display: block;
-  transition: .2s ease;
-  backface-visibility: hidden;
+div.cover_meta_separator {
   width: 100%;
-  height: 100%;
+  height: 25px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(17,23,29,0.8) 100%);
+}
+
+div.meta_container {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  min-height: 60px;
+  text-align: left;
+}
+
+div.album_info {
+  background-color: rgba(17,23,29,0.8);
+}
+
+div.album_name {
+  padding-top: 10px;
+  font-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+div.album_artist {
+  font-size: 80%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 div.cover_overlay {
@@ -66,10 +109,6 @@ div.cover_overlay {
   -ms-transform: translate(-50%, -50%);
   text-align: center;
   cursor: pointer;
-}
-
-div.cover_container:hover .cover_play {
-  opacity: 0.3;
 }
 
 div.cover_container:hover .cover_overlay {

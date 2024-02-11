@@ -3,7 +3,7 @@
     {{ $t('shared.quantity', { quantity: albumList.length }) }}
   </div>
   <div class="albumList">
-    <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" />
+    <AlbumListItem v-for="album in albumList" :key="album.getId()" :album="album" :displayMetadata="true"/>
   </div>
 </template>
 
