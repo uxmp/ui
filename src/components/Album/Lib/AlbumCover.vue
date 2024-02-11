@@ -39,8 +39,8 @@ export default defineComponent({
       required: true
     },
     size: {
-      type: String,
-      default: "260"
+      type: Number,
+      default: 260
     },
     displayMetadata: {
       type: Boolean,

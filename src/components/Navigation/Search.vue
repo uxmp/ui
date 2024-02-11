@@ -29,7 +29,7 @@
                         <div class="resultListHeader">Albums ({{ searchResult.albums.length }})</div>
                         <div class="resultList" v-for="album in searchResult.albums" :key="album.getId()">
                             <div>
-                                <AlbumCover size="60" :album="album" />
+                                <AlbumCover :size="60" :album="album" />
                             </div>
                             <div>
                                 <div><router-link :to="'/album/' + album.getId()" @click="closeModal()">{{ album.getName() }}</router-link></div>

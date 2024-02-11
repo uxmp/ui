@@ -63,7 +63,7 @@
       </div>
       <div>
         <FavoriteStarView :itemId="album.getId()" itemType="album" />
-        <AlbumCover :album="album" size="500" />
+        <AlbumCover :album="album" :size="500" />
         <div class="genres" v-if="album.getGenres().length > 0">
           <router-link :key="genre.getId()" v-for="genre in album.getGenres()" :to="'/albums/genre/' + genre.getId()">
             <span :key="genre.getId()">{{ genre.getTitle() }}</span>
