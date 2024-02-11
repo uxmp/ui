@@ -4,6 +4,12 @@
     <div class="cover_overlay" v-on:click.stop="play(artist)">
       <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']"/>
     </div>
+    <div class="meta_container" v-if="displayMetadata">
+      <div class="cover_meta_separator"></div>
+      <div class="artist_info">
+        <router-link @click.stop :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,8 +32,12 @@ export default defineComponent({
       required: true
     },
     size: {
-      type: String,
-      default: "120"
+      type: Number,
+      default: 260
+    },
+    displayMetadata: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -76,18 +86,38 @@ div.cover_container:hover .cover_overlay {
   opacity: 1;
 }
 
-div.album {
-  display: inline-flex;
-  width: 300px;
-  height: 180px;
-  background-color: #0a0f14;
-  margin: 10px;
-  padding: 15px;
-  border: 1px #446683 solid;
-}
-
 .coverPlaybutton {
   font-size: 200%;
   color: rgb(141, 102, 31);
+}
+
+div.cover_container {
+  display: flex;
+  position: relative;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.308);
+  background-size: cover;
+  background-position: center center;
+}
+
+div.cover_meta_separator {
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(17,23,29,0.8) 100%);
+}
+
+div.meta_container {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  min-height: 30px;
+  text-align: left;
+}
+
+div.artist_info {
+  height: 100%;
+  background-color: rgba(17,23,29,0.8);
+  padding-left: 5px;
+  padding-right: 5px;
 }
 </style>

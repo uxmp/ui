@@ -5,7 +5,7 @@
       {{ $t("shared.quantity", {quantity: quantity}) }}
     </div>
     <div class="artistList">
-      <ArtistListItem v-for="artist in artistList" :key="artist.getId()" :artist="artist" />
+      <ArtistListItem v-for="artist in artistList" :key="artist.getId()" :artist="artist" :displayMetadata="true"/>
     </div>
   </template>
   <template v-else>

@@ -26,8 +26,8 @@ export default defineComponent({
       required: true
     },
     size: {
-      type: String,
-      default: '60'
+      type: Number,
+      default: 60
     }
   },
   methods: {

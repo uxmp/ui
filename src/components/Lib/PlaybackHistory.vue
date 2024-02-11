@@ -11,7 +11,7 @@
     <tbody v-if="items !== null">
       <tr v-for="song in items" :key="song.getId()">
         <td>
-          <SongCover :song="song" :size="'40'" />
+          <SongCover :song="song" :size="40" />
         </td>
         <td>
           <div class="songName">

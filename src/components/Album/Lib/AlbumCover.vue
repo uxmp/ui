@@ -8,7 +8,7 @@
     </div>
     <div class="meta_container" v-if="displayMetadata">
       <div class="cover_meta_separator"></div>
-      <div class="album_info">
+      <div class="artist_info">
         <div class="album_name" :title="album.getName()">
           <router-link @click.stop :to="'/album/' + album.getId()">{{ album.getName() }}</router-link>
         </div>
@@ -75,11 +75,11 @@ div.meta_container {
   position: absolute;
   width: 100%;
   bottom: 0;
-  min-height: 60px;
+  min-height: 40px;
   text-align: left;
 }
 
-div.album_info {
+div.artist_info {
   background-color: rgba(17,23,29,0.8);
 }
 

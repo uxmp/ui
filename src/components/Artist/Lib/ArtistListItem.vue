@@ -1,10 +1,7 @@
 <template>
   <div class="artist" v-on:click="showArtist()">
     <div class="artist_inner">
-      <ArtistCover :artist="artist" />
-      <div class="artist_name">
-        <router-link :to="'/artist/' + artist.getId()">{{ artist.getName() }}</router-link>
-      </div>
+      <ArtistCover :artist="artist" :displayMetadata="true" />
     </div>
   </div>
 </template>
@@ -20,6 +17,10 @@ export default defineComponent({
     artist: {
       type: Object as () => ArtistInterface,
       required: true
+    },
+    displayMetadata: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -35,11 +36,12 @@ export default defineComponent({
 
 <style scoped>
 div.artist {
+  color: rgb(141, 102, 31);
   display: inline-flex;
-  width: 300px;
-  height: 150px;
-  margin: 8px;
-  padding: 8px;
+  width: 260px;
+  height: 260px;
+  margin: 6px;
+  padding: 10px;
   background-color: #11171d;
   border-radius: 5%;
   border: 1px #24303d solid;
@@ -54,10 +56,5 @@ div.artist_inner {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-div.artist_name {
-  padding-top: 10px;
-  font-size: 110%;;
 }
 </style>

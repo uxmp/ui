@@ -41,7 +41,7 @@
                         <div class="resultListHeader">Artists ({{ searchResult.artists.length }})</div>
                         <div class="resultList" v-for="artist in searchResult.artists" :key="artist.getId()">
                             <div>
-                                <ArtistCover size="60" :artist="artist" />
+                                <ArtistCover :size="60" :artist="artist" />
                             </div>
                             <div>
                                 <span><router-link :to="'/artist/' + artist.getId()" @click="closeModal()">{{ artist.getName() }}</router-link></span>
@@ -52,7 +52,7 @@
                         <div class="resultListHeader">Songs ({{ searchResult.songs.length }})</div>
                         <div class="resultList" v-for="song in searchResult.songs" :key="song.getId()">
                             <div>
-                                <SongCover :song="song" :size="'40'" />
+                                <SongCover :song="song" :size="60" />
                             </div>
                             <div>
                                 <div>
