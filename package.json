@@ -35,6 +35,6 @@
     "@vue/compiler-sfc": "^3.2.33",
     "typescript": "^5",
     "vite": "^5",
-    "vue-tsc": "^1"
+    "vue-tsc": "^2"
   }
 }
