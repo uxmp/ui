@@ -1,10 +1,10 @@
 <template>
-  <div v-on:click.stop="play(album)"
+  <div
       class="cover_container"
       :style="{'height': size + 'px', 'width': size + 'px', 'background-image': 'url(\'' + album.getCover() + '\')'}"
   >
     <div class="cover_overlay" v-on:click.stop="play(album)">
-      <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']"/>
+      <font-awesome-icon class="coverPlayButton" :icon="['fas', 'play']"/>
     </div>
     <div class="meta_container" v-if="displayMetadata">
       <div class="cover_meta_separator"></div>
@@ -113,10 +113,17 @@ div.cover_overlay {
 
 div.cover_container:hover .cover_overlay {
   opacity: 1;
+  width: 35%;
+  height: 35%;
+  background: rgba(36, 48, 61, 0.6);
 }
 
-.coverPlaybutton {
+.coverPlayButton {
   font-size: 200%;
   color: rgb(141, 102, 31);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 </style>

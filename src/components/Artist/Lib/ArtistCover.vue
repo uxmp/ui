@@ -1,8 +1,8 @@
 <template>
   <div class="cover_container" :style="{'height': size + 'px', 'width': size + 'px'}">
-    <img class="cover_play" v-on:click.stop="play(artist)" v-bind:src="artist.getCover()" />
+    <img class="cover_play" v-bind:src="artist.getCover()" />
     <div class="cover_overlay" v-on:click.stop="play(artist)">
-      <font-awesome-icon class="coverPlaybutton" :icon="['fas', 'play']"/>
+      <font-awesome-icon class="coverPlayButton" :icon="['fas', 'play']"/>
     </div>
     <div class="meta_container" v-if="displayMetadata">
       <div class="cover_meta_separator"></div>
@@ -78,17 +78,20 @@ div.cover_overlay {
   cursor: pointer;
 }
 
-div.cover_container:hover .cover_play {
-  opacity: 0.3;
-}
-
 div.cover_container:hover .cover_overlay {
   opacity: 1;
+  width: 35%;
+  height: 35%;
+  background: rgba(36, 48, 61, 0.6);
 }
 
-.coverPlaybutton {
+.coverPlayButton {
   font-size: 200%;
   color: rgb(141, 102, 31);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 div.cover_container {
