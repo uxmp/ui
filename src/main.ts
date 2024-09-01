@@ -1,7 +1,5 @@
 import { createApp } from 'vue'
-import App from './App.vue'
 import Router from './components/Lib/Router'
-import Store from './components/Store/Store'
 import mitt from 'mitt';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -27,15 +25,39 @@ import deLocaleMessages from './locales/de.json'
 import { createI18n } from 'vue-i18n';
 import Player from './components/Lib/Player';
 import Notifications from '@kyvg/vue3-notification'
-import withUUID from "vue-uuid";
+import {createPinia} from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import App from './App.vue'
 
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: Store.getters['authStorage/getLanguage'],
+  locale: 'en',
   fallbackLocale: 'en',
-  messages: { en: enLocaleMessages, de: deLocaleMessages }
+  messages: { en: enLocaleMessages, de: deLocaleMessages },
+  datetimeFormats: {
+    en: {
+      date: {
+        year: 'numeric', month: 'short', day: 'numeric'
+      },
+      datetime: {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+      }
+    },
+    de: {
+      date: {
+        year: 'numeric', month: 'short', day: 'numeric'
+      },
+      datetime: {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false
+      }
+    }
+  }
 })
 
 library.add(
@@ -65,10 +87,9 @@ const emitter = mitt();
 let app = createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(Router)
-  .use(Store)
+  .use(pinia)
   .use(i18n)
   .use(Notifications)
-  .use(withUUID)
 ;
 
 app.config.globalProperties.emitter = emitter;

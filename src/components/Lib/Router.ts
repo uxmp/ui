@@ -8,7 +8,6 @@ import AlbumFavoriteView from "../Album/AlbumFavoriteView.vue"
 import AlbumListByGenreView from "../Album/AlbumListByGenreView.vue"
 import ArtistView from "../Artist/ArtistView.vue"
 import HomeView from "../Home/HomeView.vue"
-import Store from "../Store/Store";
 import RadioStationList from "../RadioStation/RadioStationList.vue"
 import RadioStationEdit from "../RadioStation/RadioStationEdit.vue"
 import UserSettingsView from "../User/UserSettingsView.vue"
@@ -18,6 +17,7 @@ import PlaylistView from "../Playlist/PlaylistView.vue"
 import UserList from "../Settings/UserList.vue"
 import UserEdit from "../Settings/UserEdit.vue"
 import CatalogList from "../Settings/Catalog/CatalogList.vue";
+import {useUserStore} from "../Store/UserStore";
 
 const routes = [
   {
@@ -85,7 +85,9 @@ const routes = [
     path: "/settings/user",
     component: UserList,
     beforeEnter: () => {
-      if (!Store.getters['authStorage/isAdmin']) {
+      const userStore = useUserStore();
+
+      if (!userStore.isAdmin) {
         return false;
       }
     },
@@ -94,7 +96,9 @@ const routes = [
     path: "/settings/catalogs",
     component: CatalogList,
     beforeEnter: () => {
-      if (!Store.getters['authStorage/isAdmin']) {
+      const userStore = useUserStore();
+
+      if (!userStore.isAdmin) {
         return false;
       }
     },
@@ -103,7 +107,9 @@ const routes = [
     path: "/settings/user/edit/:userId?",
     component: UserEdit,
     beforeEnter: () => {
-      if (!Store.getters['authStorage/isAdmin']) {
+      const userStore = useUserStore();
+
+      if (!userStore.isAdmin) {
         return false;
       }
     },
@@ -116,7 +122,9 @@ const Router = createRouter({
 });
 
 Router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !Store.getters['authStorage/isLogged']) next({ path: 'Login' })
+  const userStore = useUserStore();
+
+  if (to.name !== 'Login' && !userStore.hasUserSession) next({ path: 'Login' })
   else next()
 })
 

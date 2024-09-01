@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import store from '../Store/Store'
 import Router from './Router'
+import {useUserStore} from "../Store/UserStore";
 
 const HttpRequest = axios.create({
   baseURL: import.meta.env.VITE_API_URL.toString(),
@@ -13,7 +13,9 @@ const HttpRequest = axios.create({
 
 HttpRequest.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    let token = store.getters['authStorage/getToken'];
+    const userStore = useUserStore();
+
+    let token = userStore.token;
 
     if (token && config.headers) {
       config.headers['Authorization'] = `Bearer ${ token }`;

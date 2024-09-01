@@ -10,6 +10,7 @@ import ArtistInterface from '../../model/ArtistInterface';
 import RadioStationInterface from '../../model/RadioStationInterface';
 import NowPlaying from '../../model/NowPlaying';
 import DiscInterface from '../../model/DiscInterface';
+import {useUserStore} from "../Store/UserStore";
 
 
 export default class Player {
@@ -44,12 +45,14 @@ export default class Player {
             });
           }
 
+          const userStore = useUserStore();
+
           HttpRequest.post(
             'play/nowplaying',
             {
               songId: song.songId,
               temporaryPlaylist: {
-                id: app.$store.getters['authStorage/getTemporaryPlaylistId'],
+                id: userStore.getTemporaryPlaylistId,
                 offset: song.index,
               }
             }

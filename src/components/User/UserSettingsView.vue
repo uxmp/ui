@@ -89,8 +89,16 @@ import SubSonicSettingsInterface from '../../model/SubSonicSettingsInterface'
 import SubSonicSettings from '../../model/SubSonicSettings'
 import UserSettings from '../../model/UserSettings'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
+import {useUserStore} from "../../components/Store/UserStore";
 
 export default defineComponent({
+  setup() {
+    const userStore = useUserStore();
+
+    return {
+      userStore
+    }
+  },
   name: 'UserSettings',
   data() {
     return { 
@@ -160,9 +168,7 @@ export default defineComponent({
 
       this.$i18n.locale = language
 
-      await this.$store.dispatch('authStorage/setLanguage', {
-        language
-      });
+      await this.userStore.setLanguage(language)
 
       HttpRequest.put(
         'usersettings',

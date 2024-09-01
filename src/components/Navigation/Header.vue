@@ -33,8 +33,19 @@ import { defineComponent } from 'vue'
 import HttpRequest from '../Lib/HttpRequest';
 import Search from "./Search.vue";
 import SongListView from "../Lib/SongListView.vue";
+import {useUserStore} from "../../components/Store/UserStore";
+import {useFavoriteStore} from "../../components/Store/FavoriteStore";
 
 export default defineComponent({
+  setup() {
+    const userStore = useUserStore();
+    const favoriteStore = useFavoriteStore();
+
+    return {
+      userStore,
+      favoriteStore,
+    }
+  },
   name: 'Header',
   components: {SongListView, Search},
   emits: ['hidePlayer'],
@@ -45,17 +56,17 @@ export default defineComponent({
       HttpRequest.post(
         'common/logout',
       ).then(() => {
-        this.$store.dispatch('authStorage/logout');
-        this.$store.dispatch('favorites/reset');
+        this.userStore.logout()
+        this.favoriteStore.reset()
 
         this.$router.push('/login')
       });
     },
     isAdmin(): boolean {
-      return this.$store.getters['authStorage/isAdmin'] == true;
+      return this.userStore.isAdmin;
     },
     isLoggedIn(): boolean {
-      return this.$store.getters['authStorage/isLogged'] == true;
+      return this.userStore.hasUserSession;
     }
   },
 })

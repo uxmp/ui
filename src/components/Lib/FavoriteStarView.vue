@@ -19,8 +19,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import {useFavoriteStore} from "../../components/Store/FavoriteStore";
 
 export default defineComponent({
+  setup() {
+    const favoriteStore = useFavoriteStore();
+
+    return {
+      favoriteStore
+    }
+  },
   name: 'NowPlayingView',
   props: {
     itemId: {
@@ -37,7 +45,7 @@ export default defineComponent({
       isFavorite: false
     }
   },
-  beforeMount(): void {
+  mount(): void {
     this.updateState()
   },
   watch: {
@@ -49,28 +57,17 @@ export default defineComponent({
     addFavorite(): void {
       this.isFavorite = true;
 
-      this.$store.dispatch(
-        'favorites/addItem',
-        {
-          itemId: this.itemId,
-          itemType: this.itemType,
-        }
-      );
+      this.favoriteStore.addItem(this.itemId, this.itemType);
     },
     removeFavorite(): void {
       this.isFavorite = false;
 
-      this.$store.dispatch(
-        'favorites/removeItem',
-        {
-          itemId: this.itemId,
-          itemType: this.itemType
-        }
-        );
+      this.favoriteStore.removeItem(this.itemId, this.itemType)
     },
     updateState(): void {
+      console.log(this.favoriteStore.list)
       if (this.itemId !== undefined) {
-        this.isFavorite = this.itemId in this.$store.getters['favorites/getList'][this.itemType];
+        this.isFavorite = this.itemId in this.favoriteStore.list[this.itemType];
       }
     }
   }

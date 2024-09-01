@@ -19,15 +19,22 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
 import { AxiosResponse } from 'axios';
 import HttpRequest from '../Lib/HttpRequest';
 import { plainToInstance } from 'class-transformer';
 import User from '../../model/User'
+import {defineComponent} from "vue";
+import {useUserStore} from "../../components/Store/UserStore";
+import {useFavoriteStore} from "../..//components/Store/FavoriteStore";
 
 export default defineComponent({
   setup() {
+    const userStore = useUserStore();
+    const favoriteStore = useFavoriteStore();
+
     return {
+      userStore,
+      favoriteStore,
       username: '',
       password: '',
       msg: ''
@@ -53,27 +60,23 @@ export default defineComponent({
         } else {
           let user = plainToInstance(User, data.user)
 
-          this.$store.dispatch('authStorage/login', {
-            token: data.token,
-            user: user
-          });
+          this.userStore.login(
+            data.token,
+            user
+          );
 
           this.$i18n.locale = user.getLanguage()
 
           HttpRequest.get(
             'user/favorite'
           ).then((response: AxiosResponse) => {
-            this.$store.dispatch('favorites/init', {
-              favorites: response.data
-            });
+            this.favoriteStore.init(response.data)
           });
 
           HttpRequest.get(
             'usersettings/acl'
           ).then((response: AxiosResponse) => {
-            this.$store.dispatch('authStorage/setAcl', {
-              acl: response.data
-            });
+            this.userStore.setAcl(response.data);
           });
 
           this.$router.push('/');

@@ -3,7 +3,7 @@
     -
   </template>
   <template v-else>
-    {{ date.toLocaleDateString(this.$i18n.locale) }} {{ date.toLocaleTimeString(this.$i18n.locale) }}
+    {{ $d(date, 'datetime') }}
   </template>
 </template>
 

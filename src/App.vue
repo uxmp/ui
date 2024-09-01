@@ -45,12 +45,17 @@ import PlaylistConfigInterface from './model/PlaylistConfigInterface'
 import Header from "./components/Navigation/Header.vue";
 import {Notifications} from "@kyvg/vue3-notification";
 import Player from "./components/Lib/Player";
+import {useUserStore} from "./components/Store/UserStore";
+import { v4 as uuidv4 } from 'uuid';
 
 export default defineComponent({
   setup() {
     const player = inject('ply') as Player;
+    const userStore = useUserStore();
+
     return {
       player,
+      userStore,
     };
   },
   data() {
@@ -62,7 +67,7 @@ export default defineComponent({
       timer: null as null|number,
     };
   },
-  name: 'uxMP',
+  name: 'uxmp',
   components: {
     Notifications,
     Sidebar,
@@ -72,6 +77,8 @@ export default defineComponent({
     Header,
   },
   mounted(): void {
+    this.$i18n.locale = this.userStore.language
+
     this.emitter.on(
       "updatePlaylist",
       (songList: Array<SongListItemInterface>) => {
@@ -82,14 +89,12 @@ export default defineComponent({
           .filter((songId: number): boolean => songId > 0)
         
         if (temporaryPlaylistSongIds.length > 0) {
-          let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+          let temporaryPlaylistId = this.userStore.getTemporaryPlaylistId;
           if (temporaryPlaylistId === null) {
-            temporaryPlaylistId = this.$uuid.v4()
+            temporaryPlaylistId = uuidv4();
 
             // save temporary playlist id
-            this.$store.dispatch('authStorage/setTemporaryPlaylistId', {
-              temporaryPlaylistId: temporaryPlaylistId
-            });
+            this.userStore.setTemporaryPlaylistId(temporaryPlaylistId)
           }
 
           HttpRequest.post(
@@ -119,7 +124,7 @@ export default defineComponent({
     this.timer = setInterval(this.fetchFavorites, 300000); // every 5 minutes
   },
   beforeMount(): void {
-    let temporaryPlaylistId = this.$store.getters['authStorage/getTemporaryPlaylistId'];
+    let temporaryPlaylistId = this.userStore.getTemporaryPlaylistId;
     if (temporaryPlaylistId !== null) {
       HttpRequest.get(
         'temporary_playlist/' + temporaryPlaylistId
@@ -163,7 +168,7 @@ export default defineComponent({
       }
     },
     fetchFavorites(): void {
-      if (this.$store.getters['authStorage/isLogged']) {
+      if (this.userStore.hasUserSession) {
         HttpRequest.get(
           'user/favorite'
         ).then((response: AxiosResponse) => {
