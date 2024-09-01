@@ -10,8 +10,8 @@ import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router';
 import SongListItem from '../../model/SongListItem';
 import SongListItemInterface from '../../model/SongListItemInterface';
-import HttpRequest from '../Lib/HttpRequest';
 import SongListView from '../Lib/SongListView.vue'
+import HttpRequest from '../Lib/HttpRequest';
 
 export default defineComponent({
   data() {

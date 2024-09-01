@@ -3,27 +3,20 @@ import HttpRequest from "../Lib/HttpRequest";
 import {AxiosResponse} from "axios";
 
 interface State {
-    favorites: {
-        albums: {},
-        songs: {},
-        artists: {}
-    },
+    favorites: Array<string>,
 }
 
 export const useFavoriteStore = defineStore('favorites', {
+    persist: true,
     state: (): State => ({
-        favorites: {
-            albums: {},
-            songs: {},
-            artists: {}
-        }
+        favorites: []
     }),
     getters: {
-        list: (state: State): object => state.favorites
+        list: (state: State): Array<string> => state.favorites
     },
     actions: {
         init(favorites: State): void {
-            this.state = favorites;
+            this.favorites = favorites;
         },
         addItem(itemId: number, itemType: string): void {
             HttpRequest.post(
@@ -31,10 +24,9 @@ export const useFavoriteStore = defineStore('favorites', {
                 {
                     'itemId': itemId
                 }
-            ).then((response: AxiosResponse) => {
+            ).then((response: AxiosResponse): void => {
                 if (response.data.result === true) {
-                    console.log(this.favorites)
-                    this.favorites[itemType][itemId] = new Date();
+                    this.favorites.push(itemType + '_' + itemId)
                 }
             })
         },
@@ -46,10 +38,9 @@ export const useFavoriteStore = defineStore('favorites', {
                 }
             ).then((response: AxiosResponse) => {
                 if (response.data.result === true) {
-                    console.log(this.favorites)
-                    if (itemId in this.favorites[itemType]) {
-                        delete this.favorites[itemType][itemId];
-                    }
+                    let key = itemType + '_' + itemId;
+
+                    this.favorites = this.favorites.filter((item: string): boolean => item !== key)
                 }
             })
         },

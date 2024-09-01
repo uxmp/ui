@@ -29,7 +29,7 @@ export default defineComponent({
       favoriteStore
     }
   },
-  name: 'NowPlayingView',
+  name: 'FavoriteStarView',
   props: {
     itemId: {
       type: Number,
@@ -41,11 +41,11 @@ export default defineComponent({
     }
   },
   data() {
-    return { 
+    return {
       isFavorite: false
     }
   },
-  mount(): void {
+  beforeMount(): void {
     this.updateState()
   },
   watch: {
@@ -65,9 +65,8 @@ export default defineComponent({
       this.favoriteStore.removeItem(this.itemId, this.itemType)
     },
     updateState(): void {
-      console.log(this.favoriteStore.list)
       if (this.itemId !== undefined) {
-        this.isFavorite = this.itemId in this.favoriteStore.list[this.itemType];
+        this.isFavorite = this.favoriteStore.list.includes(this.itemType + '_' + this.itemId);
       }
     }
   }

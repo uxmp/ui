@@ -63,10 +63,10 @@
 <script lang="ts">
 import { defineComponent, inject, PropType } from 'vue'
 import SongListItemInterface from '../../model/SongListItemInterface';
+import FavoriteStarView from './FavoriteStarView.vue'
 import Player from '../Lib/Player';
 import SongCover from '../Lib/SongCover.vue'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
-import FavoriteStarView from './FavoriteStarView.vue'
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
 import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 

@@ -91,12 +91,12 @@ import Disc from '../../model/Disc';
 import HttpRequest from '../Lib/HttpRequest';
 import Player from '../Lib/Player';
 import { AxiosResponse } from 'axios';
-import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 import PlaySongButton from '../Lib/PlaySongButton.vue'
 import AlbumInterface from '../../model/AlbumInterface';
 import DiscInterface from '../../model/DiscInterface';
 import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
-import FormatLength from "@/components/Lib/Format/FormatLength.vue";
+import FormatLength from "../../components/Lib/Format/FormatLength.vue";
+import FavoriteStarView from '../Lib/FavoriteStarView.vue'
 
 export default defineComponent({
   name: 'AlbumView',
