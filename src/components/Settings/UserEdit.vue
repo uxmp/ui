@@ -4,17 +4,21 @@
     <h3>{{ $t('settings.user.header.user') }}</h3>
     <form @submit="save()" v-on:submit.prevent>
       <table>
-        <tr>
-          <th>{{ $t('settings.user.table.columns.name') }}</th>
-          <td>
-            <input type="text" class="textInput" :placeholder="$t('settings.user.name_placeholder')" v-model="name" required :readonly="!isNewUser()" />
-          </td>
-        </tr>
-        <tr v-if="isNewUser()">
-          <td colspan="2" class="savebutton_row">
-            <input type="button" class="savebutton" @click="save()" :value="$t('settings.user.save_title')" />
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            <th>{{ $t('settings.user.table.columns.name') }}</th>
+            <td>
+              <input type="text" class="textInput" :placeholder="$t('settings.user.name_placeholder')" v-model="name" required :readonly="!isNewUser()" />
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-if="isNewUser()">
+            <td colspan="2" class="savebutton_row">
+              <input type="button" class="savebutton" @click="save()" :value="$t('settings.user.save_title')" />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </form>
   </div>

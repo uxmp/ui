@@ -5,28 +5,32 @@
       <h3>{{ $t('user_settings.title') }}</h3>
       <form @submit="save()" v-on:keyup.enter="save()">
         <table>
-          <tr>
-            <th>{{ $t('user_settings.table.settings_title') }}</th>
-            <th>{{ $t('user_settings.table.value_title') }}</th>
-          </tr>
-          <tr>
-            <td>
-              {{ $t('user_settings.language') }}
-            </td>
-            <td>
-              <select v-model="selectedLanguage">
-                <option v-for="option in languageOptions" :value="option.value" v-bind:key="option.value">
-                  {{ $t(option.text) }}
-                </option>
-                {{ userSettings.getLanguage() }}
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" class="savebutton_row">
-              <input type="button" class="button savebutton" @click="save()" :value="$t('user_settings.save')" />
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>{{ $t('user_settings.table.settings_title') }}</th>
+              <th>{{ $t('user_settings.table.value_title') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {{ $t('user_settings.language') }}
+              </td>
+              <td>
+                <select v-model="selectedLanguage">
+                  <option v-for="option in languageOptions" :value="option.value" v-bind:key="option.value">
+                    {{ $t(option.text) }}
+                  </option>
+                  {{ userSettings.getLanguage() }}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class="savebutton_row">
+                <input type="button" class="button savebutton" @click="save()" :value="$t('user_settings.save')" />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </form>
     </div>
@@ -34,16 +38,18 @@
       <form @submit="setPassword()" v-on:submit.prevent>
         <h3>{{ $t('user_settings.password.title')}}</h3>
         <table>
-          <tr>
-            <td>
-              <input type="password" placeholder="*********" v-model="password" required />
-            </td>
-          </tr>
-          <tr>
-            <td class="savebutton_row">
-              <input type="button" class="button savebutton" @click="setPassword()" :value="$t('settings.user.save_title')" />
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <input type="password" placeholder="*********" v-model="password" required />
+              </td>
+            </tr>
+            <tr>
+              <td class="savebutton_row">
+                <input type="button" class="button savebutton" @click="setPassword()" :value="$t('settings.user.save_title')" />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </form>
     </div>
@@ -118,10 +124,10 @@ export default defineComponent({
   computed: {
    selectedLanguage: {
       set: function(val: string): void {
-        this.userSettings.setLanguage(val)
+        this.userSettings?.setLanguage(val)
       },
       get: function(): string {
-        return this.userSettings.getLanguage()
+        return this.userSettings?.getLanguage() ?? ''
       }
     },
     password: {
@@ -139,9 +145,7 @@ export default defineComponent({
   },
   methods: {
     async showSubSonicKey(): Promise<void> {
-      if (this.subSonicSettings !== null) {
-        this.subSonicKey = this.subSonicSettings.getAccessToken()
-      }
+      this.subSonicKey = this.subSonicSettings?.getAccessToken() ?? ''
     },
     async deleteSubSonicKey(): Promise<void> {
       HttpRequest.delete(`usersettings/subsonic`).then(res => {
@@ -164,30 +168,35 @@ export default defineComponent({
       });
     },
     async save(): Promise<void> {
-      let language = this.userSettings.getLanguage();
+      if (this.userSettings !== null) {
+        let language = this.userSettings.getLanguage();
 
-      this.$i18n.locale = language
+        await this.snafu(language);
 
+        this.$i18n.locale = language
+      }
+    },
+    async snafu(language: string): Promise<void> {
       await this.userStore.setLanguage(language)
 
       HttpRequest.put(
-        'usersettings',
-        {
-          language: this.userSettings.getLanguage(),
-        }
+          'usersettings',
+          {
+            language: language,
+          }
       ).then((): void => {
         this.$notify({
           text: this.$t("user_settings.saved"),
           group: "app"
         });
       })
-      .catch(() => {
-        this.$notify({
-          text: this.$t("user_settings.error_message"),
-          type: "error",
-          group: "error"
-        });
-      });
+          .catch(() => {
+            this.$notify({
+              text: this.$t("user_settings.error_message"),
+              type: "error",
+              group: "error"
+            });
+          });
     },
     async setPassword(): Promise<void> {
       HttpRequest.put(
