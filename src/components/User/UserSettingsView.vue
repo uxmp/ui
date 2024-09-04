@@ -61,23 +61,27 @@
     <div class="box">
       <h3>{{ $t('user_settings.subsonic.title') }}</h3>
       <table>
-        <tr>
-          <th>{{ $t('user_settings.subsonic.token') }}</th>
-        </tr>
-        <tr>
-          <td v-if="subSonicSettings.getAccessToken() !== null">
-            <span>{{ $t('user_settings.subsonic.token_text') }}</span>
-            <div>
-              <pre>{{ subSonicKey }}</pre>
-              <input type="button" :value="$t('user_settings.subsonic.token_show_button')" @click="showSubSonicKey()" />
-            </div>
-            <div><input type="button" :value="$t('user_settings.subsonic.token_deletion_button')" @click="deleteSubSonicKey()" /></div>
-          </td>
-          <td v-else>
-            <span>{{ $t('user_settings.subsonic.token_generation') }}</span>
-            <div><input type="button" :value="$t('user_settings.subsonic.token_generation_button')" @click="generateSubSonicKey()" /></div>
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            <th>{{ $t('user_settings.subsonic.token') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td v-if="subSonicSettings.getAccessToken() !== null">
+              <span>{{ $t('user_settings.subsonic.token_text') }}</span>
+              <div>
+                <pre>{{ subSonicKey }}</pre>
+                <input type="button" :value="$t('user_settings.subsonic.token_show_button')" @click="showSubSonicKey()" />
+              </div>
+              <div><input type="button" :value="$t('user_settings.subsonic.token_deletion_button')" @click="deleteSubSonicKey()" /></div>
+            </td>
+            <td v-else>
+              <span>{{ $t('user_settings.subsonic.token_generation') }}</span>
+              <div><input type="button" :value="$t('user_settings.subsonic.token_generation_button')" @click="generateSubSonicKey()" /></div>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </template>
