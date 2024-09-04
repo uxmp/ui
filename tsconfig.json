@@ -12,6 +12,10 @@
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "noImplicitThis": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
   "include": [
     "src/**/*.ts",

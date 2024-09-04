@@ -24,8 +24,8 @@ import HttpRequest from '../Lib/HttpRequest';
 import { plainToInstance } from 'class-transformer';
 import User from '../../model/User'
 import {defineComponent} from "vue";
-import {useUserStore} from "../../components/Store/UserStore";
-import {useFavoriteStore} from "../..//components/Store/FavoriteStore";
+import {useUserStore} from '@/components/Store/UserStore';
+import {useFavoriteStore} from '@/components/Store/FavoriteStore';
 
 export default defineComponent({
   setup() {

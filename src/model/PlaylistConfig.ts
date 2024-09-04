@@ -2,11 +2,11 @@ import PlaylistConfigInterface from "./PlaylistConfigInterface";
 import SongListItemInterface from "./SongListItemInterface";
 
 export default class PlaylistConfig implements PlaylistConfigInterface {
-  private autoPlay: boolean = true;
+  private readonly autoPlay: boolean = true;
 
-  private offset: Number = 0;
+  private readonly offset: Number = 0;
 
-  private songList: Array<SongListItemInterface> = [];
+  private readonly songList: Array<SongListItemInterface> = [];
 
   constructor(
     songList: Array<SongListItemInterface>,

@@ -38,14 +38,14 @@ export default defineComponent({
   name: 'UserList',
   data() {
     return { 
-      userlist: [] as Array<UserListItemInterface>
+      userlist: null as null|Array<UserListItemInterface>
     }
   },
   components: {
     LoadingIcon
   },
   async created(): Promise<void> {
-    this.getUsers()
+    await this.getUsers()
   },
   methods: {
     async getUsers(): Promise<void> {

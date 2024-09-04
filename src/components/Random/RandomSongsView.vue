@@ -28,7 +28,7 @@ export default defineComponent({
   beforeMount(): void {
     this.limit = +useRoute().params.limit;
   },
-  async beforeRouteUpdate(to, from): Promise<void> {
+  async beforeRouteUpdate(to): Promise<void> {
     this.limit = +to.params.limit;
   },
   watch: {

@@ -58,7 +58,7 @@ export default defineComponent({
   name: 'PlaylistList',
   data() {
     return { 
-      playlists: [] as Array<PlaylistInterface>
+      playlists: null as null|Array<PlaylistInterface>
     }
   },
   setup() {
@@ -71,7 +71,7 @@ export default defineComponent({
     LoadingIcon
   },
   async created(): Promise<void> {
-    this.getPlaylists()
+    await this.getPlaylists()
   },
   methods: {
     async getPlaylists(): Promise<void> {

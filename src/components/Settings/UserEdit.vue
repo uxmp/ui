@@ -82,7 +82,7 @@ export default defineComponent({
     },
     async save(): Promise<void> {
       if (this.user.getId() === 0 && this.name !== '') {
-        this.create();
+        await this.create();
       }
     },
     async create(): Promise<void> {
@@ -106,7 +106,6 @@ export default defineComponent({
           group: "error"
         });
       });
-      ;
     },
     async setPassword(): Promise<void> {
       HttpRequest.put(
@@ -128,7 +127,6 @@ export default defineComponent({
           group: "error"
         });
       });
-      ;
     },
   }
 })

@@ -9,7 +9,7 @@
         <div>
         </div>
         <div class="gridItem">
-            <router-link to="/usersettings">
+            <router-link :to="'/usersettings'">
                 <font-awesome-icon :icon="['fas', 'user']" :title="$t('user_settings.title')" />
             </router-link>
         </div>
@@ -33,8 +33,8 @@ import { defineComponent } from 'vue'
 import HttpRequest from '../Lib/HttpRequest';
 import Search from "./Search.vue";
 import SongListView from "../Lib/SongListView.vue";
-import {useUserStore} from "../../components/Store/UserStore";
-import {useFavoriteStore} from "../../components/Store/FavoriteStore";
+import {useUserStore} from "@/components/Store/UserStore";
+import {useFavoriteStore} from "@/components/Store/FavoriteStore";
 
 export default defineComponent({
   setup() {

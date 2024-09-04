@@ -94,7 +94,7 @@ export default defineComponent({
     Modal,
   },
   async updated(): Promise<void> {
-    this.getPlaylists()
+    await this.getPlaylists()
   },
   methods: {
     async getPlaylists(): Promise<void> {

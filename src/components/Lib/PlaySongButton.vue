@@ -32,9 +32,6 @@ export default defineComponent({
     async play(song: SongListItemInterface): Promise<void> {
       this.player.playSong(song, this);
     },
-    async addToPlaylist(song: SongListItemInterface): Promise<void> {
-
-    }
   }
 })
 </script>

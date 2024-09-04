@@ -95,7 +95,7 @@ import SubSonicSettingsInterface from '../../model/SubSonicSettingsInterface'
 import SubSonicSettings from '../../model/SubSonicSettings'
 import UserSettings from '../../model/UserSettings'
 import LoadingIcon from '../Lib/LoadingIcon.vue'
-import {useUserStore} from "../../components/Store/UserStore";
+import {useUserStore} from "@/components/Store/UserStore";
 
 export default defineComponent({
   setup() {
@@ -218,7 +218,6 @@ export default defineComponent({
           group: "error"
         });
       });
-      ;
     },
   }
 })

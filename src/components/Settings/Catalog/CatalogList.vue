@@ -39,7 +39,7 @@ export default defineComponent({
   name: 'CatalogList',
   data() {
     return { 
-      catalogs: null as null|Array<{id: number, path: string, lastUpdate: null|Date}>
+      catalogs: null as null|Array<{id: number, path: string, lastUpdate: Date}>
     }
   },
   components: {

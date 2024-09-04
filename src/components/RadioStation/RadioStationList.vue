@@ -54,7 +54,7 @@ export default defineComponent({
   name: 'RadioStationList',
   data() {
     return { 
-      radioStations: [] as Array<RadioStationInterface>
+      radioStations: null as null|Array<RadioStationInterface>
     }
   },
   setup() {
@@ -67,7 +67,7 @@ export default defineComponent({
     LoadingIcon
   },
   async created(): Promise<void> {
-    this.getRadioStations()
+    await this.getRadioStations()
   },
   methods: {
     async play(station: RadioStationInterface): Promise<void> {

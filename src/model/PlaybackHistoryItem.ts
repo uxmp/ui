@@ -1,6 +1,7 @@
 import SongListItem from "./SongListItem";
+import PlaybackHistoryItemInterface from "@/model/PlaybackHistoryItemInterface";
 
-export default class PlaybackHistoryItem extends SongListItem {
+export default class PlaybackHistoryItem extends SongListItem implements PlaybackHistoryItemInterface{
   private userId: number = 0;
   private userName: string = '';
 

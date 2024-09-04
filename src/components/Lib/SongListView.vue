@@ -7,57 +7,52 @@
   <div>
     {{ $t("song_list.length_title") }} <FormatLength :length="length" />
   </div>
-  <template v-if="songList !== null">
-    <div class="songTable">
-      <table>
-        <thead>
-          <tr>
-            <th class="cover"></th>
-            <th>{{ $t("song_list.table.column.name.title") }}</th>
-            <th>{{ $t("song_list.table.column.artist.title") }}</th>
-            <th>{{ $t("song_list.table.column.length.title") }}</th>
-            <th>{{ $t("song_list.table.column.year.title") }}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="song in songList" :key="song.getId()">
-            <td>
-              <SongCover :size="50" :song="song" />
-            </td>
-            <td>
-              <div class="songName">
-                {{ song.getName() }}
-              </div>
-              <div class="albumName">
-                {{ $t("shared.from_album") }} <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
-              </div>
-            </td>
-            <td>
-              <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
-            </td>
-            <td>
-              <FormatLength :length="song.getLength()" />
-            </td>
-            <td>
-              {{ song.getYear() }}
-            </td>
-            <td>
-              <div class="button">
-                <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
-              </div>
-              <div class="button">
-                <FavoriteStarView :itemId="song.getId()" itemType="song" />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
-  <template v-else>
-    <LoadingIcon />
-  </template>
+  <div class="songTable">
+    <table>
+      <thead>
+      <tr>
+        <th class="cover"></th>
+        <th>{{ $t("song_list.table.column.name.title") }}</th>
+        <th>{{ $t("song_list.table.column.artist.title") }}</th>
+        <th>{{ $t("song_list.table.column.length.title") }}</th>
+        <th>{{ $t("song_list.table.column.year.title") }}</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="song in songList" :key="song.getId()">
+        <td>
+          <SongCover :size="50" :song="song" />
+        </td>
+        <td>
+          <div class="songName">
+            {{ song.getName() }}
+          </div>
+          <div class="albumName">
+            {{ $t("shared.from_album") }} <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
+          </div>
+        </td>
+        <td>
+          <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+        </td>
+        <td>
+          <FormatLength :length="song.getLength()" />
+        </td>
+        <td>
+          {{ song.getYear() }}
+        </td>
+        <td>
+          <div class="button">
+            <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
+          </div>
+          <div class="button">
+            <FavoriteStarView :itemId="song.getId()" itemType="song" />
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">

@@ -76,9 +76,9 @@ export default defineComponent({
   methods: {
     async save(): Promise<void> {
       if (this.isNewPlaylist()) {
-        this.create();
+        await this.create();
       } else {
-        this.persist();
+        await this.persist();
       }
     },
     isNewPlaylist(): boolean {

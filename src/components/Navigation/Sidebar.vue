@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {useUserStore} from "../../components/Store/UserStore";
+import {useUserStore} from "@/components/Store/UserStore";
 
 export default defineComponent({
   setup() {

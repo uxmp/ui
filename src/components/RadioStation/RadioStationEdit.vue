@@ -67,9 +67,9 @@ export default defineComponent({
   methods: {
     async save(): Promise<void> {
       if (this.radioStation.getId() === 0) {
-        this.create();
+        await this.create();
       } else {
-        this.persist();
+        await this.persist();
       }
     },
     async create(): Promise<void> {

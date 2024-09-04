@@ -1,6 +1,6 @@
 <template>
   <div class="cover">
-    <img data-amplitude-song-info="cover_art_url" />
+    <img src="" data-amplitude-song-info="cover_art_url" />
   </div>
   <div>
     <div class="title">

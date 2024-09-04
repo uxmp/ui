@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {useFavoriteStore} from "../../components/Store/FavoriteStore";
+import {useFavoriteStore} from "@/components/Store/FavoriteStore";
 
 export default defineComponent({
   setup() {

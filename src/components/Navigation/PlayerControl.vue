@@ -16,7 +16,7 @@
       <div class="amplitude-prev control-button">
         <font-awesome-icon :icon="['fas', 'step-backward']" :title="$t('player_control.previous')" />
       </div>
-      <div class="control-button" v-on:click="toggleState()" v-if="playerState == true" :title="$t('player_control.pause')">
+      <div class="control-button" v-on:click="toggleState()" v-if="playerState" :title="$t('player_control.pause')">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </div>
       <div class="control-button control-button-paused" v-on:click="toggleState()" v-else :title="$t('player_control.play')">
@@ -132,4 +132,3 @@ div.control-container-secondary {
   font-size: 90%;
 }
 </style>
-  
