@@ -2,7 +2,9 @@
   <h1>/ {{ $t("home.title") }}</h1>
   <h3>{{ $t("home.recent_albums_title") }}</h3>
   <div class="list scrollbar">
-    <AlbumListItem v-if="recentAlbums !== null" :album="album" v-for="album in recentAlbums" :key="album.getId()" :displayMetadata="true" />
+    <template v-if="recentAlbums !== null">
+      <AlbumListItem :album="album" v-for="album in recentAlbums" :key="album.getId()" :displayMetadata="true" />
+    </template>
     <LoadingIcon v-else />
   </div>
   <div class="grid">
@@ -49,7 +51,7 @@ export default defineComponent({
   methods: {
     async getNewestAlbums(): Promise<void> {
       HttpRequest.get('albums/recent').then((response: AxiosResponse) => {
-        this.recentAlbums = response.data.items.map((albumData: Object): AlbumInterface => {
+        this.recentAlbums = response.data.items.map((albumData: object): AlbumInterface => {
           return plainToInstance(Album, albumData);
         });
       });

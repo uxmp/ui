@@ -14,7 +14,7 @@ import {useUserStore} from "../Store/UserStore";
 
 
 export default class Player {
-  init(app: DefineComponent, songList: Array<Object>, offset: Number = 0): void {
+  init(app: DefineComponent, songList: Array<object>, offset: number = 0): void {
     amplitudejs.stop();
 
     // get the volume so can set it again
@@ -34,7 +34,7 @@ export default class Player {
       volume: currentVolume,
       callbacks: {
         play: function () {
-          let song = amplitudejs.getActiveSongMetadata();
+          const song = amplitudejs.getActiveSongMetadata();
 
           if ("mediaSession" in navigator) {
             navigator.mediaSession.metadata = new MediaMetadata({
@@ -88,9 +88,9 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       this.stop();
 
-      let songList = [] as Array<SongListItemInterface>;
+      const songList = [] as Array<SongListItemInterface>;
 
-      let discs = response.data.items.map((disc_raw: Object): DiscInterface => plainToInstance(Disc, disc_raw))
+      const discs = response.data.items.map((disc_raw: object): DiscInterface => plainToInstance(Disc, disc_raw))
 
       discs.map((disc: DiscInterface) => {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
@@ -106,7 +106,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       this.stop();
 
-      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
+      const songList = response.data.items.map((song_raw: object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
     });
@@ -118,7 +118,7 @@ export default class Player {
     ).then((response: AxiosResponse) => {
       this.stop();
 
-      let songList = response.data.items.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
+      const songList = response.data.items.map((song_raw: object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
       this.updatePlaylist(songList, app)
     });
@@ -127,7 +127,7 @@ export default class Player {
   playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
     this.stop();
 
-    let song = new SongListItem();
+    const song = new SongListItem();
     song.setName(station.getName());
     song.setPlayUrl(station.getUrl());
     song.setCover('/radio.png');
@@ -145,7 +145,7 @@ export default class Player {
     app.emitter.emit('updatePlaylist', songs)
   }
 
-  createSongListItem(song: SongListItemInterface): Object {
+  createSongListItem(song: SongListItemInterface): object {
     return {
       name: song.getName(),
       albumName: song.getAlbumName(),

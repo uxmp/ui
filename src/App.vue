@@ -134,7 +134,7 @@ export default defineComponent({
         let data = response.data;
 
         this.playlist = new PlaylistConfig(
-          data.songs.map((song_raw: Object): SongListItemInterface => plainToInstance(SongListItem, song_raw)),
+          data.songs.map((song_raw: object): SongListItemInterface => plainToInstance(SongListItem, song_raw)),
           data.offset,
           false
         )

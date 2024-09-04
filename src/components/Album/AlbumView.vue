@@ -126,7 +126,7 @@ export default defineComponent({
     HttpRequest.get(
       'album/' + this.$route.params.albumId + '/songs'
     ).then((response: AxiosResponse) => {
-      this.albumDiscs = response.data.items.map((disc_raw: Object): DiscInterface => plainToInstance(Disc, disc_raw));
+      this.albumDiscs = response.data.items.map((disc_raw: object): DiscInterface => plainToInstance(Disc, disc_raw));
     });
   },
   methods: {

@@ -39,7 +39,6 @@ import User from '../../model/User';
 import UserInterface from '../../model/UserInterface';
 import EntityLoader from '../Lib/EntityLoader';
 import HttpRequest from '../Lib/HttpRequest';
-import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   name: 'UserEdit',
@@ -48,9 +47,6 @@ export default defineComponent({
       user: new User(),
       password: ''
     }
-  },
-  components: {
-    LoadingIcon
   },
   computed: {
     name: {

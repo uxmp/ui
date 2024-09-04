@@ -35,7 +35,7 @@ export default defineComponent({
   methods: {
     async getAlbums(): Promise<void> {
       HttpRequest.get(`albums`).then(res => {
-        this.albumList = res.data.items.map((album_data: Object): AlbumInterface => {
+        this.albumList = res.data.items.map((album_data: object): AlbumInterface => {
           return plainToInstance(Album, album_data);
         });
         this.loading = false

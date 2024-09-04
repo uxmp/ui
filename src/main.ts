@@ -84,7 +84,7 @@ library.add(
 
 const emitter = mitt();
 
-let app = createApp(App)
+const app = createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(Router)
   .use(pinia)

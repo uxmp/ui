@@ -63,7 +63,6 @@ import SongListItemInterface from '@/model/SongListItemInterface';
 import FavoriteStarView from './FavoriteStarView.vue'
 import Player from '@/components/Lib/Player';
 import SongCover from '@/components/Lib/SongCover.vue'
-import LoadingIcon from '@/components/Lib/LoadingIcon.vue'
 import AddToPlaylist from '@/components/Playlist/Lib/AddToPlaylist.vue'
 import FormatLength from '@/components/Lib/Format/FormatLength.vue';
 
@@ -84,7 +83,6 @@ export default defineComponent({
   name: 'SongListView',
   components: {
     SongCover,
-    LoadingIcon,
     FavoriteStarView,
     FormatLength,
     AddToPlaylist,

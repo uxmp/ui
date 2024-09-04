@@ -45,7 +45,7 @@ export default defineComponent({
     HttpRequest.get(
       'playlist/' + this.$route.params.playlistId + '/songs'
     ).then((response: AxiosResponse) => {
-      this.songList = response.data.items.map((data: Object): SongListItemInterface => plainToInstance(SongListItem, data));
+      this.songList = response.data.items.map((data: object): SongListItemInterface => plainToInstance(SongListItem, data));
     });
   },
   methods: {

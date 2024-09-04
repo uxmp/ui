@@ -35,7 +35,7 @@ export default defineComponent({
   methods: {
     async getGenreStatistics(): Promise<void> {
       HttpRequest.get('genres').then((response: AxiosResponse) => {
-        this.items = response.data.items.map((data: Object): GenreStatisticItemInterface => {
+        this.items = response.data.items.map((data: object): GenreStatisticItemInterface => {
           return plainToInstance(GenreStatisticItem, data);
         })
       })

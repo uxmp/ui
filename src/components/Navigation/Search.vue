@@ -118,9 +118,9 @@ export default defineComponent({
     },
     async retrieveResult(searchTerm: string): Promise<void> {
       HttpRequest.post(`search`, { searchTerm: searchTerm }).then(res => {
-        this.searchResult.albums = res.data.items.albums.map((data: Object): AlbumInterface => plainToInstance(Album, data));
-        this.searchResult.songs = res.data.items.songs.map((data: Object): SongListItemInterface => plainToInstance(SongListItem, data));
-        this.searchResult.artists = res.data.items.artists.map((data: Object): ArtistInterface => plainToInstance(Artist, data));
+        this.searchResult.albums = res.data.items.albums.map((data: object): AlbumInterface => plainToInstance(Album, data));
+        this.searchResult.songs = res.data.items.songs.map((data: object): SongListItemInterface => plainToInstance(SongListItem, data));
+        this.searchResult.artists = res.data.items.artists.map((data: object): ArtistInterface => plainToInstance(Artist, data));
       });
 
       this.isVisible = true

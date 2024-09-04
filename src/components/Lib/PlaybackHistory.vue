@@ -36,9 +36,8 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import PlaybackHistoryItemInterface from '@//model/PlaybackHistoryItemInterface'
+import PlaybackHistoryItemInterface from '@/model/PlaybackHistoryItemInterface'
 import PlaybackHistoryItem from '@/model/PlaybackHistoryItem'
-import PlaySongButton from '@/components/Lib/PlaySongButton.vue'
 import SongCover from '@/components/Lib/SongCover.vue'
 import LoadingIcon from '@/components/Lib/LoadingIcon.vue';
 import HttpRequest from '@/components/Lib/HttpRequest'
@@ -54,7 +53,6 @@ export default defineComponent({
   },
   components: {
     LoadingIcon,
-    PlaySongButton,
     SongCover,
   },
   beforeMount() {
@@ -63,7 +61,7 @@ export default defineComponent({
   methods: {
     async getPlaybackHistory(): Promise<void> {
       HttpRequest.get('play/history').then((response: AxiosResponse) => {
-        this.items = response.data.items.map((historyData: Object): PlaybackHistoryItemInterface => {
+        this.items = response.data.items.map((historyData: object): PlaybackHistoryItemInterface => {
           return plainToInstance(PlaybackHistoryItem, historyData);
         })
       })

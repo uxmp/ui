@@ -38,7 +38,7 @@ export default defineComponent({
     async getAlbums(): Promise<void> {
       let genreId = +this.$route.params.genreId
       HttpRequest.get(`albums/genre/` + genreId).then(res => {
-        this.albumList = res.data.items.map((album_data: Object): AlbumInterface => {
+        this.albumList = res.data.items.map((album_data: object): AlbumInterface => {
           return plainToInstance(Album, album_data);
         });
         this.loading = false

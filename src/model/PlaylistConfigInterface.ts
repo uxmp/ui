@@ -6,5 +6,5 @@ export default interface PlaylistConfigInterface {
 
   getSongList(): Array<SongListItemInterface>
   
-  getOffset(): Number
+  getOffset(): number
 }

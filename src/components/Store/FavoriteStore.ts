@@ -38,7 +38,7 @@ export const useFavoriteStore = defineStore('favorites', {
                 }
             ).then((response: AxiosResponse) => {
                 if (response.data.result === true) {
-                    let key = itemType + '_' + itemId;
+                    const key = itemType + '_' + itemId;
 
                     this.favorites = this.favorites.filter((item: string): boolean => item !== key)
                 }

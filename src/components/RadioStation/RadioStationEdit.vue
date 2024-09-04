@@ -27,7 +27,6 @@ import RadioStation from '../../model/RadioStation';
 import RadioStationInterface from '../../model/RadioStationInterface';
 import EntityLoader from '../Lib/EntityLoader';
 import HttpRequest from '../Lib/HttpRequest';
-import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   name: 'RadioStationEdit',
@@ -36,9 +35,6 @@ export default defineComponent({
       radioStation: new RadioStation() as RadioStationInterface,
       msg: ''
     }
-  },
-  components: {
-    LoadingIcon
   },
   computed: {
     name: {

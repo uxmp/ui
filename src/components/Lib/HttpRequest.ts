@@ -15,7 +15,7 @@ HttpRequest.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const userStore = useUserStore();
 
-    let token = userStore.token;
+    const token = userStore.token;
 
     if (token && config.headers) {
       config.headers['Authorization'] = `Bearer ${ token }`;
