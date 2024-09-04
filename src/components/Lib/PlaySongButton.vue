@@ -1,15 +1,16 @@
 <template>
-  <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(song)" :title="$t('play_song_button.play_song_title')" />
+  <font-awesome-icon class="playButton button" :icon="['fas', 'play']" v-on:click="play(song)"
+                     :title="$t('play_song_button.play_song_title')"/>
   <span class="addToPlaylistButton">
-    <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
+    <AddToPlaylist :itemId="song.getId()" :itemType="'song'"/>
   </span>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, PropType } from 'vue'
+import {defineComponent, inject, PropType} from 'vue'
 import Player from './Player';
-import SongListItemInterface from '../../model/SongListItemInterface';
-import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
+import SongListItemInterface from '@/model/SongListItemInterface';
+import AddToPlaylist from '@/components/Playlist/Lib/AddToPlaylist.vue'
 
 export default defineComponent({
   name: 'PlaySongButton',

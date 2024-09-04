@@ -12,11 +12,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import GenreStatisticItemInterface from '../../../model/GenreStatisticItemInterface'
+import GenreStatisticItemInterface from '@/model/GenreStatisticItemInterface'
 import {AxiosResponse} from "axios";
 import {plainToInstance} from "class-transformer";
-import GenreStatisticItem from '../../../model/GenreStatisticItem'
-import HttpRequest from '../../Lib/HttpRequest'
+import GenreStatisticItem from '@/model/GenreStatisticItem'
+import HttpRequest from '@/components/Lib/HttpRequest'
 import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 
 export default defineComponent({

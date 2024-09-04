@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import AlbumListItem from './AlbumListItem.vue'
-import AlbumInterface from '../../../model/AlbumInterface'
+import AlbumInterface from '@/model/AlbumInterface'
 
 export default defineComponent({
   name: 'AlbumSelector',

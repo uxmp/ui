@@ -36,13 +36,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MostPlayedItemInterface from '../../model/MostPlayedItemInterface'
+import MostPlayedItemInterface from '@/model/MostPlayedItemInterface'
 import PlaySongButton from './PlaySongButton.vue'
-import SongCover from '../Lib/SongCover.vue'
-import HttpRequest from '../Lib/HttpRequest'
-import {AxiosResponse} from "axios";
-import {plainToInstance} from "class-transformer";
-import MostPlayedItem from '../../model/MostPlayedItem'
+import SongCover from '@/components/Lib/SongCover.vue'
+import HttpRequest from '@/components/Lib/HttpRequest'
+import {AxiosResponse} from 'axios';
+import {plainToInstance} from 'class-transformer';
+import MostPlayedItem from '@/model/MostPlayedItem'
 import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 
 export default defineComponent({

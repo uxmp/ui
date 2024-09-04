@@ -1,6 +1,6 @@
 <template>
   <div class="cover">
-    <img src="" data-amplitude-song-info="cover_art_url" />
+    <img src="" data-amplitude-song-info="cover_art_url"/>
   </div>
   <div>
     <div class="title">
@@ -8,10 +8,12 @@
     </div>
     <template v-if="nowPlaying !== null">
       <div class="album" v-if="hasAlbum()">
-        {{ $t("shared.from_album") }} <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
+        {{ $t("shared.from_album") }}
+        <router-link :to="'/album/' + nowPlaying.albumId">{{ nowPlaying.albumName }}</router-link>
       </div>
       <div class="artist" v-if="hasArtist()">
-        {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
+        {{ $t("shared.by_artist") }}
+        <router-link :to="'/artist/' + nowPlaying.artistId">{{ nowPlaying.artistName }}</router-link>
       </div>
     </template>
   </div>
@@ -19,15 +21,15 @@
     <input type="range" class="amplitude-song-slider" step=".1"/>
     <span class="amplitude-current-minutes">00</span>:<span class="amplitude-current-seconds">00</span> /
     <span class="amplitude-duration">
-      <FormatLength :length="nowPlaying.length" />
+      <FormatLength :length="nowPlaying.length"/>
     </span>
-    <FavoriteStarView :itemId="nowPlaying.songId" itemType="song" />
+    <FavoriteStarView :itemId="nowPlaying.songId" itemType="song"/>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import NowPlaying from '../../model/NowPlaying'
+import {defineComponent, PropType} from 'vue'
+import NowPlaying from '@/model/NowPlaying'
 import FavoriteStarView from './FavoriteStarView.vue'
 import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 

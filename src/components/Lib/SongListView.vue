@@ -1,11 +1,12 @@
 <template>
   <div class="playall">
     <span v-on:click="playAll()">
-      <font-awesome-icon :icon="['fas', 'play']" /> {{ $t("song_list.play_all_title") }}
+      <font-awesome-icon :icon="['fas', 'play']"/> {{ $t("song_list.play_all_title") }}
     </span>
   </div>
   <div>
-    {{ $t("song_list.length_title") }} <FormatLength :length="length" />
+    {{ $t("song_list.length_title") }}
+    <FormatLength :length="length"/>
   </div>
   <div class="songTable">
     <table>
@@ -22,31 +23,32 @@
       <tbody>
       <tr v-for="song in songList" :key="song.getId()">
         <td>
-          <SongCover :size="50" :song="song" />
+          <SongCover :size="50" :song="song"/>
         </td>
         <td>
           <div class="songName">
             {{ song.getName() }}
           </div>
           <div class="albumName">
-            {{ $t("shared.from_album") }} <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
+            {{ $t("shared.from_album") }}
+            <router-link :to="'/album/' + song.getAlbumId()">{{ song.getAlbumName() }}</router-link>
           </div>
         </td>
         <td>
           <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
         </td>
         <td>
-          <FormatLength :length="song.getLength()" />
+          <FormatLength :length="song.getLength()"/>
         </td>
         <td>
           {{ song.getYear() }}
         </td>
         <td>
           <div class="button">
-            <AddToPlaylist :itemId="song.getId()" :itemType="'song'" />
+            <AddToPlaylist :itemId="song.getId()" :itemType="'song'"/>
           </div>
           <div class="button">
-            <FavoriteStarView :itemId="song.getId()" itemType="song" />
+            <FavoriteStarView :itemId="song.getId()" itemType="song"/>
           </div>
         </td>
       </tr>
@@ -56,14 +58,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, PropType } from 'vue'
-import SongListItemInterface from '../../model/SongListItemInterface';
+import {defineComponent, inject, PropType} from 'vue'
+import SongListItemInterface from '@/model/SongListItemInterface';
 import FavoriteStarView from './FavoriteStarView.vue'
-import Player from '../Lib/Player';
-import SongCover from '../Lib/SongCover.vue'
-import LoadingIcon from '../Lib/LoadingIcon.vue'
-import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
-import FormatLength from "@/components/Lib/Format/FormatLength.vue";
+import Player from '@/components/Lib/Player';
+import SongCover from '@/components/Lib/SongCover.vue'
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue'
+import AddToPlaylist from '@/components/Playlist/Lib/AddToPlaylist.vue'
+import FormatLength from '@/components/Lib/Format/FormatLength.vue';
 
 export default defineComponent({
   props: {
@@ -98,9 +100,9 @@ export default defineComponent({
         this.emitter.emit('updatePlaylist', this.songList);
 
         this.player.init(
-	        this,
-          this.songList.map((song: SongListItemInterface) => this.player.createSongListItem(song))
-	      );
+            this,
+            this.songList.map((song: SongListItemInterface) => this.player.createSongListItem(song))
+        );
       }
     }
   }

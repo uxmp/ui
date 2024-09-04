@@ -11,11 +11,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { plainToInstance } from 'class-transformer'
-import Album from '../../model/Album'
-import HttpRequest from '../Lib/HttpRequest'
-import AlbumInterface from '../../model/AlbumInterface'
-import LoadingIcon from '../Lib/LoadingIcon.vue'
-import AlbumSelector from './Lib/AlbumSelector.vue'
+import Album from '@/model/Album'
+import HttpRequest from '@/components/Lib/HttpRequest'
+import AlbumInterface from '@/model/AlbumInterface'
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue'
+import AlbumSelector from '@/components/Album/Lib/AlbumSelector.vue'
 
 export default defineComponent({
   name: 'AlbumListView',

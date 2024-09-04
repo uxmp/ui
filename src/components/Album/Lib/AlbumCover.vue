@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
-import Player from '../../Lib/Player';
-import AlbumInterface from '../../../model/AlbumInterface';
+import Player from '@/components/Lib/Player';
+import AlbumInterface from '@/model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumCover',

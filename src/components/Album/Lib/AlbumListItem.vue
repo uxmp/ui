@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AlbumCover from './AlbumCover.vue';
-import AlbumInterface from '../../../model/AlbumInterface';
+import AlbumInterface from '@/model/AlbumInterface';
 
 export default defineComponent({
   name: 'AlbumListItem',

@@ -83,20 +83,20 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
 import 'reflect-metadata';
-import EntityLoader from '../Lib/EntityLoader';
-import LoadingIcon from '../Lib/LoadingIcon.vue';
-import AlbumCover from './Lib/AlbumCover.vue';
+import EntityLoader from '@/components/Lib/EntityLoader';
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue';
+import AlbumCover from '@/components/Album/Lib/AlbumCover.vue';
 import { plainToInstance } from 'class-transformer';
-import Disc from '../../model/Disc';
-import HttpRequest from '../Lib/HttpRequest';
-import Player from '../Lib/Player';
+import Disc from '@/model/Disc';
+import HttpRequest from '@/components/Lib/HttpRequest';
+import Player from '@/components/Lib/Player';
 import { AxiosResponse } from 'axios';
-import PlaySongButton from '../Lib/PlaySongButton.vue'
-import AlbumInterface from '../../model/AlbumInterface';
-import DiscInterface from '../../model/DiscInterface';
-import AddToPlaylist from '../Playlist/Lib/AddToPlaylist.vue'
-import FormatLength from "../../components/Lib/Format/FormatLength.vue";
-import FavoriteStarView from '../Lib/FavoriteStarView.vue'
+import PlaySongButton from '@/components/Lib/PlaySongButton.vue'
+import AlbumInterface from '@/model/AlbumInterface';
+import DiscInterface from '@/model/DiscInterface';
+import AddToPlaylist from '@/components/Playlist/Lib/AddToPlaylist.vue'
+import FormatLength from '@/components/Lib/Format/FormatLength.vue';
+import FavoriteStarView from '@/components/Lib/FavoriteStarView.vue'
 
 export default defineComponent({
   name: 'AlbumView',

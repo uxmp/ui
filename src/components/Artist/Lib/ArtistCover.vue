@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
-import Player from '../../Lib/Player';
-import ArtistInterface from '../../../model/ArtistInterface';
+import Player from '@/components/Lib/Player';
+import ArtistInterface from '@/model/ArtistInterface';
 
 export default defineComponent({
   name: 'ArtistCover',

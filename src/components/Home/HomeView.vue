@@ -20,14 +20,14 @@
 import { AxiosResponse } from 'axios'
 import { plainToInstance } from 'class-transformer'
 import { defineComponent } from 'vue'
-import Album from '../../model/Album'
-import AlbumListItem from '../Album/Lib/AlbumListItem.vue'
-import HttpRequest from '../Lib/HttpRequest'
-import AlbumInterface from '../../model/AlbumInterface'
-import PlaybackHistory from '../Lib/PlaybackHistory.vue'
-import MostPlayed from '../Lib/MostPlayed.vue'
-import GenreStatistics from './Lib/GenreStatistics.vue'
-import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
+import Album from '@/model/Album'
+import AlbumListItem from '@/components/Album/Lib/AlbumListItem.vue'
+import HttpRequest from '@/components/Lib/HttpRequest'
+import AlbumInterface from '@//model/AlbumInterface'
+import PlaybackHistory from '@/components/Lib/PlaybackHistory.vue'
+import MostPlayed from '@/components/Lib/MostPlayed.vue'
+import GenreStatistics from '@/components/Home/Lib/GenreStatistics.vue'
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue';
 
 export default defineComponent({
   name: 'HomeView',

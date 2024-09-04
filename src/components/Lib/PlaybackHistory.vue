@@ -2,54 +2,54 @@
   <h3>{{ $t("home.playback_history.title") }}</h3>
   <table>
     <thead>
-      <tr>
-        <th></th>
-        <th>{{ $t("home.playback_history.table.song_column_title") }}</th>
-        <th>{{ $t("home.playback_history.table.user_column_title") }}</th>
-      </tr>
+    <tr>
+      <th></th>
+      <th>{{ $t("home.playback_history.table.song_column_title") }}</th>
+      <th>{{ $t("home.playback_history.table.user_column_title") }}</th>
+    </tr>
     </thead>
     <tbody v-if="items !== null">
-      <tr v-for="song in items" :key="song.getId()">
-        <td>
-          <SongCover :song="song" :size="40" />
-        </td>
-        <td>
-          <div class="songName">
-            {{ song.getName() }}
-          </div>
-          <div class="artistName">
-            <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
-          </div>
-        </td>
-        <td>{{ song.getUserName() }}</td>
-      </tr>
+    <tr v-for="song in items" :key="song.getId()">
+      <td>
+        <SongCover :song="song" :size="40"/>
+      </td>
+      <td>
+        <div class="songName">
+          {{ song.getName() }}
+        </div>
+        <div class="artistName">
+          <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+        </div>
+      </td>
+      <td>{{ song.getUserName() }}</td>
+    </tr>
     </tbody>
     <tbody v-else>
-      <tr>
-        <td colspan="3">
-          <LoadingIcon />
-        </td>
-      </tr>
+    <tr>
+      <td colspan="3">
+        <LoadingIcon/>
+      </td>
+    </tr>
     </tbody>
   </table>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import PlaybackHistoryItemInterface from '../../model/PlaybackHistoryItemInterface'
-import PlaybackHistoryItem from '../../model/PlaybackHistoryItem'
-import PlaySongButton from '../Lib/PlaySongButton.vue'
-import SongCover from '../Lib/SongCover.vue'
-import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
-import HttpRequest from '../Lib/HttpRequest'
-import {AxiosResponse} from "axios";
-import {plainToInstance} from "class-transformer";
+import {defineComponent} from 'vue'
+import PlaybackHistoryItemInterface from '@//model/PlaybackHistoryItemInterface'
+import PlaybackHistoryItem from '@/model/PlaybackHistoryItem'
+import PlaySongButton from '@/components/Lib/PlaySongButton.vue'
+import SongCover from '@/components/Lib/SongCover.vue'
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue';
+import HttpRequest from '@/components/Lib/HttpRequest'
+import {AxiosResponse} from 'axios';
+import {plainToInstance} from 'class-transformer';
 
 export default defineComponent({
   name: 'PlaybackHistory',
   data() {
     return {
-      items: null as null|Array<PlaybackHistoryItemInterface>,
+      items: null as null | Array<PlaybackHistoryItemInterface>,
     }
   },
   components: {
@@ -58,7 +58,7 @@ export default defineComponent({
     SongCover,
   },
   beforeMount() {
-      this.getPlaybackHistory();
+    this.getPlaybackHistory();
   },
   methods: {
     async getPlaybackHistory(): Promise<void> {

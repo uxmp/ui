@@ -20,9 +20,9 @@
 </template>
 <script lang="ts">
 import { AxiosResponse } from 'axios';
-import HttpRequest from '../Lib/HttpRequest';
+import HttpRequest from '@/components/Lib/HttpRequest';
 import { plainToInstance } from 'class-transformer';
-import User from '../../model/User'
+import User from '@/model/User'
 import {defineComponent} from "vue";
 import {useUserStore} from '@/components/Store/UserStore';
 import {useFavoriteStore} from '@/components/Store/FavoriteStore';

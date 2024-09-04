@@ -16,12 +16,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { plainToInstance } from 'class-transformer';
-import HttpRequest from '../Lib/HttpRequest';
-import Artist from '../../model/Artist';
-import ArtistInterface from '../../model/ArtistInterface';
+import HttpRequest from '@/components/Lib/HttpRequest';
+import Artist from '@/model/Artist';
+import ArtistInterface from '@/model/ArtistInterface';
 import { AxiosResponse } from 'axios';
-import LoadingIcon from '../Lib/LoadingIcon.vue'
-import ArtistListItem from './Lib/ArtistListItem.vue'
+import LoadingIcon from '@/components/Lib/LoadingIcon.vue'
+import ArtistListItem from '@/components/Artist/Lib/ArtistListItem.vue'
 
 export default defineComponent({
   name: 'ArtistList',

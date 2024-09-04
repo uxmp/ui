@@ -9,7 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ArtistCover from './ArtistCover.vue';
-import ArtistInterface from '../../../model/ArtistInterface';
+import ArtistInterface from '@/model/ArtistInterface';
 
 export default defineComponent({
   name: 'ArtistListItem',
