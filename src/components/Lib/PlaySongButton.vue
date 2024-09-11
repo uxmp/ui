@@ -7,6 +7,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import {defineComponent, inject, PropType} from 'vue'
 import Player from './Player';
 import SongListItemInterface from '@/model/SongListItemInterface';
@@ -22,8 +24,11 @@ export default defineComponent({
   },
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>;
+
     return {
       player,
+      emitter,
     };
   },
   components: {
@@ -31,7 +36,10 @@ export default defineComponent({
   },
   methods: {
     async play(song: SongListItemInterface): Promise<void> {
-      this.player.playSong(song, this);
+      this.player.playSong(
+          song,
+          this.emitter
+      );
     },
   }
 })

@@ -39,7 +39,6 @@ export default defineComponent({
     nowPlaying: {
       type: null as unknown as PropType<NowPlaying | null>,
       required: true,
-      validator: (v: any) => v instanceof NowPlaying || v === null,
     }
   },
   components: {
@@ -48,10 +47,10 @@ export default defineComponent({
   },
   methods: {
     hasAlbum(): boolean {
-      return this.nowPlaying !== null && this.nowPlaying.albumId;
+      return this.nowPlaying !== null && this.nowPlaying.albumId > 0;
     },
     hasArtist(): boolean {
-      return this.nowPlaying !== null && this.nowPlaying.artistId;
+      return this.nowPlaying !== null && this.nowPlaying.artistId > 0;
     }
   },
 })

@@ -12,7 +12,11 @@ export default [
   ...pluginVue.configs["flat/essential"],
   {files: ["**/*.vue"], languageOptions: {parserOptions: {parser: tseslint.parser}}},
   {
-    ignores: ["dist/*", "public/*"]
+    ignores: [
+      "dist/*",
+      "public/*",
+      "src/d.ts/*",
+    ]
   },
   {
     rules: {

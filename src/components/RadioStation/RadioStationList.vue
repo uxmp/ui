@@ -42,6 +42,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import { defineComponent, inject } from 'vue'
 import { plainToInstance } from 'class-transformer';
 import HttpRequest from '../Lib/HttpRequest';
@@ -59,8 +61,11 @@ export default defineComponent({
   },
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>;
+
     return {
       player,
+      emitter,
     };
   },
   components: {
@@ -71,18 +76,18 @@ export default defineComponent({
   },
   methods: {
     async play(station: RadioStationInterface): Promise<void> {
-      this.player.playRadiostation(station, this);
+      this.player.playRadiostation(station, this.emitter);
     },
     async getRadioStations(): Promise<void> {
       HttpRequest.get(`radiostations`).then(res => {
-        this.radioStations = res.data.items.map((album_data: any): RadioStationInterface => {
+        this.radioStations = res.data.items.map((album_data: object): RadioStationInterface => {
           return plainToInstance(RadioStation, album_data);
         });
       });
     },
     async deleteStation(deleteStation: RadioStationInterface): Promise<void> {
-      HttpRequest.delete(`radiostation/` + deleteStation.getId()).then(() => {
-        this.radioStations = this.radioStations.filter((station: RadioStationInterface) => station.getId() !== deleteStation.getId() )
+      HttpRequest.delete(`radiostation/` + deleteStation.getId()).then((): void => {
+        this.getRadioStations()
       });
     },
   }

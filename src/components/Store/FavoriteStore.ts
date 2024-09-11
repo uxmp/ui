@@ -15,7 +15,7 @@ export const useFavoriteStore = defineStore('favorites', {
         list: (state: State): Array<string> => state.favorites
     },
     actions: {
-        init(favorites: State): void {
+        init(favorites: Array<string>): void {
             this.favorites = favorites;
         },
         addItem(itemId: number, itemType: string): void {

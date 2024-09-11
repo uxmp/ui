@@ -41,7 +41,7 @@ export default defineComponent({
       HttpRequest.get(
         'random/songs/' + limit
       ).then((response: AxiosResponse): void => {
-        this.songList = response.data.items.map((song_data: any): SongListItemInterface => {
+        this.songList = response.data.items.map((song_data: object): SongListItemInterface => {
           return plainToInstance(SongListItem, song_data);
         });
       });

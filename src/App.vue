@@ -3,7 +3,7 @@
   <notifications position="bottom right" group="app" />
   <div class="maingrid-noplayer" id="maingrid">
       <div class="Header">
-          <Header @hidePlayer="hidePlayer" />
+          <SiteHeader @hidePlayer="hidePlayer" />
       </div>
     <div class="Sidebar scrollbar">
       <Sidebar @hidePlayer="hidePlayer" />
@@ -29,6 +29,9 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {useFavoriteStore} from "@/components/Store/FavoriteStore";
+import {Emitter} from "mitt";
 import {defineComponent, inject} from 'vue'
 import Playlist from './components/Navigation/Playlist.vue'
 import Sidebar from './components/Navigation/Sidebar.vue'
@@ -42,7 +45,7 @@ import {plainToInstance} from 'class-transformer'
 import SongListItem from './model/SongListItem'
 import PlaylistConfig from './model/PlaylistConfig'
 import PlaylistConfigInterface from './model/PlaylistConfigInterface'
-import Header from "./components/Navigation/Header.vue";
+import SiteHeader from "./components/Navigation/SiteHeader.vue";
 import {Notifications} from "@kyvg/vue3-notification";
 import Player from "./components/Lib/Player";
 import {useUserStore} from "./components/Store/UserStore";
@@ -51,10 +54,12 @@ import { v4 as uuidv4 } from 'uuid';
 export default defineComponent({
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>
     const userStore = useUserStore();
 
     return {
       player,
+      emitter,
       userStore,
     };
   },
@@ -74,7 +79,7 @@ export default defineComponent({
     Playlist,
     PlayerControl,
     NowPlayingView,
-    Header,
+    SiteHeader,
   },
   mounted(): void {
     this.$i18n.locale = this.userStore.language
@@ -172,9 +177,7 @@ export default defineComponent({
         HttpRequest.get(
           'user/favorite'
         ).then((response: AxiosResponse) => {
-          this.$store.dispatch('favorites/init', {
-            favorites: response.data
-          });
+          useFavoriteStore().init(response.data);
         });
       }
     },

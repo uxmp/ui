@@ -127,13 +127,14 @@ export default defineComponent({
   },
   methods: {
     getArtist(): void {
-      EntityLoader.loadArtist(this.$route.params.artistId).then((artist: ArtistInterface): ArtistInterface => this.artist = artist);
+      EntityLoader.loadArtist(parseInt(this.$route.params.artistId as string))
+          .then((artist: ArtistInterface): ArtistInterface => this.artist = artist);
     },
     async getAlbums(): Promise<void> {
       HttpRequest.get(
         'albums/' + this.$route.params.artistId
       ).then((response: AxiosResponse) => {
-        this.albumList = response.data.items.map((album_data: any): AlbumInterface => {
+        this.albumList = response.data.items.map((album_data: object): AlbumInterface => {
           return plainToInstance(Album, album_data);
         });
       });
@@ -142,7 +143,7 @@ export default defineComponent({
       HttpRequest.get(
         'artist/' + this.$route.params.artistId + '/top_songs'
       ).then((response: AxiosResponse) => {
-        this.topSongs = response.data.items.map((song_data: any): SongListItemInterface => {
+        this.topSongs = response.data.items.map((song_data: object): SongListItemInterface => {
           return plainToInstance(SongListItem, song_data);
         });
       });

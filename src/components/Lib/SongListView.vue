@@ -58,6 +58,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import {defineComponent, inject, PropType} from 'vue'
 import SongListItemInterface from '@/model/SongListItemInterface';
 import FavoriteStarView from './FavoriteStarView.vue'
@@ -75,8 +77,11 @@ export default defineComponent({
   },
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>
+
     return {
       player,
+      emitter,
       length: 0
     };
   },
@@ -98,7 +103,7 @@ export default defineComponent({
         this.emitter.emit('updatePlaylist', this.songList);
 
         this.player.init(
-            this,
+            this.emitter,
             this.songList.map((song: SongListItemInterface) => this.player.createSongListItem(song))
         );
       }

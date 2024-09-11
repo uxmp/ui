@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, useTemplateRef} from 'vue'
 import Modal from "../Lib/Modal.vue";
 import LoadingIcon from "../Lib/LoadingIcon.vue";
 import SongListItemInterface from "../../model/SongListItemInterface";
@@ -111,7 +111,8 @@ export default defineComponent({
         return
       }
 
-      this.$refs.modalSearchInput.focus()
+      useTemplateRef<HTMLInputElement>('modalSearchInput').value?.focus();
+
       this.searchState = true;
 
       await this.retrieveResult(this.searchQuery)

@@ -45,7 +45,6 @@ export default defineComponent({
   data() {
     return { 
       user: new User(),
-      password: ''
     }
   },
   computed: {

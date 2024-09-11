@@ -31,7 +31,6 @@ import Playlist from '../../model/Playlist';
 import PlaylistInterface from '../../model/PlaylistInterface';
 import EntityLoader from '../Lib/EntityLoader';
 import HttpRequest from '../Lib/HttpRequest';
-import LoadingIcon from '../Lib/LoadingIcon.vue'
 
 export default defineComponent({
   name: 'PlaylistEdit',
@@ -42,9 +41,6 @@ export default defineComponent({
       playlistTypes: null as Array<{value: string, label: string}>|null,
       selectedPlaylistType: 1 as number
     }
-  },
-  components: {
-    LoadingIcon
   },
   computed: {
     name: {

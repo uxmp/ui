@@ -31,8 +31,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import HttpRequest from '../Lib/HttpRequest';
-import Search from "./Search.vue";
-import SongListView from "../Lib/SongListView.vue";
 import {useUserStore} from "@/components/Store/UserStore";
 import {useFavoriteStore} from "@/components/Store/FavoriteStore";
 
@@ -46,8 +44,7 @@ export default defineComponent({
       favoriteStore,
     }
   },
-  name: 'Header',
-  components: {SongListView, Search},
+  name: 'SiteHeader',
   emits: ['hidePlayer'],
   methods: {
     async logout(): Promise<void> {

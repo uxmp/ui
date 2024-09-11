@@ -21,6 +21,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import { defineComponent, inject } from 'vue'
 import Player from '@/components/Lib/Player';
 import AlbumInterface from '@/model/AlbumInterface';
@@ -29,8 +31,11 @@ export default defineComponent({
   name: 'AlbumCover',
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>;
+
     return {
       player,
+      emitter,
     };
   },
   props: {
@@ -49,7 +54,7 @@ export default defineComponent({
   },
   methods: {
     async play(album: AlbumInterface): Promise<void> {
-      this.player.playAlbum(album.getId(), this)
+      this.player.playAlbum(album.getId(), this.emitter)
     }
   }
 })

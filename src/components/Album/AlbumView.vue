@@ -81,6 +81,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import { defineComponent, inject } from 'vue'
 import 'reflect-metadata';
 import EntityLoader from '@/components/Lib/EntityLoader';
@@ -108,8 +110,11 @@ export default defineComponent({
   },
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>;
+
     return {
       player,
+      emitter,
     };
   },
   components: {
@@ -132,7 +137,7 @@ export default defineComponent({
   methods: {
     async playAlbum(): Promise<void> {
       if (this.album !== null) {
-        this.player.playAlbum(this.album.getId(), this);
+        this.player.playAlbum(this.album.getId(), this.emitter);
       }
     },
   }

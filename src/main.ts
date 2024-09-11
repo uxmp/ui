@@ -1,3 +1,4 @@
+import {EventTypes} from "@/components/Lib/EventTypes";
 import { createApp } from 'vue'
 import Router from './components/Lib/Router'
 import mitt from 'mitt';
@@ -82,17 +83,14 @@ library.add(
   faRectangleXmark,
 );
 
-const emitter = mitt();
+const emitter = mitt<EventTypes>();
 
-const app = createApp(App)
+createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
   .use(Router)
   .use(pinia)
   .use(i18n)
   .use(Notifications)
-;
-
-app.config.globalProperties.emitter = emitter;
-app.provide('ply', new Player());
-
-app.mount('#app')
+  .provide('emitter', emitter)
+  .provide('ply', new Player())
+  .mount('#app')

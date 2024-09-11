@@ -46,6 +46,8 @@
 </template>
 
 <script lang="ts">
+import {EventTypes} from "@/components/Lib/EventTypes";
+import {Emitter} from "mitt";
 import { defineComponent, inject } from 'vue'
 import Player from '../Lib/Player';
 import LoadingIcon from '../Lib/LoadingIcon.vue'
@@ -63,8 +65,11 @@ export default defineComponent({
   },
   setup() {
     const player = inject('ply') as Player;
+    const emitter = inject('emitter') as Emitter<EventTypes>;
+
     return {
       player,
+      emitter,
     };
   },
   components: {
@@ -76,18 +81,18 @@ export default defineComponent({
   methods: {
     async getPlaylists(): Promise<void> {
       HttpRequest.get(`playlists`).then(res => {
-        this.playlists = res.data.items.map((album_data: any): PlaylistInterface => {
+        this.playlists = res.data.items.map((album_data: object): PlaylistInterface => {
           return plainToInstance(Playlist, album_data);
         });
       });
     },
     async deletePlaylist(deletePlaylist: PlaylistInterface): Promise<void> {
       HttpRequest.delete(`playlist/` + deletePlaylist.getId()).then(() => {
-        this.playlists = this.playlists.filter((playlist: PlaylistInterface) => playlist.getId() !== deletePlaylist.getId() )
+        this.getPlaylists()
       });
     },
     async play(playlist: PlaylistInterface): Promise<void> {
-      this.player.playPlaylist(playlist.getId(), this);
+      this.player.playPlaylist(playlist.getId(), this.emitter);
     }
   }
 })

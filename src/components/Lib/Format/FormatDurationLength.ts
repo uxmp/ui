@@ -1,5 +1,5 @@
-const formatDurationLength = (secs: any) => {
-  const sec_num = parseInt(secs, 10);
+const formatDurationLength = (secs: number) => {
+  const sec_num = secs;
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor(sec_num / 60) % 60;
   const seconds = sec_num % 60;

@@ -50,7 +50,7 @@ export default defineComponent({
   methods: {
     async getUsers(): Promise<void> {
       HttpRequest.get(`/settings/user`).then(res => {
-        this.userlist = res.data.items.map((user_data: any): UserListItemInterface => {
+        this.userlist = res.data.items.map((user_data: object): UserListItemInterface => {
           return plainToInstance(UserListItem, user_data);
         });
       });

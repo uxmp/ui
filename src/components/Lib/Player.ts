@@ -1,5 +1,6 @@
+import {EventTypes} from "@/components/Lib/EventTypes";
 import * as amplitudejs from 'amplitudejs'
-import { DefineComponent } from 'vue';
+import {Emitter} from "mitt";
 import Disc from '../../model/Disc';
 import SongListItem from '../../model/SongListItem';
 import { plainToInstance } from 'class-transformer';
@@ -14,7 +15,11 @@ import {useUserStore} from "../Store/UserStore";
 
 
 export default class Player {
-  init(app: DefineComponent, songList: Array<object>, offset: number = 0): void {
+  init(
+    emitter: Emitter<EventTypes>,
+    songList: Array<object>,
+    offset: number = 0
+  ): void {
     amplitudejs.stop();
 
     // get the volume so can set it again
@@ -58,18 +63,18 @@ export default class Player {
             }
           );
 
-          app.emitter.emit('updateNowPlaying', plainToInstance(NowPlaying, song))
-          app.emitter.emit('updatePlayerState', true)
+          emitter.emit('updateNowPlaying', plainToInstance(NowPlaying, song))
+          emitter.emit('updatePlayerState', true)
 
           document.getElementById('playlist-item-' + song.index)?.scrollIntoView({
             behavior: 'smooth'
           });
         },
         pause: function () {
-          app.emitter.emit('updatePlayerState', false)
+          emitter.emit('updatePlayerState', false)
         },
         stop: function () {
-          app.emitter.emit('updatePlayerState', false)
+          emitter.emit('updatePlayerState', false)
         },
       },
       debug: import.meta.env.VITE_DEBUG_MODE == 'true',
@@ -82,7 +87,7 @@ export default class Player {
     amplitudejs.playSongAtIndex(index);
   }
 
-  playAlbum(albumId: number, app: DefineComponent): void {
+  playAlbum(albumId: number, emitter: Emitter<EventTypes>): void {
     HttpRequest.get(
       'album/' + albumId + '/songs'
     ).then((response: AxiosResponse) => {
@@ -96,23 +101,23 @@ export default class Player {
         disc.getSongList().map((song: SongListItemInterface) => songList.push(song));
       });
 
-      this.updatePlaylist(songList, app)
+      this.updatePlaylist(songList, emitter)
     });
   }
 
-  playPlaylist(playlistId: number, app: DefineComponent): void {
+  playPlaylist(playlistId: number, emitter: Emitter<EventTypes>): void {
     HttpRequest.get(
       'playlist/' + playlistId + '/songs'
-    ).then((response: AxiosResponse) => {
+    ).then((response: AxiosResponse): void => {
       this.stop();
 
       const songList = response.data.items.map((song_raw: object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
-      this.updatePlaylist(songList, app)
+      this.updatePlaylist(songList, emitter)
     });
   }
 
-  playArtist(artist: ArtistInterface, app: DefineComponent): void {
+  playArtist(artist: ArtistInterface, emitter: Emitter<EventTypes>): void {
     HttpRequest.get(
       'artist/' + artist.getId() + '/songs'
     ).then((response: AxiosResponse) => {
@@ -120,11 +125,11 @@ export default class Player {
 
       const songList = response.data.items.map((song_raw: object): SongListItemInterface => plainToInstance(SongListItem, song_raw));
 
-      this.updatePlaylist(songList, app)
+      this.updatePlaylist(songList, emitter)
     });
   }
 
-  playRadiostation(station: RadioStationInterface, app: DefineComponent): void {
+  playRadiostation(station: RadioStationInterface, emitter: Emitter<EventTypes>): void {
     this.stop();
 
     const song = new SongListItem();
@@ -132,17 +137,20 @@ export default class Player {
     song.setPlayUrl(station.getUrl());
     song.setCover('/radio.png');
 
-    app.emitter.emit('updatePlaylist', [song]);
+    this.updatePlaylist([song], emitter)
   }
 
-  playSong(song: SongListItemInterface, app: DefineComponent): void {
+  playSong(
+    song: SongListItemInterface,
+    emitter: Emitter<EventTypes>
+  ): void {
     this.stop();
 
-    this.updatePlaylist([song], app)
+    this.updatePlaylist([song], emitter)
   }
 
-  private updatePlaylist(songs: Array<SongListItemInterface>, app: DefineComponent): void {
-    app.emitter.emit('updatePlaylist', songs)
+  private updatePlaylist(songs: Array<SongListItemInterface>, emitter: Emitter<EventTypes>): void {
+    emitter.emit('updatePlaylist', songs)
   }
 
   createSongListItem(song: SongListItemInterface): object {

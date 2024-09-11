@@ -38,7 +38,7 @@ export default defineComponent({
   async created(): Promise<void> {
     HttpRequest.get('artists').then((response: AxiosResponse) => {
       this.quantity = response.data.items.length;
-      this.artistList = response.data.items.map((artist_data: any): ArtistInterface => {
+      this.artistList = response.data.items.map((artist_data: object): ArtistInterface => {
         return plainToInstance(Artist, artist_data);
       });
     });
