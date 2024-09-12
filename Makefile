@@ -1,9 +1,9 @@
 PHONY=build docker-image docker-push lint
 
-build:
+build:lint
 	npm run build
 
-docker-image:
+docker-image:build
 	docker build -t usox/uxmp-ui .
 
 docker-push: 
