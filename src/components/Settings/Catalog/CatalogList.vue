@@ -21,7 +21,9 @@
               <FormatDateTime :date="catalog.lastUpdate" />
             </td>
             <td>
-              <a @click="updateCatalog(catalog.id)">Update</a>
+              <a @click="updateCatalog(catalog.id)">{{ $t('settings.catalogs.table.columns.action_buttons.update') }}</a>
+              | <a @click="cleanCatalog(catalog.id)">{{ $t('settings.catalogs.table.columns.action_buttons.clean') }}</a>
+              | <a @click="updateCatalogArt(catalog.id)">{{ $t('settings.catalogs.table.columns.action_buttons.update_art') }}</a>
             </td>
           </tr>
         </tbody>
@@ -58,6 +60,28 @@ export default defineComponent({
       HttpRequest.post(
         `/settings/catalogs/update`,
         {catalogId: catalogId}
+      ).then(() => {
+        this.$notify({
+          text: this.$t("settings.catalogs.action_update_started"),
+          group: "app"
+        });
+      });
+    },
+    async updateCatalogArt(catalogId: number): Promise<void> {
+      HttpRequest.post(
+          `/settings/catalogs/update_art`,
+          {catalogId: catalogId}
+      ).then(() => {
+        this.$notify({
+          text: this.$t("settings.catalogs.action_update_started"),
+          group: "app"
+        });
+      });
+    },
+    async cleanCatalog(catalogId: number): Promise<void> {
+      HttpRequest.post(
+          `/settings/catalogs/cleanup`,
+          {catalogId: catalogId}
       ).then(() => {
         this.$notify({
           text: this.$t("settings.catalogs.action_update_started"),

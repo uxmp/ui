@@ -210,12 +210,19 @@
     "catalogs": {
       "title": "Catalogs",
       "action_update_started": "Catalog update started",
+      "action_cleanup_started": "Catalog cleanup started",
+      "action_update_art_started": "Catalog art update started",
       "table": {
         "columns": {
           "id": "Id",
           "path": "Path",
           "last_updated": "Last updated",
-          "actions": "Actions"
+          "actions": "Actions",
+          "action_buttons": {
+            "update": "Update",
+            "clean": "Cleanup",
+            "update_art": "Update art"
+          }
         }
       }
     },

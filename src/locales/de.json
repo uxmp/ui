@@ -210,12 +210,19 @@
     "catalogs": {
       "title": "Kataloge",
       "action_update_started": "Katalog Update gestartet",
+      "action_cleanup_started": "Katalog Aufräumen gestarted",
+      "action_update_art_started": "Katalog Cover Update gestartet",
       "table": {
         "columns": {
           "id": "Id",
           "path": "Pfad",
           "last_updated": "Zuletzt aktualisiert",
-          "actions": "Aktionen"
+          "actions": "Aktionen",
+          "action_buttons": {
+            "update": "Aktualisieren",
+            "clean": "Aufräumen",
+            "update_art": "Cover aktualisieren"
+          }
         }
       }
     },
