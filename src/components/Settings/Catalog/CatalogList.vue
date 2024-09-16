@@ -8,6 +8,7 @@
             <th>{{ $t('settings.catalogs.table.columns.id') }}</th>
             <th>{{ $t('settings.catalogs.table.columns.path') }}</th>
             <th>{{ $t('settings.catalogs.table.columns.last_updated') }}</th>
+            <th>{{ $t('settings.catalogs.table.columns.actions') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,9 @@
             </td>
             <td>
               <FormatDateTime :date="catalog.lastUpdate" />
+            </td>
+            <td>
+              <a @click="updateCatalog(catalog.id)">Update</a>
             </td>
           </tr>
         </tbody>
@@ -50,6 +54,17 @@ export default defineComponent({
     await this.getCatalogs()
   },
   methods: {
+    async updateCatalog(catalogId: number): Promise<void> {
+      HttpRequest.post(
+        `/settings/catalogs/update`,
+        {catalogId: catalogId}
+      ).then(() => {
+        this.$notify({
+          text: this.$t("settings.catalogs.action_update_started"),
+          group: "app"
+        });
+      });
+    },
     async getCatalogs(): Promise<void> {
       HttpRequest.get(`/settings/catalogs`).then(res => {
         this.catalogs = res.data.items.map((catalog: {id: number, path: string, lastUpdate: null|string}): {id: number, path: string, lastUpdate: null|Date} => {

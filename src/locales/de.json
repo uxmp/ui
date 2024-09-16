@@ -209,11 +209,13 @@
     "title": "Einstellungen",
     "catalogs": {
       "title": "Kataloge",
+      "action_update_started": "Katalog Update gestartet",
       "table": {
         "columns": {
           "id": "Id",
           "path": "Pfad",
-          "last_updated": "Zuletzt aktualisiert"
+          "last_updated": "Zuletzt aktualisiert",
+          "actions": "Aktionen"
         }
       }
     },
