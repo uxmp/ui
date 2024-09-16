@@ -29,6 +29,7 @@
 </template>
 
 <script lang="ts">
+import Search from "@/components/Navigation/Search.vue";
 import { defineComponent } from 'vue'
 import HttpRequest from '../Lib/HttpRequest';
 import {useUserStore} from "@/components/Store/UserStore";
@@ -46,6 +47,9 @@ export default defineComponent({
   },
   name: 'SiteHeader',
   emits: ['hidePlayer'],
+  components: {
+    Search
+  },
   methods: {
     async logout(): Promise<void> {
       this.$emit('hidePlayer');
