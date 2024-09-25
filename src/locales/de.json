@@ -243,7 +243,8 @@
         }
       },
       "creation_error_message": "Fehler bei der Benutzer-Erstellung",
-      "created_message": "Benutzer erstellt"
+      "created_message": "Benutzer erstellt",
+      "password_saved_message": "Fehler bei Passwot-Aktualisierung"
     }
   },
   "header": {

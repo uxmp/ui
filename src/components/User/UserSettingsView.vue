@@ -175,12 +175,12 @@ export default defineComponent({
       if (this.userSettings !== null) {
         let language = this.userSettings.getLanguage();
 
-        await this.snafu(language);
+        await this.updateLanguage(language);
 
         this.$i18n.locale = language
       }
     },
-    async snafu(language: string): Promise<void> {
+    async updateLanguage(language: string): Promise<void> {
       await this.userStore.setLanguage(language)
 
       HttpRequest.put(
@@ -194,13 +194,13 @@ export default defineComponent({
           group: "app"
         });
       })
-          .catch(() => {
-            this.$notify({
-              text: this.$t("user_settings.error_message"),
-              type: "error",
-              group: "error"
-            });
-          });
+      .catch(() => {
+        this.$notify({
+          text: this.$t("user_settings.error_message"),
+          type: "error",
+          group: "error"
+        });
+      });
     },
     async setPassword(): Promise<void> {
       HttpRequest.put(

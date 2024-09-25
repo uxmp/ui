@@ -45,6 +45,7 @@ export default defineComponent({
   data() {
     return { 
       user: new User(),
+      user_password: '',
     }
   },
   computed: {
@@ -58,10 +59,10 @@ export default defineComponent({
     },
     password: {
       set: function(val: string): void {
-        this.password = val;
+        this.user_password = val;
       },
       get: function(): string {
-        return this.password;
+        return this.user_password;
       }
     },
   },
@@ -107,7 +108,7 @@ export default defineComponent({
         '/settings/user/password',
         {
           userId: this.user.getId(),
-          password: this.password
+          password: this.user_password
         }
       ).then((): void => {
         this.$notify({

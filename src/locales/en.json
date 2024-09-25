@@ -243,7 +243,8 @@
         }
       },
       "creation_error_message": "Error creating user",
-      "created_message": "User created"
+      "created_message": "User created",
+      "password_saved_message": "Password update failed"
     }
   },
   "header": {

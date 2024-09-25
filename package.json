@@ -8,6 +8,9 @@
     "serve": "vite preview",
     "test:unit": "vue-cli-service test:unit"
   },
+  "overrides": {
+    "@intlify/core-base": "^10.0.1"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^6.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -21,19 +24,20 @@
     "class-transformer": "^0.5.0",
     "mitt": "^3.0.0",
     "pinia": "^2.2.2",
-    "pinia-plugin-persistedstate": "^3.2.3",
+    "pinia-plugin-persistedstate": "^4",
     "reflect-metadata": "^0.2",
     "sass": "^1.52.3",
     "uuid": "^10.0.0",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.2.33",
-    "vue-i18n": "^9.7",
+    "vue-i18n": "^10",
     "vue-router": "^4.0.15",
     "yargs-parser": "^21.0.1"
   },
   "devDependencies": {
     "@babel/types": "^7.18.13",
     "@eslint/js": "^9.9.1",
+    "@intlify/devtools-types": "^10",
     "@types/uuid": "^10.0.0",
     "@vitejs/plugin-vue": "^5",
     "@vue/compiler-sfc": "^3.2.33",
