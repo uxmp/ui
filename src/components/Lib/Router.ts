@@ -1,3 +1,4 @@
+import SongView from "@/components/Song/SongView.vue";
 import { createWebHistory, createRouter } from "vue-router";
 import ArtistList from "../Artist/ArtistListView.vue";
 import AlbumList from "../Album/AlbumListView.vue";
@@ -43,6 +44,10 @@ const routes = [
   {
     path: "/album/:albumId",
     component: AlbumView,
+  },
+  {
+    path: "/song/:songId",
+    component: SongView,
   },
   {
     path: "/artist/:artistId",

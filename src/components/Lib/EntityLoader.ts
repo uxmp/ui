@@ -1,3 +1,5 @@
+import SongListItem from "@/model/SongListItem";
+import SongListItemInterface from "@/model/SongListItemInterface";
 import Album from '../../model/Album'
 import { plainToInstance } from 'class-transformer';
 import Artist from '../../model/Artist';
@@ -13,6 +15,12 @@ import UserInterface from '../../model/UserInterface';
 import User from '../../model/User';
 
 const EntityLoader = new class EntityLoader {
+  async loadSong(songId: number): Promise<SongListItemInterface> {
+    return plainToInstance(
+      SongListItem,
+      await HttpRequest.get('song/' + songId).then((response: AxiosResponse) => response.data)
+    );
+  }
 
   async loadAlbum(albumId: number): Promise<AlbumInterface> {
     return plainToInstance(

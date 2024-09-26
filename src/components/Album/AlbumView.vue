@@ -42,7 +42,11 @@
                   <td>
                     <PlaySongButton :song="song" />
                   </td>
-                  <td>{{ song.getName() }}</td>
+                  <td>
+                    <router-link :key="song.getId()" :to="'/song/' + song.getId()">
+                      {{ song.getName() }}
+                    </router-link>
+                  </td>
                   <td>
                     <FormatLength :length="song.getLength()" />
                   </td>

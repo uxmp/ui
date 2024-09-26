@@ -15,7 +15,9 @@
       </td>
       <td>
         <div class="songName">
-          {{ song.getName() }}
+          <router-link :key="song.getId()" :to="'/song/' + song.getId()">
+            {{ song.getName() }}
+          </router-link>
         </div>
         <div class="artistName">
           <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
