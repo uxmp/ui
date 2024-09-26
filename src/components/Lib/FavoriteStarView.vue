@@ -77,9 +77,11 @@ export default defineComponent({
 div.favIcon .isNotFavorite:hover,
 div.favIcon .isFavorite {
   color: rgb(212, 212, 0);
+  cursor: pointer;
 }
 div.favIcon .isNotFavorite,
 div.favIcon .isFavorite:hover {
   color: white;
+  cursor: pointer;
 }
 </style>

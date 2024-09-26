@@ -23,4 +23,6 @@ export default interface SongListItemInterface {
   getLength(): number;
 
   getYear(): null | number;
+
+  getMbId(): string;
 }

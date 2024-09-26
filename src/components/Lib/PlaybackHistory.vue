@@ -20,6 +20,7 @@
           </router-link>
         </div>
         <div class="artistName">
+          {{ $t("shared.by_artist") }}
           <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
         </div>
       </td>

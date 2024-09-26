@@ -1,19 +1,31 @@
 <template>
   <template v-if="song !== null">
-    <h1>&bdquo;{{ song.getName() }}&rdquo;</h1>
-    <div class="songArtist">
-      {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
-    </div>
-    <div class="playSong">
-      <span v-on:click="playSong()" class="playButton">
-        <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
-      </span>
-    </div>
-    <div class="addToPlaylist">
-      <AddToPlaylist :itemId="song.getId()" :itemType="'song'" :showTitle="true" />
-    </div>
-    <div>
-      {{ $t("album.total_length_title") }}: <FormatLength :length="song.getLength()" />
+    <div class="songGrid">
+      <div>
+        <h1>&bdquo;{{ song.getName() }}&rdquo;</h1>
+        <div class="songArtist">
+          {{ $t("shared.by_artist") }} <router-link :to="'/artist/' + song.getArtistId()">{{ song.getArtistName() }}</router-link>
+        </div>
+        <div class="playSong">
+          <span v-on:click="playSong()" class="playButton">
+            <font-awesome-icon :icon="['fas', 'play']" title="Play" /> {{ $t("shared.play") }}
+          </span>
+        </div>
+        <div class="addToPlaylist">
+          <AddToPlaylist :itemId="song.getId()" :itemType="'song'" :showTitle="true" />
+        </div>
+        <div>
+          <FavoriteStarView :itemId="song.getId()" itemType="song" />
+        </div>
+        <div>
+          {{ $t("song_list.length_title") }} <FormatLength :length="song.getLength()" />
+        </div>
+        <div class="musicBrainz">
+          <a :href="`https://musicbrainz.org/release/${song.getMbId()}`" target="_blank">Musicbrainz</a>
+        </div>
+      </div>
+      <div>
+      </div>
     </div>
   </template>
   <template v-else>
@@ -24,6 +36,7 @@
 <script lang="ts">
 import EntityLoader from "@/components/Lib/EntityLoader";
 import {EventTypes} from "@/components/Lib/EventTypes";
+import FavoriteStarView from "@/components/Lib/FavoriteStarView.vue";
 import FormatLength from "@/components/Lib/Format/FormatLength.vue";
 import LoadingIcon from "@/components/Lib/LoadingIcon.vue";
 import Player from '@/components/Lib/Player';
@@ -50,7 +63,9 @@ export default defineComponent({
     };
   },
   components: {
-    AddToPlaylist, FormatLength,
+    FavoriteStarView,
+    AddToPlaylist,
+    FormatLength,
     LoadingIcon
   },
   async created(): Promise<void> {
@@ -135,5 +150,11 @@ span.playButton {
 
 span.playButton:hover {
   color: rgb(85, 57, 5);
+}
+
+div.songGrid {
+  display: grid;
+  grid-template-columns: auto 600px;
+  margin: auto;
 }
 </style>

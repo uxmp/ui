@@ -11,6 +11,7 @@ export default class SongListItem implements SongListItemInterface {
   private albumId: number = 0;
   private length: number = 0;
   private year: number | null = null;
+  private musicBrainzId: string = '';
 
   getId(): number {
     return this.id;
@@ -66,5 +67,9 @@ export default class SongListItem implements SongListItemInterface {
 
   getYear(): null | number {
     return this.year;
+  }
+
+  getMbId(): string {
+    return this.musicBrainzId;
   }
 }

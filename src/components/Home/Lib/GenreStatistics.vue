@@ -63,5 +63,8 @@ div.genres span {
   font-weight: bold;
   color: #ffffff;
 }
+div.genres span:hover {
+  background-color: rgb(192, 140, 44);
+}
 </style>
 
