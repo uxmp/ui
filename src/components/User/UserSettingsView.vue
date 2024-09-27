@@ -211,13 +211,13 @@ export default defineComponent({
         }
       ).then((): void => {
         this.$notify({
-          text: this.$t("user_settings.password_saved_message"),
+          text: this.$t("settings.user.password_saved_message"),
           group: "app"
         });
       })
       .catch((): void => {
         this.$notify({
-          text: this.$t("user_settings.error_message"),
+          text: this.$t("settings.user.password_error_message"),
           type: "error",
           group: "error"
         });

@@ -64,9 +64,12 @@
               </div>
               <div>
                 <div>
-                  {{ song.getName() }}
+                  <router-link :key="song.getId()" :to="'/song/' + song.getId()">
+                    {{ song.getName() }}
+                  </router-link>
                 </div>
                 <div class="artistName">
+                  {{ $t("shared.by_artist") }}
                   <router-link :to="'/artist/' + song.getArtistId()" @click="closeModal()">{{
                       song.getArtistName()
                     }}

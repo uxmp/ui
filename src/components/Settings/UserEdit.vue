@@ -118,7 +118,7 @@ export default defineComponent({
       })
       .catch((): void => {
         this.$notify({
-          text: this.$t("settings.user.error_message"),
+          text: this.$t("settings.user.password_error_message"),
           type: "error",
           group: "error"
         });
