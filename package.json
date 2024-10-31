@@ -26,7 +26,6 @@
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4",
     "reflect-metadata": "^0.2",
-    "sass": "^1.52.3",
     "uuid": "^10.0.0",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.2.33",

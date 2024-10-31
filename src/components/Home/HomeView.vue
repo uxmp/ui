@@ -60,7 +60,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="css">
 div.list {
   text-align: left;
   width: 100%;
